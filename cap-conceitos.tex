@@ -8,21 +8,11 @@
 \section{Modelos de Cores}\index{cores!modelos de}
 \label{sec:fundamentos}
 
-O uso de imagens coloridas em visão computacional ou no processamento de imagens
-pode ser motivado por dois fatores principais. O primeiro diz respeito a
-característica poderosa da cor de funcionar como um descritor que, frequentemente,
-simplifica a identificação e extração de um objeto em uma cena. O segundo está
-relacionado com a capacidade dos seres humanos de discernir milhares de
-tonalidades e intensidades, se comparado com apenas algumas dúzias de níveis
-de cinza \citep{gonzalez:02}.
+O uso de imagens coloridas em visão computacional ou no processamento de imagens pode ser motivado por dois fatores principais. O primeiro diz respeito a característica poderosa da cor de funcionar como um descritor que, frequentemente, simplifica a identificação e extração de um objeto em uma cena. O segundo está relacionado com a capacidade dos seres humanos de discernir milhares de tonalidades e intensidades, se comparado com apenas algumas dúzias de níveis de cinza \citep{gonzalez:02}.
 
-A percepção visual da cor pelo olho humano não deve variar conforme a distribuição
-espectral da luz natural incidente sobre um objeto. Em outras palavras, a aparência
-de cor dos objetos permanece estável sob condições de iluminação diferentes. Este
-fenômeno é conhecido como constância de cor \citep{gevers:12}.
+A percepção visual da cor pelo olho humano não deve variar conforme a distribuição espectral da luz natural incidente sobre um objeto. Em outras palavras, a aparência de cor dos objetos permanece estável sob condições de iluminação diferentes. Este fenômeno é conhecido como constância de cor \citep{gevers:12}.
 
-Como exemplo, o gramado de um estádio de futebol permanece verde durante todo
-o dia, inclusive ao entardecer quando, de um ponto de vista físico, a luz solar
+Como exemplo, o gramado de um estádio de futebol permanece verde durante todo o dia, inclusive ao entardecer quando, de um ponto de vista físico, a luz solar
 tem um aspecto mais avermelhado.
 
 A percepção humana das cores se dá pela ativação de células nervosas que enviam
@@ -31,35 +21,25 @@ saturação (\textit{saturation}) que, geralmente, são as características usadas
 para distinguir uma cor de outra \citep{gonzalez:02}.
 
 O brilho dá a noção de intensidade cromática. Matiz representa a cor dominante
-percebida por um observador. Já a saturação refere-se à pureza relativa ou
-quantidade de luz branca aplicada ao matiz. Combinados, matiz e saturação
-são conhecidos como cromaticidade e, portanto, uma cor deve ser caracterizada
-por seu brilho e cromaticidade \citep{gonzalez:02}.
+percebida por um observador. Já a saturação refere-se à pureza relativa ou quantidade de luz branca aplicada ao matiz. Combinados, matiz e saturação são conhecidos como cromaticidade e, portanto, uma cor deve ser caracterizada por seu brilho e cromaticidade \citep{gonzalez:02}.
 
-As cores podem ser especificadas por modelos matemáticos em tuplas de números
-em um sistema de coordenadas e um subespaço dentro deste sistema onde cada cor
-é representada por um único ponto. Tais modelos são conhecidos como modelo de
-cores \citep{gonzalez:02}.
+As cores podem ser especificadas por modelos matemáticos em tuplas de números em um sistema de coordenadas e um subespaço dentro deste sistema onde cada cor
+é representada por um único ponto. Tais modelos são conhecidos como modelo de cores \citep{gonzalez:02}.
 
-As seções seguintes descrevem brevemente alguns dos principais modelos de cores,
-bem como seus variantes e principais áreas de aplicação.
+Estes modelos podem ser classificados como de dois tipos: os modelos aditivos em que as intensidades das cores primárias são adicionadas para produzir outras cores e subtrativos, onde as cores são geradas subtraindo-se o comprimento da onda dominante da luz branca.
+
+As seções seguintes descrevem brevemente alguns dos principais modelos de cores, bem como seus variantes e principais áreas de aplicação.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores de Munsell}\index{cores!espaço de Munsell}
 \label{sec:modelo_cores_munsell}
 
-O Professor Albert H. Munsell foi pioneiro na tentativa de organizar a percepção
-de cor em um espaço de cores. Mais do que isso, Munsell conseguiu aliar a arte
-e a ciência das cores em uma única teoria \citep{konstantinos:00}.
+O Professor Albert H. Munsell foi pioneiro na tentativa de organizar a percepção de cor em um espaço de cores. Mais do que isso, Munsell conseguiu aliar a arte e a ciência das cores em uma única teoria \citep{konstantinos:00}.
 
-O princípio da igualdade de espaçamento entre os componentes do modelo é a ideia
-principal do modelo de cores de Munsell \citep{konstantinos:00}. Esses componentes
-são matiz (\textit{hue}), luminosidade (\textit{value}) e saturação (\textit{chroma}).
+O princípio da igualdade de espaçamento entre os componentes do modelo é a ideia principal do modelo de cores de Munsell \citep{konstantinos:00}. Esses componentes são matiz (\textit{hue}), luminosidade (\textit{value}) e saturação (\textit{chroma}).
 
-O modelo é representado por uma forma cilíndrica e pode ser visto na
-figura~\ref{fig:munsell-system}. O matiz está disposto no eixo circular que consiste de
-cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosidade
-no eixo vertical em uma escala variando de 0 a 10.
+O modelo é representado por uma forma cilíndrica e pode ser visto na figura~\ref{fig:munsell-system}. O matiz está disposto no eixo circular que consiste de
+cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10.
 
 \begin{figure}[!h]
   \centering
@@ -70,13 +50,44 @@ no eixo vertical em uma escala variando de 0 a 10.
 \end{figure}
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores CIE}\index{cores!modelo CIE}
+\subsection{Espaço de cores CIE}\index{cores!espaços CIE}
 \label{sec:modelo_cores_cie}
 
-Em 1931, o CIE estabeleceu o primeiro modelo matemático de especificação numérica da cor, chamado de Diagrama de Cromaticidade CIE 1931, cujo objetivo era analisar a relação entre os aspectos físicos das cores no espectro eletromagnético e sua percepção pelo sistema visual humano para determinar como uma pessoa comum percebe a cor. Uma revisão desta especificação foi publicada em 1964 \citep{gonzalez:02}.
+Em 1931, o CIE estabeleceu o primeiro modelo matemático de especificação numérica da cor, cujo objetivo era analisar a relação entre os aspectos físicos das cores no espectro eletromagnético e sua percepção pelo sistema visual humano para determinar como uma pessoa comum percebe a cor. Uma revisão desta especificação foi publicada em 1964 \citep{gonzalez:02}.
 
-O experimento consistia em detectar as cores percebidas por um observador a partir de uma mistura de três cores primárias X, Y e Z chamadas de valores \emph{tristimulus}. O CIE XYZ engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta razão, é considerado uma representação independente de dispositivo.
+O experimento que originou o padrão consistia em detectar as cores percebidas por um observador a partir de uma mistura de três cores primárias X, Y e Z chamadas de valores \emph{tristimulus}. Estas coordenadas deram origem ao espaço de cores CIE XYZ que engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta razão, é considerado uma representação independente de dispositivo \citep{konstantinos:00}.
 
+O sistema proposto pelo CIE XYZ para descrição de uma cor é baseado em um componente de luminância Y e outros dois componentes adicionais X e Z que dão a informação de cromaticidade. Este sistema é formado por cores imaginárias que podem ser expressas como combinações das medidas normalizadas abaixo:
+
+
+\begin{equation}
+  x = \frac{X}{X + Y + Z}
+\end{equation}
+
+\begin{equation}
+  y = \frac{Y}{X + Y + Z}
+\end{equation}
+
+\begin{equation}
+  z = \frac{Z}{X + Y + Z}
+\end{equation}
+
+com $x + y+ z = 1$.
+
+As combinações de valores negativos e outros problemas relacionados à seleção de um conjunto de primárias reais são eliminados.  As coordenadas de cromaticidade $x$ e $y$ permitem representar todas as cores num gráfico bidimensional, conhecido como diagrama de cromaticidade e pode ser visto na figura~\ref{fig:cie-cromaticity-diagram}.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.5\textwidth]{cie-cromaticity-diagram}
+  % fonte https://en.wikipedia.org/wiki/File:CIE1931xy_blank.svg
+  \caption{Diagrama de cromaticidade CIE 1931.}
+  \label{fig:cie-cromaticity-diagram} 
+\end{figure}
+
+Os pontos que representam as cores puras no espectro eletromagnético são rotulados de acordo com os seus comprimentos de onda e estão localizados ao longo da curva que vai da extremidade correspondente à cor vermelha até a extremidade correspondente à cor violeta. Os pontos internos correspondem
+a todas as combinações possíveis de cores visíveis, e o ponto C corresponde à localização da luz branca.
+
+O CIE também derivou e padronizou outros dois espaços de cores a partir da especificação do CIE XYZ e, da mesma maneira, são independente de dispositivo. Ambos são perceptualmente uniformes, ou seja, distâncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espaço deve permitir uma transição suave entre o preto e o branco.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores RGB}\index{cores!modelo RGB}
@@ -97,40 +108,6 @@ Texto texto texto texto texto texto texto texto texto texto texto texto texto
 \label{sec:modelo_cores_hsi}
 
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
-
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Aminoácidos}\index{ácido!amino|(}
-\label{sec:amino_acidos}
-
-Veja na Tabela \ref{tab:amino_acidos}...  texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto.
-
-\begin{table}[!t]
-\begin{center}
-    \begin{tabular}{c|c|l}
-	 \hline
-	 Código & Abreviatura & Nome completo \\ \hline
-     \texttt{A} & Ala & Alanina \\
-     \texttt{C} & Cys & Cisteína \\
-     ...        & ... & ... \\
-     \texttt{W} & Trp & Tiptofano \\
-     \texttt{Y} & Tyr & Tirosina \\ \hline
-    \end{tabular}
-  \caption{Códigos, abreviaturas e nomes dos aminoácidos.}
-  \label{tab:amino_acidos}
-\end{center}
-\end{table}
-\index{ácido!amino|)}
-
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
 
 
 %% ------------------------------------------------------------------------- %%
