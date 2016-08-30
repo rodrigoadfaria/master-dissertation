@@ -55,7 +55,7 @@ cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosi
 
 Em 1931, o CIE estabeleceu o primeiro modelo matemático de especificação numérica da cor, cujo objetivo era analisar a relação entre os aspectos físicos das cores no espectro eletromagnético e sua percepção pelo sistema visual humano para determinar como uma pessoa comum percebe a cor. Uma revisão desta especificação foi publicada em 1964 \citep{gonzalez:02}.
 
-O experimento que originou o padrão consistia em detectar as cores percebidas por um observador a partir de uma mistura de três cores primárias X, Y e Z chamadas de valores \emph{tristimulus}. Estas coordenadas deram origem ao espaço de cores CIE XYZ que engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta razão, é considerado uma representação independente de dispositivo \citep{konstantinos:00}.
+O experimento que originou o padrão consistia em detectar as cores percebidas por um observador a partir de uma mistura de três cores primárias X, Y e Z chamadas de valores tristímulus. Estas coordenadas deram origem ao espaço de cores \textbf{CIE XYZ} que engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta razão, é considerado uma representação independente de dispositivo \citep{konstantinos:00}.
 
 O sistema proposto pelo CIE XYZ para descrição de uma cor é baseado em um componente de luminância Y e outros dois componentes adicionais X e Z que dão a informação de cromaticidade. Este sistema é formado por cores imaginárias que podem ser expressas como combinações das medidas normalizadas abaixo:
 
@@ -74,7 +74,7 @@ O sistema proposto pelo CIE XYZ para descrição de uma cor é baseado em um compon
 
 com $x + y+ z = 1$.
 
-As combinações de valores negativos e outros problemas relacionados à seleção de um conjunto de primárias reais são eliminados.  As coordenadas de cromaticidade $x$ e $y$ permitem representar todas as cores num gráfico bidimensional, conhecido como diagrama de cromaticidade e pode ser visto na figura~\ref{fig:cie-cromaticity-diagram}.
+As combinações de valores negativos e outros problemas relacionados à seleção de um conjunto de primárias reais são eliminados.  As coordenadas de cromaticidade $x$ e $y$ permitem representar todas as cores num plano bidimensional, conhecido como diagrama de cromaticidade, que pode ser visto na figura~\ref{fig:cie-cromaticity-diagram}.
 
 \begin{figure}[!h]
   \centering
@@ -84,10 +84,13 @@ As combinações de valores negativos e outros problemas relacionados à seleção de
   \label{fig:cie-cromaticity-diagram} 
 \end{figure}
 
-Os pontos que representam as cores puras no espectro eletromagnético são rotulados de acordo com os seus comprimentos de onda e estão localizados ao longo da curva que vai da extremidade correspondente à cor vermelha até a extremidade correspondente à cor violeta. Os pontos internos correspondem
-a todas as combinações possíveis de cores visíveis, e o ponto C corresponde à localização da luz branca.
+Os pontos que representam as cores puras no espectro eletromagnético são rotulados de acordo com os seus comprimentos de onda e estão localizados ao longo da curva que vai da extremidade direita do eixo $x$ correspondente à cor vermelha até a extremidade esquerda do mesmo eixo correspondente à cor violeta, formando um polígono parecido com uma ferradura. Os pontos internos correspondem a todas as combinações possíveis de cores visíveis. As coordenadas $(x = 1/3, y = 1/3)$ correspondem à localização da luz branca, também conhecida como ponto branco, e servem de referência no processo de captura de imagem, codificação ou reprodução.
 
 O CIE também derivou e padronizou outros dois espaços de cores a partir da especificação do CIE XYZ e, da mesma maneira, são independente de dispositivo. Ambos são perceptualmente uniformes, ou seja, distâncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espaço deve permitir uma transição suave entre o preto e o branco.
+
+O primeiro deles foi concebido para reduzir o problema de não uniformidade perceptual. Alguns diagramas de Escala Uniforme de Cromaticidade (UCS) foram propostos com base em equações matemáticas para transformar os valores XYZ ou as coordenadas $x, y$ em um novo conjunto de valores $(u, v)$, o que deu origem ao diagrama de cromaticidade 1960 CIE $uv$ \citep{gevers:12}.
+
+Ainda com resultados insatisfatórios, o CIE fez uma nova mudança multiplicando o componente $v$ por um fator 1,5. Além disso, a escala de luminosidade dada pelo componente Y foi substituída por $L^* = [0, 100]$ para melhor representar as diferenças na luminosidade que são equivalentes. Esta revisão originou o espaço de cores \textbf{CIE 1976 $L^*u^*v^*$}, comumente conhecido pela sigla CIELUV.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores RGB}\index{cores!modelo RGB}
