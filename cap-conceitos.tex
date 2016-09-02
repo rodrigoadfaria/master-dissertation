@@ -95,10 +95,26 @@ Ainda com resultados insatisfatórios, o CIE fez uma nova mudança multiplicando o
 Em 1976 o CIE adotou um novo espaço de cores, baseado no modelo $L, a, b$, proposto por Richard Hunter em 1948, que melhor representava o espaçamento uniforme das cores. Denominado \textbf{1976 CIE $L^*a^*b^*$} e conhecido pela sigla CIELAB, é um espaço baseado em cores oponentes \footnote{Teoria iniciada por volta do ano de 1500 quando Leonardo da Vinci concluiu que as cores são produzidas pela mistura de amarelo e azul, verde e vermelho, e branco e preto. Em 1950 houve a confirmação desta teoria quando sinais de cores oponentes foram detectados na conexão óptica entre a retina e o cérebro \citep{gevers:12}.} no qual os estímulos de cor da retina são convertidos para distinções entre claro e escuro, vermelho e verde, e azul e amarelo, representados pelos eixos $L^*$, $a^*$, e $b^*$, respectivamente \citep{gevers:12}.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores RGB}\index{cores!modelo RGB}
+\subsection{Espaço de cores RGB}\index{cores!espaço RGB}
 \label{sec:modelo_cores_rgb}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
+O modelo RGB, acrônimo do inglês \textit{Red, Green, Blue}, é um espaço de cores aditivo no qual as três cores primárias vermelho, verde e azul são somadas para produzir as demais cores \citep{gonzalez:02}.
+
+Esse sistema foi baseado na teoria tricromática de Thomas Young e Hermann Helmholtz em meados do século 19 e pode ser representado graficamente
+através do cubo unitário definido sobre os eixos R, G e B, como ilustrado na figura~\ref{fig:rgb-cube} \citep{konstantinos:00}.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.4\textwidth]{rgb-cube}
+  % http://www.scratchapixel.com/old/lessons/3d-basic-lessons/lesson-5-colors-and-digital-images/color-spaces/
+  \caption{Cubo unitário representando as cores no espaço RGB.}
+  \label{fig:rgb-cube} 
+\end{figure}
+
+ARRUMAR ESTES DOIS PARÁGRAFOS.
+A origem representa a cor preta, o vértice de coordenadas (1, 1, 1) representa cor branca, os vértices que estão sobre os eixos representam as cores primárias e os demais vértices representam o complemento de cada cor primária. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla (R, G, B), com os valores R, G e B variando de 0 a 1. Os tons de cinza são representados ao longo da diagonal principal do cubo, que vai da origem (ponto correspondente a cor preta) até o vértice que corresponde à cor branca. Cada tom ao longo dessa diagonal é formado por contribuições iguais de cada primária.
+
+Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não linear. O sistema supra citado mostra o modelo não linear e é o mais utilizado por dispositivos e aplicações por ser mais próximo da percepção do sistema visual humano, no que se refere à radiação de intensidades provocada pelas cores primárias. Na literatura, este sistema é frequentemente citado com a sigla R'G'B', o que torna a nomenclatura dúbia, uma vez que o modelo linear é denominado RGB. Também é importante citar que os valores RGB lineares são raramente utilizados para representar uma imagem, já que são, perceptualmente, altamente não uniforme \citep{konstantinos:00}.
 
 
 %% ------------------------------------------------------------------------- %%
