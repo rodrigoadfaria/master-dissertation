@@ -117,11 +117,40 @@ Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores CMYK}\index{cores!modelos CMYK}
-\label{sec:modelo_cores_cmyk}
+\subsection{Modelo CMY}\index{cores!modelos CMY}
+\label{sec:modelo_cores_cmy}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
+O modelo CMY é baseado nas cores primárias complementares Ciano, Magenta e Amarelo e, diferentemente do RGB, é um modelo de cores subtrativo no qual as cores são geradas subtraindo-se o comprimento da onda dominante da luz branca e, por isso, a cor resultante corresponde à luz que é refletida \citep{gonzalez:02}.
 
+Uma maneira de obter o sistema CMY é:\\
+\begin{equation}
+  \begin{bmatrix}
+    C \\ M \\ Y
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    B \\ R \\ R
+  \end{bmatrix} +
+  \begin{bmatrix}
+    G \\ B \\ G
+  \end{bmatrix}
+\end{equation}
+
+ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias R, G e B da cor branca $W = (1, 1, 1)$ \citep{pedrini:08}:
+\begin{equation}
+  \begin{bmatrix}
+    C \\ M \\ Y
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    1 \\ 1 \\ 1
+  \end{bmatrix} +
+  \begin{bmatrix}
+    R \\ G \\ B
+  \end{bmatrix}
+\end{equation}
+
+Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas.
+
+A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar este efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores da família HSI}\index{cores!modelos HSI}
