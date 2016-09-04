@@ -105,7 +105,7 @@ através do cubo unitário definido sobre os eixos R, G e B, como ilustrado na fig
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.4\textwidth]{rgb-cube}
+  \includegraphics[width=.35\textwidth]{rgb-cube}
   % http://www.scratchapixel.com/old/lessons/3d-basic-lessons/lesson-5-colors-and-digital-images/color-spaces/
   \caption{Cubo unitário representando as cores do modelo RGB.}
   \label{fig:rgb-cube} 
@@ -174,7 +174,7 @@ A tranformação do espaço RGB para YUV é dada por:\\
 \end{equation}
 onde $0 \leq R, G, B \leq 1$.
 
-Análogo ao YUV, o modelo \textbf{YIQ} foi adotado em 1950 pelo Comitê Nacional do Sistema de Televisão (NTSC), um padrão americano para transmissão de sinal de televisão a cores. Neste modelo, o componente Y corresponde à luminância e os componentes I (matiz) e Q (saturação) codificam a informação de crominância.
+Análogo ao YUV, o modelo \textbf{YIQ} foi adotado em 1950 pelo Comitê Nacional do Sistema de Televisão (NTSC), um padrão americano para transmissão de sinal de televisão a cores. Neste modelo, o componente Y corresponde à luminância e os componentes I (matiz) e Q (saturação) codificam a informação de crominância \citep{pedrini:08}.
 
 A tranformação do espaço RGB para YIQ é dada por:\\
 \begin{equation}
@@ -191,6 +191,27 @@ A tranformação do espaço RGB para YIQ é dada por:\\
   \end{bmatrix}
 \end{equation}
 onde $0 \leq R, G, B \leq 1$.
+
+Um outro modelo de cores da família YUV é o \textbf{YCbCr}, definido matematicamente por uma transformação de coordenadas em relação a algum espaço RGB \citep{pedrini:08}.
+
+O modelo YCbCr é largamente utilizado em vídeos digitais. Neste modelo, o componente Y representa a luminância, o componente Cb dá a medida da diferença entre a cor azul e um valor de referência, análogo ao componente Cr que é a medida da diferença entre a cor vermelha e um valor de referência \citep{pedrini:08}.
+
+A conversão do espaço RGB para YCbCr é dada por:\\
+\begin{equation}
+  \begin{bmatrix}
+    Y \\ Cb \\ Cr
+  \end{bmatrix} = 
+  \begin{bmatrix}
+     0.299 &  0.587 &  0.114 \\
+    -0.169 & -0.331 &  0.5   \\
+     0.5   & -0.419 & -0.081 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    R \\ G \\ B
+  \end{bmatrix}
+\end{equation}
+
+
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores da família HSI}\index{cores!modelos HSI}
 \label{sec:modelo_cores_hsi}
@@ -199,24 +220,24 @@ Texto texto texto texto texto texto texto texto texto texto texto texto texto
 
 
 %% ------------------------------------------------------------------------- %%
-\section{Exemplo de Código-Fonte em Java}
-\label{sec:exemplo_codigo_fonte}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
+%\section{Exemplo de Código-Fonte em Java}
+%\label{sec:exemplo_codigo_fonte}
+%Texto texto texto texto texto texto texto texto texto texto texto texto texto
+%texto texto texto texto texto texto texto texto texto texto texto texto texto
+%texto texto texto texto texto texto texto texto texto texto texto texto texto
+%texto texto texto texto texto texto texto.
 
 % Foi utilizado o pacote listing para formatar código fonte
 % http://ctan.org/tex-archive/macros/latex/contrib/listings/listings.pdf
 % Veja no preambulo do arquivo tese-exemplo.tex os parâmetros de configuração.
 
-\begin{lstlisting}[frame=trbl]
-    for(i = 0; i < 20; i++)
-    {
-        // Comentário 
-        System.out.println("Mensagem...");
-    }
-\end{lstlisting}
+%\begin{lstlisting}[frame=trbl]
+%    for(i = 0; i < 20; i++)
+%    {
+%        // Comentário 
+%        System.out.println("Mensagem...");
+%    }
+%\end{lstlisting}
 
 
 %% ------------------------------------------------------------------------- %%
