@@ -31,7 +31,7 @@ Estes modelos podem ser classificados como de dois tipos: os modelos aditivos em
 As seções seguintes descrevem brevemente alguns dos principais modelos de cores, bem como seus variantes e principais áreas de aplicação.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores de Munsell}\index{cores!espaço de Munsell}
+\subsection{Modelo de Munsell}\index{cores!modelo de Munsell}
 \label{sec:modelo_cores_munsell}
 
 O Professor Albert H. Munsell foi pioneiro na tentativa de organizar a percepção de cor em um espaço de cores. Mais do que isso, Munsell conseguiu aliar a arte e a ciência das cores em uma única teoria \citep{konstantinos:00}.
@@ -50,7 +50,7 @@ cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosi
 \end{figure}
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Espaço de cores CIE}\index{cores!espaços CIE}
+\subsection{Modelo CIE}\index{cores!modelo CIE}
 \label{sec:modelo_cores_cie}
 
 Em 1931, o CIE estabeleceu o primeiro modelo matemático de especificação numérica da cor, cujo objetivo era analisar a relação entre os aspectos físicos das cores no espectro eletromagnético e sua percepção pelo sistema visual humano para determinar como uma pessoa comum percebe a cor. Uma revisão desta especificação foi publicada em 1964 \citep{gonzalez:02}.
@@ -86,19 +86,19 @@ As combinações de valores negativos e outros problemas relacionados à seleção de
 
 Os pontos que representam as cores puras no espectro eletromagnético são rotulados de acordo com os seus comprimentos de onda e estão localizados ao longo da curva que vai da extremidade direita do eixo $x$ correspondente à cor vermelha até a extremidade esquerda do mesmo eixo correspondente à cor violeta, formando um polígono parecido com uma ferradura. Os pontos internos correspondem a todas as combinações possíveis de cores visíveis. As coordenadas $(x = 1/3, y = 1/3)$ correspondem à localização da luz branca, também conhecida como ponto branco, e servem de referência no processo de captura de imagem, codificação ou reprodução.
 
-O CIE também derivou e padronizou outros dois espaços de cores a partir da especificação do CIE XYZ e, da mesma maneira, são independente de dispositivo. Ambos são perceptualmente uniformes, ou seja, distâncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espaço deve permitir uma transição suave entre o preto e o branco.
+O CIE também derivou e padronizou outros dois modelos de cores a partir da especificação do CIE XYZ e, da mesma maneira, são independente de dispositivo. Ambos são perceptualmente uniformes, ou seja, distâncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espaço deve permitir uma transição suave entre o preto e o branco.
 
 O primeiro deles foi concebido para reduzir o problema de não uniformidade perceptual. Alguns diagramas de Escala Uniforme de Cromaticidade (UCS) foram propostos com base em equações matemáticas para transformar os valores XYZ ou as coordenadas $x, y$ em um novo conjunto de valores $(u, v)$, o que deu origem ao diagrama de cromaticidade 1960 CIE $uv$ \citep{gevers:12}.
 
-Ainda com resultados insatisfatórios, o CIE fez uma nova mudança multiplicando o componente $v$ por um fator 1,5. Além disso, a escala de luminosidade dada pelo componente Y foi substituída por $L^* = [0, 100]$ para melhor representar as diferenças na luminosidade que são equivalentes. Esta revisão originou o espaço de cores \textbf{CIE 1976 $L^*u^*v^*$}, comumente conhecido pela sigla CIELUV \citep{gevers:12}.
+Ainda com resultados insatisfatórios, o CIE fez uma nova mudança multiplicando o componente $v$ por um fator 1,5. Além disso, a escala de luminosidade dada pelo componente Y foi substituída por $L^* = [0, 100]$ para melhor representar as diferenças na luminosidade que são equivalentes. Esta revisão originou o modelo de cores \textbf{CIE 1976 $L^*u^*v^*$}, comumente conhecido pela sigla CIELUV \citep{gevers:12}.
 
-Em 1976 o CIE adotou um novo espaço de cores, baseado no modelo $L, a, b$, proposto por Richard Hunter em 1948, que melhor representava o espaçamento uniforme das cores. Denominado \textbf{1976 CIE $L^*a^*b^*$} e conhecido pela sigla CIELAB, é um espaço baseado em cores oponentes \footnote{Teoria iniciada por volta do ano de 1500 quando Leonardo da Vinci concluiu que as cores são produzidas pela mistura de amarelo e azul, verde e vermelho, e branco e preto. Em 1950 houve a confirmação desta teoria quando sinais de cores oponentes foram detectados na conexão óptica entre a retina e o cérebro \citep{gevers:12}.} no qual os estímulos de cor da retina são convertidos para distinções entre claro e escuro, vermelho e verde, e azul e amarelo, representados pelos eixos $L^*$, $a^*$, e $b^*$, respectivamente \citep{gevers:12}.
+Em 1976 o CIE adotou um novo modelo de cores, baseado no modelo $L, a, b$, proposto por Richard Hunter em 1948, que melhor representava o espaçamento uniforme das cores. Denominado \textbf{1976 CIE $L^*a^*b^*$} e conhecido pela sigla CIELAB, é um espaço baseado em cores oponentes \footnote{Teoria iniciada por volta do ano de 1500 quando Leonardo da Vinci concluiu que as cores são produzidas pela mistura de amarelo e azul, verde e vermelho, e branco e preto. Em 1950 houve a confirmação desta teoria quando sinais de cores oponentes foram detectados na conexão óptica entre a retina e o cérebro \citep{gevers:12}.} no qual os estímulos de cor da retina são convertidos para distinções entre claro e escuro, vermelho e verde, e azul e amarelo, representados pelos eixos $L^*$, $a^*$, e $b^*$, respectivamente \citep{gevers:12}.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Espaço de cores RGB}\index{cores!espaço RGB}
+\subsection{Modelo RGB}\index{cores!modelo RGB}
 \label{sec:modelo_cores_rgb}
 
-O modelo RGB, acrônimo do inglês \textit{Red, Green, Blue}, é um espaço de cores aditivo no qual as três cores primárias vermelho, verde e azul são somadas para produzir as demais cores \citep{gonzalez:02}.
+O modelo RGB, acrônimo do inglês \textit{Red, Green, Blue}, é um modelo de cores aditivo no qual as três cores primárias vermelho, verde e azul são somadas para produzir as demais \citep{gonzalez:02}.
 
 Esse sistema foi baseado na teoria tricromática de Thomas Young e Hermann Helmholtz em meados do século 19 e pode ser representado graficamente
 através do cubo unitário definido sobre os eixos R, G e B, como ilustrado na figura~\ref{fig:rgb-cube} \citep{konstantinos:00}.
@@ -107,14 +107,13 @@ através do cubo unitário definido sobre os eixos R, G e B, como ilustrado na fig
   \centering
   \includegraphics[width=.4\textwidth]{rgb-cube}
   % http://www.scratchapixel.com/old/lessons/3d-basic-lessons/lesson-5-colors-and-digital-images/color-spaces/
-  \caption{Cubo unitário representando as cores no espaço RGB.}
+  \caption{Cubo unitário representando as cores do modelo RGB.}
   \label{fig:rgb-cube} 
 \end{figure}
 
-ARRUMAR ESTES DOIS PARÁGRAFOS.
-A origem representa a cor preta, o vértice de coordenadas (1, 1, 1) representa cor branca, os vértices que estão sobre os eixos representam as cores primárias e os demais vértices representam o complemento de cada cor primária. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla (R, G, B), com os valores R, G e B variando de 0 a 1. Os tons de cinza são representados ao longo da diagonal principal do cubo, que vai da origem (ponto correspondente a cor preta) até o vértice que corresponde à cor branca. Cada tom ao longo dessa diagonal é formado por contribuições iguais de cada primária.
+A origem, dada pelo vértice $(0, 0, 0)$, representa a cor preta. Já o vértice $(1, 1, 1)$, oposto à origem, representa a cor branca. Os vértices destacados sobre os eixos representam as cores primárias e os demais são o complemento de cada uma delas. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla $(r, g, b)$, onde $r, g, b \in [0, 1]$. Os tons de cinza são representados ao longo da diagonal principal do cubo, sendo que cada ponto ao longo dessa diagonal é formado por contribuições iguais de cada primária.
 
-Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não linear. O sistema supra citado mostra o modelo não linear e é o mais utilizado por dispositivos e aplicações por ser mais próximo da percepção do sistema visual humano, no que se refere à radiação de intensidades provocada pelas cores primárias. Na literatura, este sistema é frequentemente citado com a sigla R'G'B', o que torna a nomenclatura dúbia, uma vez que o modelo linear é denominado RGB. Também é importante citar que os valores RGB lineares são raramente utilizados para representar uma imagem, já que são, perceptualmente, altamente não uniforme \citep{konstantinos:00}.
+Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não linear. O sistema supra citado mostra o modelo não linear, cuja sigla é $R'G'B'$, e é o mais utilizado por dispositivos e aplicações pela sua similaridade com o sistema visual humano. Na literatura, este sistema é frequentemente citado com a sigla RGB, o que torna a nomenclatura dúbia, uma vez que o modelo linear também é denominado RGB e, portanto, a conversão entre os espaços de cores deve ser feita com certa cautela. Também é importante citar que os valores RGB lineares são raramente utilizados para representar uma imagem já que são, perceptualmente, altamente não uniformes \citep{konstantinos:00}.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -173,15 +172,6 @@ Evite misturas inapropriadas.
 
 Exemplos de referências com a tag:
 \begin{itemize}
-\item @Book: \citep{JW82}.
-{\scriptsize\begin{verbatim}
-@Book{JW82,
- author   = {Richard A. Johnson and Dean W. Wichern},
- title    = {Applied Multivariate Statistical Analysis},
- publisher= {Prentice-Hall},
- year     = {1983}
-}
-\end{verbatim}}
 
 \item @Article: \citep{MenaChalco08}.
 {\scriptsize\begin{verbatim}
@@ -194,22 +184,6 @@ Exemplos de referências com a tag:
  volume   = {5},
  pages    = {198-207},
  year     = {2008},
-}
-\end{verbatim}}
-
-\item @InProceedings: \citep{alves03:simi}.
-{\scriptsize\begin{verbatim}
-@InProceedings{alves03:simi,
- author   = {Carlos E. R. Alves and Edson N. Cáceres and Frank Dehne and 
-            Siang W. Song},
- title    = {A Parallel Wavefront Algorithm for Efficient Biological 
-            Sequence Comparison},
- booktitle= {ICCSA '03: The 2003 International Conference on Computational Science
-            and its Applications},
- year     = {2003},
- pages    = {249-258},
- month    = May,
- publisher= {Springer-Verlag}
 }
 \end{verbatim}}
 
