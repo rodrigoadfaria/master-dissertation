@@ -153,6 +153,26 @@ Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utili
 A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar este efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
+\subsection{Modelo de cores da família YUV}\index{cores!modelos YUV}
+\label{sec:modelo_cores_yuv}
+
+O termo YUV refere-se a uma família de espaços de cores dos quais a informação de luminância, representada pelo componente Y, é codificada separadamente da crominância, dada pelos componentes U e V. Os componentes U e V são representações dos sinais da diferença do azul subtraído da luminância (B-Y) e vermelho subtraído da luminância (R-Y). É utilizado para representar as cores em sistemas de transmissão analógica de televisão nos padrões Linha de Fase Alternada (PAL) e Cor Sequencial Com Memória (SECAM) \citep{pedrini:08}.
+
+A tranformação do modelo RGB para YUV é dada por:\\
+\begin{equation}
+  \begin{bmatrix}
+    Y \\ U \\ V
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    1 \\ 1 \\ 1
+  \end{bmatrix} +
+  \begin{bmatrix}
+    R \\ G \\ B
+  \end{bmatrix}
+\end{equation}
+onde $0 \leq R, G, B \leq 1$.
+
+%% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores da família HSI}\index{cores!modelos HSI}
 \label{sec:modelo_cores_hsi}
 

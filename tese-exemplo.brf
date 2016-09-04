@@ -24,13 +24,14 @@
 \backcite {gonzalez:02}{{6}{2.1.4}{subsection.2.1.4}}
 \backcite {pedrini:08}{{7}{2.1.4}{equation.2.1.4}}
 \backcite {pedrini:08}{{7}{2.1.4}{equation.2.1.5}}
-\backcite {MenaChalco08}{{7}{2.3}{section.2.3}}
+\backcite {pedrini:08}{{7}{2.1.5}{subsection.2.1.5}}
+\backcite {MenaChalco08}{{8}{2.3}{section.2.3}}
 \backcite {bobaoglu93:concepts}{{8}{2.3}{section.2.3}}
 \backcite {bronevetsky02}{{8}{2.3}{section.2.3}}
 \backcite {garcia01:PhD}{{8}{2.3}{section.2.3}}
 \backcite {schmidt03:MSc}{{8}{2.3}{section.2.3}}
-\backcite {alvisi99:analysisCIC}{{8}{2.3}{section.2.3}}
-\backcite {CORBA:spec}{{8}{2.3}{section.2.3}}
+\backcite {alvisi99:analysisCIC}{{9}{2.3}{section.2.3}}
+\backcite {CORBA:spec}{{9}{2.3}{section.2.3}}
 \backcite {gridftp}{{9}{2.3}{section.2.3}}
 \backcite {fowler04:designDead}{{9}{2.3}{section.2.3}}
 \backcite {FSF:GNU-GPL}{{9}{2.3}{section.2.3}}
