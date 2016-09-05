@@ -135,7 +135,7 @@ Uma maneira de obter o sistema CMY é:\\
   \end{bmatrix}
 \end{equation}
 
-ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias R, G e B da cor branca $W = (1, 1, 1)$ \citep{pedrini:08}:
+ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias R, G e B da cor branca $W = (1, 1, 1)$ \citep{gonzalez:02}:
 \begin{equation}
   \begin{bmatrix}
     C \\ M \\ Y
@@ -150,7 +150,7 @@ ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias 
 
 Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas.
 
-A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar este efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{pedrini:08}.
+A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar este efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores da família YUV}\index{cores!modelos da família YUV}
@@ -229,6 +229,11 @@ Neste modelo, assim como no YIQ, a intensidade dada pelo componente I é decompos
 \end{figure}
 
 O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade é entre $[0, 1]$, onde 0 significa preto e 1, branco.
+
+Outro modelo desta família é formado pelos componentes Matiz, Saturação e Luminância (\textbf{HSV}) e sua representação gráfica tridimensional é uma pirâmide hexagonal derivada do cubo RGB \citep{pedrini:08}.
+
+Os vários matizes estão representados na parte superior da pirâmide, a saturação é medida ao longo do eixo horizontal e a luminância é medida ao longo do eixo vertical, que passa pelo centro da pirâmide. O matiz, que corresponde às arestas ao redor do eixo vertical, varia de 0
+(vermelho) a 360 graus e o ângulo entre os vértices é de 60 graus. A saturação varia de 0 a 1 e é representada como sendo a razão entre a pureza de um determinado matiz e a sua pureza máxima, ou seja, quando $S = 1$. A luminância varia de 0, no pico da pirâmide representando a cor preta, a 1 na base, onde as intensidades das cores são máximas \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
 %\section{Exemplo de Código-Fonte em Java}
