@@ -117,7 +117,7 @@ Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo CMY}\index{cores!modelos CMY}
+\subsection{Modelo CMY}\index{cores!modelo CMY}
 \label{sec:modelo_cores_cmy}
 
 O modelo CMY é baseado nas cores primárias complementares Ciano, Magenta e Amarelo e, diferentemente do RGB, é um modelo de cores subtrativo no qual as cores são geradas subtraindo-se o comprimento da onda dominante da luz branca e, por isso, a cor resultante corresponde à luz que é refletida \citep{gonzalez:02}.
@@ -234,6 +234,12 @@ Outro modelo desta família é formado pelos componentes Matiz, Saturação e Luminâ
 
 Os vários matizes estão representados na parte superior da pirâmide, a saturação é medida ao longo do eixo horizontal e a luminância é medida ao longo do eixo vertical, que passa pelo centro da pirâmide. O matiz, que corresponde às arestas ao redor do eixo vertical, varia de 0
 (vermelho) a 360 graus e o ângulo entre os vértices é de 60 graus. A saturação varia de 0 a 1 e é representada como sendo a razão entre a pureza de um determinado matiz e a sua pureza máxima, ou seja, quando $S = 1$. A luminância varia de 0, no pico da pirâmide representando a cor preta, a 1 na base, onde as intensidades das cores são máximas \citep{pedrini:08}.
+
+Da mesma forma que o HSV, o modelo Matiz, Saturação e Luminosidade (\textbf{HSL}) é uma representação tridimensional e é formado por dois cones de altura 1, cujas bases são coincidentes \citep{pedrini:08}.
+
+O matiz é determinado pelos pontos no círculo das bases comuns aos cones. A saturação varia de 0 a 1, conforme a distância ao eixo do cone. A luminosidade está ao longo do eixo vertical comum aos dois cones e varia na escala $[0, 1]$, onde 0 significa preto e 1, branco \citep{pedrini:08}.
+
+Todos os modelos de cores dessa família têm a propriedade de se pensar em cores mais claras, obtidas pelo aumento do brilho ou luminosidade, e mais escuras, pela diminuição dos mesmos valores. As cores intermediárias são produzidas pela diminuição da saturação \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
 %\section{Exemplo de Código-Fonte em Java}
