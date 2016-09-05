@@ -153,7 +153,7 @@ Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utili
 A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar este efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores da família YUV}\index{cores!modelos YUV}
+\subsection{Modelo de cores da família YUV}\index{cores!modelos da família YUV}
 \label{sec:modelo_cores_yuv}
 
 O termo YUV refere-se a uma família de espaços de cores dos quais a informação de luminância, representada pelo componente Y, é codificada separadamente da crominância, dada pelos componentes U e V. Os componentes U e V são representações dos sinais da diferença do azul subtraído da luminância (B-Y) e vermelho subtraído da luminância (R-Y). É utilizado para representar as cores em sistemas de transmissão analógica de televisão nos padrões Linha de Fase Alternada (PAL) e Cor Sequencial Com Memória (SECAM) \citep{pedrini:08}.
@@ -213,11 +213,22 @@ A conversão do espaço RGB para YCbCr é dada por:\\
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores da família HSI}\index{cores!modelos HSI}
+\subsection{Modelo de cores da família HSI}\index{cores!modelos da família HSI}
 \label{sec:modelo_cores_hsi}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
+Modelos baseados no Matiz, Saturação e Intensidade (HSI) são mais adequados para aplicações de processamento de imagens, do ponto de vista do usuário, pela correlação com a percepção humana da cor \citep{konstantinos:00}.
 
+Neste modelo, assim como no YIQ, a intensidade dada pelo componente I é decomposta da informação de crominância, representada pelo matiz (H) e saturação (S) \citep{konstantinos:00}. A combinação destes componentes resulta em uma estrutura piramidal que pode ser vista na figura~\ref{fig:hsi-model}.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.6\textwidth]{hsi-model}
+  % http://www.blackice.com/images/HSIColorModel.jpg
+  \caption{Representação gráfica do modelo HSI.}
+  \label{fig:hsi-model} 
+\end{figure}
+
+O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade é entre $[0, 1]$, onde 0 significa preto e 1, branco.
 
 %% ------------------------------------------------------------------------- %%
 %\section{Exemplo de Código-Fonte em Java}
