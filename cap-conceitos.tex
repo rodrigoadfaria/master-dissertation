@@ -10,7 +10,7 @@
 
 O uso de imagens coloridas em visão computacional ou no processamento de imagens pode ser motivado por dois fatores principais. O primeiro diz respeito a característica poderosa da cor de funcionar como um descritor que, frequentemente, simplifica a identificação e extração de um objeto em uma cena. O segundo está relacionado com a capacidade dos seres humanos de discernir milhares de tonalidades e intensidades, se comparado com apenas algumas dúzias de níveis de cinza \citep{gonzalez:02}.
 
-A percepção visual da cor pelo olho humano não deve variar conforme a distribuição espectral da luz natural incidente sobre um objeto. Em outras palavras, a aparência de cor dos objetos permanece estável sob condições de iluminação diferentes. Este fenômeno é conhecido como constância de cor \citep{gevers:12}.
+A percepção visual da cor pelo olho humano não deve variar conforme a distribuição espectral da luz natural incidente sobre um objeto. Em outras palavras, a aparência de cor dos objetos permanece estável sob condições de iluminação diferentes. Esse fenômeno é conhecido como constância de cor \citep{gevers:12}.
 
 Como exemplo, o gramado de um estádio de futebol permanece verde durante todo o dia, inclusive ao entardecer quando, de um ponto de vista físico, a luz solar
 tem um aspecto mais avermelhado.
@@ -23,10 +23,10 @@ para distinguir uma cor de outra \citep{gonzalez:02}.
 O brilho dá a noção de intensidade cromática. Matiz representa a cor dominante
 percebida por um observador. Já a saturação refere-se à pureza relativa ou quantidade de luz branca aplicada ao matiz. Combinados, matiz e saturação são conhecidos como cromaticidade e, portanto, uma cor deve ser caracterizada por seu brilho e cromaticidade \citep{gonzalez:02}.
 
-As cores podem ser especificadas por modelos matemáticos em tuplas de números em um sistema de coordenadas e um subespaço dentro deste sistema onde cada cor
+As cores podem ser especificadas por modelos matemáticos em tuplas de números em um sistema de coordenadas e um subespaço dentro desse sistema onde cada cor
 é representada por um único ponto. Tais modelos são conhecidos como modelo de cores \citep{gonzalez:02}.
 
-Estes modelos podem ser classificados como de dois tipos: os modelos aditivos em que as intensidades das cores primárias são adicionadas para produzir outras cores e subtrativos, onde as cores são geradas subtraindo-se o comprimento da onda dominante da luz branca.
+Esses modelos podem ser classificados como de dois tipos: os modelos aditivos em que as intensidades das cores primárias são adicionadas para produzir outras cores e subtrativos, onde as cores são geradas subtraindo-se o comprimento da onda dominante da luz branca.
 
 As seções seguintes descrevem brevemente alguns dos principais modelos de cores, bem como seus variantes e principais áreas de aplicação.
 
@@ -57,7 +57,7 @@ Em 1931, o CIE estabeleceu o primeiro modelo matemático de especificação numéric
 
 O experimento que originou o padrão consistia em detectar as cores percebidas por um observador a partir de uma mistura de três cores primárias X, Y e Z chamadas de valores tristímulus. Estas coordenadas deram origem ao espaço de cores \textbf{CIE XYZ} que engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta razão, é considerado uma representação independente de dispositivo \citep{konstantinos:00}.
 
-O sistema proposto pelo CIE XYZ para descrição de uma cor é baseado em um componente de luminância Y e outros dois componentes adicionais X e Z que dão a informação de cromaticidade. Este sistema é formado por cores imaginárias que podem ser expressas como combinações das medidas normalizadas abaixo:
+O sistema proposto pelo CIE XYZ para descrição de uma cor é baseado em um componente de luminância Y e outros dois componentes adicionais X e Z que dão a informação de cromaticidade. Esse sistema é formado por cores imaginárias que podem ser expressas como combinações das medidas normalizadas abaixo:
 
 
 \begin{equation}
@@ -113,7 +113,7 @@ através do cubo unitário definido sobre os eixos R, G e B, como ilustrado na fig
 
 A origem, dada pelo vértice $(0, 0, 0)$, representa a cor preta. Já o vértice $(1, 1, 1)$, oposto à origem, representa a cor branca. Os vértices destacados sobre os eixos representam as cores primárias e os demais são o complemento de cada uma delas. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla $(r, g, b)$, onde $r, g, b \in [0, 1]$. Os tons de cinza são representados ao longo da diagonal principal do cubo, sendo que cada ponto ao longo dessa diagonal é formado por contribuições iguais de cada primária.
 
-Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não linear. O sistema supra citado mostra o modelo não linear, cuja sigla é $R'G'B'$, e é o mais utilizado por dispositivos e aplicações pela sua similaridade com o sistema visual humano. Na literatura, este sistema é frequentemente citado com a sigla RGB, o que torna a nomenclatura dúbia, uma vez que o modelo linear também é denominado RGB e, portanto, a conversão entre os espaços de cores deve ser feita com certa cautela. Também é importante citar que os valores RGB lineares são raramente utilizados para representar uma imagem já que são, perceptualmente, altamente não uniformes \citep{konstantinos:00}.
+Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não linear. O sistema supra citado mostra o modelo não linear, cuja sigla é $R'G'B'$, e é o mais utilizado por dispositivos e aplicações pela sua similaridade com o sistema visual humano. Na literatura, esse sistema é frequentemente citado com a sigla RGB, o que torna a nomenclatura dúbia, uma vez que o modelo linear também é denominado RGB e, portanto, a conversão entre os espaços de cores deve ser feita com certa cautela. Também é importante citar que os valores RGB lineares são raramente utilizados para representar uma imagem já que são, perceptualmente, altamente não uniformes \citep{konstantinos:00}.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -150,7 +150,7 @@ ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias 
 
 Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas.
 
-A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar este efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
+A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar esse efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores da família YUV}\index{cores!modelos da família YUV}
@@ -174,7 +174,7 @@ A tranformação do espaço RGB para YUV é dada por:\\
 \end{equation}
 onde $0 \leq R, G, B \leq 1$.
 
-Análogo ao YUV, o modelo \textbf{YIQ} foi adotado em 1950 pelo Comitê Nacional do Sistema de Televisão (NTSC), um padrão americano para transmissão de sinal de televisão a cores. Neste modelo, o componente Y corresponde à luminância e os componentes I (matiz) e Q (saturação) codificam a informação de crominância \citep{pedrini:08}.
+Análogo ao YUV, o modelo \textbf{YIQ} foi adotado em 1950 pelo Comitê Nacional do Sistema de Televisão (NTSC), um padrão americano para transmissão de sinal de televisão a cores. Nesse modelo, o componente Y corresponde à luminância e os componentes I (matiz) e Q (saturação) codificam a informação de crominância \citep{pedrini:08}.
 
 A tranformação do espaço RGB para YIQ é dada por:\\
 \begin{equation}
@@ -194,7 +194,7 @@ onde $0 \leq R, G, B \leq 1$.
 
 Um outro modelo de cores da família YUV é o \textbf{YCbCr}, definido matematicamente por uma transformação de coordenadas em relação a algum espaço RGB \citep{pedrini:08}.
 
-O modelo YCbCr é largamente utilizado em vídeos digitais. Neste modelo, o componente Y representa a luminância, o componente Cb dá a medida da diferença entre a cor azul e um valor de referência, análogo ao componente Cr que é a medida da diferença entre a cor vermelha e um valor de referência \citep{pedrini:08}.
+O modelo YCbCr é largamente utilizado em vídeos digitais. Nesse modelo, o componente Y representa a luminância, o componente Cb dá a medida da diferença entre a cor azul e um valor de referência, análogo ao componente Cr que é a medida da diferença entre a cor vermelha e um valor de referência \citep{pedrini:08}.
 
 A conversão do espaço RGB para YCbCr é dada por:\\
 \begin{equation}
@@ -218,7 +218,7 @@ A conversão do espaço RGB para YCbCr é dada por:\\
 
 Modelos baseados no Matiz, Saturação e Intensidade (HSI) são mais adequados para aplicações de processamento de imagens, do ponto de vista do usuário, pela correlação com a percepção humana da cor \citep{konstantinos:00}.
 
-Neste modelo, assim como no YIQ, a intensidade dada pelo componente I é decomposta da informação de crominância, representada pelo matiz (H) e saturação (S) \citep{konstantinos:00}. A combinação destes componentes resulta em uma estrutura piramidal que pode ser vista na figura~\ref{fig:hsi-model}.
+Nesse modelo, assim como no YIQ, a intensidade dada pelo componente I é decomposta da informação de crominância, representada pelo matiz (H) e saturação (S) \citep{konstantinos:00}. A combinação desses componentes resulta em uma estrutura piramidal que pode ser vista na figura~\ref{fig:hsi-model}.
 
 \begin{figure}[!h]
   \centering
@@ -244,10 +244,19 @@ Todos os modelos de cores dessa família têm a propriedade de se pensar em cores 
 %% ------------------------------------------------------------------------- %%
 \section{Teoria Fuzzy}\index{Fuzzy!teoria}
 \label{sec:teoria_fuzzy}
-A teoria fuzzy foi apresentada em 1964 por Lotfi A. Zadeh, professor no departamento de engenharia elétrica e ciências da computação da Universidade da Califórnia, em Berkeley, quando ele trabalhava com problemas de classificações de conjuntos que não possuíam fronteiras bem delineadas, ou  seja, a transição entre os conjuntos é suave e não abrupta.
+Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo. Essa ideia vem da teoria clássica de conjuntos e é embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o número $7$ pertence ao conjunto dos números naturais e, da mesma maneira, que o número $-7$ não pertence a esse mesmo conjunto. Este é um caso clássico em que a aplicação da lógica booleana é bem sucedida. Em outras palavras, quando questionado se o número $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas possíveis: sim ou não.
 
-Em muitos problemas não há dificuldade em determinar se um dado elemento é ou não parte de um grupo. Essa ideia vem da teoria clássica de conjuntos e é embasada no conceito fundamental de conjunto \citep{chen:00}. Nós podemos, por exemplo, afirmar que o número 7 pertence ao conjunto dos números naturais e, da mesma maneira, que o número -7 não pertence a este mesmo conjunto. Este caso trata-se de um exemplo clássico em que a aplicação da lógica booleana é bem sucedida. Em outras palavras, quando questionamos "O número $x$ pertence ao conjunto $Y$"?, temos, apenas, duas respostas possíveis "sim" ou "não".
+Entretanto, há inúmeros indivíduos ou observações na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relação de pertinência não é bem definida. Como exemplo, o conjunto das pessoas altas, os números reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicação da lógica booleana para classificar elementos como parte de um grupo ou não é imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilização da lógica booleana não resulta em interpretações realísticas, pois uma pessoa com $1,69m$ é, portanto, baixa ou, pode-se dizer ainda, que não pertence ao grupo das pessoas altas. Ora, apenas $1$ centímetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ está muito próxima de pertencer ao grupo das pessoas baixas.
 
+Claramente, a resposta a ser obtida quando da análise de possibilidades desse tipo é fortemente dependente do contexto, pois há um alto grau de incerteza inerente aos elementos e conjuntos sendo considerados.
+
+O conceito de incerteza mudou gradativamente na ciência e na matemática. Na ciência, esta mudança foi manifestada por uma transição gradual da visão tradicional, que insiste que a incerteza é indesejável e, por esta razão, ela deve ser evitada por todos os meios possíveis, para uma visão alternativa, que é tolerante à incerteza. De acordo com a visão tradicional, a ciência deve esforçar-se de certeza em todas as suas manifestações, ou seja, com precisão, especificidade, nitidez, consistência e, por conseguinte, a incerteza é considerada como não científica. De acordo com a visão alternativa, a dúvida é considerada essencial para a ciência; não é só uma praga inevitável, mas tem, de fato, uma grande utilidade \citep{klir:95}.
+
+E com base na ideia moderna de que a incerteza é algo útil na ciência é que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos dá-se sob a ótica de que os limites entre eles não são precisos e, portanto, é possível estabelecer funções que forneçam um certo \textbf{grau de pertinência} de um elemento a um dado conjunto \citep{zadeh:65}.
+
+A capacidade de conjuntos \emph{fuzzy} expressarem transições graduais de pertinência e não pertinência tem uma grande utilidade. Ela fornece não só uma representação significativa e poderosa da medida de incerteza, mas também uma forma de expressar conceitos vagos em linguagem natural \citep{klir:95}. Voltando ao exemplo do conjunto de pessoas altas, em vez de descrever a altura de uma pessoa com exatidão em metros ou centímetros, pode-se apenas dizer que ela é alta, baixa ou mediana. Cada um desses conjuntos pode ser um conjunto \emph{fuzzy}, onde um valor 1 é atribuído a um membro que está totalmente incluído em um deles, ou 0 caso contrário. Valores intermediários nessa escala indicam que o elemento está parcialmente em um dos conjuntos.
+
+A seção \ref{sec:conjuntos_fuzzy} explicita algumas das definições formais e conceitos básicos da teoria dos conjuntos \emph{fuzzy} proposta por Zadeh.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Conjuntos Fuzzy}\index{Fuzzy!conjuntos}
@@ -333,20 +342,6 @@ Evite misturas inapropriadas.
 
 Exemplos de referências com a tag:
 \begin{itemize}
-
-\item @Article: \citep{MenaChalco08}.
-{\scriptsize\begin{verbatim}
-@Article{MenaChalco08,
- author   = {Jesús P. Mena-Chalco and Helaine Carrer and Yossi Zana and 
-            Roberto M. Cesar-Jr.},
- title    = {Identification of protein coding regions using the modified 
-            {G}abor-wavelet transform},
- journal  = {IEEE/ACM Transactions on Computational Biology and Bioinformatics},
- volume   = {5},
- pages    = {198-207},
- year     = {2008},
-}
-\end{verbatim}}
 
 \item @InCollection: \citep{bobaoglu93:concepts}.
 {\scriptsize\begin{verbatim}
