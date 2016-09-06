@@ -261,10 +261,28 @@ A seção \ref{sec:conjuntos_fuzzy} explicita algumas das definições formais e con
 %% ------------------------------------------------------------------------- %%
 \subsection{Conjuntos Fuzzy}\index{Fuzzy!conjuntos}
 \label{sec:conjuntos_fuzzy}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
+A teoria de conjuntos clássicos está baseada em uma função, geralmente conhecida como função característica, dada por:
+
+\begin{equation}
+  \mu_A(x) =  \begin{cases}
+                1 \quad \text{se}\ x \in A \\
+                0 \quad \text{se}\ x \notin A
+              \end{cases}
+\end{equation}
+onde $U$ é o conjunto Universo, $A$ é um subconjunto de $U$ e $x$ é um elemento de $U$ \citep{klir:95}.
+
+Portanto, a função característica é um mapeamento dos elementos de $U$ no conjunto binário $\{0, 1\}$, formalmente definida como:
+
+\begin{equation}
+  \mu_A =  U \rightarrow \{0, 1\}
+\end{equation}
+
+Sendo assim, a função característica determina que, de acordo com algum critério, $\forall x \in U$, se $\mu_A(x) = 1$, então $x$ é um membro de $A$, por outro lado, quando $\mu_A(x) = 0$, $x$ não é um membro de $A$.
+
+Quanto aos conjuntos \emph{fuzzy}, basta generalizar a função característica aplicada nos conjuntos clássicos no intervalo $[0, 1]$ para obter-se um conjunto "fuzzificado", ou seja, o grau de pertinência de um elemento $x$ passa, agora, a ser expresso em termos contínuos. Em outras palavras, o elemento $x$ pertence ao subconjunto $A$ de $U$ com algum grau de pertinência obtido do intervalo $[0, 1]$.
+
+Cabe aqui citar a definição de conjuntos \emph{fuzzy} dada por Zadeh que designa um conjunto \emph{fuzzy} como uma classe de objetos com um grau de pertinência contínuo. Tal conjunto é caracterizado por uma função de pertinência (característica), que atribui a cada objeto um grau de pertinência que varia entre zero e um. As noções de inclusão, união, intersecção, complemento, relação, convexidade, etc., oriundas da teoria de conjuntos clássica, são estendidas a esses conjuntos \citep{zadeh:65}.
+
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Variáveis linguísticas}
