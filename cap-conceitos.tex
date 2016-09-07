@@ -1,45 +1,45 @@
 %% ------------------------------------------------------------------------- %%
-\chapter{FundamentaÁ„o TeÛrica}
+\chapter{Fundamenta√ß√£o Te√≥rica}
 \label{cap:conceitos}
 
-{\color{red} Fazer uma breve introduÁ„o aqui.}
+{\color{red} Fazer uma breve introdu√ß√£o aqui.}
 
 %% ------------------------------------------------------------------------- %%
 \section{Modelos de Cores}\index{cores!modelos de}
 \label{sec:fundamentos}
 
-O uso de imagens coloridas em vis„o computacional ou no processamento de imagens pode ser motivado por dois fatores principais. O primeiro diz respeito a caracterÌstica poderosa da cor de funcionar como um descritor que, frequentemente, simplifica a identificaÁ„o e extraÁ„o de um objeto em uma cena. O segundo est· relacionado com a capacidade dos seres humanos de discernir milhares de tonalidades e intensidades, se comparado com apenas algumas d˙zias de nÌveis de cinza \citep{gonzalez:02}.
+O uso de imagens coloridas em vis√£o computacional ou no processamento de imagens pode ser motivado por dois fatores principais. O primeiro diz respeito a caracter√≠stica poderosa da cor de funcionar como um descritor que, frequentemente, simplifica a identifica√ß√£o e extra√ß√£o de um objeto em uma cena. O segundo est√° relacionado com a capacidade dos seres humanos de discernir milhares de tonalidades e intensidades, se comparado com apenas algumas d√∫zias de n√≠veis de cinza \citep{gonzalez:02}.
 
-A percepÁ„o visual da cor pelo olho humano n„o deve variar conforme a distribuiÁ„o espectral da luz natural incidente sobre um objeto. Em outras palavras, a aparÍncia de cor dos objetos permanece est·vel sob condiÁıes de iluminaÁ„o diferentes. Esse fenÙmeno È conhecido como const‚ncia de cor \citep{gevers:12}.
+A percep√ß√£o visual da cor pelo olho humano n√£o deve variar conforme a distribui√ß√£o espectral da luz natural incidente sobre um objeto. Em outras palavras, a apar√™ncia de cor dos objetos permanece est√°vel sob condi√ß√µes de ilumina√ß√£o diferentes. Esse fen√¥meno √© conhecido como const√¢ncia de cor \citep{gevers:12}.
 
-Como exemplo, o gramado de um est·dio de futebol permanece verde durante todo o dia, inclusive ao entardecer quando, de um ponto de vista fÌsico, a luz solar
+Como exemplo, o gramado de um est√°dio de futebol permanece verde durante todo o dia, inclusive ao entardecer quando, de um ponto de vista f√≠sico, a luz solar
 tem um aspecto mais avermelhado.
 
-A percepÁ„o humana das cores se d· pela ativaÁ„o de cÈlulas nervosas que enviam
-mensagens ao cÈrebro sobre brilho (\textit{brightness}), matiz (\textit{hue}) e 
-saturaÁ„o (\textit{saturation}) que, geralmente, s„o as caracterÌsticas usadas
+A percep√ß√£o humana das cores se d√° pela ativa√ß√£o de c√©lulas nervosas que enviam
+mensagens ao c√©rebro sobre brilho (\textit{brightness}), matiz (\textit{hue}) e 
+satura√ß√£o (\textit{saturation}) que, geralmente, s√£o as caracter√≠sticas usadas
 para distinguir uma cor de outra \citep{gonzalez:02}.
 
-O brilho d· a noÁ„o de intensidade crom·tica. Matiz representa a cor dominante
-percebida por um observador. J· a saturaÁ„o refere-se ‡ pureza relativa ou quantidade de luz branca aplicada ao matiz. Combinados, matiz e saturaÁ„o s„o conhecidos como cromaticidade e, portanto, uma cor deve ser caracterizada por seu brilho e cromaticidade \citep{gonzalez:02}.
+O brilho d√° a no√ß√£o de intensidade crom√°tica. Matiz representa a cor dominante
+percebida por um observador. J√° a satura√ß√£o refere-se √† pureza relativa ou quantidade de luz branca aplicada ao matiz. Combinados, matiz e satura√ß√£o s√£o conhecidos como cromaticidade e, portanto, uma cor deve ser caracterizada por seu brilho e cromaticidade \citep{gonzalez:02}.
 
-As cores podem ser especificadas por modelos matem·ticos em tuplas de n˙meros em um sistema de coordenadas e um subespaÁo dentro desse sistema onde cada cor
-È representada por um ˙nico ponto. Tais modelos s„o conhecidos como modelo de cores \citep{gonzalez:02}.
+As cores podem ser especificadas por modelos matem√°ticos em tuplas de n√∫meros em um sistema de coordenadas e um subespa√ßo dentro desse sistema onde cada cor
+√© representada por um √∫nico ponto. Tais modelos s√£o conhecidos como modelo de cores \citep{gonzalez:02}.
 
-Esses modelos podem ser classificados como de dois tipos: os modelos aditivos em que as intensidades das cores prim·rias s„o adicionadas para produzir outras cores e subtrativos, onde as cores s„o geradas subtraindo-se o comprimento da onda dominante da luz branca.
+Esses modelos podem ser classificados como de dois tipos: os modelos aditivos em que as intensidades das cores prim√°rias s√£o adicionadas para produzir outras cores e subtrativos, onde as cores s√£o geradas subtraindo-se o comprimento da onda dominante da luz branca.
 
-As seÁıes seguintes descrevem brevemente alguns dos principais modelos de cores, bem como seus variantes e principais ·reas de aplicaÁ„o.
+As se√ß√µes seguintes descrevem brevemente alguns dos principais modelos de cores, bem como seus variantes e principais √°reas de aplica√ß√£o.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de Munsell}\index{cores!modelo de Munsell}
 \label{sec:modelo_cores_munsell}
 
-O Professor Albert H. Munsell foi pioneiro na tentativa de organizar a percepÁ„o de cor em um espaÁo de cores. Mais do que isso, Munsell conseguiu aliar a arte e a ciÍncia das cores em uma ˙nica teoria \citep{konstantinos:00}.
+O Professor Albert H. Munsell foi pioneiro na tentativa de organizar a percep√ß√£o de cor em um espa√ßo de cores. Mais do que isso, Munsell conseguiu aliar a arte e a ci√™ncia das cores em uma √∫nica teoria \citep{konstantinos:00}.
 
-O princÌpio da igualdade de espaÁamento entre os componentes do modelo È a ideia principal do modelo de cores de Munsell \citep{konstantinos:00}. Esses componentes s„o matiz (\textit{hue}), luminosidade (\textit{value}) e saturaÁ„o (\textit{chroma}).
+O princ√≠pio da igualdade de espa√ßamento entre os componentes do modelo √© a ideia principal do modelo de cores de Munsell \citep{konstantinos:00}. Esses componentes s√£o matiz (\textit{hue}), luminosidade (\textit{value}) e satura√ß√£o (\textit{chroma}).
 
-O modelo È representado por uma forma cilÌndrica e pode ser visto na figura~\ref{fig:munsell-system}. O matiz est· disposto no eixo circular que consiste de
-cinco cores de base e cinco secund·rias, a saturaÁ„o no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10.
+O modelo √© representado por uma forma cil√≠ndrica e pode ser visto na figura~\ref{fig:munsell-system}. O matiz est√° disposto no eixo circular que consiste de
+cinco cores de base e cinco secund√°rias, a satura√ß√£o no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10.
 
 \begin{figure}[!h]
   \centering
@@ -53,11 +53,11 @@ cinco cores de base e cinco secund·rias, a saturaÁ„o no eixo radial e a luminosi
 \subsection{Modelo CIE}\index{cores!modelo CIE}
 \label{sec:modelo_cores_cie}
 
-Em 1931, o CIE estabeleceu o primeiro modelo matem·tico de especificaÁ„o numÈrica da cor, cujo objetivo era analisar a relaÁ„o entre os aspectos fÌsicos das cores no espectro eletromagnÈtico e sua percepÁ„o pelo sistema visual humano para determinar como uma pessoa comum percebe a cor. Uma revis„o desta especificaÁ„o foi publicada em 1964 \citep{gonzalez:02}.
+Em 1931, o CIE estabeleceu o primeiro modelo matem√°tico de especifica√ß√£o num√©rica da cor, cujo objetivo era analisar a rela√ß√£o entre os aspectos f√≠sicos das cores no espectro eletromagn√©tico e sua percep√ß√£o pelo sistema visual humano para determinar como uma pessoa comum percebe a cor. Uma revis√£o desta especifica√ß√£o foi publicada em 1964 \citep{gonzalez:02}.
 
-O experimento que originou o padr„o consistia em detectar as cores percebidas por um observador a partir de uma mistura de trÍs cores prim·rias X, Y e Z chamadas de valores tristÌmulus. Estas coordenadas deram origem ao espaÁo de cores \textbf{CIE XYZ} que engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta raz„o, È considerado uma representaÁ„o independente de dispositivo \citep{konstantinos:00}.
+O experimento que originou o padr√£o consistia em detectar as cores percebidas por um observador a partir de uma mistura de tr√™s cores prim√°rias X, Y e Z chamadas de valores trist√≠mulus. Estas coordenadas deram origem ao espa√ßo de cores \textbf{CIE XYZ} que engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta raz√£o, √© considerado uma representa√ß√£o independente de dispositivo \citep{konstantinos:00}.
 
-O sistema proposto pelo CIE XYZ para descriÁ„o de uma cor È baseado em um componente de lumin‚ncia Y e outros dois componentes adicionais X e Z que d„o a informaÁ„o de cromaticidade. Esse sistema È formado por cores imagin·rias que podem ser expressas como combinaÁıes das medidas normalizadas abaixo:
+O sistema proposto pelo CIE XYZ para descri√ß√£o de uma cor √© baseado em um componente de lumin√¢ncia Y e outros dois componentes adicionais X e Z que d√£o a informa√ß√£o de cromaticidade. Esse sistema √© formado por cores imagin√°rias que podem ser expressas como combina√ß√µes das medidas normalizadas abaixo:
 
 
 \begin{equation}
@@ -74,7 +74,7 @@ O sistema proposto pelo CIE XYZ para descriÁ„o de uma cor È baseado em um compon
 
 com $x + y+ z = 1$.
 
-As combinaÁıes de valores negativos e outros problemas relacionados ‡ seleÁ„o de um conjunto de prim·rias reais s„o eliminados.  As coordenadas de cromaticidade $x$ e $y$ permitem representar todas as cores num plano bidimensional, conhecido como diagrama de cromaticidade, que pode ser visto na figura~\ref{fig:cie-cromaticity-diagram}.
+As combina√ß√µes de valores negativos e outros problemas relacionados √† sele√ß√£o de um conjunto de prim√°rias reais s√£o eliminados.  As coordenadas de cromaticidade $x$ e $y$ permitem representar todas as cores num plano bidimensional, conhecido como diagrama de cromaticidade, que pode ser visto na figura~\ref{fig:cie-cromaticity-diagram}.
 
 \begin{figure}[!h]
   \centering
@@ -84,45 +84,45 @@ As combinaÁıes de valores negativos e outros problemas relacionados ‡ seleÁ„o de
   \label{fig:cie-cromaticity-diagram} 
 \end{figure}
 
-Os pontos que representam as cores puras no espectro eletromagnÈtico s„o rotulados de acordo com os seus comprimentos de onda e est„o localizados ao longo da curva que vai da extremidade direita do eixo $x$ correspondente ‡ cor vermelha atÈ a extremidade esquerda do mesmo eixo correspondente ‡ cor violeta, formando um polÌgono parecido com uma ferradura. Os pontos internos correspondem a todas as combinaÁıes possÌveis de cores visÌveis. As coordenadas $(x = 1/3, y = 1/3)$ correspondem ‡ localizaÁ„o da luz branca, tambÈm conhecida como ponto branco, e servem de referÍncia no processo de captura de imagem, codificaÁ„o ou reproduÁ„o.
+Os pontos que representam as cores puras no espectro eletromagn√©tico s√£o rotulados de acordo com os seus comprimentos de onda e est√£o localizados ao longo da curva que vai da extremidade direita do eixo $x$ correspondente √† cor vermelha at√© a extremidade esquerda do mesmo eixo correspondente √† cor violeta, formando um pol√≠gono parecido com uma ferradura. Os pontos internos correspondem a todas as combina√ß√µes poss√≠veis de cores vis√≠veis. As coordenadas $(x = 1/3, y = 1/3)$ correspondem √† localiza√ß√£o da luz branca, tamb√©m conhecida como ponto branco, e servem de refer√™ncia no processo de captura de imagem, codifica√ß√£o ou reprodu√ß√£o.
 
-O CIE tambÈm derivou e padronizou outros dois modelos de cores a partir da especificaÁ„o do CIE XYZ e, da mesma maneira, s„o independente de dispositivo. Ambos s„o perceptualmente uniformes, ou seja, dist‚ncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espaÁo deve permitir uma transiÁ„o suave entre o preto e o branco.
+O CIE tamb√©m derivou e padronizou outros dois modelos de cores a partir da especifica√ß√£o do CIE XYZ e, da mesma maneira, s√£o independente de dispositivo. Ambos s√£o perceptualmente uniformes, ou seja, dist√¢ncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espa√ßo deve permitir uma transi√ß√£o suave entre o preto e o branco.
 
-O primeiro deles foi concebido para reduzir o problema de n„o uniformidade perceptual. Alguns diagramas de Escala Uniforme de Cromaticidade (UCS) foram propostos com base em equaÁıes matem·ticas para transformar os valores XYZ ou as coordenadas $x, y$ em um novo conjunto de valores $(u, v)$, o que deu origem ao diagrama de cromaticidade 1960 CIE $uv$ \citep{gevers:12}.
+O primeiro deles foi concebido para reduzir o problema de n√£o uniformidade perceptual. Alguns diagramas de Escala Uniforme de Cromaticidade (UCS) foram propostos com base em equa√ß√µes matem√°ticas para transformar os valores XYZ ou as coordenadas $x, y$ em um novo conjunto de valores $(u, v)$, o que deu origem ao diagrama de cromaticidade 1960 CIE $uv$ \citep{gevers:12}.
 
-Ainda com resultados insatisfatÛrios, o CIE fez uma nova mudanÁa multiplicando o componente $v$ por um fator 1,5. AlÈm disso, a escala de luminosidade dada pelo componente Y foi substituÌda por $L^* = [0, 100]$ para melhor representar as diferenÁas na luminosidade que s„o equivalentes. Esta revis„o originou o modelo de cores \textbf{CIE 1976 $L^*u^*v^*$}, comumente conhecido pela sigla CIELUV \citep{gevers:12}.
+Ainda com resultados insatisfat√≥rios, o CIE fez uma nova mudan√ßa multiplicando o componente $v$ por um fator 1,5. Al√©m disso, a escala de luminosidade dada pelo componente Y foi substitu√≠da por $L^* = [0, 100]$ para melhor representar as diferen√ßas na luminosidade que s√£o equivalentes. Esta revis√£o originou o modelo de cores \textbf{CIE 1976 $L^*u^*v^*$}, comumente conhecido pela sigla CIELUV \citep{gevers:12}.
 
-Em 1976 o CIE adotou um novo modelo de cores, baseado no modelo $L, a, b$, proposto por Richard Hunter em 1948, que melhor representava o espaÁamento uniforme das cores. Denominado \textbf{1976 CIE $L^*a^*b^*$} e conhecido pela sigla CIELAB, È um espaÁo baseado em cores oponentes \footnote{Teoria iniciada por volta do ano de 1500 quando Leonardo da Vinci concluiu que as cores s„o produzidas pela mistura de amarelo e azul, verde e vermelho, e branco e preto. Em 1950 houve a confirmaÁ„o desta teoria quando sinais de cores oponentes foram detectados na conex„o Ûptica entre a retina e o cÈrebro \citep{gevers:12}.} no qual os estÌmulos de cor da retina s„o convertidos para distinÁıes entre claro e escuro, vermelho e verde, e azul e amarelo, representados pelos eixos $L^*$, $a^*$, e $b^*$, respectivamente \citep{gevers:12}.
+Em 1976 o CIE adotou um novo modelo de cores, baseado no modelo $L, a, b$, proposto por Richard Hunter em 1948, que melhor representava o espa√ßamento uniforme das cores. Denominado \textbf{1976 CIE $L^*a^*b^*$} e conhecido pela sigla CIELAB, √© um espa√ßo baseado em cores oponentes \footnote{Teoria iniciada por volta do ano de 1500 quando Leonardo da Vinci concluiu que as cores s√£o produzidas pela mistura de amarelo e azul, verde e vermelho, e branco e preto. Em 1950 houve a confirma√ß√£o desta teoria quando sinais de cores oponentes foram detectados na conex√£o √≥ptica entre a retina e o c√©rebro \citep{gevers:12}.} no qual os est√≠mulos de cor da retina s√£o convertidos para distin√ß√µes entre claro e escuro, vermelho e verde, e azul e amarelo, representados pelos eixos $L^*$, $a^*$, e $b^*$, respectivamente \citep{gevers:12}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo RGB}\index{cores!modelo RGB}
 \label{sec:modelo_cores_rgb}
 
-O modelo RGB, acrÙnimo do inglÍs \textit{Red, Green, Blue}, È um modelo de cores aditivo no qual as trÍs cores prim·rias vermelho, verde e azul s„o somadas para produzir as demais \citep{gonzalez:02}.
+O modelo RGB, acr√¥nimo do ingl√™s \textit{Red, Green, Blue}, √© um modelo de cores aditivo no qual as tr√™s cores prim√°rias vermelho, verde e azul s√£o somadas para produzir as demais \citep{gonzalez:02}.
 
-Esse sistema foi baseado na teoria tricrom·tica de Thomas Young e Hermann Helmholtz em meados do sÈculo 19 e pode ser representado graficamente
-atravÈs do cubo unit·rio definido sobre os eixos R, G e B, como ilustrado na figura~\ref{fig:rgb-cube} \citep{konstantinos:00}.
+Esse sistema foi baseado na teoria tricrom√°tica de Thomas Young e Hermann Helmholtz em meados do s√©culo 19 e pode ser representado graficamente
+atrav√©s do cubo unit√°rio definido sobre os eixos R, G e B, como ilustrado na figura~\ref{fig:rgb-cube} \citep{konstantinos:00}.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.35\textwidth]{rgb-cube}
   % http://www.scratchapixel.com/old/lessons/3d-basic-lessons/lesson-5-colors-and-digital-images/color-spaces/
-  \caption{Cubo unit·rio representando as cores do modelo RGB.}
+  \caption{Cubo unit√°rio representando as cores do modelo RGB.}
   \label{fig:rgb-cube} 
 \end{figure}
 
-A origem, dada pelo vÈrtice $(0, 0, 0)$, representa a cor preta. J· o vÈrtice $(1, 1, 1)$, oposto ‡ origem, representa a cor branca. Os vÈrtices destacados sobre os eixos representam as cores prim·rias e os demais s„o o complemento de cada uma delas. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla $(r, g, b)$, onde $r, g, b \in [0, 1]$. Os tons de cinza s„o representados ao longo da diagonal principal do cubo, sendo que cada ponto ao longo dessa diagonal È formado por contribuiÁıes iguais de cada prim·ria.
+A origem, dada pelo v√©rtice $(0, 0, 0)$, representa a cor preta. J√° o v√©rtice $(1, 1, 1)$, oposto √† origem, representa a cor branca. Os v√©rtices destacados sobre os eixos representam as cores prim√°rias e os demais s√£o o complemento de cada uma delas. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla $(r, g, b)$, onde $r, g, b \in [0, 1]$. Os tons de cinza s√£o representados ao longo da diagonal principal do cubo, sendo que cada ponto ao longo dessa diagonal √© formado por contribui√ß√µes iguais de cada prim√°ria.
 
-Vale ressaltar que existem duas formas de representar o espaÁo RGB: linear e n„o linear. O sistema supra citado mostra o modelo n„o linear, cuja sigla È $R'G'B'$, e È o mais utilizado por dispositivos e aplicaÁıes pela sua similaridade com o sistema visual humano. Na literatura, esse sistema È frequentemente citado com a sigla RGB, o que torna a nomenclatura d˙bia, uma vez que o modelo linear tambÈm È denominado RGB e, portanto, a convers„o entre os espaÁos de cores deve ser feita com certa cautela. TambÈm È importante citar que os valores RGB lineares s„o raramente utilizados para representar uma imagem j· que s„o, perceptualmente, altamente n„o uniformes \citep{konstantinos:00}.
+Vale ressaltar que existem duas formas de representar o espa√ßo RGB: linear e n√£o linear. O sistema supra citado mostra o modelo n√£o linear, cuja sigla √© $R'G'B'$, e √© o mais utilizado por dispositivos e aplica√ß√µes pela sua similaridade com o sistema visual humano. Na literatura, esse sistema √© frequentemente citado com a sigla RGB, o que torna a nomenclatura d√∫bia, uma vez que o modelo linear tamb√©m √© denominado RGB e, portanto, a convers√£o entre os espa√ßos de cores deve ser feita com certa cautela. Tamb√©m √© importante citar que os valores RGB lineares s√£o raramente utilizados para representar uma imagem j√° que s√£o, perceptualmente, altamente n√£o uniformes \citep{konstantinos:00}.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo CMY}\index{cores!modelo CMY}
 \label{sec:modelo_cores_cmy}
 
-O modelo CMY È baseado nas cores prim·rias complementares Ciano, Magenta e Amarelo e, diferentemente do RGB, È um modelo de cores subtrativo no qual as cores s„o geradas subtraindo-se o comprimento da onda dominante da luz branca e, por isso, a cor resultante corresponde ‡ luz que È refletida \citep{gonzalez:02}.
+O modelo CMY √© baseado nas cores prim√°rias complementares Ciano, Magenta e Amarelo e, diferentemente do RGB, √© um modelo de cores subtrativo no qual as cores s√£o geradas subtraindo-se o comprimento da onda dominante da luz branca e, por isso, a cor resultante corresponde √† luz que √© refletida \citep{gonzalez:02}.
 
-Uma maneira de obter o sistema CMY È:\\
+Uma maneira de obter o sistema CMY √©:\\
 \begin{equation}
   \begin{bmatrix}
     C \\ M \\ Y
@@ -135,7 +135,7 @@ Uma maneira de obter o sistema CMY È:\\
   \end{bmatrix}
 \end{equation}
 
-ou ainda, efetuando uma mudanÁa de coordenadas subtraindo-se as cores prim·rias R, G e B da cor branca $W = (1, 1, 1)$ \citep{gonzalez:02}:
+ou ainda, efetuando uma mudan√ßa de coordenadas subtraindo-se as cores prim√°rias R, G e B da cor branca $W = (1, 1, 1)$ \citep{gonzalez:02}:
 \begin{equation}
   \begin{bmatrix}
     C \\ M \\ Y
@@ -148,17 +148,17 @@ ou ainda, efetuando uma mudanÁa de coordenadas subtraindo-se as cores prim·rias 
   \end{bmatrix}
 \end{equation}
 
-Assim como o RGB, o CMY È dependente de dispositivo. O modelo È amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas.
+Assim como o RGB, o CMY √© dependente de dispositivo. O modelo √© amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas.
 
-A sobreposiÁ„o das cores prim·rias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade prÛxima ao marrom ou verde escuro. Para evitar esse efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
+A sobreposi√ß√£o das cores prim√°rias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade pr√≥xima ao marrom ou verde escuro. Para evitar esse efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores da famÌlia YUV}\index{cores!modelos da famÌlia YUV}
+\subsection{Modelo de cores da fam√≠lia YUV}\index{cores!modelos da fam√≠lia YUV}
 \label{sec:modelo_cores_yuv}
 
-O termo YUV refere-se a uma famÌlia de espaÁos de cores dos quais a informaÁ„o de lumin‚ncia, representada pelo componente Y, È codificada separadamente da cromin‚ncia, dada pelos componentes U e V. Os componentes U e V s„o representaÁıes dos sinais da diferenÁa do azul subtraÌdo da lumin‚ncia (B-Y) e vermelho subtraÌdo da lumin‚ncia (R-Y). … utilizado para representar as cores em sistemas de transmiss„o analÛgica de televis„o nos padrıes Linha de Fase Alternada (PAL) e Cor Sequencial Com MemÛria (SECAM) \citep{pedrini:08}.
+O termo YUV refere-se a uma fam√≠lia de espa√ßos de cores dos quais a informa√ß√£o de lumin√¢ncia, representada pelo componente Y, √© codificada separadamente da cromin√¢ncia, dada pelos componentes U e V. Os componentes U e V s√£o representa√ß√µes dos sinais da diferen√ßa do azul subtra√≠do da lumin√¢ncia (B-Y) e vermelho subtra√≠do da lumin√¢ncia (R-Y). √â utilizado para representar as cores em sistemas de transmiss√£o anal√≥gica de televis√£o nos padr√µes Linha de Fase Alternada (PAL) e Cor Sequencial Com Mem√≥ria (SECAM) \citep{pedrini:08}.
 
-A tranformaÁ„o do espaÁo RGB para YUV È dada por:\\
+A tranforma√ß√£o do espa√ßo RGB para YUV √© dada por:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ U \\ V
@@ -174,9 +174,9 @@ A tranformaÁ„o do espaÁo RGB para YUV È dada por:\\
 \end{equation}
 onde $0 \leq R, G, B \leq 1$.
 
-An·logo ao YUV, o modelo \textbf{YIQ} foi adotado em 1950 pelo ComitÍ Nacional do Sistema de Televis„o (NTSC), um padr„o americano para transmiss„o de sinal de televis„o a cores. Nesse modelo, o componente Y corresponde ‡ lumin‚ncia e os componentes I (matiz) e Q (saturaÁ„o) codificam a informaÁ„o de cromin‚ncia \citep{pedrini:08}.
+An√°logo ao YUV, o modelo \textbf{YIQ} foi adotado em 1950 pelo Comit√™ Nacional do Sistema de Televis√£o (NTSC), um padr√£o americano para transmiss√£o de sinal de televis√£o a cores. Nesse modelo, o componente Y corresponde √† lumin√¢ncia e os componentes I (matiz) e Q (satura√ß√£o) codificam a informa√ß√£o de cromin√¢ncia \citep{pedrini:08}.
 
-A tranformaÁ„o do espaÁo RGB para YIQ È dada por:\\
+A tranforma√ß√£o do espa√ßo RGB para YIQ √© dada por:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ I \\ Q
@@ -192,11 +192,11 @@ A tranformaÁ„o do espaÁo RGB para YIQ È dada por:\\
 \end{equation}
 onde $0 \leq R, G, B \leq 1$.
 
-Um outro modelo de cores da famÌlia YUV È o \textbf{YCbCr}, definido matematicamente por uma transformaÁ„o de coordenadas em relaÁ„o a algum espaÁo RGB \citep{pedrini:08}.
+Um outro modelo de cores da fam√≠lia YUV √© o \textbf{YCbCr}, definido matematicamente por uma transforma√ß√£o de coordenadas em rela√ß√£o a algum espa√ßo RGB \citep{pedrini:08}.
 
-O modelo YCbCr È largamente utilizado em vÌdeos digitais. Nesse modelo, o componente Y representa a lumin‚ncia, o componente Cb d· a medida da diferenÁa entre a cor azul e um valor de referÍncia, an·logo ao componente Cr que È a medida da diferenÁa entre a cor vermelha e um valor de referÍncia \citep{pedrini:08}.
+O modelo YCbCr √© largamente utilizado em v√≠deos digitais. Nesse modelo, o componente Y representa a lumin√¢ncia, o componente Cb d√° a medida da diferen√ßa entre a cor azul e um valor de refer√™ncia, an√°logo ao componente Cr que √© a medida da diferen√ßa entre a cor vermelha e um valor de refer√™ncia \citep{pedrini:08}.
 
-A convers„o do espaÁo RGB para YCbCr È dada por:\\
+A convers√£o do espa√ßo RGB para YCbCr √© dada por:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ Cb \\ Cr
@@ -213,55 +213,55 @@ A convers„o do espaÁo RGB para YCbCr È dada por:\\
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores da famÌlia HSI}\index{cores!modelos da famÌlia HSI}
+\subsection{Modelo de cores da fam√≠lia HSI}\index{cores!modelos da fam√≠lia HSI}
 \label{sec:modelo_cores_hsi}
 
-Modelos baseados no Matiz, SaturaÁ„o e Intensidade (HSI) s„o mais adequados para aplicaÁıes de processamento de imagens, do ponto de vista do usu·rio, pela correlaÁ„o com a percepÁ„o humana da cor \citep{konstantinos:00}.
+Modelos baseados no Matiz, Satura√ß√£o e Intensidade (HSI) s√£o mais adequados para aplica√ß√µes de processamento de imagens, do ponto de vista do usu√°rio, pela correla√ß√£o com a percep√ß√£o humana da cor \citep{konstantinos:00}.
 
-Nesse modelo, assim como no YIQ, a intensidade dada pelo componente I È decomposta da informaÁ„o de cromin‚ncia, representada pelo matiz (H) e saturaÁ„o (S) \citep{konstantinos:00}. A combinaÁ„o desses componentes resulta em uma estrutura piramidal que pode ser vista na figura~\ref{fig:hsi-model}.
+Nesse modelo, assim como no YIQ, a intensidade dada pelo componente I √© decomposta da informa√ß√£o de cromin√¢ncia, representada pelo matiz (H) e satura√ß√£o (S) \citep{konstantinos:00}. A combina√ß√£o desses componentes resulta em uma estrutura piramidal que pode ser vista na figura~\ref{fig:hsi-model}.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.6\textwidth]{hsi-model}
   % http://www.blackice.com/images/HSIColorModel.jpg
-  \caption{RepresentaÁ„o gr·fica do modelo HSI.}
+  \caption{Representa√ß√£o gr√°fica do modelo HSI.}
   \label{fig:hsi-model} 
 \end{figure}
 
-O matiz descreve a cor em si, sob a forma de um ‚ngulo $\theta$, onde $\theta \in [0, 360]$. O vermelho est· situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturaÁ„o, que varia entre 0 e 1, indica o quanto a cor est· poluÌda com a cor branca. A escala de intensidade È entre $[0, 1]$, onde 0 significa preto e 1, branco.
+O matiz descreve a cor em si, sob a forma de um √¢ngulo $\theta$, onde $\theta \in [0, 360]$. O vermelho est√° situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de satura√ß√£o, que varia entre 0 e 1, indica o quanto a cor est√° polu√≠da com a cor branca. A escala de intensidade √© entre $[0, 1]$, onde 0 significa preto e 1, branco.
 
-Outro modelo desta famÌlia È formado pelos componentes Matiz, SaturaÁ„o e Lumin‚ncia (\textbf{HSV}) e sua representaÁ„o gr·fica tridimensional È uma pir‚mide hexagonal derivada do cubo RGB \citep{pedrini:08}.
+Outro modelo desta fam√≠lia √© formado pelos componentes Matiz, Satura√ß√£o e Lumin√¢ncia (\textbf{HSV}) e sua representa√ß√£o gr√°fica tridimensional √© uma pir√¢mide hexagonal derivada do cubo RGB \citep{pedrini:08}.
 
-Os v·rios matizes est„o representados na parte superior da pir‚mide, a saturaÁ„o È medida ao longo do eixo horizontal e a lumin‚ncia È medida ao longo do eixo vertical, que passa pelo centro da pir‚mide. O matiz, que corresponde ‡s arestas ao redor do eixo vertical, varia de 0
-(vermelho) a 360 graus e o ‚ngulo entre os vÈrtices È de 60 graus. A saturaÁ„o varia de 0 a 1 e È representada como sendo a raz„o entre a pureza de um determinado matiz e a sua pureza m·xima, ou seja, quando $S = 1$. A lumin‚ncia varia de 0, no pico da pir‚mide representando a cor preta, a 1 na base, onde as intensidades das cores s„o m·ximas \citep{pedrini:08}.
+Os v√°rios matizes est√£o representados na parte superior da pir√¢mide, a satura√ß√£o √© medida ao longo do eixo horizontal e a lumin√¢ncia √© medida ao longo do eixo vertical, que passa pelo centro da pir√¢mide. O matiz, que corresponde √†s arestas ao redor do eixo vertical, varia de 0
+(vermelho) a 360 graus e o √¢ngulo entre os v√©rtices √© de 60 graus. A satura√ß√£o varia de 0 a 1 e √© representada como sendo a raz√£o entre a pureza de um determinado matiz e a sua pureza m√°xima, ou seja, quando $S = 1$. A lumin√¢ncia varia de 0, no pico da pir√¢mide representando a cor preta, a 1 na base, onde as intensidades das cores s√£o m√°ximas \citep{pedrini:08}.
 
-Da mesma forma que o HSV, o modelo Matiz, SaturaÁ„o e Luminosidade (\textbf{HSL}) È uma representaÁ„o tridimensional e È formado por dois cones de altura 1, cujas bases s„o coincidentes \citep{pedrini:08}.
+Da mesma forma que o HSV, o modelo Matiz, Satura√ß√£o e Luminosidade (\textbf{HSL}) √© uma representa√ß√£o tridimensional e √© formado por dois cones de altura 1, cujas bases s√£o coincidentes \citep{pedrini:08}.
 
-O matiz È determinado pelos pontos no cÌrculo das bases comuns aos cones. A saturaÁ„o varia de 0 a 1, conforme a dist‚ncia ao eixo do cone. A luminosidade est· ao longo do eixo vertical comum aos dois cones e varia na escala $[0, 1]$, onde 0 significa preto e 1, branco \citep{pedrini:08}.
+O matiz √© determinado pelos pontos no c√≠rculo das bases comuns aos cones. A satura√ß√£o varia de 0 a 1, conforme a dist√¢ncia ao eixo do cone. A luminosidade est√° ao longo do eixo vertical comum aos dois cones e varia na escala $[0, 1]$, onde 0 significa preto e 1, branco \citep{pedrini:08}.
 
-Todos os modelos de cores dessa famÌlia tÍm a propriedade de se pensar em cores mais claras, obtidas pelo aumento do brilho ou luminosidade, e mais escuras, pela diminuiÁ„o dos mesmos valores. As cores intermedi·rias s„o produzidas pela diminuiÁ„o da saturaÁ„o \citep{pedrini:08}.
+Todos os modelos de cores dessa fam√≠lia t√™m a propriedade de se pensar em cores mais claras, obtidas pelo aumento do brilho ou luminosidade, e mais escuras, pela diminui√ß√£o dos mesmos valores. As cores intermedi√°rias s√£o produzidas pela diminui√ß√£o da satura√ß√£o \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
 \section{Teoria Fuzzy}\index{Fuzzy!teoria}
 \label{sec:teoria_fuzzy}
-Em muitos problemas, n„o h· dificuldade em determinar se um dado elemento È ou n„o parte de um grupo. Essa ideia vem da teoria cl·ssica de conjuntos e È embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o n˙mero $7$ pertence ao conjunto dos n˙meros naturais e, da mesma maneira, que o n˙mero $-7$ n„o pertence a esse mesmo conjunto. Este È um caso cl·ssico em que a aplicaÁ„o da lÛgica booleana È bem sucedida. Em outras palavras, quando questionado se o n˙mero $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas possÌveis: sim ou n„o.
+Em muitos problemas, n√£o h√° dificuldade em determinar se um dado elemento √© ou n√£o parte de um grupo. Essa ideia vem da teoria cl√°ssica de conjuntos e √© embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o n√∫mero $7$ pertence ao conjunto dos n√∫meros naturais e, da mesma maneira, que o n√∫mero $-7$ n√£o pertence a esse mesmo conjunto. Este √© um caso cl√°ssico em que a aplica√ß√£o da l√≥gica booleana √© bem sucedida. Em outras palavras, quando questionado se o n√∫mero $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas poss√≠veis: sim ou n√£o.
 
-Entretanto, h· in˙meros indivÌduos ou observaÁıes na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relaÁ„o de pertinÍncia n„o È bem definida. Como exemplo, o conjunto das pessoas altas, os n˙meros reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicaÁ„o da lÛgica booleana para classificar elementos como parte de um grupo ou n„o È imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilizaÁ„o da lÛgica booleana n„o resulta em interpretaÁıes realÌsticas, pois uma pessoa com $1,69m$ È, portanto, baixa ou, pode-se dizer ainda, que n„o pertence ao grupo das pessoas altas. Ora, apenas $1$ centÌmetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ est· muito prÛxima de pertencer ao grupo das pessoas baixas.
+Entretanto, h√° in√∫meros indiv√≠duos ou observa√ß√µes na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a rela√ß√£o de pertin√™ncia n√£o √© bem definida. Como exemplo, o conjunto das pessoas altas, os n√∫meros reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplica√ß√£o da l√≥gica booleana para classificar elementos como parte de um grupo ou n√£o √© imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utiliza√ß√£o da l√≥gica booleana n√£o resulta em interpreta√ß√µes real√≠sticas, pois uma pessoa com $1,69m$ √©, portanto, baixa ou, pode-se dizer ainda, que n√£o pertence ao grupo das pessoas altas. Ora, apenas $1$ cent√≠metro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ est√° muito pr√≥xima de pertencer ao grupo das pessoas baixas.
 
-Claramente, a resposta a ser obtida quando da an·lise de possibilidades desse tipo È fortemente dependente do contexto, pois h· um alto grau de incerteza inerente aos elementos e conjuntos sendo considerados.
+Claramente, a resposta a ser obtida quando da an√°lise de possibilidades desse tipo √© fortemente dependente do contexto, pois h√° um alto grau de incerteza inerente aos elementos e conjuntos sendo considerados.
 
-O conceito de incerteza mudou gradativamente na ciÍncia e na matem·tica. Na ciÍncia, esta mudanÁa foi manifestada por uma transiÁ„o gradual da vis„o tradicional, que insiste que a incerteza È indesej·vel e, por esta raz„o, ela deve ser evitada por todos os meios possÌveis, para uma vis„o alternativa, que È tolerante ‡ incerteza. De acordo com a vis„o tradicional, a ciÍncia deve esforÁar-se de certeza em todas as suas manifestaÁıes, ou seja, com precis„o, especificidade, nitidez, consistÍncia e, por conseguinte, a incerteza È considerada como n„o cientÌfica. De acordo com a vis„o alternativa, a d˙vida È considerada essencial para a ciÍncia; n„o È sÛ uma praga inevit·vel, mas tem, de fato, uma grande utilidade \citep{klir:95}.
+O conceito de incerteza mudou gradativamente na ci√™ncia e na matem√°tica. Na ci√™ncia, esta mudan√ßa foi manifestada por uma transi√ß√£o gradual da vis√£o tradicional, que insiste que a incerteza √© indesej√°vel e, por esta raz√£o, ela deve ser evitada por todos os meios poss√≠veis, para uma vis√£o alternativa, que √© tolerante √† incerteza. De acordo com a vis√£o tradicional, a ci√™ncia deve esfor√ßar-se de certeza em todas as suas manifesta√ß√µes, ou seja, com precis√£o, especificidade, nitidez, consist√™ncia e, por conseguinte, a incerteza √© considerada como n√£o cient√≠fica. De acordo com a vis√£o alternativa, a d√∫vida √© considerada essencial para a ci√™ncia; n√£o √© s√≥ uma praga inevit√°vel, mas tem, de fato, uma grande utilidade \citep{klir:95}.
 
-E com base na ideia moderna de que a incerteza È algo ˙til na ciÍncia È que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos d·-se sob a Ûtica de que os limites entre eles n„o s„o precisos e, portanto, È possÌvel estabelecer funÁıes que forneÁam um certo \textbf{grau de pertinÍncia} de um elemento a um dado conjunto \citep{zadeh:65}.
+E com base na ideia moderna de que a incerteza √© algo √∫til na ci√™ncia √© que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos d√°-se sob a √≥tica de que os limites entre eles n√£o s√£o precisos e, portanto, √© poss√≠vel estabelecer fun√ß√µes que forne√ßam um certo \textbf{grau de pertin√™ncia} de um elemento a um dado conjunto \citep{zadeh:65}.
 
-A capacidade de conjuntos \emph{fuzzy} expressarem transiÁıes graduais de pertinÍncia e n„o pertinÍncia tem uma grande utilidade. Ela fornece n„o sÛ uma representaÁ„o significativa e poderosa da medida de incerteza, mas tambÈm uma forma de expressar conceitos vagos em linguagem natural \citep{klir:95}. Voltando ao exemplo do conjunto de pessoas altas, em vez de descrever a altura de uma pessoa com exatid„o em metros ou centÌmetros, pode-se apenas dizer que ela È alta, baixa ou mediana. Cada um desses conjuntos pode ser um conjunto \emph{fuzzy}, onde um valor 1 È atribuÌdo a um membro que est· totalmente incluÌdo em um deles, ou 0 caso contr·rio. Valores intermedi·rios nessa escala indicam que o elemento est· parcialmente em um dos conjuntos.
+A capacidade de conjuntos \emph{fuzzy} expressarem transi√ß√µes graduais de pertin√™ncia e n√£o pertin√™ncia tem uma grande utilidade. Ela fornece n√£o s√≥ uma representa√ß√£o significativa e poderosa da medida de incerteza, mas tamb√©m uma forma de expressar conceitos vagos em linguagem natural \citep{klir:95}. Voltando ao exemplo do conjunto de pessoas altas, em vez de descrever a altura de uma pessoa com exatid√£o em metros ou cent√≠metros, pode-se apenas dizer que ela √© alta, baixa ou mediana. Cada um desses conjuntos pode ser um conjunto \emph{fuzzy}, onde um valor 1 √© atribu√≠do a um membro que est√° totalmente inclu√≠do em um deles, ou 0 caso contr√°rio. Valores intermedi√°rios nessa escala indicam que o elemento est√° parcialmente em um dos conjuntos.
 
-A seÁ„o \ref{sec:conjuntos_fuzzy} explicita algumas das definiÁıes formais e conceitos b·sicos da teoria dos conjuntos \emph{fuzzy} proposta por Zadeh.
+A se√ß√£o \ref{sec:conjuntos_fuzzy} explicita algumas das defini√ß√µes formais e conceitos b√°sicos da teoria dos conjuntos \emph{fuzzy} proposta por Zadeh.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Conjuntos Fuzzy}\index{Fuzzy!conjuntos}
 \label{sec:conjuntos_fuzzy}
-A teoria de conjuntos cl·ssicos est· baseada em uma funÁ„o, geralmente conhecida como funÁ„o caracterÌstica, dada por:
+A teoria de conjuntos cl√°ssicos est√° baseada em uma fun√ß√£o, geralmente conhecida como fun√ß√£o caracter√≠stica, dada por:
 
 \begin{equation}
   \mu_A(x) =  \begin{cases}
@@ -269,23 +269,23 @@ A teoria de conjuntos cl·ssicos est· baseada em uma funÁ„o, geralmente conhecida
                 0 \quad \text{se}\ x \notin A
               \end{cases}
 \end{equation}
-onde $U$ È o conjunto Universo, $A$ È um subconjunto de $U$ e $x$ È um elemento de $U$ \citep{klir:95}.
+onde $U$ √© o conjunto Universo, $A$ √© um subconjunto de $U$ e $x$ √© um elemento de $U$ \citep{klir:95}.
 
-Portanto, a funÁ„o caracterÌstica È um mapeamento dos elementos de $U$ no conjunto bin·rio $\{0, 1\}$, formalmente definida como:
+Portanto, a fun√ß√£o caracter√≠stica √© um mapeamento dos elementos de $U$ no conjunto bin√°rio $\{0, 1\}$, formalmente definida como:
 
 \begin{equation}
   \mu_A =  U \rightarrow \{0, 1\}
 \end{equation}
 
-Sendo assim, a funÁ„o caracterÌstica determina que, de acordo com algum critÈrio, $\forall x \in U$, se $\mu_A(x) = 1$, ent„o $x$ È um membro de $A$, por outro lado, quando $\mu_A(x) = 0$, $x$ n„o È um membro de $A$.
+Sendo assim, a fun√ß√£o caracter√≠stica determina que, de acordo com algum crit√©rio, $\forall x \in U$, se $\mu_A(x) = 1$, ent√£o $x$ √© um membro de $A$, por outro lado, quando $\mu_A(x) = 0$, $x$ n√£o √© um membro de $A$.
 
-Quanto aos conjuntos \emph{fuzzy}, basta generalizar a funÁ„o caracterÌstica aplicada nos conjuntos cl·ssicos no intervalo $[0, 1]$ para obter-se um conjunto "fuzzificado", ou seja, o grau de pertinÍncia de um elemento $x$ passa, agora, a ser expresso em termos contÌnuos. Em outras palavras, o elemento $x$ pertence ao subconjunto $A$ de $U$ com algum grau de pertinÍncia obtido do intervalo $[0, 1]$.
+Quanto aos conjuntos \emph{fuzzy}, basta generalizar a fun√ß√£o caracter√≠stica aplicada nos conjuntos cl√°ssicos no intervalo $[0, 1]$ para obter-se um conjunto "fuzzificado", ou seja, o grau de pertin√™ncia de um elemento $x$ passa, agora, a ser expresso em termos cont√≠nuos. Em outras palavras, o elemento $x$ pertence ao subconjunto $A$ de $U$ com algum grau de pertin√™ncia obtido do intervalo $[0, 1]$.
 
-Cabe aqui citar a definiÁ„o de conjuntos \emph{fuzzy} dada por Zadeh que designa um conjunto \emph{fuzzy} como uma classe de objetos com um grau de pertinÍncia contÌnuo. Tal conjunto È caracterizado por uma funÁ„o de pertinÍncia (caracterÌstica), que atribui a cada objeto um grau de pertinÍncia que varia entre zero e um. As noÁıes de inclus„o, uni„o, intersecÁ„o, complemento, relaÁ„o, convexidade, etc., oriundas da teoria de conjuntos cl·ssica, s„o estendidas a esses conjuntos \citep{zadeh:65}.
+Cabe aqui citar a defini√ß√£o de conjuntos \emph{fuzzy} dada por Zadeh que designa um conjunto \emph{fuzzy} como uma classe de objetos com um grau de pertin√™ncia cont√≠nuo. Tal conjunto √© caracterizado por uma fun√ß√£o de pertin√™ncia (caracter√≠stica), que atribui a cada objeto um grau de pertin√™ncia que varia entre zero e um. As no√ß√µes de inclus√£o, uni√£o, intersec√ß√£o, complemento, rela√ß√£o, convexidade, etc., oriundas da teoria de conjuntos cl√°ssica, s√£o estendidas a esses conjuntos \citep{zadeh:65}.
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Vari·veis linguÌsticas}
+\subsection{Vari√°veis lingu√≠sticas}
 \label{sec:variaveis_linguisticas}
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto texto texto texto texto texto texto
@@ -293,7 +293,7 @@ texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{LÛgica Fuzzy}\index{Fuzzy!lÛgica}
+\subsection{L√≥gica Fuzzy}\index{Fuzzy!l√≥gica}
 \label{sec:logica_fuzzy}
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto texto texto texto texto texto texto
@@ -319,46 +319,46 @@ texto texto texto texto texto texto texto.
 
 %% ------------------------------------------------------------------------- %%
 \begin{comment}
-\section{Exemplo de CÛdigo-Fonte em Java}
+\section{Exemplo de C√≥digo-Fonte em Java}
 \label{sec:exemplo_codigo_fonte}
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto.
 
-% Foi utilizado o pacote listing para formatar cÛdigo fonte
+% Foi utilizado o pacote listing para formatar c√≥digo fonte
 % http://ctan.org/tex-archive/macros/latex/contrib/listings/listings.pdf
-% Veja no preambulo do arquivo tese-exemplo.tex os par‚metros de configuraÁ„o.
+% Veja no preambulo do arquivo tese-exemplo.tex os par√¢metros de configura√ß√£o.
 
 \begin{lstlisting}[frame=trbl]
    for(i = 0; i < 20; i++)
    {
-       // Coment·rio 
+       // Coment√°rio 
        System.out.println("Mensagem...");
    }
 \end{lstlisting}
 
 
 %% ------------------------------------------------------------------------- %%
-\section{Algumas ReferÍncias}
+\section{Algumas Refer√™ncias}
 \label{sec:algumas_referencias}
 
-… muito recomend·vel a utilizaÁ„o de arquivos \emph{bibtex} para o gerenciamento
-de referÍncias a trabalhos. Nesse sentido existem trÍs plataformas gratuitas
-que permitem a busca de referÍncias acadÍmicas em formato bib: 
+√â muito recomend√°vel a utiliza√ß√£o de arquivos \emph{bibtex} para o gerenciamento
+de refer√™ncias a trabalhos. Nesse sentido existem tr√™s plataformas gratuitas
+que permitem a busca de refer√™ncias acad√™micas em formato bib: 
 \begin{itemize}
 	\item \emph{CiteULike} (patrocinados por Springer): \url{www.citeulike.org}
-	\item ColeÁ„o de bibliografia em CiÍncia da ComputaÁ„o: \url{liinwww.ira.uka.de/bibliography}
-	\item Google acadÍmico (habilitar bibtex nas preferÍncias): \url{scholar.google.com.br}
+	\item Cole√ß√£o de bibliografia em Ci√™ncia da Computa√ß√£o: \url{liinwww.ira.uka.de/bibliography}
+	\item Google acad√™mico (habilitar bibtex nas prefer√™ncias): \url{scholar.google.com.br}
 \end{itemize}
-Lamentavelmente, ainda n„o existe um mecanismo de verificaÁ„o ou validaÁ„o das
-informaÁıes nessas plataformas. Portanto, È fortemente sugerido validar todas
-as informaÁıes de tal forma que as entradas bib estejam corretas.  TambÈm, tome
-muito cuidado na padronizaÁ„o das referÍncias bibliogr·ficas: ou considere TODOS
+Lamentavelmente, ainda n√£o existe um mecanismo de verifica√ß√£o ou valida√ß√£o das
+informa√ß√µes nessas plataformas. Portanto, √© fortemente sugerido validar todas
+as informa√ß√µes de tal forma que as entradas bib estejam corretas.  Tamb√©m, tome
+muito cuidado na padroniza√ß√£o das refer√™ncias bibliogr√°ficas: ou considere TODOS
 os nomes dos autores por extenso, ou TODOS os nomes dos autores abreviados.
 Evite misturas inapropriadas.
 
-Exemplos de referÍncias com a tag:
+Exemplos de refer√™ncias com a tag:
 \begin{itemize}
 
 \item @InCollection: \citep{bobaoglu93:concepts}.
@@ -392,8 +392,8 @@ Exemplos de referÍncias com a tag:
 {\scriptsize\begin{verbatim}
 @PhdThesis{garcia01:PhD,
  author   = {Islene C. Garcia},
- title    = {Visıes Progressivas de ComputaÁıes DistribuÌdas},
- school   = {Instituto de ComputaÁ„o, Universidade de Campinas, Brasil},
+ title    = {Vis√µes Progressivas de Computa√ß√µes Distribu√≠das},
+ school   = {Instituto de Computa√ß√£o, Universidade de Campinas, Brasil},
  year     = {2001},
  month    = {Dezembro}
 }
@@ -404,7 +404,7 @@ Exemplos de referÍncias com a tag:
 @MastersThesis{schmidt03:MSc,
  author   = {Rodrigo M. Schmidt},
  title    = {Coleta de Lixo para Protocolos de \emph{Checkpointing}},
- school   = {Instituto de ComputaÁ„o, Universidade de Campinas, Brasil},
+ school   = {Instituto de Computa√ß√£o, Universidade de Campinas, Brasil},
  year     = {2003},
  month    = Oct
 }
@@ -444,25 +444,25 @@ Exemplos de referÍncias com a tag:
 }
 \end{verbatim}}
 
-\item @Misc: para referÍncia a artigo online \citep{fowler04:designDead}.
+\item @Misc: para refer√™ncia a artigo online \citep{fowler04:designDead}.
 {\scriptsize\begin{verbatim}
 @Misc{fowler04:designDead,
  author   = {Martin Fowler},
  title    = {Is Design Dead?},
  year     = {2004},
  month    = May,
- note     = {⁄ltimo acesso em 30/1/2010},
+ note     = {√öltimo acesso em 30/1/2010},
  howpublished= {\url{http://martinfowler.com/articles/designDead.html}},
 }
 \end{verbatim}}
 
-\item @Misc: para referÍncia a p·gina web \citep{FSF:GNU-GPL}.
+\item @Misc: para refer√™ncia a p√°gina web \citep{FSF:GNU-GPL}.
 {\scriptsize\begin{verbatim}
 @Misc{FSF:GNU-GPL,
  author   = {Free Software Foundation},
  title    = {GNU general public license},
  year     = {2007},
- note     = {⁄ltimo acesso em 30/1/2010},
+ note     = {√öltimo acesso em 30/1/2010},
  howpublished= {\url{http://www.gnu.org/copyleft/gpl.html}},
 }
 \end{verbatim}}

@@ -1,7 +1,7 @@
 # 
-# makefile para a compilação do documento
+# makefile para a compilaÃ§Ã£o do documento
 #
-# Sáb Jun 23 21:13:37 BRT 2007
+# SÃ¡b Jun 23 21:13:37 BRT 2007
 #
 
 BASE_NAME = tese-exemplo
