@@ -33,6 +33,7 @@
 \usepackage[all]{hypcap}                    % soluciona o problema com o hyperref e capitulos
 \usepackage[round,sort,nonamebreak]{natbib} % citação bibliográfica textual(plainnat-ime.bst)
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{verbatim}                    % para comentarios em blocos
 \fontsize{60}{62}\usefont{OT1}{cmr}{m}{n}{\selectfont}
 
@@ -44,6 +45,15 @@
 \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
 \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}
 \renewcommand{\headrulewidth}{0pt}
+
+% ---------------------------------------------------------------------------- %
+% Redefinindo estilos de teoremas, definições, exemplos, etc.
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}[chapter] % redefine a numeração por capítulo
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definição}[chapter] % ambiente para definição
+\newtheorem{exmp}{Exemplo}[chapter]   % ambiente para exemplos
 
 % ---------------------------------------------------------------------------- %
 \graphicspath{{./figuras/}}             % caminho das figuras (recomendável)
@@ -303,9 +313,13 @@ text text text.
 % ---------------------------------------------------------------------------- %
 \chapter{Lista de Símbolos}
 \begin{tabular}{ll}
-    $\omega$    & Frequência angular\\
-    $\psi$      & Função de análise \emph{wavelet}\\
-    $\Psi$      & Transformada de Fourier de $\psi$\\
+    $L^*$       & Luminância \\
+    $a^*$       & Eixo verde/vermelho no modelo de cores $L^*a^*b^*$ \\
+    $b^*$       & Eixo azul/amarelo no modelo de cores $L^*a^*b^*$ \\
+    $u^*$       & Eixo verde/vermelho no modelo de cores $L^*u^*v^*$ \\
+    $v^*$       & Eixo azul/amarelo no modelo de cores $L^*u^*v^*$ \\
+    $\theta$    & Ângulo do matiz no modelo de cores HSI\\
+    $\mu_A(x)$  & Função característica
 \end{tabular}
 
 % ---------------------------------------------------------------------------- %

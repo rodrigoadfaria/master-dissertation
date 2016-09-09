@@ -34,7 +34,7 @@ As seções seguintes descrevem brevemente alguns dos principais modelos de core
 \subsection{Modelo de Munsell}\index{cores!modelo de Munsell}
 \label{sec:modelo_cores_munsell}
 
-O Professor Albert H. Munsell foi pioneiro na tentativa de organizar a percepção de cor em um espaço de cores. Mais do que isso, Munsell conseguiu aliar a arte e a ciência das cores em uma única teoria \citep{konstantinos:00}.
+Pioneiro na tentativa de organizar a percepção de cor em um espaço de cores, Albert H. Munsell conseguiu aliar a arte e a ciência das cores em uma única teoria \citep{konstantinos:00}.
 
 O princípio da igualdade de espaçamento entre os componentes do modelo é a ideia principal do modelo de cores de Munsell \citep{konstantinos:00}. Esses componentes são matiz (\textit{hue}), luminosidade (\textit{value}) e saturação (\textit{chroma}).
 
@@ -242,11 +242,12 @@ O matiz é determinado pelos pontos no círculo das bases comuns aos cones. A sa
 Todos os modelos de cores dessa família têm a propriedade de se pensar em cores mais claras, obtidas pelo aumento do brilho ou luminosidade, e mais escuras, pela diminuição dos mesmos valores. As cores intermediárias são produzidas pela diminuição da saturação \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
-\section{Teoria Fuzzy}\index{Fuzzy!teoria}
+\section{Teoria \emph{fuzzy}}\index{fuzzy!teoria}
 \label{sec:teoria_fuzzy}
+
 Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo. Essa ideia vem da teoria clássica de conjuntos e é embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o número $7$ pertence ao conjunto dos números naturais e, da mesma maneira, que o número $-7$ não pertence a esse mesmo conjunto. Este é um caso clássico em que a aplicação da lógica booleana é bem sucedida. Em outras palavras, quando questionado se o número $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas possíveis: sim ou não.
 
-Entretanto, há inúmeros indivíduos ou observações na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relação de pertinência não é bem definida. Como exemplo, o conjunto das pessoas altas, os números reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicação da lógica booleana para classificar elementos como parte de um grupo ou não é imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilização da lógica booleana não resulta em interpretações realísticas, pois uma pessoa com $1,69m$ é, portanto, baixa ou, pode-se dizer ainda, que não pertence ao grupo das pessoas altas. Ora, apenas $1$ centímetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ está muito próxima de pertencer ao grupo das pessoas baixas.
+Entretanto, há inúmeros indivíduos ou observações na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relação de pertinência não é bem definida \citep{pedrycz:98}. Como exemplo, o conjunto das pessoas altas, os números reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicação da lógica booleana para classificar elementos como parte de um grupo ou não é imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilização da lógica booleana não resulta em interpretações realísticas, pois uma pessoa com $1,69m$ é, portanto, baixa ou, pode-se dizer ainda, que não pertence ao grupo das pessoas altas. Ora, apenas $1$ centímetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ está muito próxima de pertencer ao grupo das pessoas baixas.
 
 Claramente, a resposta a ser obtida quando da análise de possibilidades desse tipo é fortemente dependente do contexto, pois há um alto grau de incerteza inerente aos elementos e conjuntos sendo considerados.
 
@@ -259,7 +260,7 @@ A capacidade de conjuntos \emph{fuzzy} expressarem transições graduais de pert
 A seção \ref{sec:conjuntos_fuzzy} explicita algumas das definições formais e conceitos básicos da teoria dos conjuntos \emph{fuzzy} proposta por Zadeh.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Conjuntos Fuzzy}\index{Fuzzy!conjuntos}
+\subsection{Conjuntos \emph{fuzzy}}\index{fuzzy!conjuntos}
 \label{sec:conjuntos_fuzzy}
 A teoria de conjuntos clássicos está baseada em uma função, geralmente conhecida como função característica, dada por:
 
@@ -279,33 +280,133 @@ Portanto, a função característica é um mapeamento dos elementos de $U$ no co
 
 Sendo assim, a função característica determina que, de acordo com algum critério, $\forall x \in U$, se $\mu_A(x) = 1$, então $x$ é um membro de $A$, por outro lado, quando $\mu_A(x) = 0$, $x$ não é um membro de $A$.
 
-Quanto aos conjuntos \emph{fuzzy}, basta generalizar a função característica aplicada nos conjuntos clássicos no intervalo $[0, 1]$ para obter-se um conjunto "fuzzificado", ou seja, o grau de pertinência de um elemento $x$ passa, agora, a ser expresso em termos contínuos. Em outras palavras, o elemento $x$ pertence ao subconjunto $A$ de $U$ com algum grau de pertinência obtido do intervalo $[0, 1]$.
+Quanto aos conjuntos \emph{fuzzy}, basta generalizar a função característica aplicada nos conjuntos clássicos no intervalo $[0, 1]$ para obter-se um conjunto "fuzzificado", ou seja, o grau de pertinência de um elemento $x$ passa, agora, a ser expresso em termos contínuos. Em outras palavras, o elemento $x$ pertence ao subconjunto $A$ de $U$ com algum grau de pertinência obtido do intervalo $[0, 1]$. Formalmente, tem-se:
+
+\begin{equation}
+  \mu_A =  U \rightarrow [0, 1]
+\end{equation}
 
 Cabe aqui citar a definição de conjuntos \emph{fuzzy} dada por Zadeh que designa um conjunto \emph{fuzzy} como uma classe de objetos com um grau de pertinência contínuo. Tal conjunto é caracterizado por uma função de pertinência (característica), que atribui a cada objeto um grau de pertinência que varia entre zero e um. As noções de inclusão, união, intersecção, complemento, relação, convexidade, etc., oriundas da teoria de conjuntos clássica, são estendidas a esses conjuntos \citep{zadeh:65}.
+
+% definição de conjunto fuzzy
+\begin{defn}
+Um conjunto \emph{fuzzy} $A$ é um subconjunto do conjunto universo $U$ formado por pares ordenados de um elemento qualquer $x$ e seu grau de pertinência dado por $\mu_A(x)$, da forma:
+
+\begin{equation}
+  A =  \{(x, \mu_A(x)) \ |\ x \in U\}
+\end{equation}
+\end{defn}
+
+O universo de discurso $U$ pode ser composto por elementos discretos ou ser um espaço contínuo. A mesma implicação vale para o subconjunto $A$. No caso em que $U$ é um conjunto discreto e finito, tal que $U = \{x_1, x_2, x_3, \ldots, x_n\}$, pode-se simplesmente enumerar os seus elementos, juntamente com seus graus de pertinência, como segue:
+
+\begin{equation}
+  A =  \frac{\mu_A(x_1)}{x_1} + \frac{\mu_A(x_2)}{x_2} + \ldots + \frac{\mu_A(x_n)}{x_n} = \sum_{i=1}^n \frac{\mu_A(x_i)}{x_i}
+\label{equ:conjunto_fuzzy_finito}
+\end{equation}
+
+É importante ressaltar que o somatório em \ref{equ:conjunto_fuzzy_finito} não significa uma adição algébrica, mas sim a união de todos os pares ordenados de $x$ e $\mu_A(x)$ que formam o conjunto $A$ \citep{klir:95}.
+
+\begin{exmp}
+\textcolor{red}{Colocar um exemplo aqui de conjunto fuzzy que tenha sentido com o restante do texto, posteriormente. Pode ser pessoas altas, para ligar com o exemplo supra citado.}
+\end{exmp}
+
+% definição de altura
+\begin{defn}
+A altura de $A$, denotado por $altura(A)$, corresponde ao limite superior do codomínio da sua função de pertinência, da forma:
+
+\begin{equation}
+  altura(A) = \{\mu_A(x) \ |\ x \in U\}
+\label{equ:conjunto_fuzzy_altura}
+\end{equation}
+
+\end{defn}
+
+% definição de conjunto normalizado
+\begin{defn}
+Um conjunto \emph{fuzzy} $A$ é dito normalizado se existe pelo menos um elemento $x \in U$, tal que $\mu_A(x) = 1$.
+\label{equ:conjunto_fuzzy_normalizado}
+\end{defn}
+
+A definição de conjunto \emph{fuzzy} normalizado implica que pelo menos um membro de $A$ alcança o grau de pertinência máximo possível. Note que a definição em \ref{equ:conjunto_fuzzy_normalizado} considera que os valores dos graus de pertinência variam no intervalo fechado entre 0 e 1. Logo, no mínimo um elemento deve ter um grau de pertinência 1 para que $A$ possa ser considerado, de fato, normalizado. Observe que, decorrente dessa afirmação, imediatamente tem-se que que $altura(A) = 1$.
+
+% definição de suporte
+\begin{defn}
+O suporte de um conjunto \emph{fuzzy} $A$ em $U$, denotado por $suporte(A)$, é o conjunto dado por:
+
+\begin{equation}
+  suporte(A) = \{x \in U \ |\ \mu_A(x) > 0 \}
+\label{equ:conjunto_fuzzy_suporte}
+\end{equation}
+
+\end{defn}
+
+Em outras palavras, o conjunto suporte é um conjunto clássico ou conjunto ordinário que contém todos os elementos de $U$ cujo grau de pertinência é maior do que zero em $A$. Denomina-se por conjunto unitário ou \emph{singleton} um conjunto \emph{fuzzy} cujo suporte é um único ponto, por exemplo $w$, tal que $\mu_A(w) = 1$.
+
+% definição de alfa corte
+\begin{defn}
+Um $\alpha$\emph{-corte}, também conhecido por $\alpha$\emph{-nível}, é o subconjunto clássico de elementos cujo grau de pertinência é maior ou igual a um valor $\alpha$, formalmente:
+
+\begin{equation}
+  \alpha\emph{-corte(A)} = \{x \in U \ |\ \mu_A(x) \geq \alpha \}
+\label{equ:conjunto_fuzzy_alpha_corte}
+\end{equation}
+\end{defn}
+
+% definição de núcleo
+\begin{defn}
+O núcleo ou \emph{kernel} de um conjunto \emph{fuzzy} $A$ em $U$, é o conjunto de elementos pertencentes inteiramente à $A$, da forma:
+
+\begin{equation}
+  \emph{núcleo}(A) = \{x \in U \ |\ \mu_A(x) = 1 \}
+\label{equ:conjunto_fuzzy_kernel}
+\end{equation}
+\end{defn}
+
+Vale destacar que, por construção, o núcleo do conjunto $A$ está contido no conjunto suporte, o que pode ser representado formalmente como $\emph{núcleo}(A) \subseteq suporte(A)$.
+
+A figura~\ref{fig:fuzzy_definitions} mostra graficamente algumas das propriedades definidas acima.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{fuzzy_definitions}
+  % source MIT class notes
+  \caption{Representação gráfica das principais propriedades dos conjuntos fuzzy. Detalhar melhor e corrigir a imagem.}
+  \label{fig:fuzzy_definitions} 
+\end{figure}
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Operações entre conjuntos \emph{fuzzy}}\index{fuzzy!operações entre conjuntos}
+Ver ortega.
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Conectivos básicos da lógica \emph{fuzzy}}\index{fuzzy!conectivos básicos da lógica}
+\label{sec:teste}
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Números \emph{fuzzy}}
+\label{sec:numeros_fuzzy}
+Texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Funções de pertinência}
+\label{sec:funcoes_pertinencia}
+Texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Variáveis linguísticas}
 \label{sec:variaveis_linguisticas}
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto.
 
-%% ------------------------------------------------------------------------- %%
-\subsection{Lógica Fuzzy}\index{Fuzzy!lógica}
-\label{sec:logica_fuzzy}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Sistemas baseados em regras Fuzzy}\index{Fuzzy!sistemas baseados em regras}
+\subsection{Sistemas baseados em regras \emph{fuzzy}}\index{fuzzy!sistemas baseados em regras}
 \label{sec:sistemas_regras_fuzzy}
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto.
 
 
