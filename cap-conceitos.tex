@@ -388,7 +388,7 @@ Um conjunto \emph{fuzzy} $A$ é dito normalizado se existe pelo menos um element
 \label{def:conjunto_fuzzy_normalizado}
 \end{defn}
 
-A definição de conjunto \emph{fuzzy} normalizado implica que pelo menos um membro de $A$ alcança o grau de pertinência máximo possível. Note que a definição em \ref{def:conjunto_fuzzy_normalizado} considera que os valores dos graus de pertinência variam no intervalo fechado entre 0 e 1. Logo, no mínimo um elemento deve ter um grau de pertinência 1 para que $A$ possa ser considerado, de fato, normalizado. Observe que, decorrente dessa afirmação, imediatamente tem-se que que $altura(A) = 1$.
+A definição de conjunto \emph{fuzzy} normalizado implica que pelo menos um membro de $A$ alcança o grau de pertinência máximo possível. Note que a definição em \ref{def:conjunto_fuzzy_normalizado} considera que os valores dos graus de pertinência variam no intervalo fechado entre 0 e 1. Logo, no mínimo um elemento deve ter um grau de pertinência 1 para que $A$ possa ser considerado, de fato, normalizado. Observe que, decorrente dessa afirmação, imediatamente tem-se que $altura(A) = 1$.
 
 % definição de suporte
 \begin{defn}
@@ -454,6 +454,15 @@ O conjunto união é formado por todos os valores máximos entre dois conjuntos 
 \end{equation}
 \end{defn}
 
+A figura~\ref{fig:fuzzy_operacoes_uniao} exibe graficamente dois conjuntos \emph{fuzzy} $A$ e $B$ quaisquer, bem como a área pertinente à união entre eles.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.28\textwidth]{fuzzy_operacoes_uniao}
+  \caption[Operação de união entre dois conjuntos fuzzy]{Representação gráfica da operação de união entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A união é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
+  \label{fig:fuzzy_operacoes_uniao} 
+\end{figure}
+
 % definição de intersecção
 \begin{defn}
 \label{def:conjunto_fuzzy_interseccao}
@@ -463,6 +472,15 @@ O conjunto intersecção é formado por todos os valores mínimos entre dois con
   \mu_A(x) \cap \mu_B(x) = min\{\mu_A(x), \mu_B(x)\}, \quad \forall x \in U
 \end{equation}
 \end{defn}
+
+A figura~\ref{fig:fuzzy_operacoes_interseccao} exibe graficamente dois conjuntos \emph{fuzzy} $A$ e $B$ quaisquer, bem como a área pertinente à intersecção.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.28\textwidth]{fuzzy_operacoes_interseccao}
+  \caption[Operação de intersecção entre dois conjuntos fuzzy]{Representação gráfica da operação de intersecção entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A intersecção é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
+  \label{fig:fuzzy_operacoes_interseccao} 
+\end{figure}
 
 % definição de complemento
 \begin{defn}
@@ -474,7 +492,16 @@ O complemento de um conjunto \emph{fuzzy} $A$, denotado por $\mu_{\bar{A}}(x)$, 
 \end{equation}
 \end{defn}
 
-Além desses operadores, existem outros que podem ser utilizados para efetuar as operações lógicas. Um deles é a norma triangular, também denominada \textbf{\emph{norma-t}}, e co-norma triangular, usualmente denominada por \textbf{\emph{co-norma-t}} ou \textbf{\emph{norma-s}}. Os operadores utilizados para a intersecção de conjuntos \emph{fuzzy} pertencem à classe \emph{norma-t}. Os operadores utilizados para a união de conjuntos \emph{fuzzy} pertencem à classe \emph{co-norma-t} ou \emph{norma-s} \citep{zimmermann:01}.
+A figura~\ref{fig:fuzzy_operacoes_complemento} exibe graficamente um conjunto \emph{fuzzy} $A$ qualquer, bem como seu complemento.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.28\textwidth]{fuzzy_operacoes_complemento}
+  \caption[Conjunto fuzzy e seu complemento]{Representação gráfica de um conjunto fuzzy e seu complemento. A parte superior em cinza claro mostra o conjunto fuzzy $A$. Seu complemento é destacado em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
+  \label{fig:fuzzy_operacoes_complemento} 
+\end{figure}
+
+Além desses operadores, existem outros que podem ser utilizados para efetuar as operações lógicas. Um deles é a norma triangular, também denominada \textbf{\emph{norma-t}}. Outro é a co-norma triangular, usualmente denominada por \textbf{\emph{co-norma-t}} ou \textbf{\emph{norma-s}}. Os operadores utilizados para a intersecção de conjuntos \emph{fuzzy} pertencem à classe \emph{norma-t}. Os operadores utilizados para a união de conjuntos \emph{fuzzy} pertencem à classe \emph{co-norma-t} ou \emph{norma-s} \citep{zimmermann:01}.
 
 Ambas \emph{norma-t} e \emph{norma-s} são funções binárias do tipo $[0, 1] \times [0, 1] \rightarrow [0, 1]$, que devem satisfazer algumas propriedades, tais como, monotonicidade, comutatividade, associatividade e condições de contorno \footnote{As propriedades não serão expressas neste trabalho, embora sejam amplamente conhecidas, exceto pelas condições de contorno. Mais detalhes podem ser vistos em \citet{zimmermann:01}.}. Os operadores $max$ e $min$ satisfazem tais propriedades e, por essa razão, podem ser utilizados nas operações lógicas \emph{fuzzy} \citep{zimmermann:01}.
 
@@ -651,17 +678,6 @@ Exemplos de referências com a tag:
  month    = May,
  note     = {Último acesso em 30/1/2010},
  howpublished= {\url{http://martinfowler.com/articles/designDead.html}},
-}
-\end{verbatim}}
-
-\item @Misc: para referência a página web \citep{FSF:GNU-GPL}.
-{\scriptsize\begin{verbatim}
-@Misc{FSF:GNU-GPL,
- author   = {Free Software Foundation},
- title    = {GNU general public license},
- year     = {2007},
- note     = {Último acesso em 30/1/2010},
- howpublished= {\url{http://www.gnu.org/copyleft/gpl.html}},
 }
 \end{verbatim}}
 
