@@ -230,16 +230,77 @@ Nesse modelo, assim como no YIQ, a intensidade dada pelo componente I é decompo
 
 O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade é entre $[0, 1]$, onde 0 significa preto e 1, branco.
 
+A transformação dos componentes do espaço RGB para HSI é dada pelas equações:
+\begin{align}
+\label{eq:rgb_para_hsi}
+\begin{split}
+  \theta &= cos^{-1} \bigg( \frac{(R - G) + (R - B)}{2 \sqrt{(R - G)^2 + (R - B)(G - B)}} \bigg)
+  \\
+  H &= \begin{cases}
+            \theta, \quad &\text{se}\ B \leq G\\
+            360 - \theta, \quad &\text{caso contrário}\\
+       \end{cases}
+  \\
+  S &= 1 - \frac{3 min(R, G, B)}{R + G + B}
+  \\
+  I &= \frac{R + G + B}{3}
+\end{split}
+\end{align}
+
+É importante ressaltar que os valores R, G e B devem estar normalizados no intervalo entre 0 e 1. A intensidade $I$ e a saturação $S$ também estão normalizadas entre 0 e 1.
+
 Outro modelo desta família é formado pelos componentes Matiz, Saturação e Luminância (\textbf{HSV}) e sua representação gráfica tridimensional é uma pirâmide hexagonal derivada do cubo RGB \citep{pedrini:08}.
 
-Os vários matizes estão representados na parte superior da pirâmide, a saturação é medida ao longo do eixo horizontal e a luminância é medida ao longo do eixo vertical, que passa pelo centro da pirâmide. O matiz, que corresponde às arestas ao redor do eixo vertical, varia de 0
-(vermelho) a 360 graus e o ângulo entre os vértices é de 60 graus. A saturação varia de 0 a 1 e é representada como sendo a razão entre a pureza de um determinado matiz e a sua pureza máxima, ou seja, quando $S = 1$. A luminância varia de 0, no pico da pirâmide representando a cor preta, a 1 na base, onde as intensidades das cores são máximas \citep{pedrini:08}.
+Os vários matizes estão representados na parte superior da pirâmide, a saturação é medida ao longo do eixo horizontal e a luminância é medida ao longo do eixo vertical, que passa pelo centro da pirâmide. O matiz, que corresponde às arestas ao redor do eixo vertical, varia de 0 (vermelho) a 360 graus e o ângulo entre os vértices é de 60 graus. A saturação varia de 0 a 1 e é representada como sendo a razão entre a pureza de um determinado matiz e a sua pureza máxima, ou seja, quando $S = 1$. A luminância varia de 0, no pico da pirâmide representando a cor preta, a 1 na base, onde as intensidades das cores são máximas \citep{pedrini:08}.
+
+A conversão do espaço RGB para HSV é dada pelas equações:
+\begin{align}
+\label{eq:rgb_para_hsv}
+\begin{split}
+  H &=  \begin{cases}
+            60\frac{(G - B)}{M - m}, \quad &\text{se}\ M = R\\
+            60\frac{(B - R)}{M - m} + 120, \quad &\text{se}\ M = G\\
+            60\frac{(R - G)}{M - m} + 240, \quad &\text{se}\ M = B\\
+       \end{cases}
+  \\
+  S &=  \begin{cases}
+            \frac{(M - m)}{M}, \quad &\text{se}\ M \neq 0\\
+            0, \quad &\text{caso contrário}\\
+       \end{cases}
+  \\
+  V &= M
+\end{split}
+\end{align}
+
+\noindent onde $m = min(R, G ,B)$ e $M = max(R, G ,B)$. A luminância $V$ e a saturação $S$ estão normalizadas entre 0 e 1. Já o matiz $H$ varia entre 0 e 360 graus.
 
 Da mesma forma que o HSV, o modelo Matiz, Saturação e Luminosidade (\textbf{HSL}) é uma representação tridimensional e é formado por dois cones de altura 1, cujas bases são coincidentes \citep{pedrini:08}.
 
 O matiz é determinado pelos pontos no círculo das bases comuns aos cones. A saturação varia de 0 a 1, conforme a distância ao eixo do cone. A luminosidade está ao longo do eixo vertical comum aos dois cones e varia na escala $[0, 1]$, onde 0 significa preto e 1, branco \citep{pedrini:08}.
 
-Todos os modelos de cores dessa família têm a propriedade de se pensar em cores mais claras, obtidas pelo aumento do brilho ou luminosidade, e mais escuras, pela diminuição dos mesmos valores. As cores intermediárias são produzidas pela diminuição da saturação \citep{pedrini:08}.
+A conversão do espaço RGB para HSL é dada pelas equações:
+\begin{align}
+\label{eq:rgb_para_hsl}
+\begin{split}
+  H &=  \begin{cases}
+            60\frac{(G - B)}{M - m}, \quad &\text{se}\ M = R\\
+            60\frac{(B - R)}{M - m} + 120, \quad &\text{se}\ M = G\\
+            60\frac{(R - G)}{M - m} + 240, \quad &\text{se}\ M = B\\
+       \end{cases}
+  \\
+  S &=  \begin{cases}
+            \frac{(M - m)}{M + m}, \quad &\text{se}\ 0 < L \leq 0,5\\
+            \frac{(M - m)}{2 - (M + m)}, \quad &\text{se}\ L > 0,5\\
+            0, \quad &\text{se}\ M = m\\
+       \end{cases}
+  \\
+  L &= \frac{M + m}{2}
+\end{split}
+\end{align}
+
+\noindent onde $m = min(R, G ,B)$ e $M = max(R, G ,B)$. A luminância $V$ e a saturação $S$ estão normalizadas entre 0 e 1. Observe que a transformação do matiz $H$ é a mesma utilizada na conversão do espaço RGB para HSV em \ref{eq:rgb_para_hsv} e varia entre 0 e 360 graus.
+
+Todos os modelos de cores desta família têm a propriedade de se pensar em cores mais claras, obtidas pelo aumento do brilho ou luminosidade, e mais escuras, pela diminuição dos mesmos valores. As cores intermediárias são produzidas pela diminuição da saturação \citep{pedrini:08}.
 
 %% ------------------------------------------------------------------------- %%
 \section{Teoria \emph{fuzzy}}\index{fuzzy!teoria}
@@ -324,10 +385,10 @@ A altura de $A$, denotado por $altura(A)$, corresponde ao limite superior do cod
 % definição de conjunto normalizado
 \begin{defn}
 Um conjunto \emph{fuzzy} $A$ é dito normalizado se existe pelo menos um elemento $x \in U$, tal que $\mu_A(x) = 1$.
-\label{equ:conjunto_fuzzy_normalizado}
+\label{def:conjunto_fuzzy_normalizado}
 \end{defn}
 
-A definição de conjunto \emph{fuzzy} normalizado implica que pelo menos um membro de $A$ alcança o grau de pertinência máximo possível. Note que a definição em \ref{equ:conjunto_fuzzy_normalizado} considera que os valores dos graus de pertinência variam no intervalo fechado entre 0 e 1. Logo, no mínimo um elemento deve ter um grau de pertinência 1 para que $A$ possa ser considerado, de fato, normalizado. Observe que, decorrente dessa afirmação, imediatamente tem-se que que $altura(A) = 1$.
+A definição de conjunto \emph{fuzzy} normalizado implica que pelo menos um membro de $A$ alcança o grau de pertinência máximo possível. Note que a definição em \ref{def:conjunto_fuzzy_normalizado} considera que os valores dos graus de pertinência variam no intervalo fechado entre 0 e 1. Logo, no mínimo um elemento deve ter um grau de pertinência 1 para que $A$ possa ser considerado, de fato, normalizado. Observe que, decorrente dessa afirmação, imediatamente tem-se que que $altura(A) = 1$.
 
 % definição de suporte
 \begin{defn}
@@ -376,11 +437,47 @@ A figura~\ref{fig:fuzzy_definitions} mostra graficamente algumas das propriedade
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Operações entre conjuntos \emph{fuzzy}}\index{fuzzy!operações entre conjuntos}
-Ver ortega.
 
-%% ------------------------------------------------------------------------- %%
-\subsection{Conectivos básicos da lógica \emph{fuzzy}}\index{fuzzy!conectivos básicos da lógica}
-\label{sec:teste}
+Assim como na teoria de conjuntos clássica, há basicamente três operações que podem ser estendidas aos conjuntos \emph{fuzzy}. Essas operações são a união, a intersecção e o complemento, sendo representadas pelos operadores lógicos de conjunção (\textbf{OU}), disjunção (\textbf{E}) e complemento \textbf{NÃO}, respectivamente. As operações básicas formam o que é conhecido como \textbf{operações padrão em conjuntos \emph{fuzzy}} \citep{klir:95}.
+
+Tais operações são realizadas sobre suas respectivas funções de pertinência e há muitas formalizações matemáticas possíveis para os operadores que representam-nas. O par de operadores mais amplamente utilizado é o operador de mínimo ($min$) e máximo ($max$), que são semelhantes aos operadores produto e soma da álgebra elementar e utilizados para expressar a conjunção e disjunção, respectivamente \citep{thole:79}.
+
+Seja dois conjuntos \emph{fuzzy} $A$ e $B$, definidos sobre um mesmo universo de discurso $U$. Utilizando as funções $max$ e $min$, tem-se que \citep{klir:95}:
+
+% definição de união
+\begin{defn}
+\label{def:conjunto_fuzzy_uniao}
+O conjunto união é formado por todos os valores máximos entre dois conjuntos \emph{fuzzy} $A$ e $B$, onde $A, B \in U$, da forma:
+
+\begin{equation}
+  \mu_A(x) \cup \mu_B(x) = max\{\mu_A(x), \mu_B(x)\}, \quad \forall x \in U
+\end{equation}
+\end{defn}
+
+% definição de intersecção
+\begin{defn}
+\label{def:conjunto_fuzzy_interseccao}
+O conjunto intersecção é formado por todos os valores mínimos entre dois conjuntos \emph{fuzzy} $A$ e $B$, onde $A, B \in U$, da forma:
+
+\begin{equation}
+  \mu_A(x) \cap \mu_B(x) = min\{\mu_A(x), \mu_B(x)\}, \quad \forall x \in U
+\end{equation}
+\end{defn}
+
+% definição de complemento
+\begin{defn}
+\label{equ:conjunto_fuzzy_complemento}
+O complemento de um conjunto \emph{fuzzy} $A$, denotado por $\mu_{\bar{A}}(x)$, onde $A \in U$, é formado pela subtração entre o valor unitário e $\mu_A(x)$, da forma:
+
+\begin{equation}
+  \mu_{\bar{A}}(x) = 1 - \mu_A(x), \quad \forall x \in U
+\end{equation}
+\end{defn}
+
+Além desses operadores, existem outros que podem ser utilizados para efetuar as operações lógicas. Um deles é a norma triangular, também denominada \textbf{\emph{norma-t}}, e co-norma triangular, usualmente denominada por \textbf{\emph{co-norma-t}} ou \textbf{\emph{norma-s}}. Os operadores utilizados para a intersecção de conjuntos \emph{fuzzy} pertencem à classe \emph{norma-t}. Os operadores utilizados para a união de conjuntos \emph{fuzzy} pertencem à classe \emph{co-norma-t} ou \emph{norma-s} \citep{zimmermann:01}.
+
+Ambas \emph{norma-t} e \emph{norma-s} são funções binárias do tipo $[0, 1] \times [0, 1] \rightarrow [0, 1]$, que devem satisfazer algumas propriedades, tais como, monotonicidade, comutatividade, associatividade e condições de contorno \footnote{As propriedades não serão expressas neste trabalho, embora sejam amplamente conhecidas, exceto pelas condições de contorno. Mais detalhes podem ser vistos em \citet{zimmermann:01}.}. Os operadores $max$ e $min$ satisfazem tais propriedades e, por essa razão, podem ser utilizados nas operações lógicas \emph{fuzzy} \citep{zimmermann:01}.
+
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Números \emph{fuzzy}}
