@@ -235,14 +235,14 @@ A transformação dos componentes do espaço RGB para HSI é dada pelas equaçõ
 \label{eq:rgb_para_hsi}
 \begin{split}
   \theta &= cos^{-1} \bigg( \frac{(R - G) + (R - B)}{2 \sqrt{(R - G)^2 + (R - B)(G - B)}} \bigg)
-  \\
+  \\[0.5em]
   H &= \begin{cases}
-            \theta, \quad &\text{se}\ B \leq G\\
-            360 - \theta, \quad &\text{caso contrário}\\
+            \theta,       & \text{se}\ B \leq G\\
+            360 - \theta, & \text{caso contrário}\\
        \end{cases}
-  \\
+  \\[0.5em]
   S &= 1 - \frac{3 min(R, G, B)}{R + G + B}
-  \\
+  \\[0.5em]
   I &= \frac{R + G + B}{3}
 \end{split}
 \end{align}
@@ -258,16 +258,16 @@ A conversão do espaço RGB para HSV é dada pelas equações:
 \label{eq:rgb_para_hsv}
 \begin{split}
   H &=  \begin{cases}
-            60\frac{(G - B)}{M - m}, \quad &\text{se}\ M = R\\
-            60\frac{(B - R)}{M - m} + 120, \quad &\text{se}\ M = G\\
-            60\frac{(R - G)}{M - m} + 240, \quad &\text{se}\ M = B\\
+            60\ffrac{(G - B)}{M - m}, & \text{se}\ M = R\\[0.7em]
+            60\ffrac{(B - R)}{M - m} + 120, & \text{se}\ M = G\\[0.7em]
+            60\ffrac{(R - G)}{M - m} + 240, & \text{se}\ M = B
        \end{cases}
-  \\
+  \\[0.5em]
   S &=  \begin{cases}
-            \frac{(M - m)}{M}, \quad &\text{se}\ M \neq 0\\
+            \ffrac{(M - m)}{M}, \quad &\text{se}\ M \neq 0\\[0.7em]
             0, \quad &\text{caso contrário}\\
        \end{cases}
-  \\
+  \\[0.5em]
   V &= M
 \end{split}
 \end{align}
@@ -283,17 +283,17 @@ A conversão do espaço RGB para HSL é dada pelas equações:
 \label{eq:rgb_para_hsl}
 \begin{split}
   H &=  \begin{cases}
-            60\frac{(G - B)}{M - m}, \quad &\text{se}\ M = R\\
-            60\frac{(B - R)}{M - m} + 120, \quad &\text{se}\ M = G\\
-            60\frac{(R - G)}{M - m} + 240, \quad &\text{se}\ M = B\\
+            60\ffrac{(G - B)}{M - m}, & \text{se}\ M = R\\[0.7em]
+            60\ffrac{(B - R)}{M - m} + 120, & \text{se}\ M = G\\[0.7em]
+            60\ffrac{(R - G)}{M - m} + 240, & \text{se}\ M = B
        \end{cases}
-  \\
+  \\[0.5em]
   S &=  \begin{cases}
-            \frac{(M - m)}{M + m}, \quad &\text{se}\ 0 < L \leq 0,5\\
-            \frac{(M - m)}{2 - (M + m)}, \quad &\text{se}\ L > 0,5\\
-            0, \quad &\text{se}\ M = m\\
+            \ffrac{(M - m)}{M + m}, & \text{se}\ 0 < L \leq 0,5\\[0.7em]
+            \ffrac{(M - m)}{2 - (M + m)}, & \text{se}\ L > 0,5\\[0.5em]
+            0, & \text{se}\ M = m\\
        \end{cases}
-  \\
+  \\[0.5em]
   L &= \frac{M + m}{2}
 \end{split}
 \end{align}
@@ -484,7 +484,7 @@ A figura~\ref{fig:fuzzy_operacoes_interseccao} exibe graficamente dois conjuntos
 
 % definição de complemento
 \begin{defn}
-\label{equ:conjunto_fuzzy_complemento}
+\label{def:conjunto_fuzzy_complemento}
 O complemento de um conjunto \emph{fuzzy} $A$, denotado por $\mu_{\bar{A}}(x)$, onde $A \in U$, é formado pela subtração entre o valor unitário e $\mu_A(x)$, da forma:
 
 \begin{equation}
@@ -529,8 +529,83 @@ De modo geral, números \emph{fuzzy} podem ser representados por funções param
 %% ------------------------------------------------------------------------- %%
 \subsection{Funções de pertinência}
 \label{sec:funcoes_pertinencia}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
+As funções de pertinência são responsáveis por um aspecto fundamental na teoria de conjuntos \emph{fuzzy}. Como supra citado, elas permitem, por exemplo, que um número \emph{fuzzy} seja representado de forma paramétrica.
+
+As funções lineares por partes são as mais populares devido à sua baixa complexidade e eficiência e, por conseguinte, baixo custo computacional necessário para o seu processamento, o que não ocorre com outros tipos de funções já que, em geral, não resultam em uma melhoria significativa na qualidade dos valores de saída dos sistemas \citep{yen:99}. Nesse contexto, as funções de pertinência mais comumente utilizadas são as \textbf{triangulares} e \textbf{trapezoidais}. Vale ressaltar que não é necessário que as funções sejam simétricas ou igualmente  espaçadas. Além disso, cada variável do problema pode ser modelada com funções de pertinência diferentes,  com  formas  e  distribuições  próprias, definidas  de  acordo com  as suas características e do contexto onde estão sendo aplicadas.
+
+Em aplicações onde é necessário transições mais suaves, pode-se usar funções \textbf{gaussianas}, \textbf{sigmoidais}, dentre outras, desde que estejam definidas no intervalo [0, 1]. Algumas dessas funções serão apresentadas em \ref{def:funcao_fuzzy_triangular}, \ref{def:funcao_fuzzy_trapezoidal}, com base nas definições de \citet{sumathi:10}.
+
+% definição de função de pertinência triangular
+\begin{defn}
+\label{def:funcao_fuzzy_triangular}
+Um número \emph{fuzzy} $A$ é dito triangular se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
+
+\begin{equation}
+  \mu_A(x) =  \begin{cases}
+                \ffrac{x - a}{m - a}, & \text{se}\ a \leq x \leq m\\[0.5em]
+                \ffrac{b - x}{b - m}, & \text{se}\ m \leq x \leq b\\[0.5em]
+                0, & \text{caso contrário}
+              \end{cases}
+\end{equation}
+\end{defn}
+\noindent onde $m$ é o máximo grau de pertinência ou $altura(A)$, em geral $\mu_A(x) = 1$, e $a$ e $b$ os limites inferior e superior do intervalo, respectivamente, onde $\mu_A(x)$ é não nula.
+
+A figura~\ref{fig:funcao_fuzzy_triangular} exibe o gráfico da função $\mu_A(x)$ de um número \emph{fuzzy} triangular $A$.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.5\textwidth]{funcao_triangular}
+  \caption[Gráfico da função de pertinência triangular]{Gráfico da função de pertinência triangular. Note que a forma é de um triângulo, que tem como base o intervalo $[a, b]$ e como $\emph{núcleo}(A)$ o vértice $(m, 1)$.}
+  % http://www.dma.fi.upm.es/recursos/aplicaciones/logica_borrosa/web/fuzzy_inferencia/funpert_en.htm
+  \label{fig:funcao_fuzzy_triangular}
+\end{figure}
+
+% definição de função de pertinência trapezoidal
+\begin{defn}
+\label{def:funcao_fuzzy_trapezoidal}
+Um número \emph{fuzzy} $A$ é dito trapezoidal se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
+
+\begin{equation}
+  \mu_A(x) =  \begin{cases}
+                \ffrac{x - a}{b - a}, & \text{se}\ a \leq x \leq b\\[0.5em]
+                1, & \text{se}\ b \leq x \leq c\\[0.5em]
+                \ffrac{d - x}{d - c}, & \text{se}\ c \leq x \leq d\\[0.5em]
+                0, & \text{caso contrário}
+              \end{cases}
+\end{equation}
+\end{defn}
+
+A figura~\ref{fig:funcao_fuzzy_trapezoidal} exibe o gráfico da função $\mu_A(x)$ de um número \emph{fuzzy} trapezoidal $A$.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.5\textwidth]{funcao_trapezoidal}
+  \caption[Gráfico da função de pertinência trapezoidal]{Gráfico da função de pertinência trapezoidal. Aqui a forma é de um trapézio, sendo que $\mu_A(x)$ é nula para todo $x \notin [a, d]$, linearmente  crescente  até $altura(A)$, geralmente, para $x = b = c$, constante nesse valor para $x$ entre $b$ e $c$ e, finalmente, linearmente decrescente até zero em $x = d$.}
+  % http://www.dma.fi.upm.es/recursos/aplicaciones/logica_borrosa/web/fuzzy_inferencia/funpert_en.htm
+  \label{fig:funcao_fuzzy_trapezoidal}
+\end{figure}
+
+% definição de função de pertinência gaussiana
+\begin{defn}
+\label{def:funcao_fuzzy_gaussiana}
+Um número \emph{fuzzy} $A$ é dito gaussiano se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
+
+\begin{equation}
+  \mu_A(x) =  \begin{cases}
+                \exp{\big(-\ffrac{{(x - m)}^2}{\sigma} \big)}, & \text{se}\ m - \sigma \leq x \leq m + \sigma\\[0.5em]
+                0, & \text{caso contrário}
+              \end{cases}
+\end{equation}
+\end{defn}
+\noindent onde $m$ é o $\emph{núcleo}(A)$ e $\sigma$ é o desvio padrão da função gaussiana. Quanto menor $\sigma$, mais estreita a abertura horizontal da curva. A figura~\ref{fig:funcao_fuzzy_gaussiana} exibe o gráfico da função $\mu_A(x)$ de um número \emph{fuzzy} gaussiano $A$.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.5\textwidth]{funcao_gaussiana}
+  \caption[Gráfico da função de pertinência gaussiana]{Gráfico da função de pertinência gaussiana. Aqui a forma é de um sino, sendo que $\mu_A(x)$ é nula para todo $x \notin [m - \sigma, m + \sigma]$, crescente  até $altura(A)$, onde $x = m$ e decrescente até zero em $x = m + \sigma$.}
+  % http://www.dma.fi.upm.es/recursos/aplicaciones/logica_borrosa/web/fuzzy_inferencia/funpert_en.htm
+  \label{fig:funcao_fuzzy_gaussiana}
+\end{figure}
 
 
 %% ------------------------------------------------------------------------- %%
