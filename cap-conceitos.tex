@@ -460,7 +460,7 @@ A figura~\ref{fig:fuzzy_operacoes_uniao} exibe graficamente dois conjuntos \emph
   \centering
   \includegraphics[width=.28\textwidth]{fuzzy_operacoes_uniao}
   \caption[Operação de união entre dois conjuntos fuzzy]{Representação gráfica da operação de união entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A união é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
-  \label{fig:fuzzy_operacoes_uniao} 
+  \label{fig:fuzzy_operacoes_uniao}
 \end{figure}
 
 % definição de intersecção
@@ -479,7 +479,7 @@ A figura~\ref{fig:fuzzy_operacoes_interseccao} exibe graficamente dois conjuntos
   \centering
   \includegraphics[width=.28\textwidth]{fuzzy_operacoes_interseccao}
   \caption[Operação de intersecção entre dois conjuntos fuzzy]{Representação gráfica da operação de intersecção entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A intersecção é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
-  \label{fig:fuzzy_operacoes_interseccao} 
+  \label{fig:fuzzy_operacoes_interseccao}
 \end{figure}
 
 % definição de complemento
@@ -498,7 +498,7 @@ A figura~\ref{fig:fuzzy_operacoes_complemento} exibe graficamente um conjunto \e
   \centering
   \includegraphics[width=.28\textwidth]{fuzzy_operacoes_complemento}
   \caption[Conjunto fuzzy e seu complemento]{Representação gráfica de um conjunto fuzzy e seu complemento. A parte superior em cinza claro mostra o conjunto fuzzy $A$. Seu complemento é destacado em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
-  \label{fig:fuzzy_operacoes_complemento} 
+  \label{fig:fuzzy_operacoes_complemento}
 \end{figure}
 
 Além desses operadores, existem outros que podem ser utilizados para efetuar as operações lógicas. Um deles é a norma triangular, também denominada \textbf{\emph{norma-t}}. Outro é a co-norma triangular, usualmente denominada por \textbf{\emph{co-norma-t}} ou \textbf{\emph{norma-s}}. Os operadores utilizados para a intersecção de conjuntos \emph{fuzzy} pertencem à classe \emph{norma-t}. Os operadores utilizados para a união de conjuntos \emph{fuzzy} pertencem à classe \emph{co-norma-t} ou \emph{norma-s} \citep{zimmermann:01}.
@@ -509,9 +509,22 @@ Ambas \emph{norma-t} e \emph{norma-s} são funções binárias do tipo $[0, 1] \
 %% ------------------------------------------------------------------------- %%
 \subsection{Números \emph{fuzzy}}
 \label{sec:numeros_fuzzy}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
+Conjuntos \emph{fuzzy} são composições de números \emph{fuzzy}, definidos em um universo discreto ou contínuo, de forma tal que a incerteza ou imprecisão associada a uma dada informação possa ser quantificada. Portanto, grandezas do tipo \emph{em torno de} 7, \emph{aproximadamente} -7, \emph{mais ou menos} 30 podem ser mapeadas e, consequentemente, interpretadas por números \emph{fuzzy}. Dessa forma, a concepção intuitiva sobre números aproximados ou intervalos pode ser capturada \citep{klir:95}.
 
+\citet{klir:95} caracterizam um número \emph{fuzzy} como um tipo especial de conjunto \emph{fuzzy} definido no conjunto $\mathbb{R}$ dos números reais, cuja função de pertinência tem a forma:
+\begin{equation}
+\label{eq:fuzzy_numero_reais}
+  A = \mathbb{R} \rightarrow [0, 1]
+\end{equation}
+
+Para que $A$ seja, de fato, um número \emph{fuzzy}, o conjunto universo no qual $\mu_A$ está definida deve ser $\mathbb{R}$ e as seguintes propriedades devem ser satisfeitas \citep{barros:06}:
+\begin{enumerate}[label=(\roman*)]
+\item todos os $\alpha$\emph{-corte} de $A$ são não vazios, com $0 \leq \alpha \leq 1$;
+\item todos os $\alpha$\emph{-corte} são intervalos fechados de $\mathbb{R}$;
+\item $suporte(A) = \{x \in U \ |\ \mu_A(x) > 0\}$.
+\end{enumerate}
+
+De modo geral, números \emph{fuzzy} podem ser representados por funções parametrizadas. Algumas dessas funções serão apresentadas na seção \ref{sec:funcoes_pertinencia}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Funções de pertinência}
