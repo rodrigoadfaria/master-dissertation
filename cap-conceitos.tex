@@ -533,7 +533,7 @@ As funções de pertinência são responsáveis por um aspecto fundamental na te
 
 As funções lineares por partes são as mais populares devido à sua baixa complexidade e eficiência e, por conseguinte, baixo custo computacional necessário para o seu processamento, o que não ocorre com outros tipos de funções já que, em geral, não resultam em uma melhoria significativa na qualidade dos valores de saída dos sistemas \citep{yen:99}. Nesse contexto, as funções de pertinência mais comumente utilizadas são as \textbf{triangulares} e \textbf{trapezoidais}. Vale ressaltar que não é necessário que as funções sejam simétricas ou igualmente  espaçadas. Além disso, cada variável do problema pode ser modelada com funções de pertinência diferentes,  com  formas  e  distribuições  próprias, definidas  de  acordo com  as suas características e do contexto onde estão sendo aplicadas.
 
-Em aplicações onde é necessário transições mais suaves, pode-se usar funções \textbf{gaussianas}, \textbf{sigmoidais}, dentre outras, desde que estejam definidas no intervalo [0, 1]. Algumas dessas funções serão apresentadas em \ref{def:funcao_fuzzy_triangular}, \ref{def:funcao_fuzzy_trapezoidal}, com base nas definições de \citet{sumathi:10}.
+Em aplicações onde é necessário transições mais suaves, pode-se usar funções \textbf{gaussianas}, \textbf{sigmoidais}, dentre outras, desde que estejam definidas no intervalo [0, 1]. Algumas dessas funções serão apresentadas em \ref{def:funcao_fuzzy_triangular}, \ref{def:funcao_fuzzy_trapezoidal} e \ref{def:funcao_fuzzy_gaussiana}, com base nas definições de \citet{sumathi:10}.
 
 % definição de função de pertinência triangular
 \begin{defn}
@@ -611,8 +611,33 @@ Um número \emph{fuzzy} $A$ é dito gaussiano se sua função de pertinência, d
 %% ------------------------------------------------------------------------- %%
 \subsection{Variáveis linguísticas}
 \label{sec:variaveis_linguisticas}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
+Uma variável linguística é aquela cujo valor pode ser expresso por um termo qualitativo capaz de fornecer um significado conceitual à variável, tais como muito pequeno, pequeno, médio, baixo, alto e assim por diante, e que podem fornecer uma interpretação num contexto específico \citep{pedrycz:98}.
+
+Para \citet{zadeh:75}, uma variável linguística é aquela cujo valor é uma palavra ou uma sentença numa linguagem natural ou artificial.
+
+A motivação para o uso de variáveis linguísticas é que elas são, em geral, menos específicas do que variáveis numéricas \citep{zadeh:75}. Essa motivação tem um propósito particular quando os subconjuntos \emph{fuzzy} são determinados em termos de regras, já que o objetivo não é definir exaustivamente as variáveis linguísticas.
+
+Cada variável linguística tem seus estados expressos por meio de termos de uma variável base, cujos valores são números reais dentro de um intervalo específico. Uma variável de base é uma variável no sentido clássico, por exemplo, temperatura, pressão, velocidade, tensão, umidade, idade, desempenho, salário, etc \citep{klir:95}.
+
+Intuitivamente, as variáveis linguísticas  podem ser vistas como substantivos, por exemplo altura ou nota e os seus valores são adjetivos que caracterizam-nas, tais como alto, baixo, ruim, bom, dentre outros. A definição formal é dada em \ref{def:variavel_linguistica} \citep{zadeh:75, klir:95}.
+
+% definição de variável linguística
+\begin{defn}
+\label{def:variavel_linguistica}
+Uma variável linguística é caracterizada por uma quíntupla $(v, T, U, G, M)$, onde:
+
+\begin{enumerate}[label=(\roman*)]
+\item $v$ é o nome da variável.
+\item $U$ é o universo de discurso.
+\item $T$ é o conjunto de termos linguísticos de $v$ relacionado a uma variável base cujos valores variam ao longo de $U$.
+\item $G$ é uma regra sintática, ou seja, a gramática para a geração de termos linguísticos em $T$.
+\item $M$ é uma regra semântica que atribui para cada termo linguístico $t \in T$ seu significado, que é um conjunto \emph{fuzzy} em $U$.
+\end{enumerate}
+\end{defn}
+
+\begin{exmp}
+\textcolor{red}{Inserir um exemplo aqui da definição em \ref{def:variavel_linguistica}, de preferência linkada com o exemplo 2.1 e que faça sentido com o texto.}
+\end{exmp}
 
 
 %% ------------------------------------------------------------------------- %%
