@@ -314,7 +314,7 @@ Claramente, a resposta a ser obtida quando da análise de possibilidades desse t
 
 O conceito de incerteza mudou gradativamente na ciência e na matemática. Na ciência, esta mudança foi manifestada por uma transição gradual da visão tradicional, que insiste que a incerteza é indesejável e, por esta razão, ela deve ser evitada por todos os meios possíveis, para uma visão alternativa, que é tolerante à incerteza. De acordo com a visão tradicional, a ciência deve esforçar-se de certeza em todas as suas manifestações, ou seja, com precisão, especificidade, nitidez, consistência e, por conseguinte, a incerteza é considerada como não científica. De acordo com a visão alternativa, a dúvida é considerada essencial para a ciência; não é só uma praga inevitável, mas tem, de fato, uma grande utilidade \citep{klir:95}.
 
-E com base na ideia moderna de que a incerteza é algo útil na ciência é que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos dá-se sob a ótica de que os limites entre eles não são precisos e, portanto, é possível estabelecer funções que forneçam um certo \textbf{grau de pertinência} de um elemento a um dado conjunto \citep{zadeh:65}.
+E com base na ideia moderna de que a incerteza é algo útil na ciência é que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos dá-se sob a ótica de que os limites entre eles não são precisos e, portanto, é possível estabelecer funções que forneçam um certo \textbf{grau de pertinência}\index{pertinência!grau de} de um elemento a um dado conjunto \citep{zadeh:65}.
 
 A capacidade de conjuntos \emph{fuzzy} expressarem transições graduais de pertinência e não pertinência tem uma grande utilidade. Ela fornece não só uma representação significativa e poderosa da medida de incerteza, mas também uma forma de expressar conceitos vagos em linguagem natural \citep{klir:95}. Voltando ao exemplo do conjunto de pessoas altas, em vez de descrever a altura de uma pessoa com exatidão em metros ou centímetros, pode-se apenas dizer que ela é alta, baixa ou mediana. Cada um desses conjuntos pode ser um conjunto \emph{fuzzy}, onde um valor 1 é atribuído a um membro que está totalmente incluído em um deles, ou 0 caso contrário. Valores intermediários nessa escala indicam que o elemento está parcialmente em um dos conjuntos.
 
@@ -437,8 +437,9 @@ A figura~\ref{fig:fuzzy_definitions} mostra graficamente algumas das propriedade
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Operações entre conjuntos \emph{fuzzy}}\index{fuzzy!operações entre conjuntos}
+\label{sec:operacoes_conjuntos_fuzzy}
 
-Assim como na teoria de conjuntos clássica, há basicamente três operações que podem ser estendidas aos conjuntos \emph{fuzzy}. Essas operações são a união, a intersecção e o complemento, sendo representadas pelos operadores lógicos de conjunção (\textbf{OU}), disjunção (\textbf{E}) e complemento \textbf{NÃO}, respectivamente. As operações básicas formam o que é conhecido como \textbf{operações padrão em conjuntos \emph{fuzzy}} \citep{klir:95}.
+Assim como na teoria de conjuntos clássica, há basicamente três operações que podem ser estendidas aos conjuntos \emph{fuzzy}. Essas operações são a união, a intersecção e o complemento, sendo representadas pelos operadores lógicos de conjunção (\textbf{OU}), disjunção (\textbf{E}) e complemento (\textbf{NÃO}), respectivamente. As operações básicas formam o que é conhecido como \textbf{operações padrão em conjuntos \emph{fuzzy}} \citep{klir:95}.
 
 Tais operações são realizadas sobre suas respectivas funções de pertinência e há muitas formalizações matemáticas possíveis para os operadores que representam-nas. O par de operadores mais amplamente utilizado é o operador de mínimo ($min$) e máximo ($max$), que são semelhantes aos operadores produto e soma da álgebra elementar e utilizados para expressar a conjunção e disjunção, respectivamente \citep{thole:79}.
 
@@ -511,7 +512,7 @@ Ambas \emph{norma-t} e \emph{norma-s} são funções binárias do tipo $[0, 1] \
 \label{sec:numeros_fuzzy}
 Conjuntos \emph{fuzzy} são composições de números \emph{fuzzy}, definidos em um universo discreto ou contínuo, de forma tal que a incerteza ou imprecisão associada a uma dada informação possa ser quantificada. Portanto, grandezas do tipo \emph{em torno de} 7, \emph{aproximadamente} -7, \emph{mais ou menos} 30 podem ser mapeadas e, consequentemente, interpretadas por números \emph{fuzzy}. Dessa forma, a concepção intuitiva sobre números aproximados ou intervalos pode ser capturada \citep{klir:95}.
 
-\citet{klir:95} caracterizam um número \emph{fuzzy} como um tipo especial de conjunto \emph{fuzzy} definido no conjunto $\mathbb{R}$ dos números reais, cuja função de pertinência tem a forma:
+\citet{klir:95} caracterizam um número \emph{fuzzy} como um tipo especial de conjunto \emph{fuzzy} definido no conjunto $\mathbb{R}$ dos números reais, cuja função de pertinência\index{pertinência!função de} tem a forma:
 \begin{equation}
 \label{eq:fuzzy_numero_reais}
   A = \mathbb{R} \rightarrow [0, 1]
@@ -527,7 +528,7 @@ Para que $A$ seja, de fato, um número \emph{fuzzy}, o conjunto universo no qual
 De modo geral, números \emph{fuzzy} podem ser representados por funções parametrizadas. Algumas dessas funções serão apresentadas na seção \ref{sec:funcoes_pertinencia}.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Funções de pertinência}
+\subsection{Funções de pertinência}\index{pertinência!tipos de funções de}
 \label{sec:funcoes_pertinencia}
 As funções de pertinência são responsáveis por um aspecto fundamental na teoria de conjuntos \emph{fuzzy}. Como supra citado, elas permitem, por exemplo, que um número \emph{fuzzy} seja representado de forma paramétrica.
 
@@ -641,29 +642,46 @@ Uma variável linguística é caracterizada por uma quíntupla $(v, T, U, G, M)$
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Sistemas baseados em regras \emph{fuzzy}}\index{fuzzy!sistemas baseados em regras}
-\label{sec:sistemas_regras_fuzzy}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
+\subsection{Regras \emph{fuzzy}}\index{fuzzy!regras}
+\label{sec:regras_fuzzy}
+Os seres humanos tomam decisões baseados em regras, do tipo \emph{se} a temperatura está baixa, \emph{então} coloque um casaco, \emph{se} o combustível está acabando, \emph{então} abasteça o veículo, etc.
 
+As regras estão entre as técnicas mais utilizadas para representar o conhecimento. Para \citet{zimmermann:01}, as regras ainda são amplamente utilizados devido ao fato de que tornam possível modelar o conhecimento em um sistema \emph{fuzzy} capturando-o por meio de especialistas. As regras também têm a vantagem de poderem ser expressas por uma linguagem natural ou artificial que, em geral, é facilmente compreensível.
 
+De maneira similar a uma afirmação clássica, uma regra \emph{fuzzy} é composta por duas partes, resultando em uma estrutura do tipo \citep{dubois:96}:
+\begin{center}
+\emph{Se} \{antecedentes\}, \emph{então} \{consequentes\}.
+\end{center}
 
+Os antecedentes caracterizam premissas, enquanto a parte consequente são ações tomadas quando as premissas são atendidas. Diferentemente de uma regra clássica, um ou mais antecedentes podem ser parcialmente atendidos para que as premissas sejam aferidas e, portanto, as regras \emph{fuzzy} são mais relaxadas do que as regras clássicas que devem ser verificadas na sua totalidade.
 
+A forma de interpretação mais comum e amplamente usada de uma regra \emph{fuzzy} é \citep{dubois:96}:
+\begin{center}
+\emph{Se} $x$ é $A$, \emph{então} $y$ é $B$.
+\end{center}
+\noindent onde $A$ e $B$ são variáveis linguísticas definidas por conjuntos \emph{fuzzy} em universos de discurso $U$ e $V$, respectivamente. Um exemplo da aplicação da regra pode ser visto em \ref{exp:regra_fuzzy}.
 
+\begin{exmp}
+\label{exp:regra_fuzzy}
+\emph{Se} verde é baixo, \emph{então} pixel é pele.
+\end{exmp}
 
+É importante observar que \textbf{verde} é uma variável linguística e o adjetivo \textbf{baixo} é um termo linguístico representado como um número no intervalo $[0, 1]$ e, portanto, o antecedente é uma interpretação que retorna um único número desse intervalo. Por outro lado, a \textbf{pele} é a representação de um conjunto \emph{fuzzy} e, por isso, o consequente é uma atribuição de todo o conjunto \emph{fuzzy} $B$ para a variável de saída $y$, o pixel no exemplo \ref{exp:regra_fuzzy}. Porém, o consequente pode assumir outros valores que não só um conjunto \emph{fuzzy}, como também, um valor numérico clássico.
 
+Também é válido destacar a possibilidade de utilizar conectivos na formação da regra para que ela seja estendida e tenha múltiplas partes, o que possibilita a interpretação de diversas variáveis linguísticas ao mesmo tempo em um contexto específico, como pode ser visto em \ref{exp:regra_fuzzy_mult}. Nesse caso, todas as partes dos antecedentes são calculadas simultaneamente em um único resultado, com base nos operadores destacados na seção \ref{sec:operacoes_conjuntos_fuzzy}.
 
+\begin{exmp}
+\label{exp:regra_fuzzy_mult}
+\emph{Se} verde é médio e \emph{vermelho} é baixo e \emph{azul} é alto, \emph{então} pixel é não pele.
+\end{exmp}
+
+Apesar de ser possível empregar múltiplas partes também para os consequentes, tal capacidade não será utilizada e, consequentemente, não abordada neste trabalho.
 
 
 %% ------------------------------------------------------------------------- %%
 \begin{comment}
 \section{Exemplo de Código-Fonte em Java}
 \label{sec:exemplo_codigo_fonte}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
-
 % Foi utilizado o pacote listing para formatar código fonte
 % http://ctan.org/tex-archive/macros/latex/contrib/listings/listings.pdf
 % Veja no preambulo do arquivo tese-exemplo.tex os parâmetros de configuração.
