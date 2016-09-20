@@ -679,6 +679,57 @@ Apesar de ser possível empregar múltiplas partes também para os consequentes,
 
 
 %% ------------------------------------------------------------------------- %%
+\section{Classificadores}
+\label{sec:classificadores}
+A aprendizagem de máquina é uma área que está preocupada com o desenvolvimento de programas de computador capazes de melhorar automaticamente com a experiência \citep{mitchell:97}. Essa definição está intimamente ligada ao modo com que seres humanos aprendem. Os esforços de pesquisa nessa área têm sido realizados com o propósito de aproximar esta relação.
+
+Como exemplo, ao mostrar a imagem de uma árvore para uma criança de três anos de idade, muito provavelmente ela saberá reconhecê-la, pois deve ter sido exposta a situações em que tenha visto imagens semelhantes e, sendo assim, foi treinada para dar tal resposta. Logo, ela aprendeu o que é uma árvore apenas olhando para elas, não necessariamente por meio de definições matemáticas precisas. Em outras palavras, o aprendizado foi feito com base em dados que, muitas vezes, são utilizados para obter-se soluções empíricas para determinados problemas onde não há a possibilidade de se criar uma solução analítica \citep{mostafa:12}.
+
+Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de outros objetos com base em um conjunto de dados que possui descrições sobre as árvores, tais como, altura, cores, espessura, comprimento, etc. Este conjunto de dados é conhecido como \emph{dataset}. Tais descrições também são chamadas de propriedades ou características e são submetidas a um classificador que avalia as evidências apresentadas e toma uma decisão sobre o objeto sendo analisado \citep{duda:12}. Essa tarefa começa com a definição de um vetor de características em um espaço $d$-dimensional, da forma \citep{duda:12}:
+
+\begin{equation}
+\label{eq:vetor_caracteristicas}
+  x = 
+  \begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_d
+  \end{bmatrix}
+\end{equation}
+\noindent onde $x \in X$ e $X$ é o espaço de entrada, ou seja, todos os $x$ vetores possíveis.
+
+O \emph{dataset} é formado por $n$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é conjunto de classes, dependendo do lado da partição em que ele se encontra. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{decision_boundary_linear}
+        \label{fig:decision_boundary_linear}
+    \end{minipage}
+    ~ % space
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{decision_boundary_smooth}
+        \label{fig:decision_boundary_smooth}
+    \end{minipage}
+    \caption[Fronteira de decisão no espaço de características 2-dimensional]{Fronteira de decisão no espaço de características 2-dimensional. As figuras à esquerda e à direita representam a separação do espaço de características por funções linear e não linear, respectivamente. Vale ressaltar que, a complexidade computacional aumenta significativamente nos casos em que existem muitas características.\textcolor{red}{O ideal aqui é trocar essa distribuição pelo dataset de pele. A fonte dessas imagens é \citet{duda:12}}.}
+    \label{fig:decision_boundary}
+\end{figure}
+
+Note que a fronteira de decisão é uma função hipotética que o algoritmo de aprendizado deve produzir com base no treinamento dos dados. Ela deve ser mais próxima possível de uma função alvo ou função objetivo $f : X\mapsto Y$ que é desconhecida \citep{mostafa:12}.
+
+Este tipo de abordagem é caracterizada como aprendizagem supervisionada, ou seja, os dados de treinamento contêm amostras explícitas de como deve ser a saída correta sobre um vetor de entrada \citep{mostafa:12}.
+
+Na aprendizagem não supervisionada, também conhecida como clusterização, não se sabe a que classes pertencem os dados de treinamento. A missão do classificador, neste caso, é aglomerar os dados de entrada em agrupamentos naturais \citep{duda:12}. Logo, a aprendizagem não supervisionada pode ser vista como uma tarefa de encontrar padrões ou estruturas espontaneamente a partir dos dados de entrada \citep{mostafa:12}.
+
+Uma outra abordagem é a aprendizagem reforçada que, da mesma forma que na aprendizagem não supervisionada, não usa dados de entrada rotulados, em vez disso, a saída proposta pelo treinamento é utilizada juntamente com uma medida de sua qualidade para melhorar os resultados do classificador \citep{mostafa:12}.
+
+As seções \ref{sec:clasificadores_svm} tratam de alguns dos classificadores aplicados nos experimentos preliminares deste trabalho.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Máquinas de Vetores Suporte}
+As Máquinas de Vetores Suporte (SVM)
+\label{sec:clasificadores_svm}
+
+%% ------------------------------------------------------------------------- %%
 \begin{comment}
 \section{Exemplo de Código-Fonte em Java}
 \label{sec:exemplo_codigo_fonte}
@@ -693,124 +744,4 @@ Apesar de ser possível empregar múltiplas partes também para os consequentes,
        System.out.println("Mensagem...");
    }
 \end{lstlisting}
-
-
-%% ------------------------------------------------------------------------- %%
-\section{Algumas Referências}
-\label{sec:algumas_referencias}
-
-É muito recomendável a utilização de arquivos \emph{bibtex} para o gerenciamento
-de referências a trabalhos. Nesse sentido existem três plataformas gratuitas
-que permitem a busca de referências acadêmicas em formato bib: 
-\begin{itemize}
-	\item \emph{CiteULike} (patrocinados por Springer): \url{www.citeulike.org}
-	\item Coleção de bibliografia em Ciência da Computação: \url{liinwww.ira.uka.de/bibliography}
-	\item Google acadêmico (habilitar bibtex nas preferências): \url{scholar.google.com.br}
-\end{itemize}
-Lamentavelmente, ainda não existe um mecanismo de verificação ou validação das
-informações nessas plataformas. Portanto, é fortemente sugerido validar todas
-as informações de tal forma que as entradas bib estejam corretas.  Também, tome
-muito cuidado na padronização das referências bibliográficas: ou considere TODOS
-os nomes dos autores por extenso, ou TODOS os nomes dos autores abreviados.
-Evite misturas inapropriadas.
-
-Exemplos de referências com a tag:
-\begin{itemize}
-
-\item @InCollection: \citep{bobaoglu93:concepts}.
-{\scriptsize\begin{verbatim}
-@InCollection{bobaoglu93:concepts,
- author   = {Ozalp Babaoglu and Keith Marzullo},
- title    = {Consistent Global States of Distributed Systems: Fundamental Concepts
-            and Mechanisms},
- editor   = {Sape Mullender},
- booktitle= {Distributed Systems},
- edition  = {segunda},
- year     = {1993},
- pages    = {55-96}
-}
-\end{verbatim}}
-
-\item @Conference: \citep{bronevetsky02}.
-{\scriptsize\begin{verbatim}
-@Conference{bronevetsky02,
- author   = {Greg Bronevetsky and Daniel Marques and Keshav Pingali and 
-            Paul Stodghill},
- title    = {Automated application-level checkpointing of {MPI} programs},
- booktitle= {PPoPP '03: Proceedings of the 9th ACM SIGPLAN Symposium on Principles
-            and Practice of Parallel Programming},
- year     = {2003},
- pages    = {84-89}
-}
-\end{verbatim}}
-
-\item @PhdThesis: \citep{garcia01:PhD}.
-{\scriptsize\begin{verbatim}
-@PhdThesis{garcia01:PhD,
- author   = {Islene C. Garcia},
- title    = {Visões Progressivas de Computações Distribuídas},
- school   = {Instituto de Computação, Universidade de Campinas, Brasil},
- year     = {2001},
- month    = {Dezembro}
-}
-\end{verbatim}}
-
-\item @MastersThesis: \citep{schmidt03:MSc}.
-{\scriptsize\begin{verbatim}
-@MastersThesis{schmidt03:MSc,
- author   = {Rodrigo M. Schmidt},
- title    = {Coleta de Lixo para Protocolos de \emph{Checkpointing}},
- school   = {Instituto de Computação, Universidade de Campinas, Brasil},
- year     = {2003},
- month    = Oct
-}
-\end{verbatim}}
-
-\item @Techreport: \citep{alvisi99:analysisCIC}.
-{\scriptsize\begin{verbatim}
-@Techreport{alvisi99:analysisCIC,
- author   = {Lorenzo Alvisi and Elmootazbellah Elnozahy and Sriram S. Rao and
-            Syed A. Husain and Asanka Del Mel},
- title    = {An Analysis of Comunication-Induced Checkpointing},
- institution= {Department of Computer Science, University of Texas at Austin},
- year     = {1999},
- number   = {TR-99-01},
- address  = {Austin, {USA}}
-}
-\end{verbatim}}
-
-\item @Manual: \citep{CORBA:spec}.
-{\scriptsize\begin{verbatim}
-@Manual{CORBA:spec,
- title    = {{CORBA v3.0 Specification}},
- author   = {{Object Management Group}},
- month    = Jul,
- year     = {2002},
- note     = {{OMG Document 02-06-33}}
-}
-\end{verbatim}}
-
-\item @Misc: \citep{gridftp}.
-{\scriptsize\begin{verbatim}
-@Misc{gridftp,
- author   = {William Allcock},
- title    = {{GridFTP} protocol specification. {Global Grid Forum}
-            Recommendation ({GFD}.20)},
- year     = {2003}
-}
-\end{verbatim}}
-
-\item @Misc: para referência a artigo online \citep{fowler04:designDead}.
-{\scriptsize\begin{verbatim}
-@Misc{fowler04:designDead,
- author   = {Martin Fowler},
- title    = {Is Design Dead?},
- year     = {2004},
- month    = May,
- note     = {Último acesso em 30/1/2010},
- howpublished= {\url{http://martinfowler.com/articles/designDead.html}},
-}
-\end{verbatim}}
-
-\end{itemize}
 \end{comment}
