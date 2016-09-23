@@ -777,7 +777,7 @@ Geometricamente, a distância entre os dois hiperplanos paralelos ao hiperplano 
 
 É importante ressaltar que este tipo de SVM tem êxito em conjuntos de dados de treinamento linearmente separáveis. Nos casos em que os dados são não linearmente separáveis, é admitida a ocorrência de alguns erros de classificação para o conjunto de treinamento, pela inclusão de variáveis de relaxamento \citep{lorena:03}. Essas alterações foram produzidas por \citet{cortes:95} e fazem parte de uma técnica denominada suavização de margens e, por conseguinte, SVMs dessa família também são chamadas de SVM com margens suaves.
 
-Em geral, a maioria dos problemas de classificação impedem que classificadores lineares sejam utilizados por não ser possível obter resultados satisfatórios na partição dos dados de treinamento por um hiperplano. Entretanto, as SVMs lineares podem ser estendidas para lidar com essa situação mapeando o espaço de características de entrada em um novo espaço de características de dimensão mais alta, tipicamente muito maior que o espaço original \citep{duda:12}, da forma:
+Em geral, a maioria dos problemas de classificação impedem que classificadores lineares sejam utilizados por não ser possível obter resultados satisfatórios na partição dos dados de treinamento por um hiperplano. Entretanto, as SVMs lineares podem ser estendidas para lidar com essa situação mapeando o espaço de entrada em um espaço de características de dimensão mais alta, tipicamente muito maior que o espaço original \citep{duda:12}, da forma:
 \begin{equation}
 \label{eq:svm_dataset_transformado}
     D' = (\Phi(x_1), y_1), (\Phi(x_2), y_2), \ldots, (\Phi(x_n), y_n)
@@ -791,18 +791,39 @@ w \cdot \Phi(x) + b = 0
 
 Logo, os conceitos de vetores de suporte, margem, hiperplanos paralelos e, consequentemente, de problema de otimização para encontrar a solução para os parâmetros $w$ e $b$ se aplicam aqui de forma similar. Especificamente sobre a otimização, há a necessidade de se definir como o produto interno entre dois vetores quaisquer $x_i, x_j \in D$ é realizado, cuja resposta está na introdução do conceito de \emph{kernels} \citep{lorena:03}.
 
-\emph{Kernels} são funções que têm a finalidade de projetar os vetores de entrada num espaço de características com número de dimensões exponencial ou infinito \citep{taylor:04}, da forma:
+\emph{Kernels} são funções\index{\emph{kernel}!funções} que têm a finalidade de projetar os vetores de entrada num espaço de características com número de dimensões exponencial ou infinito \citep{taylor:04}, da forma:
 \begin{equation}
 \label{eq:svm_kernels}
 k(x_i, x_j) =  \Phi(x_i) \cdot \Phi(x_j)
 \end{equation}
 
-Logo, é possível aplicar um \emph{kernel} como descrito na equação \ref{eq:svm_kernels} na etapa de otimização da SVM, calculando de maneira eficiente o produto interno a partir dos dados de entrada, sem nem mesmo computar explicitamente o mapeamento $\Phi$ \citep{taylor:04}.
+Logo, é possível aplicar um \emph{kernel} como descrito na equação \ref{eq:svm_kernels} na etapa de otimização da SVM, calculando de maneira eficiente o produto interno a partir dos dados de entrada, sem nem mesmo computar explicitamente o mapeamento da função $\Phi$ \citep{taylor:04}.
 
-Alguns dos \emph{kernels} mais utilizados podem ser vistos na tabela \textcolor{red}{colocar os kernels numa tabela}.
+Alguns dos \emph{kernels} mais utilizados são \citep{lorena:03}:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Kernel} linear\index{\emph{kernel}!linear}
+\begin{equation}
+\label{eq:svm_kernel_linear}
+k(x_i, x_j) =  (x_i \cdot x_j)
+\end{equation}
+O \emph{kernel} linear é o mais simples das funções \emph{kernel} e se dá pelo produto interno de dois vetores $x_i$ e $x_j$.
 
+\item \emph{Kernel} polinomial\index{\emph{kernel}!polinomial}
+\begin{equation}
+\label{eq:svm_kernel_polinomial}
+k(x_i, x_j) =  ({\gamma x_i \cdot y_i + r} )^g
+\end{equation}
+\noindent onde $g$ é o grau do polinômio e $r$ é um termo constante. Para este \emph{kernel}, os mapeamentos $\Phi$ também são funções polinomiais e, portanto, a complexidade é proporcional à escolha de $g$ \citep{lorena:03}.
 
+\item \emph{Kernel} gaussiano\index{\emph{kernel}!gaussiano ou RBF}
+\begin{equation}
+\label{eq:svm_kernel_rbf}
+k(x_i, x_j) =  \exp{\big(-\gamma {||x_i - y_i||}^2 \big)}
+\end{equation}
+Também conhecido como Função de Base Radial (RBF), o \emph{kernel} gaussiano corresponde a um espaço de características de dimensão infinita \citep{lorena:03}.
+\end{enumerate}
 
+No \emph{kernel} RBF e polinomial, o parâmetro $\gamma$ pode ser visto como o inverso do raio de influência das amostras selecionadas pelo modelo como vetores de suporte \citep{scikit-learn:11}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{\emph{k}-Vizinhos Mais Próximos}
