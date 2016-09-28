@@ -696,7 +696,7 @@ Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de out
 \end{equation}
 \noindent onde $x \in X$ e $X$ é o espaço de entrada, ou seja, todos os $x$ vetores possíveis.
 
-O conjunto de dados é formado por $n$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é conjunto de classes, dependendo do lado da partição em que ele se encontra. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional.
+O conjunto de dados é formado por $N$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é conjunto de classes, dependendo do lado da partição em que ele se encontra. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional.
 
 \begin{figure}[h]
     \centering
@@ -721,7 +721,13 @@ Na aprendizagem não supervisionada, também conhecida como clusterização, nã
 
 Uma outra abordagem é a aprendizagem reforçada que, da mesma forma que na aprendizagem não supervisionada, não usa dados de entrada rotulados, em vez disso, a saída proposta pelo treinamento é utilizada juntamente com uma medida de sua qualidade para melhorar os resultados do classificador \citep{mostafa:12}.
 
-O paradigma utilizado nos experimentos preliminares deste trabalho é a aprendizagem supervisionada e alguns dos classificadores serão brevemente tratados nas seções \ref{sec:clasificadores_svm} e \ref{sec:clasificadores_knn}.
+Ainda sobre os resultados do classificador, é importante salientar que aprender os parâmetros de uma função alvo e testá-la nos mesmos dados é um erro fundamental, pois o modelo repetiria os rótulos das amostras tão logo treinadas implicando em um ajuste perfeito dos dados, porém, não seria suficiente para prever qualquer coisa útil sobre novos dados de entrada. Esta situação é chamada de \emph{overfitting} e para evitá-la, o conjunto de dados é, então, particionado de forma a armazenar parte dos dados para uma etapa subsequente de teste, no intuito de encontrar o estimador com a melhor performance \citep{mostafa:12}.
+
+A divisão dos dados em subconjuntos disjuntos de treinamento e de teste é uma abordagem eficaz quando uma grande quantidade de dados está disponível. Entretanto, quando os dados são limitados, a retenção de parte deles para o conjunto de teste reduz ainda mais o número de amostras disponíveis para treinamento \citep{mitchell:97}. Logo, uma outra abordagem, conhecida como validação cruzada, pode ser aplicada de modo que todo o conjunto de dados é usado no treinamento e teste.
+
+A validação cruzada\index{cruzada!validação} consiste em dividir o conjunto de dados $D$ em $K$ subconjuntos disjuntos $D_1, D_2, \ldots, D_K$, onde cada subconjunto tem tamanho aproximado $N/K$. O modelo é, então, treinado em cada um desses subconjuntos, exceto um que é mantido como um conjunto de validação, no qual a medida de erro é realizada. Este processo é repetido $K$ vezes, de tal forma que cada um dos subconjuntos tem a oportunidade de agir como o conjunto de teste e, por isso, essa abordagem também é conhecida como \emph{K-fold}. Ao final de todas as $K$ iterações, a média do erro obtido por cada estimador é usado como a medida de performance do classificador \citep{mostafa:12}.
+
+Alguns dos classificadores, que foram usados nos experimentos preliminares do capítulo \ref{cap:experimentos}, serão brevemente tratados nas seções \ref{sec:clasificadores_svm} e \ref{sec:clasificadores_knn}.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -731,12 +737,12 @@ As Máquinas de Vetores Suporte (SVM) constituem uma técnica de aprendizagem co
 
 Derivado do próprio nome da técnica, os vetores de suporte são as amostras do conjunto de treinamento que definem o hiperplano ótimo e são os padrões mais difíceis de classificar \citep{duda:12}. Intuitivamente, eles são os padrões mais relevantes para a tarefa de classificação, pois uma mudança nestes vetores implicam diretamente no resultado do hiperplano ótimo \footnote{O hiperplano de separação ótimo de uma SVM é aquele de uma classe de hiperplanos com a maior margem de separação entre os dois conjuntos de treinamento \citep{cortes:95}.}.
 
-Seja o conjunto de dados de treinamento com $n$ amostras da forma:
+Seja o conjunto de dados de treinamento com $N$ amostras da forma:
 \begin{equation}
 \label{eq:svm_dataset}
-    D = (x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)
+    D = (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)
 \end{equation}
-\noindent onde cada $x_i$ é um vetor $d$-dimensional da forma dada em \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, n$ e $y_i \in \{+1, -1\}$. Portanto, o conjunto de treinamento contém $n$ observações com suas respectivas classes.
+\noindent onde cada $x_i$ é um vetor $d$-dimensional da forma dada em \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$ e $y_i \in \{+1, -1\}$. Portanto, o conjunto de treinamento contém $N$ observações com suas respectivas classes.
 
 Assumindo que $D$ é linearmente separável, pode-se separar os dados por meio de um hiperplano usando usando um classificador, também linear, definido pela equação \citep{lorena:03}:
 \begin{equation}
@@ -780,7 +786,7 @@ Geometricamente, a distância entre os dois hiperplanos paralelos ao hiperplano 
 Em geral, a maioria dos problemas de classificação impedem que classificadores lineares sejam utilizados por não ser possível obter resultados satisfatórios na partição dos dados de treinamento por um hiperplano. Entretanto, as SVMs lineares podem ser estendidas para lidar com essa situação mapeando o espaço de entrada em um espaço de características de dimensão mais alta, tipicamente muito maior que o espaço original \citep{duda:12}, da forma:
 \begin{equation}
 \label{eq:svm_dataset_transformado}
-    D' = (\Phi(x_1), y_1), (\Phi(x_2), y_2), \ldots, (\Phi(x_n), y_n)
+    D' = (\Phi(x_1), y_1), (\Phi(x_2), y_2), \ldots, (\Phi(x_N), y_N)
 \end{equation}
 
 A escolha apropriada de uma função $\Phi$ torna o conjunto de treinamento linearmente separável no espaço transformado \citep{lorena:03}. A forma do hiperplano ótimo agora é definida por:
