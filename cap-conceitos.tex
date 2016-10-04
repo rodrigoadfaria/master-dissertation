@@ -696,7 +696,7 @@ Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de out
 \end{equation}
 \noindent onde $x \in X$ e $X$ é o espaço de entrada, ou seja, todos os $x$ vetores possíveis.
 
-O conjunto de dados é formado por $N$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é conjunto de classes, dependendo do lado da partição em que ele se encontra. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional.
+O conjunto de dados é formado por $N$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é um conjunto finito de classes que, no caso binário, é da forma $Y = \{+1, -1\}$. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional.
 
 \begin{figure}[h]
     \centering
@@ -742,9 +742,9 @@ Seja o conjunto de dados de treinamento com $N$ amostras da forma:
 \label{eq:svm_dataset}
     D = (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)
 \end{equation}
-\noindent onde cada $x_i$ é um vetor $d$-dimensional da forma dada em \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$ e $y_i \in \{+1, -1\}$. Portanto, o conjunto de treinamento contém $N$ observações com suas respectivas classes.
+\noindent onde cada $x_i$ é um vetor $d$-dimensional da forma dada em \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$, $y_i \in Y$ e $Y = \{+1, -1\}$. Portanto, o conjunto de treinamento contém $N$ observações com suas respectivas classes.
 
-Assumindo que $D$ é linearmente separável, pode-se separar os dados por meio de um hiperplano usando usando um classificador, também linear, definido pela equação \citep{lorena:03}:
+Assumindo que $D$ é linearmente separável, pode-se separar os dados por meio de um hiperplano usando um classificador, também linear, definido pela equação \citep{lorena:03}:
 \begin{equation}
 \label{eq:svm_hyperplano_otimo}
 w \cdot x + b = 0
@@ -769,6 +769,11 @@ Além disso, algumas restrições são definidas para evitar que não existam po
     w \cdot x_i + b \leq -1, & \text{se}\ y_i = -1
 \end{cases}
 \end{equation}
+\noindent ou, equivalentemente:
+\begin{equation}
+\label{eq:svm_hyperplanos_paralelos_restricoes_equiv}
+    y_i (w \cdot x_i + b) \geq 1
+\end{equation}
 
 Segundo \citet{campbell:00}, no sistema dado na equação \ref{eq:svm_hyperplanos_paralelos_restricoes}, supõe-se que a margem é sempre maior que a distância entre $w \cdot x + b = 0$ e $|w \cdot x + b = 1|$ e, por essa razão, SVMs desta natureza são usualmente denominadas de SVMs com margens rígidas. A figura~\ref{fig:svm_support_vectors} mostra a representação gráfica destes conceitos.
 
@@ -779,9 +784,46 @@ Segundo \citet{campbell:00}, no sistema dado na equação \ref{eq:svm_hyperplano
   \label{fig:svm_support_vectors}
 \end{figure}
 
-Geometricamente, a distância entre os dois hiperplanos paralelos ao hiperplano ótimo é $\ffrac{2}{||w||}$. Consequentemente, pode-se deduzir que a distância entre o hiperplano ótimo e $w \cdot x + b = \pm 1$ é $\ffrac{1}{||w||}$. Portanto, a minimização de $||w||$ maximiza a margem e, sendo assim, tem-se um problema de otimização no qual deseja-se minimizar a norma $||w||$ sujeito às restrições em \ref{eq:svm_hyperplanos_paralelos_restricoes} \citep{lorena:03}. Logo, $w$ e $b$ ótimos que resolvem este problema definem o classificador e podem ser obtidos por multiplicadores de Lagrange \citep{campbell:00}.
+Geometricamente, a distância entre os dois hiperplanos paralelos ao hiperplano ótimo é $\ffrac{2}{||w||}$. Consequentemente, pode-se deduzir que a distância entre o hiperplano ótimo e $w \cdot x + b = \pm 1$ é $\ffrac{1}{||w||}$. Portanto, a minimização de $||w||$ maximiza a margem e, sendo assim, tem-se um problema de otimização no qual deseja-se minimizar $||w||^2$ sujeito às restrições em \ref{eq:svm_hyperplanos_paralelos_restricoes_equiv} \citep{lorena:03}. Logo, $w$ e $b$ ótimos que resolvem este problema definem o classificador e podem ser obtidos por multiplicadores de Lagrange \citep{campbell:00}:
+\begin{equation}
+\label{eq:svm_margens_rigidas}
+\text{Maximizar: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j x_i\cdot x_j
+\end{equation}
 
-É importante ressaltar que este tipo de SVM tem êxito em conjuntos de dados de treinamento linearmente separáveis. Nos casos em que os dados são não linearmente separáveis, é admitida a ocorrência de alguns erros de classificação para o conjunto de treinamento, pela inclusão de variáveis de relaxamento \citep{lorena:03}. Essas alterações foram produzidas por \citet{cortes:95} e fazem parte de uma técnica denominada suavização de margens e, por conseguinte, SVMs dessa família também são chamadas de SVM com margens suaves.
+\begin{equation}
+\label{eq:svm_margens_rigidas_restricoes}
+\text{Sujeito a: }
+\begin{cases}
+    \alpha_i \geq 0\\[1em]
+    \sum_{i=1}^N \alpha_i y_i = 0
+\end{cases}
+\end{equation}
+\noindent onde $\alpha$ são os multiplicadores de Lagrange.
+
+É importante ressaltar que este tipo de SVM tem êxito em conjuntos de dados de treinamento linearmente separáveis. Nos casos em que os dados são não linearmente separáveis, é admitida a ocorrência de alguns erros de classificação para o conjunto de treinamento, pela inclusão de variáveis de relaxamento \citep{lorena:03}. Essas alterações foram produzidas por \citet{cortes:95} e fazem parte de uma técnica denominada suavização de margens e, por conseguinte, SVMs dessa família também são chamadas de SVM com margens suaves. Logo, o problema de otimização torna-se \citep{lorena:03}:
+\begin{equation}
+\label{eq:svm_margens_suaves_def}
+\text{Minimizar: } ||w||^2 + C\sum_{i=1}^N \xi_i
+\end{equation}
+
+\begin{equation}
+\label{eq:svm_margens_suaves_def_restricoes}
+\text{Sujeito a: }
+\begin{cases}
+    \xi_i \geq 0\\[1em]
+    y_i (w \cdot x_i + b) \geq 1 - \xi_i
+\end{cases}
+\end{equation}
+\noindent onde $C$ é uma constante de regularização determinada empiricamente que impõe um peso diferente para o treinamento em relação à generalização. Sendo assim, o problema pode ser resolvido da mesma maneira com a equação em \ref{eq:svm_margens_rigidas}, porém, com algumas alterações nas restrições \citep{lorena:03}:
+
+\begin{equation}
+\label{eq:svm_margens_suaves_restricoes}
+\text{Sujeito a: }
+\begin{cases}
+    0 \leq \alpha_i \leq C\\[1em]
+    \sum_{i=1}^N \alpha_i y_i = 0
+\end{cases}
+\end{equation}
 
 Em geral, a maioria dos problemas de classificação impedem que classificadores lineares sejam utilizados por não ser possível obter resultados satisfatórios na partição dos dados de treinamento por um hiperplano. Entretanto, as SVMs lineares podem ser estendidas para lidar com essa situação mapeando o espaço de entrada em um espaço de características de dimensão mais alta, tipicamente muito maior que o espaço original \citep{duda:12}, da forma:
 \begin{equation}
@@ -795,7 +837,14 @@ A escolha apropriada de uma função $\Phi$ torna o conjunto de treinamento line
 w \cdot \Phi(x) + b = 0
 \end{equation}
 
-Logo, os conceitos de vetores de suporte, margem, hiperplanos paralelos e, consequentemente, de problema de otimização para encontrar a solução para os parâmetros $w$ e $b$ se aplicam aqui de forma similar. Especificamente sobre a otimização, há a necessidade de se definir como o produto interno entre dois vetores quaisquer $x_i, x_j \in D$ é realizado, cuja resposta está na introdução do conceito de \emph{kernels} \citep{lorena:03}.
+Logo, os conceitos de vetores de suporte, margem, hiperplanos paralelos e, consequentemente, de problema de otimização para encontrar a solução para os parâmetros $w$ e $b$ se aplicam aqui de forma similar. Formalmente, o problema de otimização pode ser resolvido como \citep{lorena:03}:
+\begin{equation}
+\label{eq:svm_nao_linear}
+\text{Maximizar: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j \Phi(x_i)\cdot \Phi(x_j)
+\end{equation}
+\noindent sujeito às mesmas restrições definidas em \ref{eq:svm_margens_suaves_restricoes}.
+
+Agora, há a necessidade de se definir como o produto interno $\Phi(x_i)\cdot \Phi(x_j)$ entre dois vetores quaisquer $x_i, x_j \in D$ é realizado, cuja resposta está na introdução do conceito de \emph{kernels} \citep{lorena:03}.
 
 \emph{Kernels} são funções\index{\emph{kernel}!funções} que têm a finalidade de projetar os vetores de entrada num espaço de características com número de dimensões exponencial ou infinito \citep{taylor:04}, da forma:
 \begin{equation}
@@ -833,8 +882,60 @@ No \emph{kernel} RBF e polinomial, o parâmetro $\gamma$ pode ser visto como o i
 
 %% ------------------------------------------------------------------------- %%
 \subsection{\emph{k}-Vizinhos Mais Próximos}
-Texto texto texto
 \label{sec:clasificadores_knn}
+O $k$-Vizinhos Mais Próximos ($k$-NN) é um algoritmo baseado em instâncias, o que significa que a função alvo não é aprendida com base em amostras de treinamento; elas simplesmente são mantidas, de maneira que a relação entre uma nova amostra com as amostras de treinamento armazenadas é avaliada e uma função alvo é, então, atribuída a ela \citep{mitchell:97}.
+
+Como o próprio nome sugere, o $k$-NN classifica um novo ponto $x$ atribuindo-lhe a classe de maior frequência dentre as $k$ amostras mais próximas, ou seja, a decisão da classe de $x$ é feita por maioria de votos dos $k$ vizinhos mais próximos e, por essa razão, é interessante que a escolha de $k$ seja um número ímpar para evitar empates \citep{duda:12}.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.45\textwidth]{knn_exemplo}
+  \caption[Exemplo de aplicação do $k$-NN na tarefa de classificação em um espaço $2$-dimensional]{Exemplo de aplicação do k-NN na tarefa de classificação em um espaço $2$-dimensional. O algoritmo avalia as $k$ amostras próximas de $x$, criando uma região esférica, e rotula $x$ com a classe de maior frequência. Neste caso, $k = 5$ e a classe atribuída a $x$ deve ser a mesma dos pontos em preto. \textcolor{red}{Aqui também é interessante colocar as amostras de pele e não pele, talvez somente com duas características. Essa imagem é de \citep{duda:12}}}
+  \label{fig:knn_exemplo}
+\end{figure}
+
+Seja o conjunto de dados de treinamento com $N$ amostras da forma:
+\begin{equation}
+\label{eq:knn_dataset}
+    D = (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)
+\end{equation}
+\noindent onde cada $x_i$ é um vetor $d$-dimensional da forma dada em \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$, $y_i \in Y$ e $Y = \{+1, -1\}$. Portanto, o conjunto de treinamento contém $N$ observações com suas respectivas classes. Logo, a distância entre duas amostras $x_i$ e $x_j$ quaisquer pode ser obtida em termos da distância Euclidiana, definida como:
+
+\begin{equation}
+\label{eq:knn_distancia_euclidiana}
+d(x_i, x_j) = \sqrt{\sum_{r=1}^d (a_r(x_i) - a_r(x_j))^2}
+\end{equation}
+\noindent onde $a_r$ refere-se ao $r$-ésimo atributo do vetor de entrada $x$ e $i, j = 1, 2, \ldots, N$. Outras métricas de distância podem ser atribuídas a $d(x_i, x_j)$, tais como, Manhattan, Chebyshev e Minkowski \citep{duda:12}.
+
+Para, então, classificar uma nova amostra $x_q$, toma-se $x_1, \ldots, x_k$ instâncias do conjunto de treinamento, cujas distâncias dadas por \ref{eq:knn_distancia_euclidiana}, são dos $k$ pontos mais próximos de $x_q$. Sendo assim, a função que estima a classe de $x_q$ é dada por \citep{mitchell:97}:
+\begin{equation}
+\label{eq:knn_funcao_argmax}
+g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k \delta (y, f(x_i))
+\end{equation}
+\noindent onde
+\begin{equation}
+\label{eq:knn_delta}
+  \delta (y, f(x_i)) =  \begin{cases}
+                1, \quad \text{se}\ y = f(x_i) \\
+                0, \quad \text{caso contrário}
+              \end{cases}
+\end{equation}
+
+É importante ressaltar que $f(x_i)$ é conhecida, ou seja, é a classe da amostra $x_i$ do conjunto de treinamento.
+
+Uma variação óbvia da função dada na equação \ref{eq:knn_funcao_argmax} é a atribuição de pesos de cada um dos $k$ vizinhos, conforme sua distância, para um ponto $x_q$ sendo classificado \citep{mitchell:97}. Essa variação implica que pontos mais próximos de $x_q$ têm maior influência na sua rotulação. Formalmente, tem-se que \citep{mitchell:97}:
+\begin{equation}
+\label{eq:knn_funcao_argmax_pesos}
+g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k w_i \delta (y, f(x_i))
+\end{equation}
+\noindent onde
+\begin{equation}
+\label{eq:knn_funcao_peso}
+  w_i = \frac{1}{d(x_q, x_i)^2}
+\end{equation}
+
+No caso em que $d(x_q, x_i) = 0$, ou seja, $x_q$ e $x_i$ estão exatamente nas mesmas coordenadas, $g(x_q)$ pode assumir o mesmo valor de $f(x_i)$. Se há outras amostras de treinamento $x_i$ com a mesma característica, então $x_q$ pode assumir a classe da maioria delas \citep{mitchell:97}.
+
 
 %% ------------------------------------------------------------------------- %%
 \begin{comment}

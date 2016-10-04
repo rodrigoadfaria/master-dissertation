@@ -37,6 +37,7 @@
 \usepackage{verbatim}                    % para comentarios em blocos
 \usepackage{amsfonts}                    % casos de caracteres especiais
 \usepackage{enumitem}                    % enumeradores
+\usepackage{multirow}                    % mesclagem de linhas em tabelas
 \fontsize{60}{62}\usefont{OT1}{cmr}{m}{n}{\selectfont}
 
 % ---------------------------------------------------------------------------- %
@@ -71,6 +72,9 @@
 % Comandos personalizados
 % Frações com o tamanho pouco maiores
 \newcommand{\ffrac}[2]{\ensuremath{\frac{\displaystyle #1}{\displaystyle #2}}}
+% Funções argmin e argmax
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
 
 % ---------------------------------------------------------------------------- %
 % Opções de listing usados para o código fonte
@@ -343,8 +347,15 @@ text text text.
     $D'$        & Conjunto de dados transformado para o espaço de características\\
     $N$         & Cardinalidade do conjunto de dados\\
     $K$         & Número de partições do conjunto de dados na validação cruzada\\
+    $\alpha$    & Multiplicador de Lagrange\\
+    $\xi$       & Variável de relaxamento\\
+    $C$         & Constante de regularização\\
     $\Phi$      & Função de mapeamento do conjunto de dados de entrada\\
-    $\gamma$    & Parâmetro do \emph{kernel} polinomial ou RBF em uma SVM não linear
+    $\gamma$    & Parâmetro do \emph{kernel} polinomial ou RBF em uma SVM não linear\\
+    $d(x_i, x_j)$ & Função de distância entre dois vetores $x_i$ e $x_j$\\
+    $\argmax$   & Conjunto de argumentos que maximizam uma função objetivo\\
+    $\delta (y, f(x_i))$ & Função binária entre uma classe $y$ e a correspondência \\
+                & $f(x_i)$ de uma amostra de treinamento $x_i$ no $k$-NN
 \end{tabular}
 
 % ---------------------------------------------------------------------------- %

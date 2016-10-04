@@ -6,10 +6,10 @@ Texto texto texto texto texto texto texto texto texto texto texto texto texto.
 
 %------------------------------------------------------
 \section{Conjuntos de dados} 
-
+\label{sec:datasets_descricao}
 Para os experimentos foram utilizadas duas bases de dados distintas. A primeira delas, denominada UCI neste trabalho, foi proposta por \citet{uci-skin-dataset:12} e obtida no repositório de aprendizagem de máquina da Universidade da Califórnia em Irvine \citep{lichman:13}. A base é constituída por imagens de várias texturas de pele e não pele obtidas a partir de milhares de imagens arbitrárias de faces de diferentes idades, sexo e raças \citep{pal-texas:04, feret:96}.
 
-A UCI contém 245.057 amostras, compostas por 3 atributos que constituem o vetor de entradas $x = [x_1, x_2, x_3]$, $x \in \mathbb{R}^{d}$, sendo $d$ a dimensão do espaço, e que representam, respectivamente, os canais B (\textit{Blue}), G (\textit{Green}) e R (\textit{Red}) do modelo de cores RGB, além de uma quarta coluna que determina a classe a qual a amostra $x$ pertence, denotada por $y$, sendo $y \in Y$ e $Y = \{+1, -1\}$.
+A UCI contém 245.057 amostras, compostas por 3 atributos que constituem o vetor de entradas $x = [x_1, x_2, x_3]$, $x \in \mathbb{R}^{d}$, sendo $d$ a dimensão do espaço, e que representam, respectivamente, os canais azul (B), verde (G) e vermelho (R) do modelo de cores RGB, além de uma quarta coluna que determina a classe a qual a amostra $x$ pertence, denotada por $y$, sendo $y \in Y$ e $Y = \{+1, -1\}$.
 
 Em outras palavras, cada amostra é um pixel RGB com um determinado rótulo. Como tem-se os dados rotulados com exemplos de qual é a saída correta para uma dada entrada, os experimentos subsequentes são categorizados como sendo de aprendizado supervisionado \citep{mostafa:12}.
 
@@ -51,7 +51,7 @@ Uma vez que a dimensão do espaço do problema é $d = 3$, é possível plotar o
     \label{fig:dataset_uci}
 \end{figure}
 
-O segundo conjunto de dado utilizado nos experimentos foi proposto por \citet{sfa-skin-dataset:13}, intitulado pelos autores como banco de imagens de pele humana baseado no FERET e AR (SFA), cuja sigla também será utilizada neste trabalho. O SFA possui um conjunto de imagens de faces obtidas a partir de outros dois bancos de imagens coloridas: o FERET, criado por \citet{feret:96} e o AR, proposto por \citet{ar-face-database:98}, tendo sido utilizadas 876 e 242 imagens de cada um, respectivamente. É importante ressaltar que as imagens do AR têm fundo branco e pequenas variações de cor da pele e, portanto, o ambiente é mais controlado que as imagens do FERET \citep{sfa-skin-dataset:13}. A figura~\ref{fig:sfa_dataset_exemplo} mostra um exemplo das 1.118 imagens do banco.
+O segundo conjunto de dados utilizado nos experimentos foi proposto por \citet{sfa-skin-dataset:13}, intitulado pelos autores como banco de imagens de pele humana baseado no FERET e AR (SFA), cuja sigla também será utilizada neste trabalho. O SFA possui um conjunto de imagens de faces obtidas a partir de outros dois bancos de imagens coloridas: o FERET, criado por \citet{feret:96} e o AR, proposto por \citet{ar-face-database:98}, tendo sido utilizadas 876 e 242 imagens de cada um, respectivamente. É importante ressaltar que as imagens do AR têm fundo branco e pequenas variações de cor da pele e, portanto, o ambiente é mais controlado que as imagens do FERET \citep{sfa-skin-dataset:13}. A figura~\ref{fig:sfa_dataset_exemplo} mostra um exemplo das 1.118 imagens do banco.
 
 \begin{figure}[h]
     \centering
@@ -70,7 +70,7 @@ As amostras de pele e não pele foram geradas aleatoriamente considerando a más
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=.35\textwidth]{sfa-janelas}
+  \includegraphics[width=.3\textwidth]{sfa-janelas}
   \caption[Estrutura das janelas que formam as amostras do SFA]{Estrutura das janelas que formam as amostras do SFA. No total, são 3.354 amostras de pele e outras 5.590 de não pele para cada tamanho de janela. Fonte: \citet{sfa-skin-dataset:13}.}
   \label{fig:sfa_dataset_janelas}
 \end{figure}
@@ -88,3 +88,68 @@ A partir das amostras criadas no SFA, um conjunto de dados foi extraído gerando
     \caption[Visão 3-dimensional dos canais RGB do conjunto de dados SFA]{Visão 3-dimensional dos canais RGB do conjunto de dados SFA. Os pontos em azul são amostras de pele e os verdes de não pele. À esquerda tem-se todas as amostras do conjunto de dados gerado; à direita apenas as amostras de pele. Fonte: proposto pelo autor.}
     \label{fig:dataset_sfa}
 \end{figure}
+
+%------------------------------------------------------
+\section{Primeiro experimento}
+O primeiro experimento foi realizado com $k$-NN e SVM, disponíveis no pacote \emph{scikit-learn} \citep{scikit-learn:11}. O espaço de cores usado originalmente foi o RGB, como citado na descrição dos conjuntos de dados em \ref{sec:datasets_descricao}. Em ambos os casos, a estratégia escolhida de validação cruzada foi a \emph{10-fold}, que é uma escolha comum desta abordagem na prática \citep{mostafa:12}. Além disso, a técnica de tabela de busca\index{busca!tabela de} do \emph{scikit-learn} também foi utilizada com o objetivo de encontrar os parâmetros mais adequados para cada classificador.
+
+A tabela de busca é usada no \emph{scikit-learn} para encontrar os parâmetros ótimos de um classificador quando eles não podem ser aprendidos pelo estimador, tais como, \emph{kernel} e $\gamma$ na SVM ou número de vizinhos no $k$-NN \citep{scikit-learn:11}. As tabelas de parâmetros utilizadas no treinamento da SVM e $k$-NN podem ser vistas em \ref{tab:svm_tabela_busca} e \ref{tab:knn_tabela_busca}. Os parâmetros de cada linha são combinados na tentativa de encontrar o estimador ótimo. Por exemplo, uma escolha no treinamento da SVM seria \emph{kernel}=rbf, C=100, \emph{gamma}=1e-4. Todas as combinações possíveis são exploradas, sendo que a melhor delas é retornada \citep{scikit-learn:11}.
+
+\begin{table}[!htpb]
+\centering
+\begin{small} 
+\setlength{\tabcolsep}{10pt} 
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
+ \emph{\textbf{kernel}} & \multicolumn{4}{c|}{\textbf{C}} & \multicolumn{3}{c|}{\emph{\textbf{gamma}}} & \multicolumn{2}{c|}{\emph{\textbf{degree}}}\\ \cline{1-10}
+rbf    & 1 & 10 & 100 & 1000 & 1e-3 & 1e-4 & 1e-5 &   &   \\ \hline
+poly   & 1 & 10 & 100 & 1000 &      & 1e-4 & 1e-5 & 3 & 4 \\ \hline
+linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
+
+\end{tabular}
+\end{small}
+\caption[Tabela de busca dos parâmetros do estimador ótimo na SVM]{Tabela de busca dos parâmetros do estimador ótimo na SVM. A coluna kernel refere-se aos kernels usados no treinamento que são gaussiano, polinomial e linear, respectivamente. C é um parâmetro de regularização que diz à SVM a quantidade de erro admitido no treinamento. Gamma é um parâmetro usado somente nos kernels gaussiano e polinomial, conforme citado em \ref{sec:clasificadores_svm}. Degree é o grau do polinômio; usado somente no kernel polinomial \citep{scikit-learn:11}.}
+\label{tab:svm_tabela_busca}
+\end{table}
+
+\begin{table}[!htpb]
+\centering
+\begin{small} 
+\setlength{\tabcolsep}{8pt} 
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+ \multicolumn{10}{|c|}{\emph{\textbf{n\_neighbors}}} & \multicolumn{2}{c|}{\emph{\textbf{weights}}} & \multicolumn{1}{c|}{\emph{\textbf{algorithm}}}\\ \cline{1-13}
+3 & 5 & 9 & 15 & 25 & 50 & 100 & 200 & 400 & 800 & distance & uniform & auto \\ \hline
+
+\end{tabular} 
+\end{small}
+\caption[Tabela de busca dos parâmetros do estimador ótimo no $k$-NN]{Tabela de busca dos parâmetros do estimador ótimo no k-NN. A coluna n\_neighbors refere-se ao número de vizinhos considerado no treinamento. Weights é a função peso usada na predição, onde uniform indica que os pontos têm pesos iguais e distance indica que o inverso da distância é aplicado na classificação, conforme citado em \ref{eq:knn_funcao_peso}. A terceira coluna indica qual algoritmo deve ser utiizado; auto significa que o algoritmo será decidido com base nos dados \citep{scikit-learn:11}.}
+\label{tab:knn_tabela_busca}
+\end{table}
+
+Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_experimento_um}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
+\begin{table}[!htpb]
+\centering
+\begin{small} 
+\setlength{\tabcolsep}{8pt} 
+
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+ Base de dados & Classificador & Modelo de cores & \emph{Precision} & \emph{Recall} & \emph{F1-score} \\ \hline
+ \multirow{2}{*}{UCI} & $k$-NN & RGB & 1,00 & 1,00 & 1,00 \\ \cline{2-6}
+                      & SVM    & RGB & 0,98 & 0,98 & 0,98 \\ \hline
+ \multirow{2}{*}{SFA} & $k$-NN & RGB & 0,97 & 0,97 & 0,97 \\ \cline{2-6}
+                      & SVM    & RGB & \textcolor{red}{todo} && \\ \hline
+
+\end{tabular} 
+\end{small}
+\caption[Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA]{Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA. Os parâmetros ótimos do k-NN no treinamento com UCI foram n\_neighbors=3, weights=uniform e com SFA n\_neighbors=15, weights=uniform. Os parâmetros ótimos da SVM no treinamento com UCI foram \textcolor{red}{completar}.}
+\label{tab:resultados_experimento_um}
+\end{table}
+
+
+%------------------------------------------------------
+\section{Segundo experimento}
+
+
+%------------------------------------------------------
+\section{Terceiro experimento}
