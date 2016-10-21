@@ -97,8 +97,8 @@ A tabela de busca é usada no \emph{scikit-learn} para encontrar os parâmetros 
 
 \begin{table}[!htpb]
 \centering
-\begin{small} 
-\setlength{\tabcolsep}{10pt} 
+\begin{small}
+\setlength{\tabcolsep}{10pt}
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
  \emph{\textbf{kernel}} & \multicolumn{4}{c|}{\textbf{C}} & \multicolumn{3}{c|}{\emph{\textbf{gamma}}} & \multicolumn{2}{c|}{\emph{\textbf{degree}}}\\ \cline{1-10}
@@ -114,8 +114,8 @@ linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
 
 \begin{table}[!htpb]
 \centering
-\begin{small} 
-\setlength{\tabcolsep}{8pt} 
+\begin{small}
+\setlength{\tabcolsep}{8pt}
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
  \multicolumn{10}{|c|}{\emph{\textbf{n\_neighbors}}} & \multicolumn{2}{c|}{\emph{\textbf{weights}}} & \multicolumn{1}{c|}{\emph{\textbf{algorithm}}}\\ \cline{1-13}
@@ -130,8 +130,8 @@ linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
 Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_experimento_um}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
 \begin{table}[!htpb]
 \centering
-\begin{small} 
-\setlength{\tabcolsep}{8pt} 
+\begin{small}
+\setlength{\tabcolsep}{8pt}
 
 \begin{tabular}{|c|c|c|c|c|c|}\hline
  Base de dados & Classificador & Modelo de cores & \emph{Precision} & \emph{Recall} & \emph{F1-score} \\ \hline
@@ -140,7 +140,7 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
  \multirow{2}{*}{SFA} & $k$-NN & RGB & 0,97 & 0,97 & 0,97 \\ \cline{2-6}
                       & SVM    & RGB & \textcolor{red}{todo} && \\ \hline
 
-\end{tabular} 
+\end{tabular}
 \end{small}
 \caption[Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA]{Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA. Os parâmetros ótimos do k-NN no treinamento com UCI foram n\_neighbors=3, weights=uniform e com SFA n\_neighbors=15, weights=uniform. Os parâmetros ótimos da SVM no treinamento com UCI foram \textcolor{red}{completar}.}
 \label{tab:resultados_experimento_um}

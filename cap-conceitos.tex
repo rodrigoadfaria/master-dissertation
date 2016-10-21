@@ -38,14 +38,13 @@ Pioneiro na tentativa de organizar a percepção de cor em um espaço de cores, 
 
 O princípio da igualdade de espaçamento entre os componentes do modelo é a ideia principal do modelo de cores de Munsell \citep{konstantinos:00}. Esses componentes são matiz (\textit{hue}), luminosidade (\textit{value}) e saturação (\textit{chroma}).
 
-O modelo é representado por uma forma cilíndrica e pode ser visto na figura~\ref{fig:munsell-system}. O matiz está disposto no eixo circular que consiste de
-cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10.
+O modelo é representado por uma forma cilíndrica e pode ser visto na figura~\ref{fig:munsell-system}. O matiz está disposto no eixo circular que consiste de cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.55\textwidth]{munsell-system}
   % fonte https://commons.wikimedia.org/wiki/File:Munsell-system.svg
-  \caption{Modelo de cores de Munsell.}
+  \caption[Modelo de cores de Munsell.]{Modelo de cores de Munsell representado por uma forma cilíndrica. O matiz está disposto no eixo circular que consiste de cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10. Fonte: \citet{rus:07}.}
   \label{fig:munsell-system} 
 \end{figure}
 
@@ -80,11 +79,11 @@ As combinações de valores negativos e outros problemas relacionados à seleç�
   \centering
   \includegraphics[width=.5\textwidth]{cie-cromaticity-diagram}
   % fonte https://en.wikipedia.org/wiki/File:CIE1931xy_blank.svg
-  \caption{Diagrama de cromaticidade CIE 1931.}
+  \caption[Diagrama de cromaticidade CIE 1931]{Diagrama de cromaticidade CIE 1931. Os pontos que representam as cores puras no espectro eletromagnético são rotulados de acordo com os seus comprimentos de onda e estão localizados ao longo da curva que vai da extremidade direita do eixo $x$, correspondente à cor vermelha, até a extremidade esquerda do mesmo eixo, correspondente à cor violeta, formando um polígono parecido com uma ferradura. Os pontos internos correspondem a todas as combinações possíveis de cores visíveis. Fonte: \citet{ben:09}.}
   \label{fig:cie-cromaticity-diagram} 
 \end{figure}
 
-Os pontos que representam as cores puras no espectro eletromagnético são rotulados de acordo com os seus comprimentos de onda e estão localizados ao longo da curva que vai da extremidade direita do eixo $x$ correspondente à cor vermelha até a extremidade esquerda do mesmo eixo correspondente à cor violeta, formando um polígono parecido com uma ferradura. Os pontos internos correspondem a todas as combinações possíveis de cores visíveis. As coordenadas $(x = 1/3, y = 1/3)$ correspondem à localização da luz branca, também conhecida como ponto branco, e servem de referência no processo de captura de imagem, codificação ou reprodução.
+As coordenadas $(x = 1/3, y = 1/3)$ correspondem à localização da luz branca, também conhecida como ponto branco, e servem de referência no processo de captura de imagem, codificação ou reprodução.
 
 O CIE também derivou e padronizou outros dois modelos de cores a partir da especificação do CIE XYZ e, da mesma maneira, são independente de dispositivo. Ambos são perceptualmente uniformes, ou seja, distâncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espaço deve permitir uma transição suave entre o preto e o branco.
 
@@ -107,11 +106,9 @@ através do cubo unitário definido sobre os eixos R, G e B, como ilustrado na f
   \centering
   \includegraphics[width=.35\textwidth]{rgb-cube}
   % http://www.scratchapixel.com/old/lessons/3d-basic-lessons/lesson-5-colors-and-digital-images/color-spaces/
-  \caption{Cubo unitário representando as cores do modelo RGB.}
+  \caption[Cubo unitário representando as cores do modelo RGB]{Cubo unitário representando as cores do modelo RGB. A origem, dada pelo vértice $(0, 0, 0)$, representa a cor preta. Já o vértice $(1, 1, 1)$, oposto à origem, representa a cor branca. Os vértices destacados sobre os eixos representam as cores primárias e os demais são o complemento de cada uma delas. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla $(r, g, b)$, onde $r, g, b \in [0, 1]$. Os tons de cinza são representados ao longo da diagonal principal do cubo, sendo que cada ponto ao longo dessa diagonal é formado por contribuições iguais de cada primária. Fonte: adaptado de \citet{gonzalez:02}.}
   \label{fig:rgb-cube} 
 \end{figure}
-
-A origem, dada pelo vértice $(0, 0, 0)$, representa a cor preta. Já o vértice $(1, 1, 1)$, oposto à origem, representa a cor branca. Os vértices destacados sobre os eixos representam as cores primárias e os demais são o complemento de cada uma delas. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla $(r, g, b)$, onde $r, g, b \in [0, 1]$. Os tons de cinza são representados ao longo da diagonal principal do cubo, sendo que cada ponto ao longo dessa diagonal é formado por contribuições iguais de cada primária.
 
 Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não linear. O sistema supra citado mostra o modelo não linear, cuja sigla é $R'G'B'$, e é o mais utilizado por dispositivos e aplicações pela sua similaridade com o sistema visual humano. Na literatura, esse sistema é frequentemente citado com a sigla RGB, o que torna a nomenclatura dúbia, uma vez que o modelo linear também é denominado RGB e, portanto, a conversão entre os espaços de cores deve ser feita com certa cautela. Também é importante citar que os valores RGB lineares são raramente utilizados para representar uma imagem já que são, perceptualmente, altamente não uniformes \citep{konstantinos:00}.
 
@@ -148,9 +145,17 @@ ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primária
   \end{bmatrix}
 \end{equation}
 
-Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas.
+Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas. A figura \ref{fig:cmy-model} mostra como os componentes do modelo são combinados para gerar as demais cores.
 
-A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar esse efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra $K$, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.25\textwidth]{cmy-model}
+  % https://en.wikipedia.org/wiki/File:SubtractiveColor.svg
+  \caption[Modelo de cores subtrativo CMY]{Modelo de cores subtrativo CMY. É interessante observar que a intersecção de amarelo com magenta gera a cor vermelha, magenta com ciano gera a cor azul e ciano com amarelo gera a cor verde. Fonte: \citet{rus:08}.}
+  \label{fig:cmy-model} 
+\end{figure}
+
+A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar esse efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra K, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Modelo de cores da família YUV}\index{cores!modelos da família YUV}
@@ -224,11 +229,9 @@ Nesse modelo, assim como no YIQ, a intensidade dada pelo componente I é decompo
   \centering
   \includegraphics[width=.6\textwidth]{hsi-model}
   % http://www.blackice.com/images/HSIColorModel.jpg
-  \caption{Representação gráfica do modelo HSI.}
+  \caption[Representação gráfica do modelo HSI]{Representação gráfica do modelo HSI. O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade está entre $[0, 1]$, onde 0 significa preto e 1, branco.}
   \label{fig:hsi-model} 
 \end{figure}
-
-O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade é entre $[0, 1]$, onde 0 significa preto e 1, branco.
 
 A transformação dos componentes do espaço RGB para HSI é dada pelas equações:
 \begin{align}
@@ -431,7 +434,7 @@ A figura~\ref{fig:fuzzy_definitions} mostra graficamente algumas das propriedade
   \centering
   \includegraphics[width=1\textwidth]{fuzzy_definitions}
   % source MIT class notes
-  \caption{Representação gráfica das principais propriedades dos conjuntos fuzzy. Detalhar melhor e corrigir a imagem.}
+  \caption{Representação gráfica das principais propriedades dos conjuntos fuzzy. \textcolor{red}{Detalhar melhor e corrigir a imagem.}}
   \label{fig:fuzzy_definitions} 
 \end{figure}
 
@@ -439,7 +442,7 @@ A figura~\ref{fig:fuzzy_definitions} mostra graficamente algumas das propriedade
 \subsection{Operações entre conjuntos \emph{fuzzy}}\index{fuzzy!operações entre conjuntos}
 \label{sec:operacoes_conjuntos_fuzzy}
 
-Assim como na teoria de conjuntos clássica, há basicamente três operações que podem ser estendidas aos conjuntos \emph{fuzzy}. Essas operações são a união, a intersecção e o complemento, sendo representadas pelos operadores lógicos de conjunção (\textbf{OU}), disjunção (\textbf{E}) e complemento (\textbf{NÃO}), respectivamente. As operações básicas formam o que é conhecido como \textbf{operações padrão em conjuntos \emph{fuzzy}} \citep{klir:95}.
+Assim como na teoria de conjuntos clássica, há basicamente três operações que podem ser estendidas aos conjuntos \emph{fuzzy}. Essas operações são a união, a intersecção e o complemento, sendo representadas pelos operadores lógicos de conjunção (\textbf{OU}), disjunção (\textbf{E}) e complemento (\textbf{NÃO}), respectivamente. As operações básicas formam o que é conhecido como operações padrão em conjuntos \emph{fuzzy} \citep{klir:95}.
 
 Tais operações são realizadas sobre suas respectivas funções de pertinência e há muitas formalizações matemáticas possíveis para os operadores que representam-nas. O par de operadores mais amplamente utilizado é o operador de mínimo ($min$) e máximo ($max$), que são semelhantes aos operadores produto e soma da álgebra elementar e utilizados para expressar a conjunção e disjunção, respectivamente \citep{thole:79}.
 
