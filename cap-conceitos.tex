@@ -152,7 +152,7 @@ Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente uti
   \includegraphics[width=.25\textwidth]{cmy-model}
   % https://en.wikipedia.org/wiki/File:SubtractiveColor.svg
   \caption[Modelo de cores subtrativo CMY]{Modelo de cores subtrativo CMY. É interessante observar que a intersecção de amarelo com magenta gera a cor vermelha, magenta com ciano gera a cor azul e ciano com amarelo gera a cor verde. Fonte: \citet{rus:08}.}
-  \label{fig:cmy-model} 
+  \label{fig:cmy-model}
 \end{figure}
 
 A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar esse efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra K, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
@@ -317,7 +317,7 @@ Claramente, a resposta a ser obtida quando da análise de possibilidades desse t
 
 O conceito de incerteza mudou gradativamente na ciência e na matemática. Na ciência, esta mudança foi manifestada por uma transição gradual da visão tradicional, que insiste que a incerteza é indesejável e, por esta razão, ela deve ser evitada por todos os meios possíveis, para uma visão alternativa, que é tolerante à incerteza. De acordo com a visão tradicional, a ciência deve esforçar-se de certeza em todas as suas manifestações, ou seja, com precisão, especificidade, nitidez, consistência e, por conseguinte, a incerteza é considerada como não científica. De acordo com a visão alternativa, a dúvida é considerada essencial para a ciência; não é só uma praga inevitável, mas tem, de fato, uma grande utilidade \citep{klir:95}.
 
-E com base na ideia moderna de que a incerteza é algo útil na ciência é que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos dá-se sob a ótica de que os limites entre eles não são precisos e, portanto, é possível estabelecer funções que forneçam um certo \textbf{grau de pertinência}\index{pertinência!grau de} de um elemento a um dado conjunto \citep{zadeh:65}.
+E com base na ideia moderna de que a incerteza é algo útil na ciência é que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos dá-se sob a ótica de que os limites entre eles não são precisos e, portanto, é possível estabelecer funções que forneçam um certo grau de pertinência\index{pertinência!grau de} de um elemento a um dado conjunto \citep{zadeh:65}.
 
 A capacidade de conjuntos \emph{fuzzy} expressarem transições graduais de pertinência e não pertinência tem uma grande utilidade. Ela fornece não só uma representação significativa e poderosa da medida de incerteza, mas também uma forma de expressar conceitos vagos em linguagem natural \citep{klir:95}. Voltando ao exemplo do conjunto de pessoas altas, em vez de descrever a altura de uma pessoa com exatidão em metros ou centímetros, pode-se apenas dizer que ela é alta, baixa ou mediana. Cada um desses conjuntos pode ser um conjunto \emph{fuzzy}, onde um valor 1 é atribuído a um membro que está totalmente incluído em um deles, ou 0 caso contrário. Valores intermediários nessa escala indicam que o elemento está parcialmente em um dos conjuntos.
 
@@ -688,13 +688,13 @@ A aprendizagem de máquina é uma área que está preocupada com o desenvolvimen
 
 Como exemplo, ao mostrar a imagem de uma árvore para uma criança de três anos de idade, muito provavelmente ela saberá reconhecê-la, pois deve ter sido exposta a situações em que tenha visto imagens semelhantes e, sendo assim, foi treinada para dar tal resposta. Logo, ela aprendeu o que é uma árvore apenas olhando para elas, não necessariamente por meio de definições matemáticas precisas. Em outras palavras, o aprendizado foi feito com base em dados que, muitas vezes, são utilizados para obter-se soluções empíricas para determinados problemas onde não há a possibilidade de se criar uma solução analítica \citep{mostafa:12}.
 
-Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de outros objetos com base em um conjunto de dados que possui descrições sobre as árvores, tais como, altura, cores, espessura, comprimento, etc. Tais descrições também são chamadas de propriedades ou características e são submetidas a um classificador que avalia as evidências apresentadas e toma uma decisão sobre o objeto sendo analisado \citep{duda:12}. Essa tarefa começa com a definição de um vetor de características em um espaço $d$-dimensional, da forma \citep{duda:12}:
+Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de outros objetos com base em um conjunto de dados que possui descrições sobre as árvores, tais como, altura, cores, espessura, comprimento, etc. Tais descrições também são chamadas de atributos, propriedades ou características e são submetidas a um classificador que avalia as evidências apresentadas e toma uma decisão sobre o objeto sendo analisado \citep{duda:12}. Essa tarefa começa com a definição de um vetor de características em um espaço $d$-dimensional, da forma \citep{duda:12}:
 
 \begin{equation}
 \label{eq:vetor_caracteristicas}
   x = 
   \begin{bmatrix}
-    x_1 \\ x_2 \\ \vdots \\ x_d
+    a_1 \\ a_2 \\ \vdots \\ a_d
   \end{bmatrix}
 \end{equation}
 \noindent onde $x \in X$ e $X$ é o espaço de entrada, ou seja, todos os $x$ vetores possíveis.
@@ -897,12 +897,7 @@ Como o próprio nome sugere, o $k$-NN classifica um novo ponto $x$ atribuindo-lh
   \label{fig:knn_exemplo}
 \end{figure}
 
-Seja o conjunto de dados de treinamento com $N$ amostras da forma:
-\begin{equation}
-\label{eq:knn_dataset}
-    D = (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)
-\end{equation}
-\noindent onde cada $x_i$ é um vetor $d$-dimensional da forma dada em \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$, $y_i \in Y$ e $Y = \{+1, -1\}$. Portanto, o conjunto de treinamento contém $N$ observações com suas respectivas classes. Logo, a distância entre duas amostras $x_i$ e $x_j$ quaisquer pode ser obtida em termos da distância Euclidiana, definida como:
+Seja $D$ o conjunto de dados de treinamento com $N$ amostras da forma apresentada em \ref{eq:svm_dataset}. Logo, a distância entre duas amostras $x_i$ e $x_j$ quaisquer pode ser obtida em termos da distância Euclidiana, definida como:
 
 \begin{equation}
 \label{eq:knn_distancia_euclidiana}
@@ -938,6 +933,33 @@ g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k w_i \delta (y, f(x_i))
 \end{equation}
 
 No caso em que $d(x_q, x_i) = 0$, ou seja, $x_q$ e $x_i$ estão exatamente nas mesmas coordenadas, $g(x_q)$ pode assumir o mesmo valor de $f(x_i)$. Se há outras amostras de treinamento $x_i$ com a mesma característica, então $x_q$ pode assumir a classe da maioria delas \citep{mitchell:97}.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Árvores de Decisão}
+\label{sec:clasificadores_arvores_decisao}
+Árvore de decisão é um método para aproximação de funções alvo discretas, nas quais a função aprendida é representada por uma árvore de decisão ou, ainda, por um conjunto de regras do tipo \emph{Se-Então} que são de fácil interpretação. É uma das técnicas de aprendizagem mais populares de inferência indutiva\footnote{A tarefa de indução é desenvolver uma regra de classificação que pode determinar a classe de qualquer objeto a partir dos valores de seus atributos \citep{quinlan:86}.} \citep{mitchell:97}.
+
+As amostras de um conjunto de dados são classificadas por uma árvore de decisão por um processo iterativo onde um atributo (nó) é escolhido como raiz até algum nó folha, onde a classe é atribuída à amostra. Cada ramo partindo de um nó representa um dos valores possíveis de um dado atributo \citep{mitchell:97}.
+
+Há uma família de algoritmos de árvore de decisão. Um deles é o Divisor Iterativo 3 (ID3) proposto por \citet{quinlan:86}. O ID3 avalia cada atributo através de um teste estatístico para determinar o quão bem ele, por si só, classifica as amostras de treinamento. O melhor atributo é selecionado como o nó raiz da árvore. Um ramo descendente do nó raiz é criado para cada valor possível deste atributo e as amostras de treinamento são classificadas para o nó descendente adequado. Este processo é então repetido recursivamente utilizando as amostras associadas a cada nó descendente. Esse é um algoritmo de busca guloso, já que ele não retrocede para reconsiderar escolhas anteriores \citep{mitchell:97}. O algoritmo para quando o subconjunto de amostras associado a um nó é da mesma classe ou quando não há relevância estatística para uma nova partição \citep{quinlan:86}.
+
+Para medir a impureza de uma partição, o ID3 usa o conceito de entropia, formalmente \citep{quinlan:86}:
+
+\begin{equation}
+\label{eq:arvore_devisao_entropia}
+H(D) = - y_\oplus log_2 y_\oplus - y_\ominus log_2 y_\ominus
+\end{equation}
+\noindent onde $D$ é o conjunto de dados de treinamento com $N$ amostras da forma apresentada em \ref{eq:svm_dataset}, $y_\oplus$ e $y_\ominus$ é a proporção de amostras positivas e negativas de $D$, respectivamente. É importante notar que a entropia é 0 quando todas as amostras de $D$ pertencem à mesma classe, 1 quando $D$ contém um número igual de amostras positivas e negativas e um valor entre 0 e 1 nos demais casos \citep{mitchell:97}.
+
+Dada a entropia como uma medida de impureza de um conjunto de amostras de treinamento, pode-se definir o teste estatístico, conhecido como ganho de informação, que mede a efetividade de um atributo na classificação dos dados de treinamento, formalmente \citep{quinlan:86}:
+\begin{equation}
+\label{eq:arvore_devisao_ganho_informacao}
+IG(D, a_r) = H(D) - \sum_{v \in V(a_r)} \frac{|D_v|}{|D|} H(D_v)
+\end{equation}
+\noindent onde $V(a_r)$ é o conjunto de todos os possíveis valores do atributo $a_r$, $D_v$ é o subconjunto de $D$ no qual o atributo $a_r$ tem o valor $v$.
+
+Vale enfatizar que o primeiro termo da equação dado em \ref{eq:arvore_devisao_ganho_informacao} é a entropia do conjunto original $D$ e o segundo termo é o valor esperado da entropia depois que $D$ é particionado usando o atributo $a_r$ \citep{mitchell:97}. Outro aspecto importante é que o algoritmo inicia com o conjunto $D$ original, que é substituído por $D_v$ à medida que a recursão se aprofunda.
 
 
 %% ------------------------------------------------------------------------- %%
