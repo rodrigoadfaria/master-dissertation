@@ -5,7 +5,7 @@
 {\color{red} Fazer uma breve introdução aqui.}
 
 %% ------------------------------------------------------------------------- %%
-\section{Modelos de Cores}\index{cores!modelos de}
+\section{Modelos de cores}\index{cores!modelos de}
 \label{sec:fundamentos}
 
 O uso de imagens coloridas em visão computacional ou no processamento de imagens pode ser motivado por dois fatores principais. O primeiro diz respeito a característica poderosa da cor de funcionar como um descritor que, frequentemente, simplifica a identificação e extração de um objeto em uma cena. O segundo está relacionado com a capacidade dos seres humanos de discernir milhares de tonalidades e intensidades, se comparado com apenas algumas dúzias de níveis de cinza \citep{gonzalez:02}.
@@ -734,7 +734,7 @@ Alguns dos classificadores, que foram usados nos experimentos preliminares do ca
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Máquinas de Vetores Suporte}
+\subsection{Máquinas de vetores suporte}
 \label{sec:clasificadores_svm}
 As Máquinas de Vetores Suporte (SVM) constituem uma técnica de aprendizagem computacional baseada na Teoria de Aprendizado Estatístico \citep{vapnik:13}, cujo objetivo era de resolver problemas de classificação de padrões. Na prática, uma SVM tem a habilidade de gerar um hiperplano ou conjunto de hiperplanos num espaço de alta ou infinita dimensionalidade, que pode ser usado para tarefas de classificação, regressão ou outras \citep{duda:12}.
 
@@ -884,7 +884,7 @@ Também conhecido como Função de Base Radial (RBF), o \emph{kernel} gaussiano 
 No \emph{kernel} RBF e polinomial, o parâmetro $\gamma$ pode ser visto como o inverso do raio de influência das amostras selecionadas pelo modelo como vetores de suporte \citep{scikit-learn:11}.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{\emph{k}-Vizinhos Mais Próximos}
+\subsection{\emph{k}-vizinhos mais próximos}
 \label{sec:clasificadores_knn}
 O $k$-Vizinhos Mais Próximos ($k$-NN) é um algoritmo baseado em instâncias, o que significa que a função alvo não é aprendida com base em amostras de treinamento; elas simplesmente são mantidas, de maneira que a relação entre uma nova amostra com as amostras de treinamento armazenadas é avaliada e uma função alvo é, então, atribuída a ela \citep{mitchell:97}.
 
@@ -936,7 +936,7 @@ No caso em que $d(x_q, x_i) = 0$, ou seja, $x_q$ e $x_i$ estão exatamente nas m
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Árvores de Decisão}
+\subsection{Árvores de decisão}
 \label{sec:clasificadores_arvores_decisao}
 Árvore de decisão é um método para aproximação de funções alvo discretas, nas quais a função aprendida é representada por uma árvore de decisão ou, ainda, por um conjunto de regras do tipo \emph{Se-Então} que são de fácil interpretação. É uma das técnicas de aprendizagem mais populares de inferência indutiva\footnote{A tarefa de indução é desenvolver uma regra de classificação que pode determinar a classe de qualquer objeto a partir dos valores de seus atributos \citep{quinlan:86}.} \citep{mitchell:97}.
 
@@ -960,6 +960,8 @@ IG(D, a_r) = H(D) - \sum_{v \in V(a_r)} \frac{|D_v|}{|D|} H(D_v)
 \noindent onde $V(a_r)$ é o conjunto de todos os possíveis valores do atributo $a_r$, $D_v$ é o subconjunto de $D$ no qual o atributo $a_r$ tem o valor $v$.
 
 Vale enfatizar que o primeiro termo da equação dado em \ref{eq:arvore_devisao_ganho_informacao} é a entropia do conjunto original $D$ e o segundo termo é o valor esperado da entropia depois que $D$ é particionado usando o atributo $a_r$ \citep{mitchell:97}. Outro aspecto importante é que o algoritmo inicia com o conjunto $D$ original, que é substituído por $D_v$ à medida que a recursão se aprofunda.
+
+Batizado de C4.5, \citet{quinlan:93} estendeu o ID3 para possibilitar o uso de atributos contínuos, atributos com dados ausentes e melhoria na eficiência computacional. Além disso, essa versão cuida de questões como quão profunda a árvore deve ser para evitar que os dados de treinamento sejam perfeitamente classificados, ou seja, quando o conjunto de treinamento é particionado até que cada subconjunto contenha apenas amostras de uma única classe. A estratégia adotada por \citet{quinlan:93} foi podar a árvore posteriormente à geração da árvore ajustada. Esse processo, apesar de ser mais lento que a proposta anterior do ID3, tornou o algoritmo mais confiável e com maior capacidade de generalização.
 
 
 %% ------------------------------------------------------------------------- %%
