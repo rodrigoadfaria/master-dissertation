@@ -2,7 +2,7 @@
 \chapter{Experimentos Preliminares}
 \label{cap:experimentos}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto.
+Uma série de experimentos foram realizados com dois conjuntos de dados de pele de seres humanos. Os classificadores utilizados foram SVM, $k$-NN e a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. Outro aspecto estudado é o efeito da escolha do modelo de cores no classificador. A formação dos conjuntos de dados é detalhada na seção \ref{sec:datasets_descricao} e os resultados dos experimentos podem ser vistos nas seções \ref{sec:experimento_um}, \ref{sec:experimento_dois} e \ref{sec:experimento_tres}.
 
 %------------------------------------------------------
 \section{Conjuntos de dados} 
@@ -91,6 +91,7 @@ A partir das amostras criadas no SFA, um conjunto de dados foi extraído gerando
 
 %------------------------------------------------------
 \section{Primeiro experimento}
+\label{sec:experimento_um}
 O primeiro experimento foi realizado com $k$-NN e SVM, disponíveis no pacote \emph{scikit-learn} \citep{scikit-learn:11}. O espaço de cores usado originalmente foi o RGB, como citado na descrição dos conjuntos de dados em \ref{sec:datasets_descricao}. Em ambos os casos, a estratégia escolhida de validação cruzada foi a \emph{10-fold}, que é uma escolha comum desta abordagem na prática \citep{mostafa:12}. Além disso, a técnica de tabela de busca\index{busca!tabela de} do \emph{scikit-learn} também foi utilizada com o objetivo de encontrar os parâmetros mais adequados para cada classificador.
 
 A tabela de busca é usada no \emph{scikit-learn} para encontrar os parâmetros ótimos de um classificador quando eles não podem ser aprendidos pelo estimador, tais como, \emph{kernel} e $\gamma$ na SVM ou número de vizinhos no $k$-NN \citep{scikit-learn:11}. As tabelas de parâmetros utilizadas no treinamento da SVM e $k$-NN podem ser vistas em \ref{tab:svm_tabela_busca} e \ref{tab:knn_tabela_busca}. Os parâmetros de cada linha são combinados na tentativa de encontrar o estimador ótimo. Por exemplo, uma escolha no treinamento da SVM seria \emph{kernel}=rbf, C=100, \emph{gamma}=1e-4. Todas as combinações possíveis são exploradas, sendo que a melhor delas é retornada \citep{scikit-learn:11}.
@@ -149,7 +150,39 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
 
 %------------------------------------------------------
 \section{Segundo experimento}
+\label{sec:experimento_dois}
+Este experimento, de maneira similar ao realizado na seção \ref{sec:experimento_um}, também foi realizado com $k$-NN e SVM. Porém, os conjuntos de dados SFA foram transformados para espaços de cores HSV, Lab e YCbCr com o objetivo de entender a influência nos resultados. Para esses modelos de cores, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado. Novamente, a estratégia escolhida de validação cruzada foi a \emph{10-fold}.
+
+Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
+\begin{table}[!htpb]
+\centering
+\begin{small}
+\setlength{\tabcolsep}{8pt}
+
+\begin{tabular}{|c|c|c|c|c|}\hline
+ Modelo de cores & Classificador & \emph{Precision} & \emph{Recall} & \emph{F1-score} \\ \hline
+ \multirow{2}{*}{RGB}   & $k$-NN  & 1,00 & 1,00 & 1,00 \\ \cline{2-5}
+                        & SVM     & 0,98 & 0,98 & 0,98 \\ \hline
+ \multirow{2}{*}{HSV}   & $k$-NN  & \textcolor{red}{todo} && \\ \cline{2-5}
+                        & SVM     & \textcolor{red}{todo} && \\ \hline
+ \multirow{2}{*}{HS}    & $k$-NN  & \textcolor{red}{todo} && \\ \cline{2-5}
+                        & SVM     & \textcolor{red}{todo} && \\ \hline
+ \multirow{2}{*}{Lab}   & $k$-NN  & \textcolor{red}{todo} && \\ \cline{2-5}
+                        & SVM     & \textcolor{red}{todo} && \\ \hline
+ \multirow{2}{*}{ab}    & $k$-NN  & \textcolor{red}{todo} && \\ \cline{2-5}
+                        & SVM     & \textcolor{red}{todo} && \\ \hline
+ \multirow{2}{*}{YCbCr} & $k$-NN  & \textcolor{red}{todo} && \\ \cline{2-5}
+                        & SVM     & \textcolor{red}{todo} && \\ \hline
+ \multirow{2}{*}{CbCr}  & $k$-NN  & \textcolor{red}{todo} && \\ \cline{2-5}
+                        & SVM     & \textcolor{red}{todo} && \\ \hline
+
+\end{tabular}
+\end{small}
+\caption[Resultados dos experimentos com $k$-NN e SVM no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com $k$-NN e SVM no conjunto de dados SFA em espaços de cores distintos. As linhas com os modelos de cores HS, ab e CbCr indicam que o componente de luminância não foi utilizado no treinamento.}
+\label{tab:resultados_experimento_dois}
+\end{table}
 
 
 %------------------------------------------------------
 \section{Terceiro experimento}
+\label{sec:experimento_tres}
