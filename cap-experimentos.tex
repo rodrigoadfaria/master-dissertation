@@ -151,7 +151,7 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
 %------------------------------------------------------
 \section{Segundo experimento}
 \label{sec:experimento_dois}
-Este experimento, de maneira similar ao realizado na seção \ref{sec:experimento_um}, também foi realizado com $k$-NN e SVM. Porém, os conjuntos de dados SFA foram transformados para espaços de cores HSV, Lab e YCbCr com o objetivo de entender a influência nos resultados. Para esses modelos de cores, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado. Novamente, a estratégia escolhida de validação cruzada foi a \emph{10-fold}.
+Este experimento, de maneira similar ao realizado na seção \ref{sec:experimento_um}, também foi realizado com $k$-NN e SVM. Porém, os conjuntos de dados SFA foram transformados para os espaços de cor HSV, Lab e YCbCr com o objetivo de compreender a influência nos resultados. Além disso, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado. Novamente, a estratégia escolhida de validação cruzada foi a \emph{10-fold}.
 
 Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
 \begin{table}[!htpb]
@@ -186,3 +186,25 @@ Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. 
 %------------------------------------------------------
 \section{Terceiro experimento}
 \label{sec:experimento_tres}
+O último experimento foi realizado com a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. Os conjuntos de dados SFA transformados para os espaços de cor HSV, Lab e YCbCr também foram aplicados aqui. Além disso, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado.
+
+\begin{table}[!htpb]
+\centering
+\begin{small}
+\setlength{\tabcolsep}{8pt}
+
+\begin{tabular}{|c|c|c|}\hline
+ Modelo de cores & Taxa de erro & Desvio padrão \\ \hline
+ RGB   & \textcolor{red}{todo} & \\ \hline
+ HSV   & \textcolor{red}{todo} & \\ \hline
+ HS    & \textcolor{red}{todo} & \\ \hline
+ Lab   & \textcolor{red}{todo} & \\ \hline
+ ab    & \textcolor{red}{todo} & \\ \hline
+ YCbCr & \textcolor{red}{todo} & \\ \hline
+ CbCr  & \textcolor{red}{todo} & \\ \hline
+
+\end{tabular}
+\end{small}
+\caption[Resultados dos experimentos com árvore de decisão \emph{fuzzy} no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com árvore de decisão \emph{fuzzy} no conjunto de dados SFA em espaços de cores distintos. As linhas com os modelos de cores HS, ab e CbCr indicam que o componente de luminância não foi utilizado no treinamento.}
+\label{tab:resultados_experimento_tres}
+\end{table}
