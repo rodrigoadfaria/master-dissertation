@@ -151,7 +151,7 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
 %------------------------------------------------------
 \section{Segundo experimento}
 \label{sec:experimento_dois}
-Este experimento, de maneira similar ao realizado na seção \ref{sec:experimento_um}, também foi realizado com $k$-NN e SVM. Porém, os conjuntos de dados SFA foram transformados para os espaços de cor HSV, Lab e YCbCr com o objetivo de compreender a influência nos resultados. Além disso, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado. Novamente, a estratégia escolhida de validação cruzada foi a \emph{10-fold}.
+Este experimento, de maneira similar ao realizado na seção \ref{sec:experimento_um}, também foi realizado com $k$-NN e SVM. Porém, o conjunto de dados SFA foi transformado para os espaços de cor HSV, Lab e YCbCr com o objetivo de compreender a influência nos resultados. Além disso, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado. Novamente, a estratégia escolhida de validação cruzada foi a \emph{10-fold}.
 
 Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
 \begin{table}[!htpb]
@@ -186,7 +186,10 @@ Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. 
 %------------------------------------------------------
 \section{Terceiro experimento}
 \label{sec:experimento_tres}
-O último experimento foi realizado com a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. Os conjuntos de dados SFA transformados para os espaços de cor HSV, Lab e YCbCr também foram aplicados aqui. Além disso, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado.
+O último experimento foi realizado com a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. O conjunto de dados SFA transformado para os espaços de cor HSV, Lab e YCbCr também foi aplicado aqui. Além disso, há um parâmetro que define o nível de confiança que deve ser aplicado no processo de poda da árvore. Esse parâmetro foi mantido em 25\%, o padrão dado pelo algoritmo.
+
+Conforme citado na seção \ref{sec:trabalhos_relacionados}, há quatro maneiras de determinar quantos serão os conjuntos \emph{fuzzy} por atributo. \textcolor{red}{completar}. A tabela \ref{tab:resultados_experimento_tres} mostra os resultados com a taxa de erro em cada conjunto de dados para o respectivo espaço de cor.
+
 
 \begin{table}[!htpb]
 \centering
@@ -195,16 +198,38 @@ O último experimento foi realizado com a árvore de decisão \emph{fuzzy} propo
 
 \begin{tabular}{|c|c|c|}\hline
  Modelo de cores & Taxa de erro & Desvio padrão \\ \hline
- RGB   & \textcolor{red}{todo} & \\ \hline
- HSV   & \textcolor{red}{todo} & \\ \hline
- HS    & \textcolor{red}{todo} & \\ \hline
- Lab   & \textcolor{red}{todo} & \\ \hline
- ab    & \textcolor{red}{todo} & \\ \hline
- YCbCr & \textcolor{red}{todo} & \\ \hline
- CbCr  & \textcolor{red}{todo} & \\ \hline
+ RGB   & 3,44 & 0,00 \\ \hline
+ HSV   & 3,09 & 0,00 \\ \hline
+ Lab   & 9,25 & 0,00 \\ \hline
+ YCbCr & 5,46 & 0,00 \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Resultados dos experimentos com árvore de decisão \emph{fuzzy} no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com árvore de decisão \emph{fuzzy} no conjunto de dados SFA em espaços de cores distintos. As linhas com os modelos de cores HS, ab e CbCr indicam que o componente de luminância não foi utilizado no treinamento.}
+\caption[Resultados dos experimentos com árvore de decisão fuzzy no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com árvore de decisão fuzzy no conjunto de dados SFA em espaços de cores distintos.}
 \label{tab:resultados_experimento_tres}
 \end{table}
+
+As regras induzidas pelo algoritmo ficam disponíveis para a inferência de novas amostras. Por exemplo, para o conjunto de dados no modelo de cores Lab foram geradas 21 regras:
+\begin{enumerate}[itemsep=0mm]
+\item \textbf{if} \emph{red} \textbf{is} baixa \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} mediabaixa \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} baixa \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} mediabaixa \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} baixa  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} mediabaixa  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} alta  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} mediaalta \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} alta \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} baixa \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediabaixa \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} media \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} baixa \textbf{then} class \textbf{is} -1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} mediabaixa \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} mediaalta \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} alta \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} alta \textbf{then} class \textbf{is} 1
+\item \textbf{if} \emph{red} \textbf{is} alta \textbf{then} class \textbf{is} -1
+\end{enumerate}
