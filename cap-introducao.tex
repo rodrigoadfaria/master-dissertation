@@ -34,6 +34,10 @@ Outro método para construir um classificador de pele é definir, explicitamente
 
 Diferentemente da proposta de \citet{kovac:03}, \citet{yogarajah:11} desenvolveu uma técnica onde os limiares definidos nas regras são adaptados dinamicamente. O método consiste em detectar a região dos olhos e extrair uma região elíptica da face. Posteriormente, um filtro de Sobel é aplicado para detectar as bordas da região resultante que, por sua vez, é submetida a uma dilatação. A imagem resultante é subtraída da imagem elíptica da face original. Como resultado tem-se uma região de pele mais uniforme onde os limiares são calculados. A técnica foi utilizada como uma etapa de pré processamento por \citet{tan:12} numa estratégia que combina um histograma de densidades $2$-dimensional e um modelo Gaussiano para detecção de cor de pele. Os resultados mostraram uma acurácia de 90,39\%.
 
+\citet{naji:12} constrói um classificador explícito no espaço de cores HSV para 4 diferentes etnias de pele em paralelo. Após a segmentação primitiva, é aplicado um algoritmo de crescimento de região baseado em regras, no qual a saída da primeira camada é usada como uma semente e, em seguida, a máscara final em outras camadas é construída iterativamente por meio de pixels de pele vizinhos. Uma das medidas de desempenho reportadas foi a taxa de pixels verdadeiros positivos no valor de 96,5\%.
+
+\citet{kawulok:13} combinaram informações globais e locais da imagem para construir um mapa de probabilidade que é usado para gerar a semente inicial para análise espacial dos pixels de pele. As sementes extraídas utilizando um modelo local são altamente adaptadas à imagem, o que melhora muito o resultado da análise espacial.
+
 %% ------------------------------------------------------------------------- %%
 \section{Objetivos}
 \label{sec:objetivo}
