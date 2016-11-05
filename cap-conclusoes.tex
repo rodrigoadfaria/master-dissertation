@@ -8,19 +8,27 @@ Os créditos em disciplinas necessários para o programa de mestrado em Ciência
 \section{Atividades Previstas}
 \label{sec:atividades_previstas}
 \begin{enumerate}
-    \item \textbf{Leituras adicionais:} outras referências devem ser adicionadas ao presente trabalho, principalmente, conteúdo relacionado a métodos de \emph{kernel}, que servirão de embasamento para compreender e estudar a técnica de \emph{kernels} em conjuntos \emph{fuzzy}.
-    
-    \item \textbf{Análise dos resultados:} os resultados obtidos deverão ser avaliados e reportados no projeto de pesquisa e em publicações a serem realizadas.
-    
-    \item \textbf{Publicações:} artigos científicos com os resultados obtidos devem ser publicados em revistas ou conferências relacionadas com o contexto do projeto de pesquisa.
-    
-    \item \textbf{Escrita da dissertação:} a dissertação deve ser escrita assim que as demais atividades tiverem sido concluídas.
+    \item \textbf{Revisar leituras adicionais:} outras referências deverão ser adicionadas ao presente trabalho, principalmente, conteúdo relacionado a métodos de \emph{kernel}, que servirão de embasamento para compreender e estudar a técnica de \emph{kernels} em conjuntos \emph{fuzzy} proposta por \citet{guevara:14}.
+
+    \item \textbf{Incorporar novos conjuntos de dados:} essa atividade consiste em analisar e integrar novos conjuntos de dados ao projeto para utilização nos experimentos, tanto de bancos de imagens de cor de pele, como outros conjuntos de imagens coloridas onde a classificação de dados intervalares possa ser aplicada.
+
+    \item \textbf{Investigar características passíveis de uso em classificadores de dados intervalares:} os classificadores treinados durante a etapa de experimentos preliminares consistiam apenas da informação de cor da imagem, independente do espaço de cores escolhido. Portanto, essa atividade visa compreender o papel de outros atributos, tais como textura e características locais, durante o treinamento e se a inclusão de tais atributos, de fato, pode acarretar em melhoria de performance.
+
+    \item \textbf{Desenvolver novas ferramentas:} novas ferramentas devem ser desenvolvidas para dar suporte aos experimentos subsequentes, tais como a tabela de busca implementada para otimização de parâmetros do \emph{FuzzyDT}. Todo software criado por este projeto de pesquisa será disponibilizado para toda a comunidade científica em formato de código livre.
+
+    \item \textbf{Elaborar novos experimentos:} com base nas ferramentas desenvolvidas e conjuntos de dados estabelecidos, elaborar e executar novos experimentos.
+
+    \item \textbf{Analisar os resultados:} os resultados obtidos deverão ser avaliados e reportados no projeto de pesquisa e em publicações a serem realizadas. Eventualmente, correções nas ferramentas desenvolvidas e/ou nos experimentos também serão agregadas nesta etapa.
+
+    \item \textbf{Publicar resultados:} artigos científicos com os resultados obtidos devem ser publicados em revistas ou conferências sobre processamento de imagens, classificação ou outras áreas relacionadas com o contexto do projeto de pesquisa.
+
+    \item \textbf{Escrever a dissertação:} a dissertação deverá ser escrita assim que as demais atividades tiverem sido concluídas, principalmente em relação aos experimentos e análise de resultados, o que fornecerá dados consolidados para a conclusão do projeto de pesquisa.
 \end{enumerate}
 
 %------------------------------------------------------
 \section{Cronograma Proposto}\index{proposto!cronograma}
 \label{sec:cronograma}
-As atividades listadas na seção \ref{sec:atividades_previstas} serão realizados de acordo com o cronograma disposto na tabela \ref{tab:cronograma_proposto}. As tarefas foram divididas dentro de um período de doze meses de execução e a previsão de defesa da dissertação é outubro de 2017.
+As atividades listadas na seção \ref{sec:atividades_previstas} serão realizadas de acordo com o cronograma disposto na tabela \ref{tab:cronograma_proposto}. As tarefas foram divididas dentro de um período de onze meses de execução e a previsão de defesa da dissertação é outubro de 2017.
 
 \begin{table}[!htpb]
 \centering
@@ -32,18 +40,18 @@ As atividades listadas na seção \ref{sec:atividades_previstas} serão realizad
 
 % \cline semelhante ao \hline, indicando as colunas com a linha horizontal
 % \multicolumn{12}{c|}{Meses} indica que doze colunas serão mescladas
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
- & \multicolumn{12}{c|}{Meses 2016/2017}\\ \cline{2-13}
-\raisebox{1.5ex}{Atividade} & Nov & Dez & Jan & Fev & Mar & Abr & Mai & Jun & Jul & Ago & Set & Out \\ \hline
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+ & \multicolumn{11}{c|}{Meses 2016/2017}\\ \cline{2-12}
+\raisebox{1.5ex}{Atividade} & Dez & Jan & Fev & Mar & Abr & Mai & Jun & Jul & Ago & Set & Out \\ \hline
 
-1 & X & X & X &  &  &  &  &  &  &  &  & \\ \hline
-2 & X & X & X & X &  &  &  &  &  &  &  & \\ \hline
-3 &  & X & X & X & X &  &  &  &  &  &  & \\ \hline
-4 &  &  &  & X & X & X & X & X & X &  &  & \\ \hline
-5 &  &  &  &  & X & X & X &  &  &  &  & \\ \hline
-6 &  &  &  &  & X & X & X & X &  &  &  & \\ \hline
-7 &  &  &  &  &  &  & X & X &  &  &  & \\ \hline
-8 &  &  &  &  &  &  &  & X & X & X & X & X \\ \hline
+1 & X & X & X &   &   &   &   &   &   &   & \\ \hline
+2 & X & X &   &   &   &   &   &   &   &   & \\ \hline
+3 &   & X & X &   &   &   &   &   &   &   & \\ \hline
+4 &   &   & X & X & X & X &   &   &   &   & \\ \hline
+5 &   &   &   &   & X & X & X &   &   &   & \\ \hline
+6 &   &   &   &   &   & X & X & X &   &   & \\ \hline
+7 &   &   &   &   &   &   & X & X &   &   & \\ \hline
+8 &   &   &   &   &   &   &   & X & X & X & X \\ \hline
 
 \end{tabular} 
 \end{small}
