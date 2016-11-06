@@ -19,18 +19,18 @@ A tabela~\ref{tbl:uci_dataset} exemplifica um pequeno trecho da base de dados UC
 \centering
 \begin{small}
 \begin{tabular}{|c|c|c|c|} \hline
-B       & G     & R     & Classe  \\ \hline
-74	    & 85    & 123	& 1     \\
-207	    & 215   & 255   & 1     \\
-74      & 82    & 122	& 1     \\
-202     & 211   & 255   & 1     \\
-54      & 72    & 125   & 1     \\
-\ldots  &\ldots & \dots &\ldots \\
-166     & 164   & 116   & -1    \\
-148     & 150   & 91    & -1    \\
-29      & 26    & 5     & -1    \\
-167     & 166	& 115	& -1    \\
-180	    & 177	& 133	& -1    \\ \hline
+\thb{B} & \thb{G} & \thb{R}  & \thb{Classe}  \\ \hline
+74	    & 85      & 123	     & 1     \\
+207	    & 215     & 255      & 1     \\
+74      & 82      & 122	     & 1     \\
+202     & 211     & 255      & 1     \\
+54      & 72      & 125      & 1     \\
+\ldots  &\ldots   & \dots    &\ldots \\
+166     & 164     & 116      & -1    \\
+148     & 150     & 91       & -1    \\
+29      & 26      & 5        & -1    \\
+167     & 166	  & 115	     & -1    \\
+180	    & 177	  & 133	     & -1    \\ \hline
 \end{tabular}
 \caption[Trecho com amostras da base de dados UCI]{Trecho com amostras da base de dados UCI. Cada uma das três primeiras colunas representam um canal do pixel do espaço de cores RGB e variam entre 0 e 255. A quarta coluna é a classe atribuída à amostra, que pode assumir +1 se for pele e -1, caso contrário. Originalmente, a classe que representa um pixel de não pele tinha valor 2, substituída por -1 para conformidade com os experimentos.}
 \label{tbl:uci_dataset}
@@ -102,7 +102,7 @@ A tabela de busca é usada no \emph{scikit-learn} para encontrar os parâmetros 
 \setlength{\tabcolsep}{10pt}
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
- \emph{\textbf{kernel}} & \multicolumn{4}{c|}{\textbf{C}} & \multicolumn{3}{c|}{\emph{\textbf{gamma}}} & \multicolumn{2}{c|}{\emph{\textbf{degree}}}\\ \cline{1-10}
+ \thbi{kernel} & \multicolumn{4}{c|}{\thbi{C}} & \multicolumn{3}{c|}{\thbi{gamma}} & \multicolumn{2}{c|}{\thbi{degree}}\\ \cline{1-10}
 rbf    & 1 & 10 & 100 & 1000 & 1e-3 & 1e-4 & 1e-5 &   &   \\ \hline
 poly   & 1 & 10 & 100 & 1000 &      & 1e-4 & 1e-5 & 3 & 4 \\ \hline
 linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
@@ -119,7 +119,7 @@ linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
 \setlength{\tabcolsep}{8pt}
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
- \multicolumn{10}{|c|}{\emph{\textbf{n\_neighbors}}} & \multicolumn{2}{c|}{\emph{\textbf{weights}}} & \multicolumn{1}{c|}{\emph{\textbf{algorithm}}}\\ \cline{1-13}
+ \multicolumn{10}{|c|}{\thbi{n\_neighbors}} & \multicolumn{2}{c|}{\thbi{weights}} & \multicolumn{1}{c|}{\thbi{algorithm}}\\ \cline{1-13}
 3 & 5 & 9 & 15 & 25 & 50 & 100 & 200 & 400 & 800 & distance & uniform & auto \\ \hline
 
 \end{tabular} 
@@ -135,7 +135,7 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
 \setlength{\tabcolsep}{8pt}
 
 \begin{tabular}{|c|c|c|c|c|c|}\hline
- Base de dados & Classificador & Modelo de cores & \emph{Precision} & \emph{Recall} & \emph{F1-score} \\ \hline
+ \thb{Base de dados} & \thb{Classificador} & \thb{Modelo de cores} & \thbi{Precision} & \thbi{Recall} & \thbi{F1-score} \\ \hline
  \multirow{2}{*}{UCI} & $k$-NN & RGB & 1,00 & 1,00 & 1,00 \\ \cline{2-6}
                       & SVM    & RGB & 0,98 & 0,98 & 0,98 \\ \hline
  \multirow{2}{*}{SFA} & $k$-NN & RGB & 0,9672 & 0,9669 & 0,9670 \\ \cline{2-6}
@@ -186,22 +186,41 @@ Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. 
 %------------------------------------------------------
 \section{Terceiro experimento}
 \label{sec:experimento_tres}
-O último experimento foi realizado com a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. O conjunto de dados SFA transformado para os espaços de cor HSV, Lab e YCbCr também foi aplicado aqui. Além disso, há um parâmetro que define o nível de confiança que deve ser aplicado no processo de poda da árvore. Esse parâmetro foi mantido em 25\%, o padrão dado pelo algoritmo.
-
-Conforme citado na seção \ref{sec:trabalhos_relacionados}, há quatro maneiras de determinar quantos serão os conjuntos \emph{fuzzy} por atributo. \textcolor{red}{completar}. A tabela \ref{tab:resultados_experimento_tres} mostra os resultados com a taxa de erro em cada conjunto de dados para o respectivo espaço de cor.
-
+O último experimento foi realizado com a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. O conjunto de dados SFA transformado para os espaços de cor HSV, Lab e YCbCr também foi utilizado aqui. Além disso, há um parâmetro que define o nível de confiança que deve ser aplicado no processo de poda da árvore. Por padrão, esse parâmetro assume o valor de 25\%, o qual não compromete o desempenho da árvore e evita o fenômeno de sobreajuste. Outra questão relevante neste experimento é a escolha do método que estima a quantidade de conjuntos \emph{fuzzy} por atributo, conforme citado na seção \ref{sec:trabalhos_relacionados}. A tabela de busca dos parâmetros do estimador ótimo no \emph{FuzzyDT} pode ser vista em \ref{tab:fuzzy_dt_tabela_busca}.
 
 \begin{table}[!htpb]
 \centering
 \begin{small}
-\setlength{\tabcolsep}{8pt}
+\setlength{\tabcolsep}{6pt}
 
-\begin{tabular}{|c|c|c|}\hline
- Modelo de cores & Taxa de erro & Desvio padrão \\ \hline
- RGB   & 3,44 & 0,00 \\ \hline
- HSV   & 3,09 & 0,00 \\ \hline
- Lab   & 9,25 & 0,00 \\ \hline
- YCbCr & 5,46 & 0,00 \\ \hline
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
+ \thb{Conjunto de dados} & \multicolumn{4}{c|}{\thb{Nível de confiança}} & \multicolumn{4}{c|}{\thb{Método}} & \thb{\texttt{\#} conjuntos \emph{fuzzy}}\\ \cline{1-10}
+RGB   & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
+HSV   & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
+Lab   & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
+YCbCr & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
+
+\end{tabular}
+\end{small}
+\caption[Tabela de busca dos parâmetros do estimador ótimo no \emph{FuzzyDT}]{Tabela de busca dos parâmetros do estimador ótimo no FuzzyDT. A coluna conjunto de dados, conforme o nome sugere, refere-se aos conjuntos de dados oriundos do SFA em diferentes espaços de cores. A segunda coluna é o nível de confiança aplicado na poda da árvore. A coluna método indica o método de estimativa do número de conjuntos fuzzy para treinamento, seguida do número de conjuntos fuzzy que devem ser gerados por atributo. Este último parâmetro foi testado em um intervalo entre 2 e 9, conforme citado em \citet{cintra:11} e é aplicável somente quando o método é fixed.}
+\label{tab:fuzzy_dt_tabela_busca}
+\end{table}
+
+Para que os melhores parâmetros pudessem ser introduzidos no treinamento da árvore, foi desenvolvido um algoritmo que testa diversas combinações deles, avaliando a performance do modelo ajustado, de maneira similar à tabela de busca do \emph{scikit-learn}. O algoritmo também tem a capacidade de executar várias instâncias em paralelo. A tabela \ref{tab:resultados_experimento_tres} mostra os resultados com a taxa de erro em cada conjunto de dados para o respectivo espaço de cor, bem como os parâmetros que proporcionaram o melhor desempenho.
+
+Os resultados mostram taxas de erros competitivas, do ponto de vista de classificação usando dados intervalares, em relação à modelagem com conjuntos de dados clássicos. Um ponto relevante é que o método fixo de geração dos conjuntos \emph{fuzzy} foi absolutamente unânime dentre todas as quatro técnicas propostas por \citet{cintra:11}, sendo o tamanho dos conjuntos a única peculiaridade, independente do espaço de cor. Além disso, a taxa de erro obtida foi a mesma para todos os níveis de confiança testados para poda da árvore. Isso também ocorreu nas demais combinações de parâmetros, ou seja, naquelas onde a taxa de erro obtida foi maior. Portanto, é possível afirmar que, de fato, o nível de confiança pode ser mantido em 25\% para o treinamento do \emph{FuzzyDT}.
+
+\begin{table}[!htpb]
+\centering
+\begin{small}
+\setlength{\tabcolsep}{6pt}
+
+\begin{tabular}{|c|c|c|c|c|}\hline
+ \thb{Modelo de cores} & \thb{Taxa de erro} & \thb{Desvio padrão} & \thb{Método} & \thb{\texttt{\#} conjuntos \emph{fuzzy}} \\ \hline
+ RGB   & 3,00 & 0,00 & fixed & 4 \\ \hline
+ HSV   & 3,23 & 0,00 & fixed & 3 \\ \hline
+ Lab   & 2,84 & 0,00 & fixed & 6 \\ \hline
+ YCbCr & 2,72 & 0,00 & fixed & 8 \\ \hline
 
 \end{tabular}
 \end{small}
@@ -209,27 +228,17 @@ Conforme citado na seção \ref{sec:trabalhos_relacionados}, há quatro maneiras
 \label{tab:resultados_experimento_tres}
 \end{table}
 
-As regras induzidas pelo algoritmo ficam disponíveis para a inferência de novas amostras. Por exemplo, para o conjunto de dados no modelo de cores Lab foram geradas 21 regras:
+Além das taxas de erros produzidas pelo \emph{FuzzyDT}, outra saída são as regras induzidas pelo algoritmo que ficam disponíveis para a inferência de novas amostras. Por exemplo, para o conjunto de dados no modelo de cores HSV, cuja taxa de erro foi de 3,23\%, foram geradas 9 regras:
 \begin{enumerate}[itemsep=0mm]
-\item \textbf{if} \emph{red} \textbf{is} baixa \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} mediabaixa \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} baixa \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} mediabaixa \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} baixa  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} mediabaixa  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{green} \textbf{is} alta  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} mediaalta \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} media  \textbf{and} \emph{blue} \textbf{is} alta \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} baixa \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediabaixa \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} media \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} baixa \textbf{then} class \textbf{is} -1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} mediabaixa \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} media \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} mediaalta \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} mediaalta  \textbf{and} \emph{blue} \textbf{is} alta \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} mediaalta  \textbf{and} \emph{green} \textbf{is} alta \textbf{then} class \textbf{is} 1
-\item \textbf{if} \emph{red} \textbf{is} alta \textbf{then} class \textbf{is} -1
+\item \thb{Se} saturação \thb{é} baixa \thb{então} classe \thb{é} -1
+\item \thb{Se} saturação \thb{é} media \thb{e} intensidade \thb{é} baixa \thb{então} classe \thb{é} -1
+\item \thb{Se} matiz \thb{é} baixa \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} media \thb{então} classe \thb{é} 1
+\item \thb{Se} matiz \thb{é} media \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} media \thb{então} classe \thb{é} -1
+\item \thb{Se} matiz \thb{é} alta \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} media \thb{então} classe \thb{é} -1
+\item \thb{Se} matiz \thb{é} baixa \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} alta \thb{então} classe \thb{é} 1
+\item \thb{Se} matiz \thb{é} media \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} alta \thb{então} classe \thb{é} -1
+\item \thb{Se} matiz \thb{é} alta \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} alta \thb{então} classe \thb{é} -1
+\item \thb{Se} saturação \thb{é} alta \thb{então} classe \thb{é} -1
 \end{enumerate}
+
+Como citado na tabela \ref{tab:resultados_experimento_tres}, no espaço de cores HSV, o algoritmo gerou um total de 3 conjuntos \emph{fuzzy} por atributo, que são: baixa, media e alta. As regras são arranjadas de tal forma que o usuário pode facilmente interpretá-las por meio de conjunções. O \emph{FuzzyDT} demonstrou robustez e bom desempenho quando comparado com classificadores clássicos, o que o credencia como um bom candidato na classificação de conjuntos de dados intervalares.
