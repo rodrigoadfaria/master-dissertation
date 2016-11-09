@@ -11,15 +11,15 @@
             latexdraw:showOrigin="true" latexdraw:showTicks="all"
             latexdraw:showLabels="y" latexdraw:ticksStyle="Bottom"
             latexdraw:type="axe" id="id1664041396">
-            <g latexdraw:type="joinedLines" id="id168566660">
+            <g latexdraw:type="joinedLines" id="id831259413">
                 <polyline points="400.0,320.0 843.3541666666666,320.0 "
                     stroke-width="2.0" stroke="black"
-                    latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-168566660)"/>
+                    latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-831259413)"/>
             </g>
-            <g latexdraw:type="joinedLines" id="id1151131114">
+            <g latexdraw:type="joinedLines" id="id913699514">
                 <polyline points="400.0,320.0 400.0,76.64583333333333 "
                     stroke-width="2.0" stroke="black"
-                    latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-1151131114)"/>
+                    latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-913699514)"/>
             </g>
         </g>
         <g latexdraw:type="text" id="id1966073608" fill="black" latexdraw:position="bl">
@@ -38,25 +38,23 @@
         <g latexdraw:type="text" id="id2142225755" fill="black" latexdraw:position="bl">
             <text x="860.0" y="320.0">x</text>
         </g>
-        <g latexdraw:type="joinedLines" id="id1936762163">
-            <polyline
-                points="400.0,320.0 480.0,320.0 560.0,120.0 640.0,120.0 720.0,320.0 820.0,320.0 "
-                stroke-width="2.0" stroke="#0033cc" fill="none" latexdraw:rotationAngle="0.0"/>
-        </g>
         <g latexdraw:type="text" id="id1898596350" fill="black" latexdraw:position="bl">
             <text x="640.0" y="340.0">c</text>
         </g>
         <g latexdraw:type="text" id="id970363518" fill="black" latexdraw:position="bl">
             <text x="560.0" y="340.0">b</text>
         </g>
+        <g latexdraw:type="text" id="id98789354" fill="black" latexdraw:position="bl">
+            <text x="600.0" y="340.0">m</text>
+        </g>
     </g>
     <defs>
-        <marker overflow="visible" orient="auto" id="arrow1-168566660">
+        <marker overflow="visible" orient="auto" id="arrow1-831259413">
             <path
                 d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
                 latexdraw:arrSizeNum="2.0" fill="black"/>
         </marker>
-        <marker overflow="visible" orient="auto" id="arrow1-1151131114">
+        <marker overflow="visible" orient="auto" id="arrow1-913699514">
             <path
                 d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
                 latexdraw:arrSizeNum="2.0" fill="black"/>
