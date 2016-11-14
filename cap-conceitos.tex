@@ -430,9 +430,9 @@ A figura~\ref{fig:fuzzy_definitions} mostra graficamente algumas das propriedade
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=1\textwidth]{fuzzy_definitions}
+  \includegraphics[width=.8\textwidth]{fuzzy_definitions}
   % source MIT class notes
-  \caption[Representação gráfica das principais propriedades dos conjuntos fuzzy]{Representação gráfica das principais propriedades dos conjuntos fuzzy. \textcolor{red}{Detalhar melhor e corrigir a imagem.}}
+  \caption[Representação gráfica das principais propriedades dos conjuntos \emph{fuzzy}]{Representação gráfica das principais propriedades dos conjuntos fuzzy. A imagem mostra a representação de um conjunto fuzzy A triangular com altura(A) = 1, ou seja, o conjunto é normalizado. O núcleo(A) = \{150\}, o que significa que apenas um único elemento pertence inteiramente à A. As linhas em vermelho mostram um $\alpha$-corte, onde $\alpha = 0,5$. O intervalo dado pelo conjunto suporte ]100, 200[ compreende todos os valores de Azul cujo grau de pertinência é maior do que 0. Fonte: proposto pelo autor.}
   \label{fig:fuzzy_definitions} 
 \end{figure}
 
@@ -461,7 +461,7 @@ A figura~\ref{fig:fuzzy_operacoes_uniao} exibe graficamente dois conjuntos \emph
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.28\textwidth]{fuzzy_operacoes_uniao}
-  \caption[Operação de união entre dois conjuntos fuzzy]{Representação gráfica da operação de união entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A união é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
+  \caption[Operação de união entre dois conjuntos \emph{fuzzy}]{Representação gráfica da operação de união entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A união é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
   \label{fig:fuzzy_operacoes_uniao}
 \end{figure}
 
@@ -480,7 +480,7 @@ A figura~\ref{fig:fuzzy_operacoes_interseccao} exibe graficamente dois conjuntos
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.28\textwidth]{fuzzy_operacoes_interseccao}
-  \caption[Operação de intersecção entre dois conjuntos fuzzy]{Representação gráfica da operação de intersecção entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A intersecção é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
+  \caption[Operação de intersecção entre dois conjuntos \emph{fuzzy}]{Representação gráfica da operação de intersecção entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A intersecção é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
   \label{fig:fuzzy_operacoes_interseccao}
 \end{figure}
 
@@ -499,7 +499,7 @@ A figura~\ref{fig:fuzzy_operacoes_complemento} exibe graficamente um conjunto \e
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.28\textwidth]{fuzzy_operacoes_complemento}
-  \caption[Conjunto fuzzy e seu complemento]{Representação gráfica de um conjunto fuzzy e seu complemento. A parte superior em cinza claro mostra o conjunto fuzzy $A$. Seu complemento é destacado em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
+  \caption[Conjunto \emph{fuzzy} e seu complemento]{Representação gráfica de um conjunto fuzzy e seu complemento. A parte superior em cinza claro mostra o conjunto fuzzy $A$. Seu complemento é destacado em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
   \label{fig:fuzzy_operacoes_complemento}
 \end{figure}
 
@@ -690,20 +690,20 @@ Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de out
 \end{equation}
 \noindent onde $x \in X$ e $X$ é o espaço de entrada, ou seja, todos os $x$ vetores possíveis.
 
-O conjunto de dados é formado por $N$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é um conjunto finito de classes que, no caso binário, é da forma $Y = \{+1, -1\}$. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional.
+O conjunto de dados é formado por $N$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é um conjunto finito de classes que, no caso binário, é da forma $Y = \{+1, -1\}$. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional de amostras de pele e não pele do conjunto de dados SFA\footnote{Este conjunto de dados será detalhado na seção \ref{sec:datasets_descricao}.}.
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{decision_boundary_linear}
         \label{fig:decision_boundary_linear}
     \end{minipage}
     ~ % space
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{decision_boundary_smooth}
         \label{fig:decision_boundary_smooth}
     \end{minipage}
-    \caption[Fronteira de decisão no espaço de características 2-dimensional]{Fronteira de decisão no espaço de características 2-dimensional. As figuras à esquerda e à direita representam a separação do espaço de características por funções linear e não linear, respectivamente. Vale ressaltar que, a complexidade computacional aumenta significativamente nos casos em que existem muitas características.\textcolor{red}{O ideal aqui é trocar essa distribuição pelo dataset de pele. A fonte dessas imagens é \citet{duda:12}}.}
+    \caption[Fronteira de decisão no espaço de características 2-dimensional]{Fronteira de decisão no espaço de características 2-dimensional de amostras de pele e não pele do conjunto de dados SFA. Os eixos representam os canais a e b do modelo de cores Lab. As figuras à esquerda e à direita mostram a separação do espaço de características por funções linear e não linear, respectivamente. Vale ressaltar que, a complexidade computacional aumenta significativamente nos casos em que existem muitas características. Fonte: proposto pelo autor.}
     \label{fig:decision_boundary}
 \end{figure}
 
@@ -774,7 +774,7 @@ Segundo \citet{campbell:00}, no sistema dado na equação \ref{eq:svm_hyperplano
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.5\textwidth]{svm_support_vectors}
-  \caption[Exemplo de um problema de classes binárias separáveis num espaço $2$-dimensional]{Exemplo de um problema de classes binárias separáveis num espaço $2$-dimensional. Os vetores de suporte, marcados com quadrados cinza, definem a margem de maior separação entre as duas classes. \textcolor{red}{Aqui também é interessante colocar as amostras de pele e não pele, talvez somente com duas características. Essa imagem é de \citep{cortes:95}}}
+  \caption[Exemplo de um problema de classes binárias separáveis num espaço $2$-dimensional]{Exemplo de um problema de classes binárias separáveis num espaço $2$-dimensional. Os vetores de suporte, marcados com quadrados cinza, definem a margem de maior separação entre as duas classes. Fonte: \citet{cortes:95}.}
   \label{fig:svm_support_vectors}
 \end{figure}
 
@@ -883,8 +883,8 @@ Como o próprio nome sugere, o $k$-NN classifica um novo ponto $x$ atribuindo-lh
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.45\textwidth]{knn_exemplo}
-  \caption[Exemplo de aplicação do $k$-NN na tarefa de classificação em um espaço $2$-dimensional]{Exemplo de aplicação do k-NN na tarefa de classificação em um espaço $2$-dimensional. O algoritmo avalia as $k$ amostras próximas de $x$, criando uma região esférica, e rotula $x$ com a classe de maior frequência. Neste caso, $k = 5$ e a classe atribuída a $x$ deve ser a mesma dos pontos em preto. \textcolor{red}{Aqui também é interessante colocar as amostras de pele e não pele, talvez somente com duas características. Essa imagem é de \citep{duda:12}}}
+  \includegraphics[width=.65\textwidth]{knn_exemplo}
+  \caption[Exemplo de aplicação do $k$-NN na tarefa de classificação num espaço $2$-dimensional]{Exemplo de aplicação do k-NN na tarefa de classificação num espaço $2$-dimensional. O algoritmo avalia as $k$ amostras próximas de $x$, criando uma região esférica, e rotula $x$ com a classe de maior frequência. Neste caso, $k = 5$ e a classe atribuída a $x$ deve ser a mesma dos pontos em azul. Fonte: proposto pelo autor.}
   \label{fig:knn_exemplo}
 \end{figure}
 

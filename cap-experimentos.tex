@@ -149,13 +149,13 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
 \begin{tabular}{|c|c|c|c|c|c|}\hline
  \thb{Base de dados} & \thb{Classificador} & \thb{Modelo de cores} & \thbi{Precision} & \thbi{Recall} & \thbi{F1-score} \\ \hline
  \multirow{2}{*}{UCI} & $k$-NN & RGB & 1,00 & 1,00 & 1,00 \\ \cline{2-6}
-                      & SVM    & RGB & 0,98 & 0,98 & 0,98 \\ \hline
+                      & SVM    & RGB & 0,9995 & 0,9995 & 0,9995 \\ \hline
  \multirow{2}{*}{SFA} & $k$-NN & RGB & 0,9672 & 0,9669 & 0,9670 \\ \cline{2-6}
                       & SVM    & RGB & \textcolor{red}{todo} && \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA]{Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA. Os parâmetros ótimos do k-NN no treinamento com UCI foram n\_neighbors=3, weights=uniform e com SFA n\_neighbors=15, weights=uniform. Os parâmetros ótimos da SVM no treinamento com UCI foram \textcolor{red}{completar}.}
+\caption[Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA]{Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA. Os parâmetros ótimos do k-NN no treinamento com UCI foram n\_neighbors=3, weights=uniform e com SFA n\_neighbors=15, weights=uniform. Os parâmetros ótimos da SVM no treinamento com UCI foram kernel=rbf, C=100 e gamma=1e-3 \textcolor{red}{completar}.}
 \label{tab:resultados_experimento_um}
 \end{table}
 
