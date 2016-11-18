@@ -37,7 +37,7 @@ A tabela~\ref{tbl:uci_dataset} exemplifica um pequeno trecho da base de dados UC
 \end{small}
 \end{table}
 
-Uma vez que a dimensão do espaço do problema é $d = 3$, é possível plotar os dados para melhor interpretação dos mesmos, conforme mostra a figura~\ref{fig:dataset_uci}.
+Uma vez que os dados são pontos no espaço RGB, é possível plotar os dados para melhor interpretação dos mesmos, conforme mostra a figura~\ref{fig:dataset_uci}.
 \begin{figure}[h]
     \centering
     \begin{minipage}{0.45\textwidth}
@@ -147,8 +147,8 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
 \setlength{\tabcolsep}{8pt}
 
 \begin{tabular}{|c|c|c|c|c|c|}\hline
- \thb{Base de dados} & \thb{Classificador} & \thb{Modelo de cores} & \thbi{Precision} & \thbi{Recall} & \thbi{F1-score} \\ \hline
- \multirow{2}{*}{UCI} & $k$-NN & RGB & 1,00 & 1,00 & 1,00 \\ \cline{2-6}
+ \thb{Conjunto de dados} & \thb{Classificador} & \thb{Modelo de cores} & \thbi{Precision} & \thbi{Recall} & \thbi{F1-score} \\ \hline
+ \multirow{2}{*}{UCI} & $k$-NN & RGB & 0,9995 & 0,9995 & 0,9995 \\ \cline{2-6}
                       & SVM    & RGB & 0,9995 & 0,9995 & 0,9995 \\ \hline
  \multirow{2}{*}{SFA} & $k$-NN & RGB & 0,9672 & 0,9669 & 0,9670 \\ \cline{2-6}
                       & SVM    & RGB & \textcolor{red}{todo} && \\ \hline
@@ -159,11 +159,14 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
 \label{tab:resultados_experimento_um}
 \end{table}
 
+Como pode ser visto na tabela \ref{tab:resultados_experimento_um}, ambos classificadores tiveram medidas de qualidade muito altas no conjunto de dados UCI, próximas a 100\%, o que, provavelmente, é uma situação de sobreajuste. Uma causa provável está na separação dos dados de treinamento e teste. Há muitas repetições entre as amostras, logo, é possível que amostras já vistas pelo classificador durante o treinamento sejam utilizadas na etapa de teste. Por essa razão, os experimentos subsequentes foram realizados somente com o SFA.
 
 %------------------------------------------------------
 \section{Segundo experimento}
 \label{sec:experimento_dois}
 Este experimento, de maneira similar ao realizado na seção \ref{sec:experimento_um}, também foi realizado com $k$-NN e SVM. Porém, o conjunto de dados SFA foi transformado para os espaços de cor HSV, Lab e YCbCr com o objetivo de compreender a influência nos resultados. Além disso, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado. Novamente, a estratégia escolhida de validação cruzada foi a \emph{10-fold}.
+
+Como o objetivo deste experimento é avaliar a performance do classificador em espaços de cores distintos, os parâmetros ótimos obtidos no experimento \ref{sec:experimento_um} foram fixados aqui.
 
 Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
 \begin{table}[!htpb]
@@ -194,6 +197,7 @@ Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. 
 \label{tab:resultados_experimento_dois}
 \end{table}
 
+É interessante observar que os indicadores de qualidade do modelo mostram que o $k$-NN obteve taxas ao redor de 96\% em todos os espaços de cor, quando aplicado com os 3 canais. Além disso, quando o canal de luminância foi ignorado, o desempenho foi inferior - no máximo 4 pontos percentuais. Por outro lado, a perda de performance pode ser compensada pela redução da complexidade do modelo, já que uma dimensão pode ser descartada, mantendo, ainda, medidas de qualidade relativamente significativas.
 
 %------------------------------------------------------
 \section{Terceiro experimento}
@@ -227,16 +231,16 @@ Os resultados mostram taxas de erros competitivas, do ponto de vista de classifi
 \begin{small}
 \setlength{\tabcolsep}{6pt}
 
-\begin{tabular}{|c|c|c|c|c|}\hline
- \thb{Modelo de cores} & \thb{Taxa de erro} & \thb{Desvio padrão} & \thb{Método} & \thb{\texttt{\#} conjuntos \emph{fuzzy}} \\ \hline
- RGB   & 3,00 & 0,00 & fixed & 4 \\ \hline
- HSV   & 3,23 & 0,00 & fixed & 3 \\ \hline
- Lab   & 2,84 & 0,00 & fixed & 6 \\ \hline
- YCbCr & 2,72 & 0,00 & fixed & 8 \\ \hline
+\begin{tabular}{|c|c|c|c|}\hline
+ \thb{Modelo de cores} & \thb{Taxa de erro} & \thb{Método} & \thb{\texttt{\#} conjuntos \emph{fuzzy}} \\ \hline
+ RGB   & 3,00 & fixed & 4 \\ \hline
+ HSV   & 3,23 & fixed & 3 \\ \hline
+ Lab   & 2,84 & fixed & 6 \\ \hline
+ YCbCr & 2,72 & fixed & 8 \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Resultados dos experimentos com árvore de decisão fuzzy no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com árvore de decisão fuzzy no conjunto de dados SFA em espaços de cores distintos.}
+\caption[Resultados dos experimentos com árvore de decisão \emph{fuzzy} no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com árvore de decisão fuzzy no conjunto de dados SFA em espaços de cores distintos. O algoritmo também mostra o desvio padrão obtido com o estimador ótimo, porém, o valor é 0,00 na maioria dos casos e, por essa razão, não está explícito na tabela.}
 \label{tab:resultados_experimento_tres}
 \end{table}
 

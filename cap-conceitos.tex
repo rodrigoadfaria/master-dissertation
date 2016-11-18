@@ -130,7 +130,7 @@ Uma maneira de obter o sistema CMY é:\\
   \end{bmatrix}
 \end{equation}
 
-ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias R, G e B da cor branca $W = (1, 1, 1)$ \citep{gonzalez:02}:
+\noindent ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias R, G e B da cor branca $W = (1, 1, 1)$ \citep{gonzalez:02}:
 \begin{equation}
   \begin{bmatrix}
     C \\ M \\ Y
@@ -307,7 +307,7 @@ Todos os modelos de cores desta família têm a propriedade de se pensar em core
 \section{Teoria \emph{fuzzy}}\index{fuzzy!teoria}
 \label{sec:teoria_fuzzy}
 
-Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo. Essa ideia vem da teoria clássica de conjuntos e é embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o número $7$ pertence ao conjunto dos números naturais e, da mesma maneira, que o número $-7$ não pertence a esse mesmo conjunto. Este é um caso clássico em que a aplicação da lógica booleana é bem sucedida. Em outras palavras, quando questionado se o número $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas possíveis: sim ou não.
+Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo. Essa ideia vem da teoria clássica de conjuntos e é embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o número $7$ pertence ao conjunto dos números naturais e, da mesma maneira, que o número $-7$ não pertence a esse mesmo conjunto. Este é um caso em que a relação de ordem pode ser definida com a lógica clássica. Em outras palavras, quando questionado se o número $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas possíveis: sim ou não.
 
 Entretanto, há inúmeros indivíduos ou observações na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relação de pertinência não é bem definida \citep{pedrycz:98}. Como exemplo, o conjunto das pessoas altas, os números reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicação da lógica booleana para classificar elementos como parte de um grupo ou não é imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilização da lógica booleana não resulta em interpretações realísticas, pois uma pessoa com $1,69m$ é, portanto, baixa ou, pode-se dizer ainda, que não pertence ao grupo das pessoas altas. Ora, apenas $1$ centímetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ está muito próxima de pertencer ao grupo das pessoas baixas.
 
@@ -444,7 +444,7 @@ Assim como na teoria de conjuntos clássica, há basicamente três operações q
 
 Tais operações são realizadas sobre suas respectivas funções de pertinência e há muitas formalizações matemáticas possíveis para os operadores que representam-nas. O par de operadores mais amplamente utilizado é o operador de mínimo ($min$) e máximo ($max$), que são semelhantes aos operadores produto e soma da álgebra elementar e utilizados para expressar a conjunção e disjunção, respectivamente \citep{thole:79}.
 
-Seja dois conjuntos \emph{fuzzy} $A$ e $B$, definidos sobre um mesmo universo de discurso $U$. Utilizando as funções $max$ e $min$, tem-se que \citep{klir:95}:
+Seja dois conjuntos \emph{fuzzy} $A$ e $B$, definidos sobre um mesmo universo de discurso $U$. Utilizando as funções $max$ e $min$, tem-se as seguintes definições \citep{klir:95}:
 
 % definição de união
 \begin{defn}
@@ -503,9 +503,9 @@ A figura~\ref{fig:fuzzy_operacoes_complemento} exibe graficamente um conjunto \e
   \label{fig:fuzzy_operacoes_complemento}
 \end{figure}
 
-Além desses operadores, existem outros que podem ser utilizados para efetuar as operações lógicas. Um deles é a norma triangular, também denominada \emph{norma-t}. Outro é a co-norma triangular, usualmente denominada por \emph{co-norma-t} ou \emph{norma-s}. Os operadores utilizados para a intersecção de conjuntos \emph{fuzzy} pertencem à classe \emph{norma-t}. Os operadores utilizados para a união de conjuntos \emph{fuzzy} pertencem à classe \emph{co-norma-t} ou \emph{norma-s} \citep{zimmermann:01}.
+Além desses operadores, existem outros que podem ser utilizados para efetuar as operações lógicas. Um deles é a norma triangular, também denominada \emph{t-norma}. Outro é a conorma triangular, usualmente denominada por \emph{t-conorma} ou \emph{s-norma}. Os operadores utilizados para a intersecção de conjuntos \emph{fuzzy} pertencem à classe \emph{t-norma}. Os operadores utilizados para a união de conjuntos \emph{fuzzy} pertencem à classe \emph{t-conorma} ou \emph{s-norma} \citep{zimmermann:01}.
 
-Ambas \emph{norma-t} e \emph{norma-s} são funções binárias do tipo $[0, 1] \times [0, 1] \rightarrow [0, 1]$, que devem satisfazer algumas propriedades, tais como, monotonicidade, comutatividade, associatividade e condições de contorno \footnote{As propriedades não serão expressas neste trabalho, embora sejam amplamente conhecidas, exceto pelas condições de contorno. Mais detalhes podem ser vistos em \citet{zimmermann:01}.}. Os operadores $max$ e $min$ satisfazem tais propriedades e, por essa razão, podem ser utilizados nas operações lógicas \emph{fuzzy} \citep{zimmermann:01}.
+Ambas \emph{t-norma} e \emph{s-norma} são funções binárias do tipo $[0, 1] \times [0, 1] \rightarrow [0, 1]$, que devem satisfazer algumas propriedades, tais como, monotonicidade, comutatividade, associatividade e condições de contorno \footnote{As propriedades não serão expressas neste trabalho, embora sejam amplamente conhecidas, exceto pelas condições de contorno. Mais detalhes podem ser vistos em \citet{zimmermann:01}.}. Os operadores $max$ e $min$ satisfazem tais propriedades e, por essa razão, podem ser utilizados nas operações lógicas \emph{fuzzy} \citep{zimmermann:01}.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -516,7 +516,7 @@ Conjuntos \emph{fuzzy} são composições de números \emph{fuzzy}, definidos em
 \citet{klir:95} caracterizam um número \emph{fuzzy} como um tipo especial de conjunto \emph{fuzzy} definido no conjunto $\mathbb{R}$ dos números reais, cuja função de pertinência\index{pertinência!função de} tem a forma:
 \begin{equation}
 \label{eq:fuzzy_numero_reais}
-  A = \mathbb{R} \rightarrow [0, 1]
+  A : \mathbb{R} \rightarrow [0, 1]
 \end{equation}
 
 Para que $A$ seja, de fato, um número \emph{fuzzy}, o conjunto universo no qual $\mu_A$ está definida deve ser $\mathbb{R}$ e as seguintes propriedades devem ser satisfeitas \citep{barros:06}:
@@ -544,8 +544,8 @@ Um número \emph{fuzzy} $A$ é dito triangular se sua função de pertinência, 
 
 \begin{equation}
   \mu_A(x) =  \begin{cases}
-                \ffrac{x - a}{m - a}, & \text{se}\ a \leq x \leq m\\[0.5em]
-                \ffrac{b - x}{b - m}, & \text{se}\ m \leq x \leq b\\[0.5em]
+                \ffrac{x - a}{m - a}, & \text{se}\ a < x \leq m\\[0.5em]
+                \ffrac{b - x}{b - m}, & \text{se}\ m < x < b\\[0.5em]
                 0, & \text{caso contrário}
               \end{cases}
 \end{equation}
@@ -568,9 +568,9 @@ Um número \emph{fuzzy} $A$ é dito trapezoidal se sua função de pertinência,
 
 \begin{equation}
   \mu_A(x) =  \begin{cases}
-                \ffrac{x - a}{b - a}, & \text{se}\ a \leq x \leq b\\[0.5em]
+                \ffrac{x - a}{b - a}, & \text{se}\ a < x < b\\[0.5em]
                 1, & \text{se}\ b \leq x \leq c\\[0.5em]
-                \ffrac{d - x}{d - c}, & \text{se}\ c \leq x \leq d\\[0.5em]
+                \ffrac{d - x}{d - c}, & \text{se}\ c < x < d\\[0.5em]
                 0, & \text{caso contrário}
               \end{cases}
 \end{equation}
@@ -860,14 +860,14 @@ O \emph{kernel} linear é o mais simples das funções \emph{kernel} e se dá pe
 \item \emph{Kernel} polinomial\index{\emph{kernel}!polinomial}
 \begin{equation}
 \label{eq:svm_kernel_polinomial}
-k(x_i, x_j) =  ({\gamma x_i \cdot y_i + r} )^g
+k(x_i, x_j) =  ({\gamma x_i \cdot x_j + r} )^g
 \end{equation}
 \noindent onde $g$ é o grau do polinômio e $r$ é um termo constante. Para este \emph{kernel}, os mapeamentos $\Phi$ também são funções polinomiais e, portanto, a complexidade é proporcional à escolha de $g$ \citep{lorena:03}.
 
 \item \emph{Kernel} gaussiano\index{\emph{kernel}!gaussiano ou RBF}
 \begin{equation}
 \label{eq:svm_kernel_rbf}
-k(x_i, x_j) =  \exp{\big(-\gamma {||x_i - y_i||}^2 \big)}
+k(x_i, x_j) =  \exp{\big(-\gamma {||x_i - x_j||}^2 \big)}
 \end{equation}
 Também conhecido como Função de Base Radial (RBF), o \emph{kernel} gaussiano corresponde a um espaço de características de dimensão infinita \citep{lorena:03}.
 \end{enumerate}
