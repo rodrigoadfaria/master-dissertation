@@ -227,7 +227,7 @@ Nesse modelo, assim como no YIQ, a intensidade dada pelo componente I é decompo
   \centering
   \includegraphics[width=.6\textwidth]{hsi-model}
   % http://www.blackice.com/images/HSIColorModel.jpg
-  \caption[Representação gráfica do modelo HSI]{Representação gráfica do modelo HSI. O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade está entre $[0, 1]$, onde 0 significa preto e 1, branco.}
+  \caption[Representação gráfica do modelo HSI]{Representação gráfica do modelo HSI. O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade está entre $[0, 1]$, onde 0 significa preto e 1, branco. Fonte: \citet{blackice:16}.}
   \label{fig:hsi-model} 
 \end{figure}
 
@@ -309,7 +309,7 @@ Todos os modelos de cores desta família têm a propriedade de se pensar em core
 
 Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo. Essa ideia vem da teoria clássica de conjuntos e é embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o número $7$ pertence ao conjunto dos números naturais e, da mesma maneira, que o número $-7$ não pertence a esse mesmo conjunto. Este é um caso em que a relação de ordem pode ser definida com a lógica clássica. Em outras palavras, quando questionado se o número $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas possíveis: sim ou não.
 
-Entretanto, há inúmeros indivíduos ou observações na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relação de pertinência não é bem definida \citep{pedrycz:98}. Como exemplo, o conjunto das pessoas altas, os números reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicação da lógica booleana para classificar elementos como parte de um grupo ou não é imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilização da lógica booleana não resulta em interpretações realísticas, pois uma pessoa com $1,69m$ é, portanto, baixa ou, pode-se dizer ainda, que não pertence ao grupo das pessoas altas. Ora, apenas $1$ centímetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ está muito próxima de pertencer ao grupo das pessoas baixas.
+Entretanto, há inúmeros indivíduos ou observações na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relação de pertinência não é bem definida \citep{pedrycz:98}. Como exemplo, o conjunto das pessoas altas, os números reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicação da lógica clássica para classificar elementos como parte de um grupo ou não é imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilização da lógica clássica não resulta em interpretações realísticas, pois uma pessoa com $1,69m$ é, portanto, baixa ou, pode-se dizer ainda, que não pertence ao grupo das pessoas altas. Ora, apenas $1$ centímetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ está muito próxima de pertencer ao grupo das pessoas baixas.
 
 Claramente, a resposta a ser obtida quando da análise de possibilidades desse tipo é fortemente dependente do contexto, pois há um alto grau de incerteza inerente aos elementos e conjuntos sendo considerados.
 
@@ -369,7 +369,19 @@ O universo de discurso $U$ pode ser composto por elementos discretos ou ser um e
 É importante ressaltar que o somatório em \ref{equ:conjunto_fuzzy_finito} não significa uma adição algébrica, mas sim a união de todos os pares ordenados de $x$ e $\mu_A(x)$ que formam o conjunto $A$ \citep{klir:95}.
 
 \begin{exmp}
-\textcolor{red}{Colocar um exemplo aqui de conjunto fuzzy que tenha sentido com o restante do texto, posteriormente. Pode ser pessoas altas, para ligar com o exemplo supra citado.}
+Exemplo de conjunto \emph{fuzzy} sobre a variável de base altura. Aqui, tem-se a representação tradicional com conjuntos clássicos, onde a transição é abrupta, e a representação com conjuntos \emph{fuzzy}.
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{crisp_set}
+    \end{minipage}
+    ~ % space
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{fuzzy_set}
+    \end{minipage}
+    \caption[Representação da variável altura em conjuntos clássicos e \emph{fuzzy}]{Representação da variável altura em conjuntos clássicos e fuzzy. À esquerda tem-se a representação de conjuntos clássicos; à direita a representação com conjuntos fuzzy. Fonte: proposto pelo autor.}
+    \label{fig:crisp_fuzzy_set}
+\end{figure}
 \end{exmp}
 
 % definição de altura
