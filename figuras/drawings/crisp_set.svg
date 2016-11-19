@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:latexdraw="http://latexdraw.sourceforge.net/namespaces/latexdraw"
+    version="1.1" baseProfile="full">
+    <g>
+        <g stroke-width="2.0" stroke="black" latexdraw:style="Axe"
+            latexdraw:gridStart="0.0 0.0" latexdraw:gridEnd="8.0 5.0"
+            latexdraw:origin="0.0 0.0" latexdraw:increment="1.0 0.6"
+            latexdraw:distLabels="0.8 2.4"
+            latexdraw:ticksSize="7.055555555555555"
+            latexdraw:showOrigin="true" latexdraw:showTicks="all"
+            latexdraw:showLabels="y" latexdraw:ticksStyle="Bottom"
+            latexdraw:type="axe" id="id1010871000">
+            <g latexdraw:type="joinedLines" id="id383393838">
+                <polyline points="340.0,400.0 733.3541666666666,400.0 "
+                    stroke-width="2.0" stroke="black"
+                    latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-383393838)"/>
+            </g>
+            <g latexdraw:type="joinedLines" id="id1662243025">
+                <polyline points="340.0,400.0 340.0,156.64583333333334 "
+                    stroke-width="2.0" stroke="black"
+                    latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-1662243025)"/>
+            </g>
+        </g>
+        <g latexdraw:type="text" id="id1649295477" fill="black" latexdraw:position="bl">
+            <text x="410.0" y="425.0">0,5</text>
+        </g>
+        <g latexdraw:type="text" id="id130453089" fill="black" latexdraw:position="bl">
+            <text x="490.0" y="425.0">1,0</text>
+        </g>
+        <g latexdraw:type="text" id="id899640717" fill="black" latexdraw:position="bl">
+            <text x="650.0" y="425.0">2,00</text>
+        </g>
+        <g latexdraw:type="text" id="id60697388" fill="black" latexdraw:position="bl">
+            <text x="570.0" y="425.0">1,5</text>
+        </g>
+        <g latexdraw:type="text" id="id1626533576" fill="black" latexdraw:position="bl">
+            <text x="645.0" y="195.0">Alto</text>
+        </g>
+        <g latexdraw:type="text" id="id1794379301" fill="black" latexdraw:position="bl">
+            <text x="720.0" y="420.0">Altura</text>
+        </g>
+        <g latexdraw:type="text" id="id730978772" fill="black"
+            latexdraw:position="bl" transform="rotate(269.4233879713513) translate(-693.201618155564 -53.7397397615872)">
+            <text x="320.0" y="370.0">grau de pertinência</text>
+        </g>
+        <g latexdraw:type="text" id="id1767333234" fill="black" latexdraw:position="bl">
+            <text x="340.0" y="140.0">y</text>
+        </g>
+        <g latexdraw:type="joinedLines" id="id215160473">
+            <polyline
+                points="340.0,400.0 600.0,400.0 600.0,200.0 720.0,200.0 "
+                stroke-width="2.0" stroke="#002fc5" fill="none" latexdraw:rotationAngle="0.0"/>
+        </g>
+    </g>
+    <defs>
+        <marker overflow="visible" orient="auto" id="arrow1-383393838">
+            <path
+                d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
+                latexdraw:arrSizeNum="2.0" fill="black"/>
+        </marker>
+        <marker overflow="visible" orient="auto" id="arrow1-1662243025">
+            <path
+                d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
+                latexdraw:arrSizeNum="2.0" fill="black"/>
+        </marker>
+    </defs>
+    <metadata>
+        <latexdraw:metadata>
+            <latexdraw:latexIncludes>
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}</latexdraw:latexIncludes>
+            <latexdraw:displayXScale>true</latexdraw:displayXScale>
+            <latexdraw:displayYScale>true</latexdraw:displayYScale>
+            <latexdraw:unit>CM</latexdraw:unit>
+            <latexdraw:zoom>1.0</latexdraw:zoom>
+            <latexdraw:magneticGridStyle>CUSTOMISED</latexdraw:magneticGridStyle>
+            <latexdraw:gridGap>20</latexdraw:gridGap>
+            <latexdraw:magneticGrid>true</latexdraw:magneticGrid>
+            <latexdraw:version>3.3.4</latexdraw:version>
+            <latexdraw:size>
+                <latexdraw:width>1855</latexdraw:width>
+                <latexdraw:height>1056</latexdraw:height>
+            </latexdraw:size>
+            <latexdraw:position>
+                <latexdraw:x>65.0</latexdraw:x>
+                <latexdraw:y>24.0</latexdraw:y>
+            </latexdraw:position>
+        </latexdraw:metadata>
+    </metadata>
+</svg>
