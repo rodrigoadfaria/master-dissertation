@@ -151,15 +151,15 @@ Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_e
  \multirow{2}{*}{UCI} & $k$-NN & RGB & 0,9995 & 0,9995 & 0,9995 \\ \cline{2-6}
                       & SVM    & RGB & 0,9995 & 0,9995 & 0,9995 \\ \hline
  \multirow{2}{*}{SFA} & $k$-NN & RGB & 0,9672 & 0,9669 & 0,9670 \\ \cline{2-6}
-                      & SVM    & RGB & \textcolor{red}{todo} && \\ \hline
+                      & SVM    & RGB & 0,9643 & 0,9628 & 0,9638 \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA]{Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA. Os parâmetros ótimos do k-NN no treinamento com UCI foram n\_neighbors=3, weights=uniform e com SFA n\_neighbors=15, weights=uniform. Os parâmetros ótimos da SVM no treinamento com UCI foram kernel=rbf, C=100 e gamma=1e-3 \textcolor{red}{completar}.}
+\caption[Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA]{Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA. Os parâmetros ótimos do k-NN no treinamento com UCI foram n\_neighbors=3, weights=uniform e com SFA n\_neighbors=15, weights=uniform. Os parâmetros ótimos da SVM no treinamento com UCI e SFA foram kernel=rbf, C=100 e gamma=1e-3.}
 \label{tab:resultados_experimento_um}
 \end{table}
 
-Como pode ser visto na tabela \ref{tab:resultados_experimento_um}, ambos classificadores tiveram medidas de qualidade muito altas no conjunto de dados UCI, próximas a 100\%, o que, provavelmente, é uma situação de sobreajuste. Uma causa provável está na separação dos dados de treinamento e teste. Há muitas repetições entre as amostras, logo, é possível que amostras já vistas pelo classificador durante o treinamento sejam utilizadas na etapa de teste. Por essa razão, os experimentos subsequentes foram realizados somente com o SFA.
+Como pode ser visto na tabela \ref{tab:resultados_experimento_um}, o $k$-NN teve resultados ligeiramente melhores que a SVM no conjunto de dados SFA. Ambos classificadores tiveram medidas de qualidade muito altas no conjunto de dados UCI, próximas a 100\%, o que, provavelmente, é uma situação de sobreajuste. Uma causa possível está na separação dos dados de treinamento e teste. Há muitas repetições entre as amostras, logo, é possível que amostras já vistas pelo classificador durante o treinamento sejam utilizadas na etapa de teste. Por essa razão, os experimentos subsequentes foram realizados somente com o SFA.
 
 %------------------------------------------------------
 \section{Segundo experimento}
@@ -177,19 +177,19 @@ Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. 
 \begin{tabular}{|c|c|c|c|c|}\hline
  Modelo de cores & Classificador & \emph{Precision} & \emph{Recall} & \emph{F1-score} \\ \hline
  \multirow{2}{*}{RGB}   & $k$-NN  & 0,9672 & 0,9669 & 0,9670 \\ \cline{2-5}
-                        & SVM     & 0,98 & 0,98 & 0,98 \\ \hline
+                        & SVM     & 0,9643 & 0,9628 & 0,9638 \\ \hline
  \multirow{2}{*}{HSV}   & $k$-NN  & 0,9676 & 0,9673 & 0,9674 \\ \cline{2-5}
-                        & SVM     & \textcolor{red}{todo} && \\ \hline
+                        & SVM     & 0,9718 & 0,9677 & 0,9679 \\ \hline
  \multirow{2}{*}{HS}    & $k$-NN  & 0,9215 & 0,9194 & 0,9199 \\ \cline{2-5}
-                        & SVM     & \textcolor{red}{todo} && \\ \hline
+                        & SVM     & 0,9305 & 0,9302 & 0,9302 \\ \hline
  \multirow{2}{*}{Lab}   & $k$-NN  & 0,9671 & 0,9660 & 0,9670 \\ \cline{2-5}
-                        & SVM     & \textcolor{red}{todo} && \\ \hline
+                        & SVM     & 0,9675 & 0,9665 & 0,9672 \\ \hline
  \multirow{2}{*}{ab}    & $k$-NN  & 0,9444 & 0,9439 & 0,9440 \\ \cline{2-5}
-                        & SVM     & \textcolor{red}{todo} && \\ \hline
+                        & SVM     & 0,9451 & 0,9447 & 0,9446 \\ \hline
  \multirow{2}{*}{YCbCr} & $k$-NN  & 0,9679 & 0,9677 & 0,9677 \\ \cline{2-5}
-                        & SVM     & \textcolor{red}{todo} && \\ \hline
+                        & SVM     & 0,9635 & 0,9633 & 0,9632 \\ \hline
  \multirow{2}{*}{CbCr}  & $k$-NN  & 0,9487 & 0,9482 & 0,9483 \\ \cline{2-5}
-                        & SVM     & \textcolor{red}{todo} && \\ \hline
+                        & SVM     & 0,9496 & 0,9492 & 0,9493 \\ \hline
 
 \end{tabular}
 \end{small}
@@ -197,7 +197,9 @@ Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. 
 \label{tab:resultados_experimento_dois}
 \end{table}
 
-É interessante observar que os indicadores de qualidade do modelo mostram que o $k$-NN obteve taxas ao redor de 96\% em todos os espaços de cor, quando aplicado com os 3 canais. Além disso, quando o canal de luminância foi ignorado, o desempenho foi inferior - no máximo 4 pontos percentuais. Por outro lado, a perda de performance pode ser compensada pela redução da complexidade do modelo, já que uma dimensão pode ser descartada, mantendo, ainda, medidas de qualidade relativamente significativas.
+Os melhores resultados com a SVM e $k$-NN foram obtidos nos espaços de cores HSV e YCbCr, respectivamente. Dentre aqueles onde o componente de luminância foi ignorado, o CbCr teve a melhor performance.
+
+É interessante observar que os indicadores de qualidade do modelo mostram que ambos classificadores tiveram taxas ao redor de 96\% em todos os espaços de cor, quando aplicado com os 3 canais. Além disso, quando o canal de luminância foi ignorado, o desempenho foi inferior - aproximadamente 4 pontos percentuais no pior caso. Por outro lado, a perda de performance pode ser compensada pela redução da complexidade do modelo, já que uma dimensão pode ser descartada, mantendo, ainda, medidas de qualidade relativamente significativas.
 
 %------------------------------------------------------
 \section{Terceiro experimento}
