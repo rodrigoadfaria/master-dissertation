@@ -12,7 +12,7 @@
 % ---------------------------------------------------------------------------- %
 % Pacotes 
 \usepackage[T1]{fontenc}
-\usepackage[brazil]{babel}
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[pdftex]{graphicx}           % usamos arquivos pdf/png como figuras
 \usepackage{setspace}                   % espaçamento flexível
@@ -132,34 +132,33 @@ framexrightmargin=10pt
 \thispagestyle{empty}
 \begin{center}
     \vspace*{2.3cm}
-    \textbf{\Large{Classificação intervalar com aplicação em imagens coloridas}}\\
+    \textbf{\Large{Combined correlation rules to detect skin on colored images based on dynamic color clustering}}\\
     
     \vspace*{1.2cm}
     \Large{Rodrigo Augusto Dias Faria}
     
     \vskip 2cm
     \textsc{
-    Texto apresentado\\[-0.25cm] 
-    ao\\[-0.25cm]
-    Instituto de Matemática e Estatística\\[-0.25cm]
-    da\\[-0.25cm]
-    Universidade de São Paulo\\[-0.25cm]
-    para\\[-0.25cm]
-    o exame de qualificação\\[-0.25cm]
-    do\\[-0.25cm]
-    Mestrado em Ciências}
+    Thesis submitted\\[-0.25cm] 
+    to the\\[-0.25cm]
+    Institute of Mathematics and Statistics\\[-0.25cm]
+    of the\\[-0.25cm]
+    University of São Paulo\\[-0.25cm]
+    to\\[-0.25cm]
+    obtain the title\\[-0.25cm]
+    of\\[-0.25cm]
+    Master in Science}
     
     \vskip 1.5cm
-    Programa: Ciência da Computação\\
-    Orientador: Prof. Dr. Roberto Hirata Junior
-    %Coorientador: Prof. Dr. Nome do Coorientador
+    Program: Computer Science\\
+    Advisor: Prof. Dr. Roberto Hirata Jr
 
 %   \vskip 1cm
 %   \normalsize{Durante o desenvolvimento deste trabalho o autor recebeu auxílio
 %   financeiro da CAPES/CNPq/FAPESP}
     
     \vskip 1.5cm % voltar para 0.5cm caso for usar a linha acima
-    \normalsize{São Paulo, novembro de 2016}
+    \normalsize{São Paulo, February 2018}
 \end{center}
 
 % ---------------------------------------------------------------------------- %
@@ -172,24 +171,23 @@ framexrightmargin=10pt
 %   final, corrigida, do trabalho
 %
 %
-%\newpage
-%\thispagestyle{empty}
-%    \begin{center}
-%        \vspace*{2.3 cm}
-%        \textbf{\Large{Título do trabalho a ser apresentado à \\
-%        CPG para a dissertação/tese}}\\
-%        \vspace*{2 cm}
-%    \end{center}
+\newpage
+\thispagestyle{empty}
+    \begin{center}
+        \vspace*{2.3 cm}
+        \textbf{\Large{Combined correlation rules to detect skin on colored images based on dynamic color clustering}}\\
+        \vspace*{2 cm}
+    \end{center}
 
-%    \vskip 2cm
+    \vskip 2cm
 
-%    \begin{flushright}
-%	Esta é a versão original da dissertação/tese elaborada pelo\\
-%	candidato (Nome Completo do Aluno), tal como \\
-%	submetida à Comissão Julgadora.
- %   \end{flushright}
+    \begin{flushright}
+	This is the original version of the thesis prepared by the \\
+	candidate Rodrigo Augusto Dias Faria, such as \\
+	submitted to the Examining Committee.
+    \end{flushright}
 
-%\pagebreak
+\pagebreak
 
 
 % ---------------------------------------------------------------------------- %
@@ -245,55 +243,46 @@ framexrightmargin=10pt
 % ---------------------------------------------------------------------------- %
 % Agradecimentos:
 % Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar esta página 
-% \chapter*{Agradecimentos}
-% Texto texto texto texto texto texto texto texto texto texto texto texto texto
-% texto texto texto texto texto texto texto texto texto texto texto texto texto
-% texto texto texto texto texto texto texto texto texto texto texto texto texto
-% texto texto texto texto. Texto opcional.
+\chapter*{Acknowledgements}
+Texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto. Texto opcional.
 
 
 % ---------------------------------------------------------------------------- %
 % Resumo
 \chapter*{Resumo}
 
-\noindent FARIA, R. A. D. \textbf{Classificação intervalar com aplicação em imagens coloridas}.
-Qualificação (Mestrado) - Instituto de Matemática e Estatística,
-Universidade de São Paulo, São Paulo, 2016.
+\noindent FARIA, R. A. D. \textbf{Regras de correlação combinadas para detectar pele em imagens coloridas baseadas em agrupamento dinâmico de cores}.
+Dissertação (Mestrado) - Instituto de Matemática e Estatística,
+Universidade de São Paulo, São Paulo, 2018.
 \\
 
-Há diversos fenômenos na natureza cuja quantificação mais adequada é representada por um intervalo, mais que por um número. Por exemplo, fenômenos cuja relação de ordem (pertinência) não é bem definida, ou quando queremos considerar a imprecisão, ou a incerteza das medidas na modelagem. 
-%
-Um exemplo mais concreto acontece em processamento de imagens de mais de uma cor cujo espaço não pode ser modelado naturalmente como um reticulado completo. 
-%
-Uma modelagem alternativa dos dados pode ser feita usando-se conjuntos \emph{fuzzy}. 
-%
-A capacidade de conjuntos \emph{fuzzy} expressarem transições graduais de pertinência e não pertinência tem uma grande utilidade. Ela fornece não só uma representação significativa e poderosa da medida de incerteza, mas também uma forma de expressar conceitos vagos em linguagem natural. 
-%
-Neste trabalho estudamos a classificação intervalar em imagens coloridas, em especial, na detecção de cor de pele, que tem um importante papel para uma ampla gama de aplicações de processamento de imagens, tais como, detecção e rastreamento de face, análise de gestos e outros domínios da iteração humano computador. 
+A detecção de pele desempenha um papel importante em uma ampla gama de aplicações em processamento de imagens e visão computacional. Em suma, existem três abordagens principais para detecção de pele: baseadas em regras, aprendizado de máquina e híbridos. Elas diferem em termos de precisão e eficiência computacional. Geralmente, as abordagens com aprendizado de máquina e as híbridas superam os métodos baseados em regras, mas exigem um conjunto de dados de treinamento grande e representativo, bem como um tempo de classificação custoso, que pode ser um fator decisivo para aplicações em tempo real. Neste trabalho, propomos uma melhoria de um novo método de detecção de pele baseado em regras que funciona no espaço de cores YCbCr. Nossa motivação baseia-se na hipótese de que: (1) a regra original pode ser revertida e, (2) pixels de pele humana não aparecem isolados, ou seja, as operações de vizinhança são levadas em consideração. O método é uma combinação de algumas regras de correlação baseadas nessas hipóteses. Essas regras avaliam as combinações de valores de crominância Cb, Cr para identificar os pixels de pele, dependendo da forma e tamanho dos agrupamentos de cores de pele gerados dinamicamente. O método é muito eficiente em termos de esforço computacional, bem como robusto em cenas de imagens muito complexas.
 \\
 
-\noindent \textbf{Palavras-chave:} conjuntos \emph{fuzzy}, modelos de cores, classificação supervisionada.
+\noindent \textbf{Palavras-chave:} detecção de pele, segmentação de pele humana, modelo de cores YCbCr, regras de correlação, agrupamento dinâmico de cores.
 
 % ---------------------------------------------------------------------------- %
 % Abstract
-%\chapter*{\textcolor{red}{Abstract}}
-%\noindent FARIA, R. A. D. \textbf{Avaliação de conjuntos \emph{fuzzy} em
-%classificação supervisionada sob diferentes modelos de cores}.
-%Dissertação (Mestrado) - Instituto de Matemática e Estatística,
-%Universidade de São Paulo, São Paulo, 2016.
-%\\
+\chapter*{Abstract}
+\noindent FARIA, R. A. D. \textbf{Combined correlation rules to detect skin on colored images based on dynamic color clustering}.
+Thesis (Masters Degree) - Institute of Mathematics and Statistics,
+University of São Paulo, São Paulo, 2018.
+\\
 
-%Elemento obrigatório, elaborado com as mesmas características do resumo em
-%\\
+Skin detection plays an important role in a wide range of image processing and computer vision applications. In short, there are three major approaches for skin detection: rule-based, machine learning and hybrid. They differ in terms of accuracy and computational efficiency. Generally, machine learning and hybrid approaches outperform the rule-based methods, but require a large and representative training dataset as well as costly classification time, which can be a deal breaker for real time applications. In this work, we propose an improvement of a novel method on rule-based skin detection that works in the YCbCr color space. Our motivation is based on the hypothesis that: (1) the original rule can be reversed and, (2) human skin pixels do not appear isolated, i.e. neighborhood operations are taken in consideration. The method is a combination of some correlation rules based on these hypothesis. Such rules evaluate the combinations of chrominance Cb, Cr values to identify the skin pixels depending on the shape and size of dynamically generated skin color clusters. The method is very efficient in terms of computational effort as well as robust in very complex image scenes.
+\\
 
-%\noindent \textbf{Keywords:} keyword1, keyword2, keyword3.
+\noindent \textbf{Keywords:} skin detection, human skin segmentation, YCbCr color model, correlation rules, dynamic color clustering.
 
 % ---------------------------------------------------------------------------- %
 % Sumário
 \tableofcontents    % imprime o sumário
 
 % ---------------------------------------------------------------------------- %
-\chapter{Lista de Abreviaturas}
+\chapter{List of Acronyms}
 \begin{tabular}{ll}
     AR          & Banco de imagens de faces de Aleix e Robert (\emph{Aleix and Robert Face Database})\\
     CIE         & Comissão Internacional de Iluminação (\emph{Commission Internationale de l'Eclairage})\\
@@ -320,7 +309,7 @@ Neste trabalho estudamos a classificação intervalar em imagens coloridas, em e
 \end{tabular}
 
 % ---------------------------------------------------------------------------- %
-\chapter{Lista de Símbolos}
+\chapter{List of Symbols}
 \begin{tabular}{ll}
     $L^*$       & Luminância \\
     $a^*$       & Eixo verde/vermelho no modelo de cores $L^*a^*b^*$ \\
