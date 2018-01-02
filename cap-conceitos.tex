@@ -1,123 +1,121 @@
 %% ------------------------------------------------------------------------- %%
-\chapter{Fundamentação Teórica}
+\chapter{Theoretical Background}
 \label{cap:conceitos}
+In this chapter, the theoretical concepts that apply to this research are stated. First, a short introduction to color models is provided in order to give an overview of the main characteristics of some of the most used in the computer vision and image processing area, on which this research is based. Thereafter, some machine learning methods are defined and explained, once they were used in the preliminary experiments of this work.                                                                                                                               
 
 %% ------------------------------------------------------------------------- %%
-\section{Modelos de cores}\index{cores!modelos de}
+\section{Color models}
 \label{sec:fundamentos}
 
-O uso de imagens coloridas em visão computacional ou no processamento de imagens pode ser motivado por dois fatores principais. O primeiro diz respeito a característica poderosa da cor de funcionar como um descritor que, frequentemente, simplifica a identificação e extração de um objeto em uma cena. O segundo está relacionado com a capacidade dos seres humanos de discernir milhares de tonalidades e intensidades, se comparado com apenas algumas dúzias de níveis de cinza \citep{gonzalez:02}.
+The use of color images in computer vision or image processing can be motivated by two main factors. The first refers to the powerful characteristic of color to function as a descriptor that often simplifies the identification and extraction of an object in a scene. The second is related to the ability of humans to discern thousands of tonalities and intensities compared to only a few dozen levels of gray \citep{gonzalez:02}.
 
-A percepção visual da cor pelo olho humano não deve variar conforme a distribuição espectral da luz natural incidente sobre um objeto. Em outras palavras, a aparência de cor dos objetos permanece estável sob condições de iluminação diferentes. Esse fenômeno é conhecido como constância de cor \citep{gevers:12}.
+The visual perception of color by the human eye should not vary according to the spectral distribution of the natural light incident upon an object. In other words, the color appearance of objects remains stable under different lighting conditions. This phenomenon is known as color constancy \citep{gevers:12}.
 
-Como exemplo, o gramado de um estádio de futebol permanece verde durante todo o dia, inclusive ao entardecer quando, de um ponto de vista físico, a luz solar
-tem um aspecto mais avermelhado.
+As an example, the grass of a soccer stadium remains green throughout the day, even at dusk when, from a physical point of view, sunlight has a more reddish appearance.
 
-A percepção humana das cores se dá pela ativação de células nervosas que enviam
-mensagens ao cérebro sobre brilho (\textit{brightness}), matiz (\textit{hue}) e 
-saturação (\textit{saturation}) que, geralmente, são as características usadas
-para distinguir uma cor de outra \citep{gonzalez:02}.
+The human perception of colors occurs by the activation of nerve cells that send signals to the brain about brightness, hue and saturation, which are usually the features used to distinguish one color from another \citep{gonzalez:02}.
 
-O brilho dá a noção de intensidade cromática. Matiz representa a cor dominante
-percebida por um observador. Já a saturação refere-se à pureza relativa ou quantidade de luz branca aplicada ao matiz. Combinados, matiz e saturação são conhecidos como cromaticidade e, portanto, uma cor deve ser caracterizada por seu brilho e cromaticidade \citep{gonzalez:02}.
+The brightness gives the notion of chromatic intensity. Hue represents the dominant color perceived by an observer. Saturation refers to the relative purity or amount of white light applied to the hue. Combined, hue and saturation are known as chromaticity and, therefore, a color must be characterized by its brightness and chromaticity \citep{gonzalez:02}.
 
-As cores podem ser especificadas por modelos matemáticos em tuplas de números em um sistema de coordenadas e um subespaço dentro desse sistema onde cada cor
-é representada por um único ponto. Tais modelos são conhecidos como modelo de cores \citep{gonzalez:02}.
+Colors can be specified by mathematical models in tuples of numbers in a coordinate system and a subspace within that system where each color is represented by a single point. Such models are known as the color models \citep{gonzalez:02}.
 
-Esses modelos podem ser classificados como de dois tipos: os modelos aditivos em que as intensidades das cores primárias são adicionadas para produzir outras cores e subtrativos, onde as cores são geradas subtraindo-se o comprimento da onda dominante da luz branca.
+These models can be classified as of two types: the additive models in which the primary color intensities are added to produce other colors and subtractive, where colors are generated by subtracting the length of the dominant wave from the white light.
 
-As seções seguintes descrevem brevemente alguns dos principais modelos de cores, bem como seus variantes e principais áreas de aplicação.
+The following sections briefly describe some of the major color models, as well as their variants and main areas of application.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de Munsell}\index{cores!modelo de Munsell}
+\subsection{Munsell color model}
 \label{sec:modelo_cores_munsell}
 
-Pioneiro na tentativa de organizar a percepção de cor em um espaço de cores, Albert H. Munsell conseguiu aliar a arte e a ciência das cores em uma única teoria \citep{konstantinos:00}.
+Pioneer in an attempt to organize the perception of color in a color space, Albert H. Munsell was able to combine the art and science of colors in a single theory \citep{konstantinos:00}.
 
-O princípio da igualdade de espaçamento entre os componentes do modelo é a ideia principal do modelo de cores de Munsell \citep{konstantinos:00}. Esses componentes são matiz (\textit{hue}), luminosidade (\textit{value}) e saturação (\textit{chroma}).
+The principle of equality of visual spacing between the components of the model is the essential idea of the Munsell color model. These components are hue, value, corresponding to luminance, and chroma, corresponding to saturation \citep{konstantinos:00}.
 
-O modelo é representado por uma forma cilíndrica e pode ser visto na figura~\ref{fig:munsell-system}. O matiz está disposto no eixo circular que consiste de cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10.
+The model is represented by a cylindrical shape and it can be seen in the figure ~\ref{fig:munsell-system}. The hue is arranged in the circular axis consisting of five base as well as five secondary colors, the saturation in the radial axis and the luminance in the vertical axis in a range varying from 0 to 10.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.55\textwidth]{munsell-system}
   % fonte https://commons.wikimedia.org/wiki/File:Munsell-system.svg
-  \caption[Modelo de cores de Munsell.]{Modelo de cores de Munsell representado por uma forma cilíndrica. O matiz está disposto no eixo circular que consiste de cinco cores de base e cinco secundárias, a saturação no eixo radial e a luminosidade no eixo vertical em uma escala variando de 0 a 10. Fonte: \citet{rus:07}.}
+  \caption[Munsell color model.]{Munsell color model represented by a cylindrical shape. The hue is arranged on the circular axis consisting of five base and five secondary colors, the saturation on the radial axis and the luminance on the vertical axis in a range varying from 0 to 10. Source: \citet{rus:07}.}
   \label{fig:munsell-system} 
 \end{figure}
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo CIE}\index{cores!modelo CIE}
+\subsection{CIE color model}
 \label{sec:modelo_cores_cie}
 
-Em 1931, o CIE estabeleceu o primeiro modelo matemático de especificação numérica da cor, cujo objetivo era analisar a relação entre os aspectos físicos das cores no espectro eletromagnético e sua percepção pelo sistema visual humano para determinar como uma pessoa comum percebe a cor. Uma revisão desta especificação foi publicada em 1964 \citep{gonzalez:02}.
+In 1931, the CIE established the first mathematical model of color numerical specification, whose objective was to analyze the relationship between the physical aspects of colors in the electromagnetic spectrum and their perception by the human visual system to determine how an ordinary person perceives the color. A review of this specification was published in 1964 \citep{gonzalez:02}.
 
-O experimento que originou o padrão consistia em detectar as cores percebidas por um observador a partir de uma mistura de três cores primárias X, Y e Z chamadas de valores tristímulus. Estas coordenadas deram origem ao espaço de cores \textbf{CIE XYZ} que engloba todas as cores que podem ser percebidas por um ser humano comum e, por esta razão, é considerado uma representação independente de dispositivo \citep{konstantinos:00}.
+The experiment that originated the standard consisted in detecting the colors perceived by an observer from a mixture of three primary colors X, Y and Z called tristimulus values. These coordinates gave rise to the CIE XYZ color space which encompasses all the colors that can be perceived by an ordinary human being. For this reason, it is considered an device independent representation \citep{konstantinos:00}.
 
-O sistema proposto pelo CIE XYZ para descrição de uma cor é baseado em um componente de luminância Y e outros dois componentes adicionais X e Z que dão a informação de cromaticidade. Esse sistema é formado por cores imaginárias que podem ser expressas como combinações das medidas normalizadas abaixo:
-
+The system proposed by the CIE XYZ to describe a color is based on a luminance component Y, and two additional components X and Z, that bring the chromaticity information. This system is formed by imaginary colors that can be expressed as combinations of the normalized measures shown in the equations~\ref{eq:cie_x}, \ref{eq:cie_y} and \ref{eq:cie_z}.
 
 \begin{equation}
   x = \frac{X}{X + Y + Z}
+\label{eq:cie_x}
 \end{equation}
 
 \begin{equation}
   y = \frac{Y}{X + Y + Z}
+\label{eq:cie_y}
 \end{equation}
 
 \begin{equation}
   z = \frac{Z}{X + Y + Z}
+\label{eq:cie_z}
 \end{equation}
 
-com $x + y+ z = 1$.
+where $x + y+ z = 1$.
 
-As combinações de valores negativos e outros problemas relacionados à seleção de um conjunto de primárias reais são eliminados.  As coordenadas de cromaticidade $x$ e $y$ permitem representar todas as cores num plano bidimensional, conhecido como diagrama de cromaticidade, que pode ser visto na figura~\ref{fig:cie-cromaticity-diagram}.
+Combinations of negative values and other problems related to selecting a set of real primaries are eliminated. The chromaticity coordinates $x$ and $y$ allow to represent all colors in a two-dimensional plane, also known as a chromaticity diagram, which can be seen in the figure ~\ref{fig:cie-cromaticity-diagram}.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.5\textwidth]{cie-cromaticity-diagram}
   % fonte https://en.wikipedia.org/wiki/File:CIE1931xy_blank.svg
-  \caption[Diagrama de cromaticidade CIE 1931]{Diagrama de cromaticidade CIE 1931. Os pontos que representam as cores puras no espectro eletromagnético são rotulados de acordo com os seus comprimentos de onda e estão localizados ao longo da curva que vai da extremidade direita do eixo $x$, correspondente à cor vermelha, até a extremidade esquerda do mesmo eixo, correspondente à cor violeta, formando um polígono parecido com uma ferradura. Os pontos internos correspondem a todas as combinações possíveis de cores visíveis. Fonte: \citet{ben:09}.}
+  \caption[CIE 1931 chromaticity diagram]{CIE 1931 chromaticity diagram. The points representing pure colors in the electromagnetic spectrum are labeled according to their wavelengths and are located along the curve from the right end of the x-axis, corresponding to the red color, to the left end of the same axis, corresponding to the violet color, forming a polygon similar to a horseshoe. The internal points correspond to all possible combinations of visible colors. Source: \citet{ben:09}.}
   \label{fig:cie-cromaticity-diagram} 
 \end{figure}
 
-As coordenadas $(x = 1/3, y = 1/3)$ correspondem à localização da luz branca, também conhecida como ponto branco, e servem de referência no processo de captura de imagem, codificação ou reprodução.
+The coordinates $ (x = 1/3, y = 1/3) $ correspond to the location of white light, also known as white point, and serve as reference in the process of image capture, coding, or reproduction.
 
-O CIE também derivou e padronizou outros dois modelos de cores a partir da especificação do CIE XYZ e, da mesma maneira, são independente de dispositivo. Ambos são perceptualmente uniformes, ou seja, distâncias perceptuais iguais separam todas as cores \citep{vezhnevets:03}. Como exemplo, a escala de cinzas do espaço deve permitir uma transição suave entre o preto e o branco.
+CIE also derived and standardized two other color models based on CIE XYZ specification and, likewise, are device independent. Both are perceptually uniform, which means that equal perceptual distances separate all colors in the system~\citep{vezhnevets:03}. As an example, the gray scale of the space should allow for a smooth transition between black and white.
 
-O primeiro deles foi concebido para reduzir o problema de não uniformidade perceptual. Alguns diagramas de Escala Uniforme de Cromaticidade (UCS) foram propostos com base em equações matemáticas para transformar os valores XYZ ou as coordenadas $x, y$ em um novo conjunto de valores $(u, v)$, o que deu origem ao diagrama de cromaticidade 1960 CIE $uv$ \citep{gevers:12}.
+The first one was designed to reduce the problem of perceptual non-uniformity. Some Uniform Chromaticity Scale (UCS) diagrams were proposed based on mathematical equations to transform the values XYZ or the coordinates $x, y$ into a new set of values $(u, v)$, which gave rise to the 1960 CIE $uv$ chromaticity diagram~\citep{gevers:12}.
 
-Ainda com resultados insatisfatórios, o CIE fez uma nova mudança multiplicando o componente $v$ por um fator 1,5. Além disso, a escala de luminosidade dada pelo componente Y foi substituída por $L^* = [0, 100]$ para melhor representar as diferenças na luminosidade que são equivalentes. Esta revisão originou o modelo de cores \textbf{CIE 1976 $L^*u^*v^*$}, comumente conhecido pela sigla CIELuv \citep{gevers:12}.
+Still with unsatisfactory results, the CIE made a new change by multiplying the $v$ component by a factor of 1.5. In addition, the brightness scale given by the Y component has been replaced by $L^* = [0, 100]$ to better represent the differences in luminosity that are equivalent. This revision originated the CIE 1976 $L^*u^*v^*$ color model, commonly known by the acronym CIELuv~\citep{gevers:12}.
 
-Em 1976 o CIE adotou um novo modelo de cores, baseado no modelo $L, a, b$, proposto por Richard Hunter em 1948, que melhor representava o espaçamento uniforme das cores. Denominado \textbf{1976 CIE $L^*a^*b^*$} e conhecido pela sigla CIELab, é um espaço baseado em cores oponentes \footnote{Teoria iniciada por volta do ano de 1500 quando Leonardo da Vinci concluiu que as cores são produzidas pela mistura de amarelo e azul, verde e vermelho, e branco e preto. Em 1950 houve a confirmação desta teoria quando sinais de cores oponentes foram detectados na conexão óptica entre a retina e o cérebro \citep{gevers:12}.} no qual os estímulos de cor da retina são convertidos para distinções entre claro e escuro, vermelho e verde, e azul e amarelo, representados pelos eixos $L^*$, $a^*$, e $b^*$, respectivamente \citep{gevers:12}.
+In 1976 the CIE adopted a new color model, based on the $L, a, b$ model, proposed by Richard Hunter in 1948, which best represented the uniform spacing of colors. Named CIE $L^*a^*b^*$ and known by the acronym CIELab, it is a space based on opponent colors \footnote{Theory started around 1500 when Leonardo da Vinci concluded that colors are produced by mixing yellow and blue, green and red, and white and black. In 1950, this theory was confirmed when optically-colored signals were detected at the optical connection between the retina and the brain~\citep{gevers:12}.} in which the color stimuli of retina is converted to distinctions between light and dark, red and green, and blue and yellow, represented by the axes $L^*$, $a^*$, and $b^*$, respectively~\citep{gevers:12}.
+
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo RGB}\index{cores!modelo RGB}
+\subsection{RGB color model}
 \label{sec:modelo_cores_rgb}
 
-O modelo RGB, acrônimo do inglês \textit{Red, Green, Blue}, é um modelo de cores aditivo no qual as três cores primárias vermelho, verde e azul são somadas para produzir as demais \citep{gonzalez:02}.
+The RGB model, an acronym for Red, Green, and Blue, is an additive color model in which the three primary colors red, green and blue are added to produce the others \citep{gonzalez:02}.
 
-Esse sistema foi baseado na teoria tricromática de Thomas Young e Hermann Helmholtz em meados do século 19 e pode ser representado graficamente
-através do cubo unitário definido sobre os eixos R, G e B, como ilustrado na figura~\ref{fig:rgb-cube} \citep{konstantinos:00}.
+This system was based on the trichromatic theory of Thomas Young and Hermann Helmholtz in the mid-19th century and can be represented graphically
+through the unit cube defined on the axes R, G and B, as illustrated in the figure~\ref{fig:rgb-cube} \citep{konstantinos:00}.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.35\textwidth]{rgb-cube}
   % http://www.scratchapixel.com/old/lessons/3d-basic-lessons/lesson-5-colors-and-digital-images/color-spaces/
-  \caption[Cubo unitário representando as cores do modelo RGB]{Cubo unitário representando as cores do modelo RGB. A origem, dada pelo vértice $(0, 0, 0)$, representa a cor preta. Já o vértice $(1, 1, 1)$, oposto à origem, representa a cor branca. Os vértices destacados sobre os eixos representam as cores primárias e os demais são o complemento de cada uma delas. Cada ponto no interior do cubo corresponde a uma cor que pode ser representada pela tripla $(r, g, b)$, onde $r, g, b \in [0, 1]$. Os tons de cinza são representados ao longo da diagonal principal do cubo, sendo que cada ponto ao longo dessa diagonal é formado por contribuições iguais de cada primária. Fonte: adaptado de \citet{gonzalez:02}.}
+  \caption[Unit cube representing the colors of the RGB model]{Unit cube representing the colors of the RGB model. The origin, given by the vertex $(0, 0, 0)$, represents the black color. The vertex $(1, 1, 1)$, opposite the origin, represents the white color. The highlighted vertices on the axes represent the primary colors and the others are the complement of each. Each point inside the cube corresponds to a color that can be represented by the triple $(r, g, b)$, where $r, g, b \in [0, 1]$. The shades of gray are represented along the main diagonal of the cube, with each point along this diagonal being formed by equal contributions of each primary color. Source: adapted from \citet{gonzalez:02}.}
   \label{fig:rgb-cube} 
 \end{figure}
 
-Vale ressaltar que existem duas formas de representar o espaço RGB: linear e não linear. O sistema supra citado mostra o modelo não linear, cuja sigla é $R'G'B'$, e é o mais utilizado por dispositivos e aplicações pela sua similaridade com o sistema visual humano. Na literatura, esse sistema é frequentemente citado com a sigla RGB, o que torna a nomenclatura dúbia, uma vez que o modelo linear também é denominado RGB e, portanto, a conversão entre os espaços de cores deve ser feita com certa cautela. Também é importante citar que os valores RGB lineares são raramente utilizados para representar uma imagem já que são, perceptualmente, altamente não uniformes \citep{konstantinos:00}.
+It is noteworthy that there are two ways of representing the RGB space: linear and non-linear. The above-mentioned system shows the non-linear model, whose abbreviation is $R'G'B'$, and is most used by devices and applications because of their similarity to the human visual system. In the literature, this system is frequently cited with the acronym RGB, which makes the nomenclature dubious, since the linear model is also called RGB and, therefore, the conversion between color spaces must be done with some caution. It is also important to note that linear RGB values are rarely used to represent an image since they are perceptually highly non-uniform \citep{konstantinos:00}.
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo CMY}\index{cores!modelo CMY}
+\subsection{CMY color model}
 \label{sec:modelo_cores_cmy}
 
-O modelo CMY é baseado nas cores primárias complementares Ciano, Magenta e Amarelo e, diferentemente do RGB, é um modelo de cores subtrativo no qual as cores são geradas subtraindo-se o comprimento da onda dominante da luz branca e, por isso, a cor resultante corresponde à luz que é refletida \citep{gonzalez:02}.
+The CMY model is based on the complementary primary colors Cyan, Magenta, and Yellow and, unlike RGB, is a subtractive color model in which colors are generated by subtracting the length of the dominant wave from the white light and, therefore, the resulting color corresponds to the light that is reflected \citep{gonzalez:02}.
 
-Uma maneira de obter o sistema CMY é:\\
+One way to get the CMY system is:\\
 \begin{equation}
   \begin{bmatrix}
     C \\ M \\ Y
@@ -130,7 +128,7 @@ Uma maneira de obter o sistema CMY é:\\
   \end{bmatrix}
 \end{equation}
 
-\noindent ou ainda, efetuando uma mudança de coordenadas subtraindo-se as cores primárias R, G e B da cor branca $W = (1, 1, 1)$ \citep{gonzalez:02}:
+\noindent or by making a change of coordinates by subtracting the primary colors R, G and B of the white color $W = (1, 1, 1)$ \citep{gonzalez:02}:
 \begin{equation}
   \begin{bmatrix}
     C \\ M \\ Y
@@ -143,25 +141,25 @@ Uma maneira de obter o sistema CMY é:\\
   \end{bmatrix}
 \end{equation}
 
-Assim como o RGB, o CMY é dependente de dispositivo. O modelo é amplamente utilizado em equipamentos que depositam pigmentos coloridos sobre papel, tais como impressoras ou fotocopiadoras coloridas. A figura \ref{fig:cmy-model} mostra como os componentes do modelo são combinados para gerar as demais cores.
+Likely RGB, CMY is device dependent. The model is widely used in equipment that deposits colored pigments on paper, such as color printers or photocopiers. The figure~\ref{fig:cmy-model} shows how the model components are combined to generate the other colors.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.25\textwidth]{cmy-model}
   % https://en.wikipedia.org/wiki/File:SubtractiveColor.svg
-  \caption[Modelo de cores subtrativo CMY]{Modelo de cores subtrativo CMY. É interessante observar que a intersecção de amarelo com magenta gera a cor vermelha, magenta com ciano gera a cor azul e ciano com amarelo gera a cor verde. Fonte: \citet{rus:08}.}
+  \caption[CMY subtractive color model]{CMY subtractive color model. It is interesting to note that the intersection of yellow with magenta generates the red color, magenta with cyan generates the blue color and cyan with yellow generates the green color. Source: \citet{rus:08}.}
   \label{fig:cmy-model}
 \end{figure}
 
-A sobreposição das cores primárias CMY em iguais quantidades para gerar a cor preta tipicamente cria uma tonalidade próxima ao marrom ou verde escuro. Para evitar esse efeito indesejado, normalmente adiciona-se o componente de cor preta no sistema, representado pela letra K, obtendo-se um novo modelo conhecido como \textbf{CMYK} \citep{gonzalez:02}.
+Overlapping the CMY primary colors in equal amounts to generate the black color typically creates a tint that is close to brown or dark green. To avoid this undesired effect, the black component is usually added to the system, represented by the letter K. This operation gives rise to a new model known as \textbf{CMYK}~\citep{gonzalez:02}.
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores da família YUV}\index{cores!modelos da família YUV}
+\subsection{Color models of the YUV family}
 \label{sec:modelo_cores_yuv}
 
-O termo YUV refere-se a uma família de espaços de cores dos quais a informação de luminância, representada pelo componente Y, é codificada separadamente da crominância, dada pelos componentes U e V. Os componentes U e V são representações dos sinais da diferença do azul subtraído da luminância (B-Y) e vermelho subtraído da luminância (R-Y). É utilizado para representar as cores em sistemas de transmissão analógica de televisão nos padrões Linha de Fase Alternada (PAL) e Cor Sequencial Com Memória (SECAM) \citep{pedrini:08}.
+The acronym YUV stands to a family of color spaces of which the luminance information, represented by the Y component, is coded separately from the chrominance, given by the components U and V. The components U and V are representations of signals of the difference of the blue subtracted from luminance (B-Y) and red subtracted from luminance (R-Y). It is used to represent colors in analogue television transmission systems in the Phase Alternating Line (PAL) and Sequential Color with Memory (SECAM)~\citep{pedrini:08}.
 
-A tranformação do espaço RGB para YUV é dada por:\\
+The transformation of the RGB space to YUV is given by:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ U \\ V
@@ -175,11 +173,11 @@ A tranformação do espaço RGB para YUV é dada por:\\
     R \\ G \\ B
   \end{bmatrix}
 \end{equation}
-onde $0 \leq R, G, B \leq 1$.
+where $0 \leq R, G, B \leq 1$.
 
-Análogo ao YUV, o modelo \textbf{YIQ} foi adotado em 1950 pelo Comitê Nacional do Sistema de Televisão (NTSC), um padrão americano para transmissão de sinal de televisão a cores. Nesse modelo, o componente Y corresponde à luminância e os componentes I (matiz) e Q (saturação) codificam a informação de crominância \citep{pedrini:08}.
+Analogous to the YUV, the YIQ model was adopted in 1950 by the National Television System Committee (NTSC), an American standard for color television signal transmission. In this model, the Y component corresponds to luminance and the components I (hue) and Q (saturation) encode the chrominance information \citep{pedrini:08}.
 
-A tranformação do espaço RGB para YIQ é dada por:\\
+The transformation of the RGB space to YIQ is given by:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ I \\ Q
@@ -193,13 +191,13 @@ A tranformação do espaço RGB para YIQ é dada por:\\
     R \\ G \\ B
   \end{bmatrix}
 \end{equation}
-onde $0 \leq R, G, B \leq 1$.
+where $0 \leq R, G, B \leq 1$.
 
-Um outro modelo de cores da família YUV é o \textbf{YCbCr}, definido matematicamente por uma transformação de coordenadas em relação a algum espaço RGB \citep{pedrini:08}.
+Another color model of the YUV family is the YCbCr, mathematically defined by a coordinate transformation with respect to some RGB space~\citep{pedrini:08}.
 
-O modelo YCbCr é largamente utilizado em vídeos digitais. Nesse modelo, o componente Y representa a luminância, o componente Cb dá a medida da diferença entre a cor azul e um valor de referência, análogo ao componente Cr que é a medida da diferença entre a cor vermelha e um valor de referência \citep{pedrini:08}.
+The YCbCr model is widely used in digital videos. In this system, the Y component represents luminance, Cb component gives the measurement of the difference between the blue color and a reference value, similar to the Cr component which is the measurement of the difference between the red color and a reference value~\citep{pedrini:08}.
 
-A conversão do espaço RGB para YCbCr é dada por:\\
+The transformation of the RGB space to YCbCr is given by:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ Cb \\ Cr
@@ -216,30 +214,30 @@ A conversão do espaço RGB para YCbCr é dada por:\\
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Modelo de cores da família HSI}\index{cores!modelos da família HSI}
+\subsection{Color models of the HSI family}
 \label{sec:modelo_cores_hsi}
 
-Modelos baseados no Matiz, Saturação e Intensidade (HSI) são mais adequados para aplicações de processamento de imagens, do ponto de vista do usuário, pela correlação com a percepção humana da cor \citep{konstantinos:00}.
+Hue, Saturation, and Intensity (HSI) models are best suited for image processing applications from the user's point of view, due the correlation with human perception of the color~\citep{konstantinos:00}.
 
-Nesse modelo, assim como no YIQ, a intensidade dada pelo componente I é decomposta da informação de crominância, representada pelo matiz (H) e saturação (S) \citep{konstantinos:00}. A combinação desses componentes resulta em uma estrutura piramidal que pode ser vista na figura~\ref{fig:hsi-model}.
+In this model, as in YIQ, the intensity given by I component is decomposed from the chrominance information, represented by the hue (H) and saturation (S) \citep{konstantinos:00}. The combination of these components results in a pyramidal structure which can be seen in figure~\ref{fig:hsi-model}.
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.6\textwidth]{hsi-model}
+  \includegraphics[width=.7\textwidth]{hsi-model}
   % http://www.blackice.com/images/HSIColorModel.jpg
-  \caption[Representação gráfica do modelo HSI]{Representação gráfica do modelo HSI. O matiz descreve a cor em si, sob a forma de um ângulo $\theta$, onde $\theta \in [0, 360]$. O vermelho está situado a 0 grau, amarelo a 60, verde a 120 e assim sucessivamente. O componente de saturação, que varia entre 0 e 1, indica o quanto a cor está poluída com a cor branca. A escala de intensidade está entre $[0, 1]$, onde 0 significa preto e 1, branco. Fonte: \citet{blackice:16}.}
+  \caption[Graphical representation of the HSI model]{Graphical representation of the HSI model. The hue describes the color itself, in the form of an angle $\theta$, where $\theta \in [0, 360]$. Red is at 0 degree, yellow at 60, green at 120, and so on. The saturation component, which varies between 0 and 1, indicates how much color is polluted with white color. The intensity scale is between $[0, 1]$, where 0 means black and 1, white. Source: \citet{blackice:16}.}
   \label{fig:hsi-model} 
 \end{figure}
 
-A transformação dos componentes do espaço RGB para HSI é dada pelas equações:
+The transformation of the components of the RGB space to HSI is given by the equations:
 \begin{align}
 \label{eq:rgb_para_hsi}
 \begin{split}
   \theta &= cos^{-1} \bigg( \frac{(R - G) + (R - B)}{2 \sqrt{(R - G)^2 + (R - B)(G - B)}} \bigg)
   \\[0.5em]
   H &= \begin{cases}
-            \theta,       & \text{se}\ B \leq G\\
-            360 - \theta, & \text{caso contrário}\\
+            \theta,       & \text{if}\ B \leq G\\
+            360 - \theta, & \text{otherwise}\\
        \end{cases}
   \\[0.5em]
   S &= 1 - \frac{3 min(R, G, B)}{R + G + B}
@@ -248,440 +246,60 @@ A transformação dos componentes do espaço RGB para HSI é dada pelas equaçõ
 \end{split}
 \end{align}
 
-É importante ressaltar que os valores R, G e B devem estar normalizados no intervalo entre 0 e 1. A intensidade $I$ e a saturação $S$ também estão normalizadas entre 0 e 1.
+It is important to note that the values R, G and B must be normalized in the interval between 0 and 1. The intensity $I$ and the saturation $S$ are also normalized between 0 and 1.
 
-Outro modelo desta família é formado pelos componentes Matiz, Saturação e Luminância (\textbf{HSV}) e sua representação gráfica tridimensional é uma pirâmide hexagonal derivada do cubo RGB \citep{pedrini:08}.
+Another model of this family is formed by the components Hue, Saturation and Value (HSV) and its three-dimensional graphical representation is a hexagonal pyramid derived from the RGB cube \citep{pedrini:08}. Value, in this context, is the luminance component.
 
-Os vários matizes estão representados na parte superior da pirâmide, a saturação é medida ao longo do eixo horizontal e a luminância é medida ao longo do eixo vertical, que passa pelo centro da pirâmide. O matiz, que corresponde às arestas ao redor do eixo vertical, varia de 0 (vermelho) a 360 graus e o ângulo entre os vértices é de 60 graus. A saturação varia de 0 a 1 e é representada como sendo a razão entre a pureza de um determinado matiz e a sua pureza máxima, ou seja, quando $S = 1$. A luminância varia de 0, no pico da pirâmide representando a cor preta, a 1 na base, onde as intensidades das cores são máximas \citep{pedrini:08}.
+The various hue shades are represented at the top of the pyramid, the saturation is measured along the horizontal axis and value is measured along the vertical axis, which passes through the center of the pyramid. The hue, which corresponds to the edges around the vertical axis, varies from 0 (red) to 360 degrees and the angle between the vertices is 60 degrees. The saturation varies from 0 to 1 and is represented as the ratio of the purity of a given hue to its maximum purity, that is, when $S = 1$. Value varies from 0, at the peak of the pyramid representing the black color, to 1 at the base, where the intensities of the colors are maximum~\citep{pedrini:08}.
 
-A conversão do espaço RGB para HSV é dada pelas equações:
+The transformation of the components of the RGB space to HSV is given by the equations:
 \begin{align}
 \label{eq:rgb_para_hsv}
 \begin{split}
   H &=  \begin{cases}
-            60\ffrac{(G - B)}{M - m}, & \text{se}\ M = R\\[0.7em]
-            60\ffrac{(B - R)}{M - m} + 120, & \text{se}\ M = G\\[0.7em]
-            60\ffrac{(R - G)}{M - m} + 240, & \text{se}\ M = B
+            60\ffrac{(G - B)}{M - m}, & \text{if}\ M = R\\[0.7em]
+            60\ffrac{(B - R)}{M - m} + 120, & \text{if}\ M = G\\[0.7em]
+            60\ffrac{(R - G)}{M - m} + 240, & \text{if}\ M = B
        \end{cases}
   \\[0.5em]
   S &=  \begin{cases}
-            \ffrac{(M - m)}{M}, \quad &\text{se}\ M \neq 0\\[0.7em]
-            0, \quad &\text{caso contrário}\\
+            \ffrac{(M - m)}{M}, \quad &\text{if}\ M \neq 0\\[0.7em]
+            0, \quad &\text{otherwise}\\
        \end{cases}
   \\[0.5em]
   V &= M
 \end{split}
 \end{align}
 
-\noindent onde $m = min(R, G ,B)$ e $M = max(R, G ,B)$. A luminância $V$ e a saturação $S$ estão normalizadas entre 0 e 1. Já o matiz $H$ varia entre 0 e 360 graus.
+\noindent where $m = min(R, G ,B)$ and $M = max(R, G ,B)$. The luminance $V$ and saturation $S$ are normalized between 0 and 1. The $H$ hue ranges from 0 to 360 degrees.
 
-Da mesma forma que o HSV, o modelo Matiz, Saturação e Luminosidade (\textbf{HSL}) é uma representação tridimensional e é formado por dois cones de altura 1, cujas bases são coincidentes \citep{pedrini:08}.
+Similarly to HSV, the Hue, Saturation and Lightness (HSL) model is a three-dimensional representation and is formed by two cones of height 1, whose bases are coincident \citep{pedrini:08}.
 
-O matiz é determinado pelos pontos no círculo das bases comuns aos cones. A saturação varia de 0 a 1, conforme a distância ao eixo do cone. A luminosidade está ao longo do eixo vertical comum aos dois cones e varia na escala $[0, 1]$, onde 0 significa preto e 1, branco \citep{pedrini:08}.
+The hue is determined by the points in the circle of the common bases to the cones. The saturation varies from 0 to 1, depending on the distance to the axis of the cone. The lightness is along the vertical axis common to the two cones and varies in the scale $[0, 1]$, where 0 means black and 1, white \citep{pedrini:08}.
 
-A conversão do espaço RGB para HSL é dada pelas equações:
+The conversion of the RGB space to HSL is given by the equations:
 \begin{align}
 \label{eq:rgb_para_hsl}
 \begin{split}
   H &=  \begin{cases}
-            60\ffrac{(G - B)}{M - m}, & \text{se}\ M = R\\[0.7em]
-            60\ffrac{(B - R)}{M - m} + 120, & \text{se}\ M = G\\[0.7em]
-            60\ffrac{(R - G)}{M - m} + 240, & \text{se}\ M = B
+            60\ffrac{(G - B)}{M - m}, & \text{if}\ M = R\\[0.7em]
+            60\ffrac{(B - R)}{M - m} + 120, & \text{if}\ M = G\\[0.7em]
+            60\ffrac{(R - G)}{M - m} + 240, & \text{if}\ M = B
        \end{cases}
   \\[0.5em]
   S &=  \begin{cases}
-            \ffrac{(M - m)}{M + m}, & \text{se}\ 0 < L \leq 0,5\\[0.7em]
-            \ffrac{(M - m)}{2 - (M + m)}, & \text{se}\ L > 0,5\\[0.5em]
-            0, & \text{se}\ M = m\\
+            \ffrac{(M - m)}{M + m}, & \text{if}\ 0 < L \leq 0,5\\[0.7em]
+            \ffrac{(M - m)}{2 - (M + m)}, & \text{if}\ L > 0,5\\[0.5em]
+            0, & \text{if}\ M = m\\
        \end{cases}
   \\[0.5em]
   L &= \frac{M + m}{2}
 \end{split}
 \end{align}
 
-\noindent onde $m = min(R, G ,B)$ e $M = max(R, G ,B)$. A luminância $V$ e a saturação $S$ estão normalizadas entre 0 e 1. Observe que a transformação do matiz $H$ é a mesma utilizada na conversão do espaço RGB para HSV em \ref{eq:rgb_para_hsv} e varia entre 0 e 360 graus.
+\noindent where $m = min(R, G ,B)$ and $M = max(R, G ,B)$. The lightness $V$ and saturation $S$ are normalized between 0 and 1. Note that the transformation of the $H$ component is the same as that used in the conversion of the RGB to HSV space in \ref{eq:rgb_para_hsv} and varies between 0 and 360 degrees.
 
-Todos os modelos de cores desta família têm a propriedade de se pensar em cores mais claras, obtidas pelo aumento do brilho ou luminosidade, e mais escuras, pela diminuição dos mesmos valores. As cores intermediárias são produzidas pela diminuição da saturação \citep{pedrini:08}.
-
-%% ------------------------------------------------------------------------- %%
-\section{Teoria \emph{fuzzy}}\index{fuzzy!teoria}
-\label{sec:teoria_fuzzy}
-
-Em muitos problemas, não há dificuldade em determinar se um dado elemento é ou não parte de um grupo. Essa ideia vem da teoria clássica de conjuntos e é embasada no conceito fundamental de conjunto \citep{chen:00}. Pode-se, por exemplo, afirmar que o número $7$ pertence ao conjunto dos números naturais e, da mesma maneira, que o número $-7$ não pertence a esse mesmo conjunto. Este é um caso em que a relação de ordem pode ser definida com a lógica clássica. Em outras palavras, quando questionado se o número $7$ pertence ao conjunto dos naturais tem-se, apenas, duas respostas possíveis: sim ou não.
-
-Entretanto, há inúmeros indivíduos ou observações na natureza que nem sempre podem ser classificados de tal forma, pelo fato de que a relação de pertinência não é bem definida \citep{pedrycz:98}. Como exemplo, o conjunto das pessoas altas, os números reais aproximadamente zero ou o grupo de alunos mais inteligentes da escola. Ocorre que, nesses casos, a aplicação da lógica clássica para classificar elementos como parte de um grupo ou não é imprecisa. Em outras palavras, se tomado $x = 1,70m$ como o limiar que separa as pessoas altas das baixas, fica evidente que a utilização da lógica clássica não resulta em interpretações realísticas, pois uma pessoa com $1,69m$ é, portanto, baixa ou, pode-se dizer ainda, que não pertence ao grupo das pessoas altas. Ora, apenas $1$ centímetro separa tal pessoa de um grupo ou de outro. Analogamente, uma pessoa com $1,71m$ está muito próxima de pertencer ao grupo das pessoas baixas.
-
-Claramente, a resposta a ser obtida quando da análise de possibilidades desse tipo é fortemente dependente do contexto, pois há um alto grau de incerteza inerente aos elementos e conjuntos sendo considerados.
-
-O conceito de incerteza mudou gradativamente na ciência e na matemática. Na ciência, esta mudança foi manifestada por uma transição gradual da visão tradicional, que insiste que a incerteza é indesejável e, por esta razão, ela deve ser evitada por todos os meios possíveis, para uma visão alternativa, que é tolerante à incerteza. De acordo com a visão tradicional, a ciência deve esforçar-se de certeza em todas as suas manifestações, ou seja, com precisão, especificidade, nitidez, consistência e, por conseguinte, a incerteza é considerada como não científica. De acordo com a visão alternativa, a dúvida é considerada essencial para a ciência; não é só uma praga inevitável, mas tem, de fato, uma grande utilidade \citep{klir:95}.
-
-E com base na ideia moderna de que a incerteza é algo útil na ciência é que Zadeh convergiu para um de seus mais importantes trabalhos: a teoria de conjuntos \emph{fuzzy}, cuja abordagem sobre conjuntos dá-se sob a ótica de que os limites entre eles não são precisos e, portanto, é possível estabelecer funções que forneçam um certo grau de pertinência\index{pertinência!grau de} de um elemento a um dado conjunto \citep{zadeh:65}.
-
-A capacidade de conjuntos \emph{fuzzy} expressarem transições graduais de pertinência e não pertinência tem uma grande utilidade. Ela fornece não só uma representação significativa e poderosa da medida de incerteza, mas também uma forma de expressar conceitos vagos em linguagem natural \citep{klir:95}. Voltando ao exemplo do conjunto de pessoas altas, em vez de descrever a altura de uma pessoa com exatidão em metros ou centímetros, pode-se apenas dizer que ela é alta, baixa ou mediana. Cada um desses conjuntos pode ser um conjunto \emph{fuzzy}, onde um valor 1 é atribuído a um membro que está totalmente incluído em um deles, ou 0 caso contrário. Valores intermediários nessa escala indicam que o elemento está parcialmente em um dos conjuntos.
-
-A seção \ref{sec:conjuntos_fuzzy} explicita algumas das definições formais e conceitos básicos da teoria dos conjuntos \emph{fuzzy} proposta por Zadeh.
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Conjuntos \emph{fuzzy}}\index{fuzzy!conjuntos}
-\label{sec:conjuntos_fuzzy}
-A teoria de conjuntos clássicos está baseada em uma função, geralmente conhecida como função característica, dada por:
-
-\begin{equation}
-  \mu_A(x) =  \begin{cases}
-                1 \quad \text{se}\ x \in A \\
-                0 \quad \text{se}\ x \notin A
-              \end{cases}
-\end{equation}
-onde $U$ é o conjunto Universo, $A$ é um subconjunto de $U$ e $x$ é um elemento de $U$ \citep{klir:95}.
-
-Portanto, a função característica é um mapeamento dos elementos de $U$ no conjunto binário $\{0, 1\}$, formalmente definida como:
-
-\begin{equation}
-  \mu_A =  U \rightarrow \{0, 1\}
-\end{equation}
-
-Sendo assim, a função característica determina que, de acordo com algum critério, $\forall x \in U$, se $\mu_A(x) = 1$, então $x$ é um membro de $A$, por outro lado, quando $\mu_A(x) = 0$, $x$ não é um membro de $A$.
-
-Quanto aos conjuntos \emph{fuzzy}, basta generalizar a função característica aplicada nos conjuntos clássicos no intervalo $[0, 1]$ para obter-se um conjunto "fuzzificado", ou seja, o grau de pertinência de um elemento $x$ passa, agora, a ser expresso em termos contínuos. Em outras palavras, o elemento $x$ pertence ao subconjunto $A$ de $U$ com algum grau de pertinência obtido do intervalo $[0, 1]$. Formalmente, tem-se:
-
-\begin{equation}
-  \mu_A =  U \rightarrow [0, 1]
-\end{equation}
-
-Cabe aqui citar a definição de conjuntos \emph{fuzzy} dada por Zadeh que designa um conjunto \emph{fuzzy} como uma classe de objetos com um grau de pertinência contínuo. Tal conjunto é caracterizado por uma função de pertinência (característica), que atribui a cada objeto um grau de pertinência que varia entre zero e um. As noções de inclusão, união, intersecção, complemento, relação, convexidade, etc., oriundas da teoria de conjuntos clássica, são estendidas a esses conjuntos \citep{zadeh:65}.
-
-% definição de conjunto fuzzy
-\begin{defn}
-Um conjunto \emph{fuzzy} $A$ é um subconjunto do conjunto universo $U$ formado por pares ordenados de um elemento qualquer $x$ e seu grau de pertinência dado por $\mu_A(x)$, da forma:
-
-\begin{equation}
-  A =  \{(x, \mu_A(x)) \ |\ x \in U\}
-\end{equation}
-\end{defn}
-
-O universo de discurso $U$ pode ser composto por elementos discretos ou ser um espaço contínuo. A mesma implicação vale para o subconjunto $A$. No caso em que $U$ é um conjunto discreto e finito, tal que $U = \{x_1, x_2, x_3, \ldots, x_n\}$, pode-se simplesmente enumerar os seus elementos, juntamente com seus graus de pertinência, como segue:
-
-\begin{equation}
-  A =  \frac{\mu_A(x_1)}{x_1} + \frac{\mu_A(x_2)}{x_2} + \ldots + \frac{\mu_A(x_n)}{x_n} = \sum_{i=1}^n \frac{\mu_A(x_i)}{x_i}
-\label{equ:conjunto_fuzzy_finito}
-\end{equation}
-
-É importante ressaltar que o somatório em \ref{equ:conjunto_fuzzy_finito} não significa uma adição algébrica, mas sim a união de todos os pares ordenados de $x$ e $\mu_A(x)$ que formam o conjunto $A$ \citep{klir:95}.
-
-\begin{exmp}
-Exemplo de conjunto \emph{fuzzy} sobre a variável de base altura. Aqui, tem-se a representação tradicional com conjuntos clássicos, onde a transição é abrupta, e a representação com conjuntos \emph{fuzzy}.
-\begin{figure}[h]
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\textwidth]{crisp_set}
-    \end{minipage}
-    ~ % space
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\textwidth]{fuzzy_set}
-    \end{minipage}
-    \caption[Representação da variável altura em conjuntos clássicos e \emph{fuzzy}]{Representação da variável altura em conjuntos clássicos e fuzzy. À esquerda tem-se a representação de conjuntos clássicos; à direita a representação com conjuntos fuzzy. Fonte: proposto pelo autor.}
-    \label{fig:crisp_fuzzy_set}
-\end{figure}
-\end{exmp}
-
-% definição de altura
-\begin{defn}
-A altura de $A$, denotado por $altura(A)$, corresponde ao limite superior do codomínio da sua função de pertinência, da forma:
-
-\begin{equation}
-  altura(A) = \{\mu_A(x) \ |\ x \in U\}
-\label{equ:conjunto_fuzzy_altura}
-\end{equation}
-
-\end{defn}
-
-% definição de conjunto normalizado
-\begin{defn}
-Um conjunto \emph{fuzzy} $A$ é dito normalizado se existe pelo menos um elemento $x \in U$, tal que $\mu_A(x) = 1$.
-\label{def:conjunto_fuzzy_normalizado}
-\end{defn}
-
-A definição de conjunto \emph{fuzzy} normalizado implica que pelo menos um membro de $A$ alcança o grau de pertinência máximo possível. Note que a definição em \ref{def:conjunto_fuzzy_normalizado} considera que os valores dos graus de pertinência variam no intervalo fechado entre 0 e 1. Logo, no mínimo um elemento deve ter um grau de pertinência 1 para que $A$ possa ser considerado, de fato, normalizado. Observe que, decorrente dessa afirmação, imediatamente tem-se que $altura(A) = 1$.
-
-% definição de suporte
-\begin{defn}
-O suporte de um conjunto \emph{fuzzy} $A$ em $U$, denotado por $suporte(A)$, é o conjunto dado por:
-
-\begin{equation}
-  suporte(A) = \{x \in U \ |\ \mu_A(x) > 0 \}
-\label{equ:conjunto_fuzzy_suporte}
-\end{equation}
-
-\end{defn}
-
-Em outras palavras, o conjunto suporte é um conjunto clássico ou conjunto ordinário que contém todos os elementos de $U$ cujo grau de pertinência é maior do que zero em $A$. Denomina-se por conjunto unitário ou \emph{singleton} um conjunto \emph{fuzzy} cujo suporte é um único ponto, por exemplo $w$, tal que $\mu_A(w) = 1$.
-
-% definição de alfa corte
-\begin{defn}
-Um $\alpha$\emph{-corte}, também conhecido por $\alpha$\emph{-nível}, é o subconjunto clássico de elementos cujo grau de pertinência é maior ou igual a um valor $\alpha$, formalmente:
-
-\begin{equation}
-  \alpha\emph{-corte(A)} = \{x \in U \ |\ \mu_A(x) \geq \alpha \}
-\label{equ:conjunto_fuzzy_alpha_corte}
-\end{equation}
-\end{defn}
-
-% definição de núcleo
-\begin{defn}
-O núcleo ou \emph{kernel} de um conjunto \emph{fuzzy} $A$ em $U$, é o conjunto de elementos pertencentes inteiramente à $A$, da forma:
-
-\begin{equation}
-  \emph{núcleo}(A) = \{x \in U \ |\ \mu_A(x) = 1 \}
-\label{equ:conjunto_fuzzy_kernel}
-\end{equation}
-\end{defn}
-
-Vale destacar que, por construção, o núcleo do conjunto $A$ está contido no conjunto suporte, o que pode ser representado formalmente como $\emph{núcleo}(A) \subseteq suporte(A)$.
-
-A figura~\ref{fig:fuzzy_definitions} mostra graficamente algumas das propriedades definidas acima.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.8\textwidth]{fuzzy_definitions}
-  % source MIT class notes
-  \caption[Representação gráfica das principais propriedades dos conjuntos \emph{fuzzy}]{Representação gráfica das principais propriedades dos conjuntos fuzzy. A imagem mostra a representação de um conjunto fuzzy A triangular com altura(A) = 1, ou seja, o conjunto é normalizado. O núcleo(A) = \{150\}, o que significa que apenas um único elemento pertence inteiramente à A. As linhas em vermelho mostram um $\alpha$-corte, onde $\alpha = 0,5$. O intervalo dado pelo conjunto suporte ]100, 200[ compreende todos os valores de Azul cujo grau de pertinência é maior do que 0. Fonte: proposto pelo autor.}
-  \label{fig:fuzzy_definitions} 
-\end{figure}
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Operações entre conjuntos \emph{fuzzy}}\index{fuzzy!operações entre conjuntos}
-\label{sec:operacoes_conjuntos_fuzzy}
-
-Assim como na teoria de conjuntos clássica, há basicamente três operações que podem ser estendidas aos conjuntos \emph{fuzzy}. Essas operações são a união, a intersecção e o complemento, sendo representadas pelos operadores lógicos de conjunção (\textbf{OU}), disjunção (\textbf{E}) e complemento (\textbf{NÃO}), respectivamente. As operações básicas formam o que é conhecido como operações padrão em conjuntos \emph{fuzzy} \citep{klir:95}.
-
-Tais operações são realizadas sobre suas respectivas funções de pertinência e há muitas formalizações matemáticas possíveis para os operadores que representam-nas. O par de operadores mais amplamente utilizado é o operador de mínimo ($min$) e máximo ($max$), que são semelhantes aos operadores produto e soma da álgebra elementar e utilizados para expressar a conjunção e disjunção, respectivamente \citep{thole:79}.
-
-Seja dois conjuntos \emph{fuzzy} $A$ e $B$, definidos sobre um mesmo universo de discurso $U$. Utilizando as funções $max$ e $min$, tem-se as seguintes definições \citep{klir:95}:
-
-% definição de união
-\begin{defn}
-\label{def:conjunto_fuzzy_uniao}
-O conjunto união é formado por todos os valores máximos entre dois conjuntos \emph{fuzzy} $A$ e $B$, onde $A, B \in U$, da forma:
-
-\begin{equation}
-  \mu_A(x) \cup \mu_B(x) = max\{\mu_A(x), \mu_B(x)\}, \quad \forall x \in U
-\end{equation}
-\end{defn}
-
-A figura~\ref{fig:fuzzy_operacoes_uniao} exibe graficamente dois conjuntos \emph{fuzzy} $A$ e $B$ quaisquer, bem como a área pertinente à união entre eles.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.28\textwidth]{fuzzy_operacoes_uniao}
-  \caption[Operação de união entre dois conjuntos \emph{fuzzy}]{Representação gráfica da operação de união entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A união é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
-  \label{fig:fuzzy_operacoes_uniao}
-\end{figure}
-
-% definição de intersecção
-\begin{defn}
-\label{def:conjunto_fuzzy_interseccao}
-O conjunto intersecção é formado por todos os valores mínimos entre dois conjuntos \emph{fuzzy} $A$ e $B$, onde $A, B \in U$, da forma:
-
-\begin{equation}
-  \mu_A(x) \cap \mu_B(x) = min\{\mu_A(x), \mu_B(x)\}, \quad \forall x \in U
-\end{equation}
-\end{defn}
-
-A figura~\ref{fig:fuzzy_operacoes_interseccao} exibe graficamente dois conjuntos \emph{fuzzy} $A$ e $B$ quaisquer, bem como a área pertinente à intersecção.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.28\textwidth]{fuzzy_operacoes_interseccao}
-  \caption[Operação de intersecção entre dois conjuntos \emph{fuzzy}]{Representação gráfica da operação de intersecção entre dois conjuntos fuzzy. A parte superior em cinza claro mostra os dois conjuntos fuzzy $A$ e $B$ em sobreposição. A intersecção é destacada em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
-  \label{fig:fuzzy_operacoes_interseccao}
-\end{figure}
-
-% definição de complemento
-\begin{defn}
-\label{def:conjunto_fuzzy_complemento}
-O complemento de um conjunto \emph{fuzzy} $A$, denotado por $\mu_{\bar{A}}(x)$, onde $A \in U$, é formado pela subtração entre o valor unitário e $\mu_A(x)$, da forma:
-
-\begin{equation}
-  \mu_{\bar{A}}(x) = 1 - \mu_A(x), \quad \forall x \in U
-\end{equation}
-\end{defn}
-
-A figura~\ref{fig:fuzzy_operacoes_complemento} exibe graficamente um conjunto \emph{fuzzy} $A$ qualquer, bem como seu complemento.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.28\textwidth]{fuzzy_operacoes_complemento}
-  \caption[Conjunto \emph{fuzzy} e seu complemento]{Representação gráfica de um conjunto fuzzy e seu complemento. A parte superior em cinza claro mostra o conjunto fuzzy $A$. Seu complemento é destacado em preto na parte inferior. Adaptado de \citet{vrusias:06}.}
-  \label{fig:fuzzy_operacoes_complemento}
-\end{figure}
-
-Além desses operadores, existem outros que podem ser utilizados para efetuar as operações lógicas. Um deles é a norma triangular, também denominada \emph{t-norma}. Outro é a conorma triangular, usualmente denominada por \emph{t-conorma} ou \emph{s-norma}. Os operadores utilizados para a intersecção de conjuntos \emph{fuzzy} pertencem à classe \emph{t-norma}. Os operadores utilizados para a união de conjuntos \emph{fuzzy} pertencem à classe \emph{t-conorma} ou \emph{s-norma} \citep{zimmermann:01}.
-
-Ambas \emph{t-norma} e \emph{s-norma} são funções binárias do tipo $[0, 1] \times [0, 1] \rightarrow [0, 1]$, que devem satisfazer algumas propriedades, tais como, monotonicidade, comutatividade, associatividade e condições de contorno \footnote{As propriedades não serão expressas neste trabalho, embora sejam amplamente conhecidas, exceto pelas condições de contorno. Mais detalhes podem ser vistos em \citet{zimmermann:01}.}. Os operadores $max$ e $min$ satisfazem tais propriedades e, por essa razão, podem ser utilizados nas operações lógicas \emph{fuzzy} \citep{zimmermann:01}.
-
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Números \emph{fuzzy}}
-\label{sec:numeros_fuzzy}
-Conjuntos \emph{fuzzy} são composições de números \emph{fuzzy}, definidos em um universo discreto ou contínuo, de forma tal que a incerteza ou imprecisão associada a uma dada informação possa ser quantificada. Portanto, grandezas do tipo \emph{em torno de} 7, \emph{aproximadamente} -7, \emph{mais ou menos} 30 podem ser mapeadas e, consequentemente, interpretadas por números \emph{fuzzy}. Dessa forma, a concepção intuitiva sobre números aproximados ou intervalos pode ser capturada \citep{klir:95}.
-
-\citet{klir:95} caracterizam um número \emph{fuzzy} como um tipo especial de conjunto \emph{fuzzy} definido no conjunto $\mathbb{R}$ dos números reais, cuja função de pertinência\index{pertinência!função de} tem a forma:
-\begin{equation}
-\label{eq:fuzzy_numero_reais}
-  A : \mathbb{R} \rightarrow [0, 1]
-\end{equation}
-
-Para que $A$ seja, de fato, um número \emph{fuzzy}, o conjunto universo no qual $\mu_A$ está definida deve ser $\mathbb{R}$ e as seguintes propriedades devem ser satisfeitas \citep{barros:06}:
-\begin{enumerate}[label=(\roman*)]
-\item todos os $\alpha$\emph{-corte} de $A$ são não vazios, com $0 \leq \alpha \leq 1$;
-\item todos os $\alpha$\emph{-corte} são intervalos fechados de $\mathbb{R}$;
-\item $suporte(A) = \{x \in U \ |\ \mu_A(x) > 0\}$.
-\end{enumerate}
-
-De modo geral, números \emph{fuzzy} podem ser representados por funções parametrizadas. Algumas dessas funções serão apresentadas na seção \ref{sec:funcoes_pertinencia}.
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Funções de pertinência}\index{pertinência!tipos de funções de}
-\label{sec:funcoes_pertinencia}
-As funções de pertinência são responsáveis por um aspecto fundamental na teoria de conjuntos \emph{fuzzy}. Como supra citado, elas permitem, por exemplo, que um número \emph{fuzzy} seja representado de forma paramétrica.
-
-As funções lineares por partes são as mais populares devido à sua baixa complexidade e eficiência e, por conseguinte, baixo custo computacional necessário para o seu processamento, o que não ocorre com outros tipos de funções já que, em geral, não resultam em uma melhoria significativa na qualidade dos valores de saída dos sistemas \citep{yen:99}. Nesse contexto, as funções de pertinência mais comumente utilizadas são as triangulares e trapezoidais. Vale ressaltar que não é necessário que as funções sejam simétricas ou igualmente  espaçadas. Além disso, cada variável do problema pode ser modelada com funções de pertinência diferentes,  com  formas  e  distribuições  próprias, definidas  de  acordo com  as suas características e do contexto onde estão sendo aplicadas.
-
-Em aplicações onde é necessário transições mais suaves, pode-se usar funções gaussianas, sigmoidais, dentre outras, desde que estejam definidas no intervalo [0, 1]. Algumas dessas funções serão apresentadas em \ref{def:funcao_fuzzy_triangular}, \ref{def:funcao_fuzzy_trapezoidal} e \ref{def:funcao_fuzzy_gaussiana}, com base nas definições de \citet{sumathi:10}.
-
-% definição de função de pertinência triangular
-\begin{defn}
-\label{def:funcao_fuzzy_triangular}
-Um número \emph{fuzzy} $A$ é dito triangular se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
-
-\begin{equation}
-  \mu_A(x) =  \begin{cases}
-                \ffrac{x - a}{m - a}, & \text{se}\ a < x \leq m\\[0.5em]
-                \ffrac{b - x}{b - m}, & \text{se}\ m < x < b\\[0.5em]
-                0, & \text{caso contrário}
-              \end{cases}
-\end{equation}
-\end{defn}
-\noindent onde $m$ é o máximo grau de pertinência ou $altura(A)$, em geral $\mu_A(x) = 1$, e $a$ e $b$ os limites inferior e superior do intervalo, respectivamente, onde $\mu_A(x)$ é não nula.
-
-A figura~\ref{fig:funcao_fuzzy_triangular} exibe o gráfico da função $\mu_A(x)$ de um número \emph{fuzzy} triangular $A$.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.6\textwidth]{funcao_triangular}
-  \caption[Gráfico da função de pertinência triangular]{Gráfico da função de pertinência triangular. Note que a forma é de um triângulo, que tem como base o intervalo $[a, b]$ e como $\emph{núcleo}(A)$ o vértice $(m, 1)$. Fonte: proposto pelo autor.}
-  \label{fig:funcao_fuzzy_triangular}
-\end{figure}
-
-% definição de função de pertinência trapezoidal
-\begin{defn}
-\label{def:funcao_fuzzy_trapezoidal}
-Um número \emph{fuzzy} $A$ é dito trapezoidal se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
-
-\begin{equation}
-  \mu_A(x) =  \begin{cases}
-                \ffrac{x - a}{b - a}, & \text{se}\ a < x < b\\[0.5em]
-                1, & \text{se}\ b \leq x \leq c\\[0.5em]
-                \ffrac{d - x}{d - c}, & \text{se}\ c < x < d\\[0.5em]
-                0, & \text{caso contrário}
-              \end{cases}
-\end{equation}
-\end{defn}
-
-A figura~\ref{fig:funcao_fuzzy_trapezoidal} exibe o gráfico da função $\mu_A(x)$ de um número \emph{fuzzy} trapezoidal $A$.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.6\textwidth]{funcao_trapezoidal}
-  \caption[Gráfico da função de pertinência trapezoidal]{Gráfico da função de pertinência trapezoidal. Aqui a forma é de um trapézio, sendo que $\mu_A(x)$ é nula para todo $x \notin [a, d]$, linearmente  crescente  até $altura(A)$, geralmente, para $x = b = c$, constante nesse valor para $x$ entre $b$ e $c$ e, finalmente, linearmente decrescente até zero em $x = d$. Fonte: proposto pelo autor.}
-  \label{fig:funcao_fuzzy_trapezoidal}
-\end{figure}
-
-% definição de função de pertinência gaussiana
-\begin{defn}
-\label{def:funcao_fuzzy_gaussiana}
-Um número \emph{fuzzy} $A$ é dito gaussiano se sua função de pertinência, denotada por $\mu_{A}(x)$, é da forma:
-
-\begin{equation}
-  \mu_A(x) =  \begin{cases}
-                \exp{\big(-\ffrac{{(x - m)}^2}{\sigma} \big)}, & \text{se}\ m - \sigma \leq x \leq m + \sigma\\[0.5em]
-                0, & \text{caso contrário}
-              \end{cases}
-\end{equation}
-\end{defn}
-\noindent onde $m$ é o $\emph{núcleo}(A)$ e $\sigma$ é o desvio padrão da função gaussiana. Quanto menor $\sigma$, mais estreita a abertura horizontal da curva. A figura~\ref{fig:funcao_fuzzy_gaussiana} exibe o gráfico da função $\mu_A(x)$ de um número \emph{fuzzy} gaussiano $A$.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.6\textwidth]{funcao_gaussiana}
-  \caption[Gráfico da função de pertinência gaussiana]{Gráfico da função de pertinência gaussiana. Aqui a forma é de um sino, sendo que $\mu_A(x)$ é nula para todo $x \notin [m - \sigma, m + \sigma]$, crescente  até $altura(A)$, onde $x = m$ e decrescente até zero em $x = m + \sigma$. Fonte: proposto pelo autor.}
-  \label{fig:funcao_fuzzy_gaussiana}
-\end{figure}
-
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Variáveis linguísticas}
-\label{sec:variaveis_linguisticas}
-Uma variável linguística é aquela cujo valor pode ser expresso por um termo qualitativo capaz de fornecer um significado conceitual à variável, tais como muito pequeno, pequeno, médio, baixo, alto e assim por diante, e que podem fornecer uma interpretação num contexto específico \citep{pedrycz:98}.
-
-Para \citet{zadeh:75}, uma variável linguística é aquela cujo valor é uma palavra ou uma sentença numa linguagem natural ou artificial.
-
-A motivação para o uso de variáveis linguísticas é que elas são, em geral, menos específicas do que variáveis numéricas \citep{zadeh:75}. Essa motivação tem um propósito particular quando os subconjuntos \emph{fuzzy} são determinados em termos de regras, já que o objetivo não é definir exaustivamente as variáveis linguísticas.
-
-Cada variável linguística tem seus estados expressos por meio de termos de uma variável base, cujos valores são números reais dentro de um intervalo específico. Uma variável de base é uma variável no sentido clássico, por exemplo, temperatura, pressão, velocidade, tensão, umidade, idade, desempenho, salário, etc \citep{klir:95}.
-
-Intuitivamente, as variáveis linguísticas  podem ser vistas como substantivos, por exemplo altura ou nota e os seus valores são adjetivos que caracterizam-nas, tais como alto, baixo, ruim, bom, dentre outros. A definição formal é dada em \ref{def:variavel_linguistica} \citep{zadeh:75, klir:95}.
-
-% definição de variável linguística
-\begin{defn}
-\label{def:variavel_linguistica}
-Uma variável linguística é caracterizada por uma quíntupla $(v, T, U, G, M)$, onde:
-
-\begin{enumerate}[label=(\roman*)]
-\item $v$ é o nome da variável.
-\item $U$ é o universo de discurso.
-\item $T$ é o conjunto de termos linguísticos de $v$ relacionado a uma variável base cujos valores variam ao longo de $U$.
-\item $G$ é uma regra sintática, ou seja, a gramática para a geração de termos linguísticos em $T$.
-\item $M$ é uma regra semântica que atribui para cada termo linguístico $t \in T$ seu significado, que é um conjunto \emph{fuzzy} em $U$.
-\end{enumerate}
-\end{defn}
-
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Regras \emph{fuzzy}}\index{fuzzy!regras}
-\label{sec:regras_fuzzy}
-Os seres humanos tomam decisões baseados em regras, do tipo \emph{se} a temperatura está baixa, \emph{então} coloque um casaco, \emph{se} o combustível está acabando, \emph{então} abasteça o veículo, etc.
-
-As regras estão entre as técnicas mais utilizadas para representar o conhecimento. Para \citet{zimmermann:01}, as regras ainda são amplamente utilizados devido ao fato de que tornam possível modelar o conhecimento em um sistema \emph{fuzzy} capturando-o por meio de especialistas. As regras também têm a vantagem de poderem ser expressas por uma linguagem natural ou artificial que, em geral, é facilmente compreensível.
-
-De maneira similar a uma afirmação clássica, uma regra \emph{fuzzy} é composta por duas partes, resultando em uma estrutura do tipo \citep{dubois:96}:
-\begin{center}
-\emph{Se} \{antecedentes\}, \emph{então} \{consequentes\}.
-\end{center}
-
-Os antecedentes caracterizam premissas, enquanto a parte consequente são ações tomadas quando as premissas são atendidas. Diferentemente de uma regra clássica, um ou mais antecedentes podem ser parcialmente atendidos para que as premissas sejam aferidas e, portanto, as regras \emph{fuzzy} são mais relaxadas do que as regras clássicas que devem ser verificadas na sua totalidade.
-
-A forma de interpretação mais comum e amplamente usada de uma regra \emph{fuzzy} é \citep{dubois:96}:
-\begin{center}
-\emph{Se} $x$ é $A$, \emph{então} $y$ é $B$.
-\end{center}
-\noindent onde $A$ e $B$ são variáveis linguísticas definidas por conjuntos \emph{fuzzy} em universos de discurso $U$ e $V$, respectivamente. Um exemplo da aplicação da regra pode ser visto em \ref{exp:regra_fuzzy}.
-
-\begin{exmp}
-\label{exp:regra_fuzzy}
-\emph{Se} verde é baixo, \emph{então} pixel é pele.
-\end{exmp}
-
-É importante observar que \textbf{verde} é uma variável linguística e o adjetivo \textbf{baixo} é um termo linguístico representado como um número no intervalo $[0, 1]$ e, portanto, o antecedente é uma interpretação que retorna um único número desse intervalo. Por outro lado, \textbf{pele} é a representação de um conjunto \emph{fuzzy} e, por isso, o consequente é uma atribuição de todo o conjunto \emph{fuzzy} $B$ para a variável de saída $y$, o pixel no exemplo \ref{exp:regra_fuzzy}. Porém, o consequente pode assumir outros valores que não só um conjunto \emph{fuzzy}, como também, um valor numérico clássico.
-
-Também é válido destacar a possibilidade de utilizar conectivos na formação da regra para que ela seja estendida e tenha múltiplas partes, o que possibilita a interpretação de diversas variáveis linguísticas ao mesmo tempo em um contexto específico, como pode ser visto em \ref{exp:regra_fuzzy_mult}. Nesse caso, todas as partes dos antecedentes são calculadas simultaneamente em um único resultado, com base nos operadores destacados na seção \ref{sec:operacoes_conjuntos_fuzzy}.
-
-\begin{exmp}
-\label{exp:regra_fuzzy_mult}
-\emph{Se} verde é médio e \emph{vermelho} é baixo e \emph{azul} é alto, \emph{então} pixel é não pele.
-\end{exmp}
-
-Apesar de ser possível empregar múltiplas partes também para os consequentes, tal capacidade não será utilizada e, consequentemente, não abordada neste trabalho.
+All the color models of this family have the property of thinking of lighter colors, obtained by increasing the brightness or lightness, and darker colors, by the diminution of the same values. The intermediate colors are produced by decreasing the saturation~\citep{pedrini:08}.
 
 
 %% ------------------------------------------------------------------------- %%

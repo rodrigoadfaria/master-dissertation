@@ -284,64 +284,63 @@ Skin detection plays an important role in a wide range of image processing and c
 % ---------------------------------------------------------------------------- %
 \chapter{List of Acronyms}
 \begin{tabular}{ll}
-    AR          & Banco de imagens de faces de Aleix e Robert (\emph{Aleix and Robert Face Database})\\
-    CIE         & Comissão Internacional de Iluminação (\emph{Commission Internationale de l'Eclairage})\\
-    CMY         & Ciano, Magenta e Amarelo (\emph{Cyan, Magenta and Yellow})\\
-    FERET       & Banco de imagens de faces Tecnologia de Reconhecimento Facial\\                 & (\emph{Face Recognition Technology Database})\\
-    HSI         & Matiz, Saturação e Intensidade (\emph{Hue, Saturation, Intensity})\\
-    HSL         & Matiz, Saturação e Luminosidade (\emph{Hue, Saturation, Lightness})\\
-    HSV         & Matiz, Saturação e Luminância (\emph{Hue, Saturation, Value})\\
-    ID3         & Divisor Iterativo 3 (\emph{Iterative Dichotomiser 3})\\
-    $k$-NN      & $k$-Vizinhos Mais Próximos (\emph{k-Nearest Neighbors})\\
-    NTSC        & Comitê Nacional do Sistema de Televisão (\emph{National Television System Committee})\\
-    PAL         & Linha de Fase Alternada (\emph{Phase Alternation Line})\\
-    RBF         & Função de Base Radial (\emph{Radial Basis Function})\\
-    RGB         & Vermelho, Verde e Azul (\emph{Red, Green and Blue})\\
-    SECAM       & Cor Sequencial Com Memória (\emph{Séquentiel Couleur à Mémoire})\\
-    SFA         & Banco de imagens de faces do FERET e AR (\emph{Skin of FERET and AR})\\
-    SVM         & Máquinas de Vetores Suporte (\emph{Support Vector Machines})\\
-    UCS         & Escala Uniforme de Cromaticidade (\emph{Uniform Chromaticity Scale})\\
-    UCI         & Conjunto de dados de pele/não pele do repositório da Universidade da Califórnia\\
-                & em Irvine (\emph{University of California at Irvine skin/non skin dataset})\\
-    YIQ         & Luminância, Matiz e Saturação (\emph{Luma, Hue and Saturation})\\
-    YUV         & Luminância e Crominância (\emph{Luma and Chrominance})\\
-    WM          & Método Wang-Mendel (\emph{Wang-Mendel method})\\
+    AR          & Aleix and Robert Face Database\\
+    CIE         & Commission Internationale de l'Eclairage\\
+    CMY         & Cyan, Magenta and Yellow\\
+    FERET       & Face Recognition Technology database\\
+    HSI         & Hue, Saturation, Intensity\\
+    HSL         & Hue, Saturation, Lightness\\
+    HSV         & Hue, Saturation, Value\\
+    ID3         & Iterative Dichotomiser 3\\
+    $k$-NN      & k-Nearest Neighbors\\
+    NTSC        & National Television System Committee\\
+    PAL         & Phase Alternating Line\\
+    RBF         & Radial Basis Function\\
+    RGB         & Red, Green and Blue\\
+    SECAM       & Sequential Color with Memory\\
+    SFA         & Skin of FERET and AR Database\\
+    SVM         & Support Vector Machines\\
+    UCS         & Uniform Chromaticity Scale\\
+    UCI         & University of California at Irvine skin/non skin dataset\\
+    YIQ         & Luma, Hue and Saturation\\
+    YUV         & Luma and Chrominance\\
+    WM          & Wang-Mendel method\\
 \end{tabular}
 
 % ---------------------------------------------------------------------------- %
 \chapter{List of Symbols}
 \begin{tabular}{ll}
-    $L^*$       & Luminância \\
-    $a^*$       & Eixo verde/vermelho no modelo de cores $L^*a^*b^*$ \\
-    $b^*$       & Eixo azul/amarelo no modelo de cores $L^*a^*b^*$ \\
-    $u^*$       & Eixo verde/vermelho no modelo de cores $L^*u^*v^*$ \\
-    $v^*$       & Eixo azul/amarelo no modelo de cores $L^*u^*v^*$ \\
-    $\theta$    & Ângulo do matiz no modelo de cores HSI\\
-    $max$       & Operador máximo\\
-    $min$       & Operador mínimo\\
-    $\mu_A(x)$  & Função característica\\
-    $\mathbb{R}$& Conjunto dos números reais\\
-    $\sigma$    & Desvio padrão da função de pertinência gaussiana\\
-    $a_r$       & $r$-ésimo atributo de um vetor de características\\
-    $D$         & Conjunto de dados\\
-    $D'$        & Conjunto de dados transformado para o espaço de características\\
-    $N$         & Cardinalidade do conjunto de dados\\
-    $K$         & Número de partições do conjunto de dados na validação cruzada\\
-    $\alpha$    & Multiplicador de Lagrange\\
+    $L^*$       & Luminance \\
+    $a^*$       & Green/red axis on $L^*a^*b^*$ color model \\
+    $b^*$       & Blue/yellow axis on $L^*a^*b^*$ color model \\
+    $u^*$       & Green/red axis on $L^*u^*v^*$ color model \\
+    $v^*$       & Blue/yellow axis on $L^*u^*v^*$ color model \\
+    $\theta$    & Hue angle on HSI color model \\
+    $max$       & Max operator \\
+    $min$       & Min operator \\
+    $\mu_A(x)$  & Membership function \\
+    $\mathbb{R}$& Set of real numbers \\
+    $\sigma$    & Standard deviation of the Gaussian membership function \\
+    $a_r$       & $r$-th attribute of a feature vector \\
+    $D$         & Dataset \\
+    $D'$        & Dataset in feature space \\
+    $N$         & Dataset cardinality \\
+    $K$         & Numbers of dataset partitions in cross-validation \\
+    $\alpha$    & Lagrange multiplier \\
     $\xi$       & Variável de relaxamento\\
-    $C$         & Constante de regularização\\
-    $\Phi$      & Função de mapeamento do conjunto de dados de entrada\\
-    $\gamma$    & Parâmetro do \emph{kernel} polinomial ou RBF em uma SVM não linear\\
-    $d(x_i, x_j)$ & Função de distância entre dois vetores $x_i$ e $x_j$\\
-    $\argmax$   & Conjunto de argumentos que maximizam uma função objetivo\\
-    $\delta (y, f(x_i))$ & Função binária entre uma classe $y$ e a correspondência \\
-                & $f(x_i)$ de uma amostra de treinamento $x_i$ no $k$-NN\\
-    $H(D)$      & Entropia do conjunto de dados $D$\\
-    $y_\oplus$  & Proporção de amostras positivas\\
-    $y_\ominus$ & Proporção de amostras negativas\\
-    $IG(D, a_r)$& Ganho de informação no particionamento do conjunto $D$ pelo atributo $a_r$\\
-    $V(a_r)$    & Conjunto de todos os possíveis valores do atributo $a_r$\\
-    $D_v$       & Subconjunto de $D$ no qual $a_r$ tem o valor $v$\\
+    $C$         & Regularization parameter \\
+    $\Phi$      & Nonlinear feature expansion function \\
+    $\gamma$    & Polynomial/RBF kernel parameter of a nonlinear SVM \\
+    $d(x_i, x_j)$ & Distance function between $x_i$ and $x_j$ vectors \\
+    $\argmax$   & Arguments of maxima operator \\
+    $\delta (y, f(x_i))$ & Binary function between $y$ and \\
+                & $f(x_i)$ of a training sample $x_i$ in $k$-NN\\
+    $H(D)$      & Entropy of dataset $D$\\
+    $y_\oplus$  & Positive samples rate \\
+    $y_\ominus$ & Negative samples rate \\
+    $IG(D, a_r)$& Information gain of $D$ partitioning by $a_r$ attribute \\
+    $V(a_r)$    & Set of all possible values of $a_r$\\
+    $D_v$       & Subset of $D$ where $a_r$ is equal to $v$\\
 \end{tabular}
 
 % ---------------------------------------------------------------------------- %
@@ -359,10 +358,11 @@ Skin detection plays an important role in a wide range of image processing and c
 \singlespacing              % espaçamento simples
 %\onehalfspacing            % espaçamento um e meio
 
-\input cap-introducao        % associado ao arquivo: 'cap-introducao.tex'
-\input cap-conceitos         % associado ao arquivo: 'cap-conceitos.tex'
-\input cap-experimentos      % associado ao arquivo: 'cap-experimentos.tex'
-\input cap-conclusoes        % associado ao arquivo: 'cap-conclusoes.tex'
+\input cap-introducao
+\input cap-related-work
+\input cap-conceitos
+\input cap-experimentos
+\input cap-conclusoes
 
 % cabeçalho para os apêndices
 \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\appendixname\ \thechapter}} {\MakeUppercase{#1}} }
