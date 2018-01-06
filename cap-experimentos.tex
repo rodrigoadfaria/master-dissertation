@@ -1,25 +1,27 @@
 %% ------------------------------------------------------------------------- %%
-\chapter{Experimentos Preliminares}
+\chapter{Evaluation}
 \label{cap:experimentos}
 
-Uma série de experimentos foram realizados com dois conjuntos de dados de pele de seres humanos. Os classificadores utilizados foram SVM, $k$-NN e a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. Outro aspecto estudado é o efeito da escolha do modelo de cores no classificador. A formação dos conjuntos de dados é detalhada na seção \ref{sec:datasets_descricao} e os resultados dos experimentos podem ser vistos nas seções \ref{sec:experimento_um}, \ref{sec:experimento_dois} e \ref{sec:experimento_tres}.
+In this section we present some experimental evaluations of the proposed extensions along with the original method in three widely known datasets: SFA, Pratheepan and HGR. In addition, a brief definition of the evaluation metrics used is shown for the sake of clarity.
+
 
 %------------------------------------------------------
-\section{Conjuntos de dados} 
-\label{sec:datasets_descricao}
-Para os experimentos foram utilizadas duas bases de dados distintas. A primeira delas, denominada UCI neste trabalho, foi proposta por \citet{uci-skin-dataset:12} e obtida no repositório de aprendizagem de máquina da Universidade da Califórnia em Irvine \citep{lichman:13}. A base é constituída por imagens de várias texturas de pele e não pele obtidas a partir de milhares de imagens arbitrárias de faces de diferentes idades, sexo e raças \citep{pal-texas:04, feret:96}.
+\section{Datasets}
+\label{sec:datasets}
 
-A UCI contém 245.057 amostras, compostas por 3 atributos que constituem o vetor de entradas $x = [x_1, x_2, x_3]$, $x \in \mathbb{R}^{d}$, sendo $d$ a dimensão do espaço, e que representam, respectivamente, os canais azul (B), verde (G) e vermelho (R) do modelo de cores RGB, além de uma quarta coluna que determina a classe a qual a amostra $x$ pertence, denotada por $y$, sendo $y \in Y$ e $Y = \{+1, -1\}$.
+\subsection{UCI}
+\label{sec:datasets_uci}
+Named UCI in this work, this dataset was proposed by~\citet{uci-skin-dataset:12} and obtained from the machine learning repository of the University of California in Irvine \citep{lichman:13}. The dataset consists of images of various skin and non-skin textures obtained from thousands of arbitrary faces images of different ages, sex and races \citep{pal-texas:04, feret:96}.
 
-Em outras palavras, cada amostra é um pixel RGB com um determinado rótulo. Como tem-se os dados rotulados com exemplos de qual é a saída correta para uma dada entrada, os experimentos subsequentes são categorizados como sendo de aprendizado supervisionado \citep{mostafa:12}.
+The UCI contains 245,057 samples, composed of 3 attributes that constitute the input vector $x = [x_1, x_2, x_3]$, $x \in \mathbb{R}^{d}$, where $d$ is the space dimension which represents, respectively, blue (B), green (G) and red (R) channels of the RGB color model. In addition, a fourth column determines the class to which the sample $x$ belongs, denoted by $y$, where $y \in Y$ and $Y = \{+1, -1\}$. In other words, each sample is an RGB pixel with a given label.
 
-A tabela~\ref{tbl:uci_dataset} exemplifica um pequeno trecho da base de dados UCI. Vale ressaltar que do total das 245.057 amostras, 194.198 são de pixels não pele e 50.859 de pixels com diferentes tons de pele. Além disso, as imagens que foram utilizadas na extração do conjunto de dados não foi disponibilizada pelos autores.
+The table~\ref{tbl:uci_dataset} exemplifies a short excerpt from the UCI database. It is worth mentioning that of the 245,057 samples, 194,198 are non-skin pixels and 50,859 pixels with different skin tones. In addition, the images that were used to extract the dataset were not made available by the authors.
 
-\begin{table}[!htpb]
+\begin{table}[hb]
 \centering
 \begin{small}
 \begin{tabular}{|c|c|c|c|} \hline
-\thb{B} & \thb{G} & \thb{R}  & \thb{Classe}  \\ \hline
+\thb{B} & \thb{G} & \thb{R}  & \thb{Label}  \\ \hline
 74	    & 85      & 123	     & 1     \\
 207	    & 215     & 255      & 1     \\
 74      & 82      & 122	     & 1     \\
@@ -32,13 +34,14 @@ A tabela~\ref{tbl:uci_dataset} exemplifica um pequeno trecho da base de dados UC
 167     & 166	  & 115	     & -1    \\
 180	    & 177	  & 133	     & -1    \\ \hline
 \end{tabular}
-\caption[Trecho com amostras da base de dados UCI]{Trecho com amostras da base de dados UCI. Cada uma das três primeiras colunas representam um canal do pixel do espaço de cores RGB e variam entre 0 e 255. A quarta coluna é a classe atribuída à amostra, que pode assumir +1 se for pele e -1, caso contrário. Originalmente, a classe que representa um pixel de não pele tinha valor 2, substituída por -1 para conformidade com os experimentos.}
+\caption[Excerpt with samples from the UCI dataset]{Excerpt with samples from the UCI dataset. Each of the first three columns represents a pixel channel of the RGB color space ranging from 0 to 255. The fourth column is the label assigned to the sample, which can assume +1 if it is skin and -1, otherwise. Originally, the class representing a non-skin pixel had value 2, replaced by -1 for compliance with the experiments.}
 \label{tbl:uci_dataset}
 \end{small}
 \end{table}
 
-Uma vez que os dados são pontos no espaço RGB, é possível plotar os dados para melhor interpretação dos mesmos, conforme mostra a figura~\ref{fig:dataset_uci}.
-\begin{figure}[h]
+Since the data are points in the RGB space, it is possible to plot it for a better interpretation of them, as shown in the figure~\ref{fig:dataset_uci}.
+
+\begin{figure}[ht]
     \centering
     \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\textwidth]{uci_skinns_plot}
@@ -47,48 +50,55 @@ Uma vez que os dados são pontos no espaço RGB, é possível plotar os dados pa
     \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\textwidth]{uci_skin_plot}
     \end{minipage}
-    \caption[Visão 3-dimensional dos canais RGB do conjunto de dados UCI]{Visão 3-dimensional dos canais RGB do conjunto de dados UCI. Os pontos em azul são amostras de pele e os verdes de não pele. À esquerda tem-se todas as amostras do conjunto de dados; à direita apenas as amostras de pele. Fonte: proposto pelo autor.}
+    \caption[3-dimensional view of the RGB channels of the UCI dataset]{3-dimensional view of the RGB channels of the UCI dataset. The blue points are skin samples and the green ones are non-skin. On the left are all samples of the dataset; to the right only the skin samples. Source: proposed by the author.}
     \label{fig:dataset_uci}
 \end{figure}
 
-O segundo conjunto de dados utilizado nos experimentos foi proposto por \citet{sfa-skin-dataset:13}, intitulado pelos autores como banco de imagens de pele humana baseado no FERET e AR (SFA), cuja sigla também será utilizada neste trabalho. O SFA possui um conjunto de imagens de faces obtidas a partir de outros dois bancos de imagens coloridas: o FERET, criado por \citet{feret:96} e o AR, proposto por \citet{ar-face-database:98}, tendo sido utilizadas 876 e 242 imagens de cada um, respectivamente. É importante ressaltar que as imagens do AR têm fundo branco e pequenas variações de cor da pele e, portanto, o ambiente é mais controlado que as imagens do FERET \citep{sfa-skin-dataset:13}. A figura~\ref{fig:sfa_dataset_exemplo} mostra um exemplo das 1.118 imagens do banco.
 
-\begin{figure}[h]
+\subsection{SFA}
+\label{sec:datasets_sfa}
+SFA, the name of the dataset proposed by \citet{sfa-skin-dataset:13}, stands for Skin of FERET and AR Database. The SFA is a set of images of frontal faces obtained from two other color image databases: the FERET, created by~\citet{feret:96}, and the AR proposed by~\citet{ar-face-database:98}, which provided 876 and 242 images each, respectively. It is important to notice that AR images have a white background and small variations of skin color. In other words, the environment is more controlled than the images in FERET \cite{sfa-skin-dataset:13}. Figure~\ref{fig:sfa_dataset_exemplo} shows some of the 1,118 samples available.
+
+\begin{figure}[ht]
     \centering
     \begin{subfigure}[t]{0.21\textwidth}
-        \includegraphics[width=\textwidth]{sfa_img_1}
-        \includegraphics[width=\textwidth]{sfa_img_1_gt}
+        \includegraphics[width=\textwidth]{sfa/ori/img4}
+        \includegraphics[width=\textwidth]{sfa/gtc/img4}
+        \includegraphics[width=\textwidth]{sfa/gt/img4}
     \end{subfigure}
     ~
     \begin{subfigure}[t]{0.21\textwidth}
-        \includegraphics[width=\textwidth]{sfa_img_14}
-        \includegraphics[width=\textwidth]{sfa_img_14_gt}
+        \includegraphics[width=\textwidth]{sfa/ori/img51}
+        \includegraphics[width=\textwidth]{sfa/gtc/img51}
+        \includegraphics[width=\textwidth]{sfa/gt/img51}
     \end{subfigure}
     ~
     \begin{subfigure}[t]{0.21\textwidth}
-        \includegraphics[width=\textwidth]{sfa_img_586}
-        \includegraphics[width=\textwidth]{sfa_img_586_gt}
+        \includegraphics[width=\textwidth]{sfa/ori/img112}
+        \includegraphics[width=\textwidth]{sfa/gtc/img112}
+        \includegraphics[width=\textwidth]{sfa/gt/img112}
     \end{subfigure}
     ~ % space
     \begin{subfigure}[t]{0.21\textwidth}
-        \includegraphics[width=\textwidth]{sfa_img_726}
-        \includegraphics[width=\textwidth]{sfa_img_726_gt}
+        \includegraphics[width=\textwidth]{sfa/ori/img14}
+        \includegraphics[width=\textwidth]{sfa/gtc/img14}
+        \includegraphics[width=\textwidth]{sfa/gt/img14}
     \end{subfigure}
-    \caption[Exemplos de imagens do banco de faces SFA]{Exemplos de imagens do banco de faces SFA. Na parte superior tem-se a imagem original e na inferior o ground truth com os pixels de cor de pele anotados manualmente, sendo que a cor preta RGB = (0, 0, 0) foi atribuída a todos os pixels no fundo. Fonte: \citet{sfa-skin-dataset:13}.}
+    \caption[Examples of SFA face image database]{Examples of SFA face image database. First row are the original images and the second contain the colored ground truth with the skin color pixels annotated manually. The black color RGB = (0, 0, 0) was assigned to all pixels in the background. In the third row we have the binary ground truth images. We generated these samples based on the colored ground truth, by creating a mask, assigning (255, 255, 255) for the pixels which were not background (0, 0, 0). One can see some noise in the results, but the samples were enough for further experiments. In addition, the original images were not perfectly annotated. Therefore, some salt noise can be seen in non-skin regions. Source: \citet{sfa-skin-dataset:13}.}
     \label{fig:sfa_dataset_exemplo}
 \end{figure}
 
-As amostras de pele e não pele foram geradas aleatoriamente considerando a máscara \emph{ground truth}\footnote{\emph{Ground truth} é o termo utilizado para denotar uma imagem cujo objeto de interesse está devidamente segmentado e ressaltado, descartando os pixels remanescentes atribuindo-lhes cores uniformes.} de cada imagem, sendo três amostras de pele e cinco de não pele. Cada amostra é uma janela de tamanho $n\times n$, sendo $n$ ímpar, com um pixel central, a partir do qual outros tamanhos de amostra foram criados, que variam de $1 \times 1$ até $35 \times 35$, como pode ser visto na figura~\ref{fig:sfa_dataset_janelas} \citep{sfa-skin-dataset:13}.
+\citet{sfa-skin-dataset:13} also extracted different window patches of each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a window of size $n \times n$, where $n$ is odd, with a central pixel, from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in figure~\ref{fig:sfa_dataset_janelas}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=.3\textwidth]{sfa-janelas}
-  \caption[Estrutura das janelas que formam as amostras do SFA]{Estrutura das janelas que formam as amostras do SFA. No total, são 3.354 amostras de pele e outras 5.590 de não pele para cada tamanho de janela. Fonte: \citet{sfa-skin-dataset:13}.}
+  \caption[Structure of the windows that form the SFA samples]{Structure of the windows that form the SFA samples. In total, there are 3,354 skin samples and 5,590 non-skin samples for each window size. Source: \citet{sfa-skin-dataset:13}.}
   \label{fig:sfa_dataset_janelas}
 \end{figure}
 
-A partir das amostras criadas no SFA, um conjunto de dados foi extraído gerando uma base de dados de pele e não pele similar ao UCI na tabela~\ref{tbl:uci_dataset}. O tamanho da janela utilizado foi $9 \times 9$ e o espaço de cores também foi o RGB. Portanto, o total de amostras empregado nos experimentos é 724.464, sendo 271.674 de pele e 452.790 de não pele. A classe atribuída à cada amostra tem o mesmo valor que no UCI, ou seja, +1 se for pele e -1, caso contrário. A figura~\ref{fig:dataset_sfa} mostra a representação gráfica dos dados plotados em 3 dimensões.
-\begin{figure}[h]
+\textcolor{red}{Review} A partir das amostras criadas no SFA, um conjunto de dados foi extraído gerando uma base de dados de pele e não pele similar ao UCI na tabela~\ref{tbl:uci_dataset}. O tamanho da janela utilizado foi $9 \times 9$ e o espaço de cores também foi o RGB. Portanto, o total de amostras empregado nos experimentos é 724.464, sendo 271.674 de pele e 452.790 de não pele. A classe atribuída à cada amostra tem o mesmo valor que no UCI, ou seja, +1 se for pele e -1, caso contrário. A figura~\ref{fig:dataset_sfa} mostra a representação gráfica dos dados plotados em 3 dimensões.
+\begin{figure}[hb]
     \centering
     \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\textwidth]{sfa_skinns_plot}
@@ -97,14 +107,66 @@ A partir das amostras criadas no SFA, um conjunto de dados foi extraído gerando
     \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\textwidth]{sfa_skin_plot}
     \end{minipage}
-    \caption[Visão 3-dimensional dos canais RGB do conjunto de dados SFA]{Visão 3-dimensional dos canais RGB do conjunto de dados SFA. Os pontos em azul são amostras de pele e os verdes de não pele. À esquerda tem-se todas as amostras do conjunto de dados gerado; à direita apenas as amostras de pele. Fonte: proposto pelo autor.}
+    \caption[Visão 3-dimensional dos canais RGB do conjunto de dados SFA]{\textcolor{red}{Review} Visão 3-dimensional dos canais RGB do conjunto de dados SFA. Os pontos em azul são amostras de pele e os verdes de não pele. À esquerda tem-se todas as amostras do conjunto de dados gerado; à direita apenas as amostras de pele. Fonte: proposto pelo autor.}
     \label{fig:dataset_sfa}
 \end{figure}
+
+\subsection{Pratheepan}
+\label{sec:datasets_pratheepan}
+The images in the Pratheepan dataset were downloaded randomly from Google for human skin detection search. There are 78 images of family and face captured with a range of distinct cameras using different color enhancement and under different illumination conditions \cite{tan:12}. Figure~\ref{fig:pra_dataset_exemplo} shows some of the 78 samples available.
+
+\begin{figure}[hb]
+    \centering
+    \begin{subfigure}[t]{0.293\textwidth}
+        \includegraphics[width=\textwidth]{pra/ori/07-c140-12family-red-rr-398h}
+        \includegraphics[width=\textwidth]{pra/gt/07-c140-12family-red-rr-398h}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{pra/ori/3115267-My-very-large-Indian-family-2}
+        \includegraphics[width=\textwidth]{pra/gt/3115267-My-very-large-Indian-family-2}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{pra/ori/buck_family}
+        \includegraphics[width=\textwidth]{pra/gt/buck_family}
+    \end{subfigure}
+    \caption[Examples of Pratheepan skin dataset]{Examples of Pratheepan skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source: \citet{tan:12}.}
+    \label{fig:pra_dataset_exemplo}
+\end{figure}
+
+
+\subsection{HGR}
+\label{sec:datasets_hgr}
+The database for Hand Gesture Recognition (HGR) contains the gestures from Polish and American Sign Language. There are 1,558 images acquired in different conditions of background, dimensions and lightening. In addition to original and ground truth binary skin mask images, it includes hand feature points location in separate files. Figure~\ref{fig:hgr_dataset_exemplo} shows some of the 1,558 samples available \citep{kawulok:14, nalepa:14, grzejszczak:16}.
+
+The images within were acquired in three different series. A set of 899 was captured in uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and (41) uncontrolled background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions \citep{kawulok:14, nalepa:14, grzejszczak:16}.
+
+\begin{figure}[hb]
+    \centering
+    \begin{subfigure}[t]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{hgr/ori/D_P_hgr1_id05_2}
+        \includegraphics[width=\textwidth]{hgr/gt/D_P_hgr1_id05_2}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.275\textwidth}
+        \includegraphics[width=\textwidth]{hgr/ori/N_P_hgr1_id04_5}
+        \includegraphics[width=\textwidth]{hgr/gt/N_P_hgr1_id04_5}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.337\textwidth}
+        \includegraphics[width=\textwidth]{hgr/ori/V_S_hgr2A2_id03_1}
+        \includegraphics[width=\textwidth]{hgr/gt/V_S_hgr2A2_id03_1}
+    \end{subfigure}
+    \caption[Examples of HGR skin dataset]{Examples of HGR skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Differently from Pratheepan and SFA, the ground truth is also binary images, but the black color RGB = (0, 0, 0) was assigned to all pixels when they represent skin patches. Source: \citet{kawulok:14, nalepa:14, grzejszczak:16}.}
+    \label{fig:hgr_dataset_exemplo}
+\end{figure}
+
 
 %------------------------------------------------------
 \section{Primeiro experimento}
 \label{sec:experimento_um}
-O primeiro experimento foi realizado com $k$-NN e SVM, disponíveis no pacote \emph{scikit-learn} \citep{scikit-learn:11}. O espaço de cores usado originalmente foi o RGB, como citado na descrição dos conjuntos de dados em \ref{sec:datasets_descricao}. Em ambos os casos, a estratégia escolhida de validação cruzada foi a \emph{10-fold}, que é uma escolha comum desta abordagem na prática \citep{mostafa:12}. Além disso, a técnica de tabela de busca\index{busca!tabela de} do \emph{scikit-learn} também foi utilizada com o objetivo de encontrar os parâmetros mais adequados para cada classificador.
+O primeiro experimento foi realizado com $k$-NN e SVM, disponíveis no pacote \emph{scikit-learn} \citep{scikit-learn:11}. O espaço de cores usado originalmente foi o RGB, como citado na descrição dos conjuntos de dados em \ref{sec:datasets}. Em ambos os casos, a estratégia escolhida de validação cruzada foi a \emph{10-fold}, que é uma escolha comum desta abordagem na prática \citep{mostafa:12}. Além disso, a técnica de tabela de busca\index{busca!tabela de} do \emph{scikit-learn} também foi utilizada com o objetivo de encontrar os parâmetros mais adequados para cada classificador.
 
 A tabela de busca é usada no \emph{scikit-learn} para encontrar os parâmetros ótimos de um classificador quando eles não podem ser aprendidos pelo estimador, tais como, \emph{kernel} e $\gamma$ na SVM ou número de vizinhos no $k$-NN \citep{scikit-learn:11}. As tabelas de parâmetros utilizadas no treinamento da SVM e $k$-NN podem ser vistas em \ref{tab:svm_tabela_busca} e \ref{tab:knn_tabela_busca}. Os parâmetros de cada linha são combinados na tentativa de encontrar o estimador ótimo. Por exemplo, uma escolha no treinamento da SVM seria \emph{kernel}=rbf, C=100, \emph{gamma}=1e-4. Todas as combinações possíveis são exploradas, sendo que a melhor delas é retornada \citep{scikit-learn:11}.
 
@@ -200,63 +262,3 @@ Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. 
 Os melhores resultados com a SVM e $k$-NN foram obtidos nos espaços de cores HSV e YCbCr, respectivamente. Dentre aqueles onde o componente de luminância foi ignorado, o CbCr teve a melhor performance.
 
 É interessante observar que os indicadores de qualidade do modelo mostram que ambos classificadores tiveram taxas ao redor de 96\% em todos os espaços de cor, quando aplicado com os 3 canais. Além disso, quando o canal de luminância foi ignorado, o desempenho foi inferior - aproximadamente 4 pontos percentuais no pior caso. Por outro lado, a perda de performance pode ser compensada pela redução da complexidade do modelo, já que uma dimensão pode ser descartada, mantendo, ainda, medidas de qualidade relativamente significativas.
-
-%------------------------------------------------------
-\section{Terceiro experimento}
-\label{sec:experimento_tres}
-O último experimento foi realizado com a árvore de decisão \emph{fuzzy} proposta por \citet{cintra:13}. O conjunto de dados SFA transformado para os espaços de cor HSV, Lab e YCbCr também foi utilizado aqui. Além disso, há um parâmetro que define o nível de confiança que deve ser aplicado no processo de poda da árvore. Por padrão, esse parâmetro assume o valor de 25\%, o qual não compromete o desempenho da árvore e evita o fenômeno de sobreajuste. Outra questão relevante neste experimento é a escolha do método que estima a quantidade de conjuntos \emph{fuzzy} por atributo, conforme citado na seção \ref{sec:trabalhos_relacionados}. A tabela de busca dos parâmetros do estimador ótimo no \emph{FuzzyDT} pode ser vista em \ref{tab:fuzzy_dt_tabela_busca}.
-
-\begin{table}[!htpb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{6pt}
-
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
- \thb{Conjunto de dados} & \multicolumn{4}{c|}{\thb{Nível de confiança}} & \multicolumn{4}{c|}{\thb{Método}} & \thb{\texttt{\#} conjuntos \emph{fuzzy}}\\ \cline{1-10}
-RGB   & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
-HSV   & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
-Lab   & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
-YCbCr & 10 & 15 & 20 & 25 & infogain & wm & rf & fixed & 2-9 \\ \hline
-
-\end{tabular}
-\end{small}
-\caption[Tabela de busca dos parâmetros do estimador ótimo no \emph{FuzzyDT}]{Tabela de busca dos parâmetros do estimador ótimo no FuzzyDT. A coluna conjunto de dados, conforme o nome sugere, refere-se aos conjuntos de dados oriundos do SFA em diferentes espaços de cores. A segunda coluna é o nível de confiança aplicado na poda da árvore. A coluna método indica o método de estimativa do número de conjuntos fuzzy para treinamento, seguida do número de conjuntos fuzzy que devem ser gerados por atributo. Este último parâmetro foi testado em um intervalo entre 2 e 9, conforme citado em \citet{cintra:11} e é aplicável somente quando o método é fixed.}
-\label{tab:fuzzy_dt_tabela_busca}
-\end{table}
-
-Para que os melhores parâmetros pudessem ser introduzidos no treinamento da árvore, foi desenvolvido um algoritmo que testa diversas combinações deles, avaliando a performance do modelo ajustado, de maneira similar à tabela de busca do \emph{scikit-learn}. O algoritmo também tem a capacidade de executar várias instâncias em paralelo. A tabela \ref{tab:resultados_experimento_tres} mostra os resultados com a taxa de erro em cada conjunto de dados para o respectivo espaço de cor, bem como os parâmetros que proporcionaram o melhor desempenho.
-
-Os resultados mostram taxas de erros competitivas, do ponto de vista de classificação usando dados intervalares, em relação à modelagem com conjuntos de dados clássicos. Um ponto relevante é que o método fixo de geração dos conjuntos \emph{fuzzy} foi absolutamente unânime dentre todas as quatro técnicas propostas por \citet{cintra:11}, sendo o tamanho dos conjuntos a única peculiaridade, independente do espaço de cor. Além disso, a taxa de erro obtida foi a mesma para todos os níveis de confiança testados para poda da árvore. Isso também ocorreu nas demais combinações de parâmetros, ou seja, naquelas onde a taxa de erro obtida foi maior. Portanto, é possível afirmar que, de fato, o nível de confiança pode ser mantido em 25\% para o treinamento do \emph{FuzzyDT}.
-
-\begin{table}[!htpb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{6pt}
-
-\begin{tabular}{|c|c|c|c|}\hline
- \thb{Modelo de cores} & \thb{Taxa de erro} & \thb{Método} & \thb{\texttt{\#} conjuntos \emph{fuzzy}} \\ \hline
- RGB   & 3,00 & fixed & 4 \\ \hline
- HSV   & 3,23 & fixed & 3 \\ \hline
- Lab   & 2,84 & fixed & 6 \\ \hline
- YCbCr & 2,72 & fixed & 8 \\ \hline
-
-\end{tabular}
-\end{small}
-\caption[Resultados dos experimentos com árvore de decisão \emph{fuzzy} no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com árvore de decisão fuzzy no conjunto de dados SFA em espaços de cores distintos. O algoritmo também mostra o desvio padrão obtido com o estimador ótimo, porém, o valor é 0,00 na maioria dos casos e, por essa razão, não está explícito na tabela.}
-\label{tab:resultados_experimento_tres}
-\end{table}
-
-Além das taxas de erros produzidas pelo \emph{FuzzyDT}, outra saída são as regras induzidas pelo algoritmo que ficam disponíveis para a inferência de novas amostras. Por exemplo, para o conjunto de dados no modelo de cores HSV, cuja taxa de erro foi de 3,23\%, foram geradas 9 regras:
-\begin{enumerate}[itemsep=0mm]
-\item \thb{Se} saturação \thb{é} baixa \thb{então} classe \thb{é} -1
-\item \thb{Se} saturação \thb{é} media \thb{e} intensidade \thb{é} baixa \thb{então} classe \thb{é} -1
-\item \thb{Se} matiz \thb{é} baixa \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} media \thb{então} classe \thb{é} 1
-\item \thb{Se} matiz \thb{é} media \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} media \thb{então} classe \thb{é} -1
-\item \thb{Se} matiz \thb{é} alta \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} media \thb{então} classe \thb{é} -1
-\item \thb{Se} matiz \thb{é} baixa \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} alta \thb{então} classe \thb{é} 1
-\item \thb{Se} matiz \thb{é} media \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} alta \thb{então} classe \thb{é} -1
-\item \thb{Se} matiz \thb{é} alta \thb{e} saturação \thb{é} media \thb{e} intensidade \thb{é} alta \thb{então} classe \thb{é} -1
-\item \thb{Se} saturação \thb{é} alta \thb{então} classe \thb{é} -1
-\end{enumerate}
-
-Como citado na tabela \ref{tab:resultados_experimento_tres}, no espaço de cores HSV, o algoritmo gerou um total de 3 conjuntos \emph{fuzzy} por atributo, que são: baixa, media e alta. As regras são arranjadas de tal forma que o usuário pode facilmente interpretá-las por meio de conjunções. O \emph{FuzzyDT} demonstrou robustez e bom desempenho quando comparado com classificadores clássicos, o que o credencia como um bom candidato na classificação de conjuntos de dados intervalares.
