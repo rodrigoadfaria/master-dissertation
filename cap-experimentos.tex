@@ -163,6 +163,65 @@ The images within were acquired in three different series. A set of 899 was capt
 \end{figure}
 
 
+
+%------------------------------------------------------
+\section{Evaluation measures}
+
+\textit{Precision, Recall, Specificity} and \textit{F-measure} have been used as evaluation metrics. They are the same used in~\citet{brancati:17} to compare the performance with state-of-the-art methods. They are also widely used by the scientific community. These metrics are given by the following formulas:
+
+\begin{equation*}
+    Precision = \frac{TP}{TP + FP}
+    \label{eq:precision}
+\end{equation*}
+
+\begin{equation*}
+    Recall = \frac{TP}{TP + FN}
+    \label{eq:recall}
+\end{equation*}
+
+\begin{equation*}
+    Specificity = \frac{TN}{TN + FP}
+    \label{eq:specificity}
+\end{equation*}
+
+\begin{equation*}
+    F-measure = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+    \label{eq:fmeasure}
+\end{equation*}
+
+where TP, TN, FP, FN are, respectively, the number of true positive, true negative, false positive, and false negative pixels counted in the image, which are obtained from the confusion matrix (see table~\ref{tab:confusion_matrix}).
+
+\begin{table}[hb]
+    \centering
+
+    \begin{tikzpicture}[
+    box/.style={draw,rectangle,minimum size=2cm,text width=1.5cm,align=center}]
+    \matrix (conmat) [row sep=.1cm,column sep=.1cm] {
+    \node (tpos) [box,
+        label=left:\( \textbf{skin} \),
+        label=above:\( \textbf{skin} \),
+        ] {True \\ Positive};
+    &
+    \node (fneg) [box,
+        label=above:\textbf{non-skin}] {False \\ Negative};
+    \\
+    \node (fpos) [box,
+        label=left:\( \textbf{non-skin} \)] {False \\ Positive};
+    &
+    \node (tneg) [box] {True \\ Negative};
+    \\
+    };
+    \node [left=.05cm of conmat,text width=1.5cm,align=right] {\textbf{ground \\ truth}};
+    \node [above=.05cm of conmat] {\textbf{prediction outcome}};
+    \end{tikzpicture}
+
+    \caption[Confusion matrix table used during experiments]{Confusion matrix table used to count the number of true positive, true negative, false positive, and false negative pixels in the image during experiments. These numbers are fundamental input for evaluation measures.}
+    \label{tab:confusion_matrix}
+\end{table}
+
+
+
+
 %------------------------------------------------------
 \section{Primeiro experimento}
 \label{sec:experimento_um}
@@ -170,7 +229,7 @@ O primeiro experimento foi realizado com $k$-NN e SVM, disponíveis no pacote \e
 
 A tabela de busca é usada no \emph{scikit-learn} para encontrar os parâmetros ótimos de um classificador quando eles não podem ser aprendidos pelo estimador, tais como, \emph{kernel} e $\gamma$ na SVM ou número de vizinhos no $k$-NN \citep{scikit-learn:11}. As tabelas de parâmetros utilizadas no treinamento da SVM e $k$-NN podem ser vistas em \ref{tab:svm_tabela_busca} e \ref{tab:knn_tabela_busca}. Os parâmetros de cada linha são combinados na tentativa de encontrar o estimador ótimo. Por exemplo, uma escolha no treinamento da SVM seria \emph{kernel}=rbf, C=100, \emph{gamma}=1e-4. Todas as combinações possíveis são exploradas, sendo que a melhor delas é retornada \citep{scikit-learn:11}.
 
-\begin{table}[!htpb]
+\begin{table}[ht]
 \centering
 \begin{small}
 \setlength{\tabcolsep}{10pt}
@@ -183,11 +242,11 @@ linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Tabela de busca dos parâmetros do estimador ótimo na SVM]{Tabela de busca dos parâmetros do estimador ótimo na SVM. A coluna kernel refere-se aos kernels usados no treinamento que são gaussiano, polinomial e linear, respectivamente. C é um parâmetro de regularização que diz à SVM a quantidade de erro admitido no treinamento. Gamma é um parâmetro usado somente nos kernels gaussiano e polinomial, conforme citado em \ref{sec:clasificadores_svm}. Degree é o grau do polinômio; usado somente no kernel polinomial \citep{scikit-learn:11}.}
+\caption[Tabela de busca dos parâmetros do estimador ótimo na SVM]{Tabela de busca dos parâmetros do estimador ótimo na SVM. A coluna kernel refere-se aos kernels usados no treinamento que são gaussiano, polinomial e linear, respectivamente. C é um parâmetro de regularização que diz à SVM a quantidade de erro admitido no treinamento. Gamma é um parâmetro usado somente nos kernels gaussiano e polinomial, conforme citado em \ref{sec:classifiers_svm}. Degree é o grau do polinômio; usado somente no kernel polinomial \citep{scikit-learn:11}.}
 \label{tab:svm_tabela_busca}
 \end{table}
 
-\begin{table}[!htpb]
+\begin{table}[hb]
 \centering
 \begin{small}
 \setlength{\tabcolsep}{8pt}

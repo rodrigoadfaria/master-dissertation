@@ -303,13 +303,13 @@ All the color models of this family have the property of thinking of lighter col
 
 
 %% ------------------------------------------------------------------------- %%
-\section{Classificadores}
+\section{Machine learning}
 \label{sec:classificadores}
-A aprendizagem de máquina é uma área que está preocupada com o desenvolvimento de programas de computador capazes de melhorar automaticamente com a experiência \citep{mitchell:97}. Essa definição está intimamente ligada ao modo com que seres humanos aprendem. Os esforços de pesquisa nessa área têm sido realizados com o propósito de aproximar esta relação.
+Machine learning is an area that is concerned with the development of computer programs capable of improving automatically with the experience \citep{mitchell:97}. This definition is closely linked to the way humans learn. Research efforts in this area have been carried out with the purpose of bringing this relationship closer.
 
-Como exemplo, ao mostrar a imagem de uma árvore para uma criança de três anos de idade, muito provavelmente ela saberá reconhecê-la, pois deve ter sido exposta a situações em que tenha visto imagens semelhantes e, sendo assim, foi treinada para dar tal resposta. Logo, ela aprendeu o que é uma árvore apenas olhando para elas, não necessariamente por meio de definições matemáticas precisas. Em outras palavras, o aprendizado foi feito com base em dados que, muitas vezes, são utilizados para obter-se soluções empíricas para determinados problemas onde não há a possibilidade de se criar uma solução analítica \citep{mostafa:12}.
+As an example, in showing the image of a tree to a three-year-old child, she will most likely know how to recognize it, as she must have been exposed to situations where she has seen similar images, and was trained to do so answer. Then, she learned what a tree is by looking at them, not necessarily by precise mathematical definitions. In other words, the learning was done on the basis of data that are often used to obtain empirical solutions to certain problems where there is no possibility of creating an analytical solution \citep{mostafa:12}.
 
-Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de outros objetos com base em um conjunto de dados que possui descrições sobre as árvores, tais como, altura, cores, espessura, comprimento, etc. Tais descrições também são chamadas de atributos, propriedades ou características e são submetidas a um classificador que avalia as evidências apresentadas e toma uma decisão sobre o objeto sendo analisado \citep{duda:12}. Essa tarefa começa com a definição de um vetor de características em um espaço $d$-dimensional, da forma \citep{duda:12}:
+Similarly, an algorithm can be trained to differentiate a tree from other objects based on a set of data that has descriptions about the trees, such as height, colors, thickness, length, and so on. These descriptions are also called attributes, properties or features, and are submitted to a classifier that evaluates the presented evidences and makes a decision about the object being analyzed \citep{duda:12}. This task begins with the definition of a feature vector in a $d$-dimensional space, of the form \citep{duda:12}:
 
 \begin{equation}
 \label{eq:vetor_caracteristicas}
@@ -318,11 +318,11 @@ Analogamente, um algoritmo pode ser treinado para diferenciar uma árvore de out
     a_1 \\ a_2 \\ \vdots \\ a_d
   \end{bmatrix}
 \end{equation}
-\noindent onde $x \in X$ e $X$ é o espaço de entrada, ou seja, todos os $x$ vetores possíveis.
+\noindent where $x \in X$ and $X$ is the input space, that is, all of the $x$ possible vectors.
 
-O conjunto de dados é formado por $N$ destes vetores e, sendo assim, o problema agora está em particionar o espaço de características de tal maneira que uma fronteira de decisão é formada \citep{duda:12}. Pode-se, então, atribuir uma classe ou rótulo $y$ específico para um dado vetor, onde $y \in Y$ e $Y$ é um conjunto finito de classes que, no caso binário, é da forma $Y = \{+1, -1\}$. A figura~\ref{fig:decision_boundary} mostra exemplos de particionamento de um espaço de características $2$-dimensional de amostras de pele e não pele do conjunto de dados SFA\footnote{Este conjunto de dados será detalhado na seção \ref{sec:datasets}.}.
+The dataset is formed by $N$ of these vectors and, therefore, the problem now is to partition the feature space in such a way that a decision boundary is formed \citep{duda:12}. We can then assign a specific class or label $y$ for a given vector, where $y \in Y$ and $Y$ is a finite set of classes which, in the binary case, is of the form $Y = \{+1, -1\}$. Figure~\ref{fig:decision_boundary} shows partitioning examples of a $2$-dimensional space of skin and non-skin samples from the SFA dataset \footnote{This dataset will be detailed in the section \ref{sec:datasets}.}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{decision_boundary_linear}
@@ -333,49 +333,50 @@ O conjunto de dados é formado por $N$ destes vetores e, sendo assim, o problema
         \includegraphics[width=\textwidth]{decision_boundary_smooth}
         \label{fig:decision_boundary_smooth}
     \end{minipage}
-    \caption[Fronteira de decisão no espaço de características 2-dimensional]{Fronteira de decisão no espaço de características 2-dimensional de amostras de pele e não pele do conjunto de dados SFA. Os eixos representam os canais a e b do modelo de cores Lab. As figuras à esquerda e à direita mostram a separação do espaço de características por funções linear e não linear, respectivamente. Vale ressaltar que, a complexidade computacional aumenta significativamente nos casos em que existem muitas características. Fonte: proposto pelo autor.}
+    \caption[Decision boundary in the 2-dimensional space]{Decision boundary in the 2-dimensional space of skin and non-skin samples of the SFA dataset. The axes represent the channels $a$ and $b$ of the Lab color model. The figures on the left and right show the separation of the feature space by linear and non-linear functions, respectively. It is noteworthy that, computational complexity increases significantly in cases where there are many features. Source: proposed by the author.}
     \label{fig:decision_boundary}
 \end{figure}
 
-Note que a fronteira de decisão é uma função hipotética que o algoritmo de aprendizado deve produzir com base no treinamento dos dados. Ela deve ser mais próxima possível de uma função alvo ou função objetivo $f : X\mapsto Y$ que é desconhecida \citep{mostafa:12}.
+Note that the decision boundary is a hypothetical function that the learning algorithm must produce based on training data. It should be as close as possible to a target function or objective function $f: X \mapsto Y$ that is unknown \citep{mostafa:12}.
 
-Este tipo de abordagem é caracterizada como aprendizagem supervisionada, ou seja, os dados de treinamento contêm amostras explícitas de como deve ser a saída correta sobre um vetor de entrada \citep{mostafa:12}.
+This type of approach is characterized as supervised learning, that is, the training data contain explicit samples of how the correct output should be on an input vector \citep{mostafa:12}.
 
-Na aprendizagem não supervisionada, também conhecida como clusterização, não se sabe a que classes pertencem os dados de treinamento. A missão do classificador, neste caso, é aglomerar os dados de entrada em agrupamentos naturais \citep{duda:12}. Logo, a aprendizagem não supervisionada pode ser vista como uma tarefa de encontrar padrões ou estruturas espontaneamente a partir dos dados de entrada \citep{mostafa:12}.
+In unsupervised learning, also known as clustering, it is unknown what classes the training data belong to. The mission of the classifier, in this case, is to agglomerate input data into natural clusters \citep{duda:12}. Therefore, unsupervised learning can be seen as a task of finding patterns or structures spontaneously from the input data \citep{mostafa:12}.
 
-Uma outra abordagem é a aprendizagem reforçada que, da mesma forma que na aprendizagem não supervisionada, não usa dados de entrada rotulados, em vez disso, a saída proposta pelo treinamento é utilizada juntamente com uma medida de sua qualidade para melhorar os resultados do classificador \citep{mostafa:12}.
+Another approach is reinforcement learning which, just as in unsupervised learning, does not use labeled input data. The output proposed by the training is used along with a measure of its quality to improve the results of the classifier \citep{mostafa:12}.
 
-Ainda sobre os resultados do classificador, é importante salientar que aprender os parâmetros de uma função alvo e testá-la nos mesmos dados é um erro fundamental, pois o modelo repetiria os rótulos das amostras tão logo treinadas implicando em um ajuste perfeito dos dados, porém, não seria suficiente para prever qualquer coisa útil sobre novos dados de entrada. Este fenômeno é chamado de sobreajuste e para evitá-lo, o conjunto de dados é, então, particionado de forma a armazenar parte dos dados para uma etapa subsequente de teste, no intuito de encontrar o estimador com a melhor performance \citep{mostafa:12}.
+Still on the results of the classifier, it is important to point out that learning the parameters of a target function and testing it on the same data is a fundamental error because the model would repeat the labels of the samples as soon as they were trained, implying a perfect fit of the data. However, it would not be enough to predict anything useful about new input data. This phenomenon is called over-fitting and to avoid it, the dataset is then partitioned so as to store some of the data for a subsequent test step, in order to find the best-performing estimator \citep{mostafa:12}.
 
-A divisão dos dados em subconjuntos disjuntos de treinamento e de teste é uma abordagem eficaz quando uma grande quantidade de dados está disponível. Entretanto, quando os dados são limitados, a retenção de parte deles para o conjunto de teste reduz ainda mais o número de amostras disponíveis para treinamento \citep{mitchell:97}. Logo, uma outra abordagem, conhecida como validação cruzada, pode ser aplicada de modo que todo o conjunto de dados é usado no treinamento e teste.
+Splitting the data into disjoint training and testing subsets is an effective approach when a large amount of data is available. However, when data is limited, retaining part of them for the test set further reduces the number of samples available for training \citep{mitchell:97}. Therefore, another approach, known as cross-validation, can be applied so that the entire dataset is used in training and testing.
 
-A validação cruzada\index{cruzada!validação} consiste em dividir o conjunto de dados $D$ em $K$ subconjuntos disjuntos $D_1, D_2, \ldots, D_K$, onde cada subconjunto tem tamanho aproximado $N/K$. O modelo é, então, treinado em cada um desses subconjuntos, exceto um que é mantido como um conjunto de validação, no qual a medida de erro é realizada. Este processo é repetido $K$ vezes, de tal forma que cada um dos subconjuntos tem a oportunidade de agir como o conjunto de teste e, por isso, essa abordagem também é conhecida como \emph{K-fold}. Ao final de todas as $K$ iterações, a média do erro obtido por cada estimador é usado como a medida de performance do classificador \citep{mostafa:12}.
+The cross-validation consists of dividing the dataset $D$ into $K$ disjoint subsets $D_1, D_2, \ldots, D_K$, where each subset has an approximate size of $N / K$. The model is then trained on each of these subsets, except one that is maintained as a validation set, in which the error measure is calculated. This process is repeated $K$ times, in such a way that each of the subsets has the opportunity to act as the test set. By this reason, this approach is also known as \emph{K-fold}. At the end of all $K$ iterations, the mean error obtained by each estimator is used as the performance measure of the classifier \citep{mostafa:12}.
 
-Alguns dos classificadores, que foram usados nos experimentos preliminares do capítulo \ref{cap:experimentos}, serão brevemente tratados nas seções \ref{sec:clasificadores_svm} e \ref{sec:clasificadores_knn}.
+Some of the classifiers that were used in the preliminary experiments of the chapter \ref{cap:experimentos} will be briefly discussed in the sections \ref{sec:classifiers_svm}, \ref{sec:classifiers_knn} and \ref{sec:classifiers_dt}.
+
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Máquinas de vetores suporte}
-\label{sec:clasificadores_svm}
-As Máquinas de Vetores Suporte (SVM) constituem uma técnica de aprendizagem computacional baseada na Teoria de Aprendizado Estatístico \citep{vapnik:13}, cujo objetivo era de resolver problemas de classificação de padrões. Na prática, uma SVM tem a habilidade de gerar um hiperplano ou conjunto de hiperplanos num espaço de alta ou infinita dimensionalidade, que pode ser usado para tarefas de classificação, regressão ou outras \citep{duda:12}.
+\subsection{Support vector machines}
+\label{sec:classifiers_svm}
+Support Vector Machines (SVM) are a machine learning technique based on the Statistical Learning Theory \citep{vapnik:13}, whose objective was to solve problems of classification of patterns. In practice, an SVM has the ability to generate a hyperplane or set of hyperplanes in a space of high or infinite dimensionality, which can be used for classification, regression, or other tasks \citep{duda:12}.
 
-Derivado do próprio nome da técnica, os vetores de suporte são as amostras do conjunto de treinamento que definem o hiperplano ótimo e são os padrões mais difíceis de classificar \citep{duda:12}. Intuitivamente, eles são os padrões mais relevantes para a tarefa de classificação, pois uma mudança nestes vetores implicam diretamente no resultado do hiperplano ótimo \footnote{O hiperplano de separação ótimo de uma SVM é aquele de uma classe de hiperplanos com a maior margem de separação entre os dois conjuntos de treinamento \citep{cortes:95}.}.
+Derived from the technique name itself, the support vectors are the training set samples that define the optimal hyperplane and are the most difficult patterns to classify \citep{duda:12}. Intuitively, they are the most relevant patterns for the classification task, since a change in these vectors directly implies in the result of the optimal hyperplane \footnote{The optimal separation hyperplane of an SVM is that of a class of hyperplanes with the highest separation margin between the two training sets \citep{cortes:95}.}.
 
-Seja o conjunto de dados de treinamento com $N$ amostras da forma:
+Let the training dataset with $N$ samples of the form:
 \begin{equation}
 \label{eq:svm_dataset}
     D = (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)
 \end{equation}
-\noindent onde cada $x_i$ é um vetor $d$-dimensional da forma dada em \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$, $y_i \in Y$ e $Y = \{+1, -1\}$. Portanto, o conjunto de treinamento contém $N$ observações com suas respectivas classes.
+\noindent where each $x_i$ is a $d$-dimensional vector of the form given by \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$, $y_i \in Y$ and $Y = \{+1, -1\}$. Therefore, the training dataset contain $N$ observations with its respective labels.
 
-Assumindo que $D$ é linearmente separável, pode-se separar os dados por meio de um hiperplano usando um classificador, também linear, definido pela equação \citep{lorena:03}:
+Supposing that $D$ is linearly separable, one can separate the data by means of a hyperplane using a classifier, also linear, defined by the equation \citep{lorena:03}:
 \begin{equation}
 \label{eq:svm_hyperplano_otimo}
 w \cdot x + b = 0
 \end{equation}
-\noindent onde $w \cdot x$ é um produto escalar, $w$ é o vetor normal ao hiperplano e $b$ é um termo compensador. O parâmetro $\ffrac{b}{||w||}$ determina o deslocamento do hiperplano em relação à origem.
+\noindent where $w \cdot x$ is a dot product, $w$ is the normal vector to the hyperplane and $b$ is a bias term. The parameter $\ffrac{b}{||w||}$ determines the offset of the hyperplane in relation to the origin.
 
-A partir dessa definição, outros dois hiperplanos paralelos ao hiperplano ótimo podem ser obtidos, conforme as equações em \ref{eq:svm_hyperplanos_paralelos}, de forma que uma região delimitada, conhecida como margem, se forma entre eles.
+From this definition, two other parallel hyperplanes to the optimal hyperplane can be obtained, according to the equations in~\ref{eq:svm_hyperplanos_paralelos}, so that a delimited region, known as margin, rises between them.
 
 \begin{equation}
 \label{eq:svm_hyperplanos_paralelos}
@@ -385,180 +386,189 @@ A partir dessa definição, outros dois hiperplanos paralelos ao hiperplano óti
 \end{cases}
 \end{equation}
 
-Além disso, algumas restrições são definidas para evitar que não existam pontos entre $w \cdot x + b = 0$ e $w \cdot x + b = \pm 1$, formalmente tem-se \citep{lorena:03}:
+In addition, some constraints are defined to avoid that there are no points between $w \cdot x + b = 0 $ and $w \cdot x + b = \pm 1$. Formally, we have \citep{lorena:03}:
+
 \begin{equation}
 \label{eq:svm_hyperplanos_paralelos_restricoes}
 \begin{cases}
-    w \cdot x_i + b \geq +1, & \text{se}\ y_i = +1\\
-    w \cdot x_i + b \leq -1, & \text{se}\ y_i = -1
+    w \cdot x_i + b \geq +1, & \text{if}\ y_i = +1\\
+    w \cdot x_i + b \leq -1, & \text{if}\ y_i = -1
 \end{cases}
 \end{equation}
-\noindent ou, equivalentemente:
+\noindent or, similarly:
 \begin{equation}
 \label{eq:svm_hyperplanos_paralelos_restricoes_equiv}
     y_i (w \cdot x_i + b) \geq 1
 \end{equation}
 
-Segundo \citet{campbell:00}, no sistema dado na equação \ref{eq:svm_hyperplanos_paralelos_restricoes}, supõe-se que a margem é sempre maior que a distância entre $w \cdot x + b = 0$ e $|w \cdot x + b = 1|$ e, por essa razão, SVMs desta natureza são usualmente denominadas de SVMs com margens rígidas. A figura~\ref{fig:svm_support_vectors} mostra a representação gráfica destes conceitos.
+According to \citet{campbell:00}, in the system given by equation \ref{eq:svm_hyperplanos_paralelos_restricoes}, it is assumed that the margin is always greater than the distance between $w \cdot x + b = 0$ and $|w \cdot x + b = 1|$ and, for this reason, SVMs of this nature are usually referred as hard-margin SVMs. Figure~\ref{fig:svm_support_vectors} shows the graphical representation of these concepts.
 
-\begin{figure}[!h]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=.5\textwidth]{svm_support_vectors}
-  \caption[Exemplo de um problema de classes binárias separáveis num espaço $2$-dimensional]{Exemplo de um problema de classes binárias separáveis num espaço $2$-dimensional. Os vetores de suporte, marcados com quadrados cinza, definem a margem de maior separação entre as duas classes. Fonte: \citet{cortes:95}.}
+  \caption[Example of a problem of separable binary classes in a $2$-dimensional space]{Example of a problem of separable binary classes in a $2$-dimensional space. The support vectors, marked with gray squares, define the margin with highest separation between the two classes. Source: \citet{cortes:95}.}
   \label{fig:svm_support_vectors}
 \end{figure}
 
-Geometricamente, a distância entre os dois hiperplanos paralelos ao hiperplano ótimo é $\ffrac{2}{||w||}$. Consequentemente, pode-se deduzir que a distância entre o hiperplano ótimo e $w \cdot x + b = \pm 1$ é $\ffrac{1}{||w||}$. Portanto, a minimização de $||w||$ maximiza a margem e, sendo assim, tem-se um problema de otimização no qual deseja-se minimizar $||w||^2$ sujeito às restrições em \ref{eq:svm_hyperplanos_paralelos_restricoes_equiv} \citep{lorena:03}. Logo, $w$ e $b$ ótimos que resolvem este problema definem o classificador e podem ser obtidos por multiplicadores de Lagrange \citep{campbell:00}:
+Geometrically, the distance between the two parallel hyperplanes to the optimal hyperplane is $\ffrac{2}{||w||}$. Consequently, one can deduce that the distance between the optimal hyperplane and $w \cdot x + b = \pm 1$ is $\ffrac{1}{||w||}$. Then, the minimization of $||w||$ maximizes the margin and, thus, we have an optimization problem in which we want to minimize $||w||^2$ subject to the constraints in \ref{eq:svm_hyperplanos_paralelos_restricoes_equiv} \citep{lorena:03}. Therefore, optimal $w$ and $b$ that solve this problem define the classifier and can be obtained by Lagrange multipliers \citep{campbell:00}:
+
 \begin{equation}
 \label{eq:svm_margens_rigidas}
-\text{Maximizar: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j x_i\cdot x_j
+\text{Maximize: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j x_i\cdot x_j
 \end{equation}
 
 \begin{equation}
 \label{eq:svm_margens_rigidas_restricoes}
-\text{Sujeito a: }
+\text{Subject to: }
 \begin{cases}
     \alpha_i \geq 0\\[1em]
     \sum_{i=1}^N \alpha_i y_i = 0
 \end{cases}
 \end{equation}
-\noindent onde $\alpha$ são os multiplicadores de Lagrange.
+\noindent where $\alpha$ are the Lagrange multipliers.
 
-É importante ressaltar que este tipo de SVM tem êxito em conjuntos de dados de treinamento linearmente separáveis. Nos casos em que os dados são não linearmente separáveis, é admitida a ocorrência de alguns erros de classificação para o conjunto de treinamento, pela inclusão de variáveis de relaxamento \citep{lorena:03}. Essas alterações foram produzidas por \citet{cortes:95} e fazem parte de uma técnica denominada suavização de margens e, por conseguinte, SVMs dessa família também são chamadas de SVM com margens suaves. Logo, o problema de otimização torna-se \citep{lorena:03}:
+It is important to note that this type of SVM succeeds in linearly separable training datasets. In cases where the data are non-linearly separable, some classification errors are allowed for the training set, by the inclusion of relaxation variables \citep{lorena:03}. These changes were produced by \citet{cortes:95} and are part of a technique called margin smoothing, and therefore, SVMs of this family are also called soft-margin SVMs. So, the optimization problem becomes \citep{lorena:03}:
 \begin{equation}
 \label{eq:svm_margens_suaves_def}
-\text{Minimizar: } ||w||^2 + C\sum_{i=1}^N \xi_i
+\text{Minimize: } ||w||^2 + C\sum_{i=1}^N \xi_i
 \end{equation}
 
 \begin{equation}
 \label{eq:svm_margens_suaves_def_restricoes}
-\text{Sujeito a: }
+\text{Subject to: }
 \begin{cases}
     \xi_i \geq 0\\[1em]
     y_i (w \cdot x_i + b) \geq 1 - \xi_i
 \end{cases}
 \end{equation}
-\noindent onde $C$ é uma constante de regularização determinada empiricamente que impõe um peso diferente para o treinamento em relação à generalização. Sendo assim, o problema pode ser resolvido da mesma maneira com a equação em \ref{eq:svm_margens_rigidas}, porém, com algumas alterações nas restrições \citep{lorena:03}:
+\noindent where $C$ is an regularization constant, empirically determined, that imposes a different weight for training in relation to generalization. Thus, the problem can be solved in the same way with the equation in \ref{eq:svm_margens_rigidas}, but with some changes in the constraints \citep{lorena:03}:
 
 \begin{equation}
 \label{eq:svm_margens_suaves_restricoes}
-\text{Sujeito a: }
+\text{Subject to: }
 \begin{cases}
     0 \leq \alpha_i \leq C\\[1em]
     \sum_{i=1}^N \alpha_i y_i = 0
 \end{cases}
 \end{equation}
 
-Em geral, a maioria dos problemas de classificação impedem que classificadores lineares sejam utilizados por não ser possível obter resultados satisfatórios na partição dos dados de treinamento por um hiperplano. Entretanto, as SVMs lineares podem ser estendidas para lidar com essa situação mapeando o espaço de entrada em um espaço de características de dimensão mais alta, tipicamente muito maior que o espaço original \citep{duda:12}, da forma:
+In general, most classification problems prevent linear classifiers from being used because it is not possible to obtain satisfactory results in the partitioning of training data by a hyperplane. However, linear SVMs can be extended to deal with this situation by mapping the input space into a higher-dimensional feature space, typically much larger than the original space~\citep{duda:12}, of the form:
+
 \begin{equation}
 \label{eq:svm_dataset_transformado}
     D' = (\Phi(x_1), y_1), (\Phi(x_2), y_2), \ldots, (\Phi(x_N), y_N)
 \end{equation}
 
-A escolha apropriada de uma função $\Phi$ torna o conjunto de treinamento linearmente separável no espaço transformado \citep{lorena:03}. A forma do hiperplano ótimo agora é definida por:
+The proper choice of a function $\Phi$ makes the training set linearly separable in the transformed space \citep{lorena:03}. The shape of the optimal hyperplane is now defined by:
 \begin{equation}
 \label{eq:svm_hyperplano_otimo_trasnformado}
 w \cdot \Phi(x) + b = 0
 \end{equation}
 
-Logo, os conceitos de vetores de suporte, margem, hiperplanos paralelos e, consequentemente, de problema de otimização para encontrar a solução para os parâmetros $w$ e $b$ se aplicam aqui de forma similar. Formalmente, o problema de otimização pode ser resolvido como \citep{lorena:03}:
+Therefore, the concepts of support vectors, margin, parallel hyperplanes, and hence, optimization problem to find the solution for the $w$ and $b$ parameters apply here in a similar manner. Formally, the optimization problem can be solved as~\citep{lorena:03}:
 \begin{equation}
 \label{eq:svm_nao_linear}
-\text{Maximizar: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j \Phi(x_i)\cdot \Phi(x_j)
+\text{Maximize: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j \Phi(x_i)\cdot \Phi(x_j)
 \end{equation}
-\noindent sujeito às mesmas restrições definidas em \ref{eq:svm_margens_suaves_restricoes}.
+\noindent subject to the same constrains given by~\ref{eq:svm_margens_suaves_restricoes}.
 
-Agora, há a necessidade de se definir como o produto interno $\Phi(x_i)\cdot \Phi(x_j)$ entre dois vetores quaisquer $x_i, x_j \in D$ é realizado, cuja resposta está na introdução do conceito de \emph{kernels} \citep{lorena:03}.
+Now, there is a need to define as the inner product $\Phi(x_i) \cdot \Phi(x_j)$ between two vectors $x_i, x_j \in D$ is realized, whose answer lies in the introduction of the concept of \emph{kernels}~\citep{lorena:03}.
 
-\emph{Kernels} são funções\index{\emph{kernel}!funções} que têm a finalidade de projetar os vetores de entrada num espaço de características com número de dimensões exponencial ou infinito \citep{taylor:04}, da forma:
+\emph{Kernels} are functions that have the purpose of projecting the input vectors in a features space with exponential or infinite number of dimensions~\citep{taylor:04}, of the form:
 \begin{equation}
 \label{eq:svm_kernels}
 k(x_i, x_j) =  \Phi(x_i) \cdot \Phi(x_j)
 \end{equation}
 
-Logo, é possível aplicar um \emph{kernel} como descrito na equação \ref{eq:svm_kernels} na etapa de otimização da SVM, calculando de maneira eficiente o produto interno a partir dos dados de entrada, sem nem mesmo computar explicitamente o mapeamento da função $\Phi$ \citep{taylor:04}.
+Thus, it is possible to apply a \emph{kernel} as described in the equation~\ref{eq:svm_kernels} in the SVM optimization step, efficiently calculating the internal product from the input data, without even explicitly computing the mapping of the $\Phi$ function~\citep{taylor:04}.
 
-Alguns dos \emph{kernels} mais utilizados são \citep{lorena:03}:
+Some of the most commonly used \emph{kernels} are~\citep{lorena:03}:
 \begin{enumerate}[label=(\roman*)]
-\item \emph{Kernel} linear\index{\emph{kernel}!linear}
+\item Linear \emph{kernel}
 \begin{equation}
 \label{eq:svm_kernel_linear}
 k(x_i, x_j) =  (x_i \cdot x_j)
 \end{equation}
-O \emph{kernel} linear é o mais simples das funções \emph{kernel} e se dá pelo produto interno de dois vetores $x_i$ e $x_j$.
+The linear \emph{kernel} is the simplest of the \emph{kernel} functions and it is given by the internal product of two vectors $x_i$ and $x_j$.
 
-\item \emph{Kernel} polinomial\index{\emph{kernel}!polinomial}
+\item Polynomial \emph{kernel}
 \begin{equation}
 \label{eq:svm_kernel_polinomial}
 k(x_i, x_j) =  ({\gamma x_i \cdot x_j + r} )^g
 \end{equation}
-\noindent onde $g$ é o grau do polinômio e $r$ é um termo constante. Para este \emph{kernel}, os mapeamentos $\Phi$ também são funções polinomiais e, portanto, a complexidade é proporcional à escolha de $g$ \citep{lorena:03}.
+Where $g$ is the degree of the polynomial and $r$ is a constant term. For this \emph{kernel}, the $\Phi$ mappings are also polynomial functions, so the complexity is proportional to the choice of $g$~\citep{lorena:03}.
 
-\item \emph{Kernel} gaussiano\index{\emph{kernel}!gaussiano ou RBF}
+\item Gaussian \emph{kernel}
 \begin{equation}
 \label{eq:svm_kernel_rbf}
 k(x_i, x_j) =  \exp{\big(-\gamma {||x_i - x_j||}^2 \big)}
 \end{equation}
-Também conhecido como Função de Base Radial (RBF), o \emph{kernel} gaussiano corresponde a um espaço de características de dimensão infinita \citep{lorena:03}.
+Also known as Radial Basis Function (RBF), the Gaussian \emph{kernel} corresponds to a features space of infinite dimension~\citep{lorena:03}.
+
 \end{enumerate}
 
-No \emph{kernel} RBF e polinomial, o parâmetro $\gamma$ pode ser visto como o inverso do raio de influência das amostras selecionadas pelo modelo como vetores de suporte \citep{scikit-learn:11}.
+For the RBF and polynomial \emph{kernels}, the $\gamma$ parameter can be seen as the inverse of the radius of influence of samples selected by the model as support vectors \citep{scikit-learn:11}.
+
+
 
 %% ------------------------------------------------------------------------- %%
-\subsection{\emph{k}-vizinhos mais próximos}
-\label{sec:clasificadores_knn}
-O $k$-Vizinhos Mais Próximos ($k$-NN) é um algoritmo baseado em instâncias, o que significa que a função alvo não é aprendida com base em amostras de treinamento; elas simplesmente são mantidas, de maneira que a relação entre uma nova amostra com as amostras de treinamento armazenadas é avaliada e uma função alvo é, então, atribuída a ela \citep{mitchell:97}.
+\subsection{\emph{k}-Nearest Neighbors}
+\label{sec:classifiers_knn}
+The $k$-Nearest Neighbors ($k$-NN) is an algorithm based on instances, which means that the target function is not learned based on training samples; they are simply stored, so that the relation between a new sample and the stored training samples is evaluated, and a target function is then assigned to it~\citep{mitchell:97}.
 
-Como o próprio nome sugere, o $k$-NN classifica um novo ponto $x$ atribuindo-lhe a classe de maior frequência dentre as $k$ amostras mais próximas, ou seja, a decisão da classe de $x$ é feita por maioria de votos dos $k$ vizinhos mais próximos e, por essa razão, é interessante que a escolha de $k$ seja um número ímpar para evitar empates \citep{duda:12}.
+As the name suggests, $k$-NN classifies a new point $x$ by assigning it the highest frequency class of the $k$ closest samples, that is, the decision of the class of $x$ is made by majority of the votes of the $k$ nearest neighbors, and for this reason, it is interesting that the choice of $k$ be an odd number to avoid draws \citep{duda:12}.
 
-\begin{figure}[!h]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=.65\textwidth]{knn_exemplo}
-  \caption[Exemplo de aplicação do $k$-NN na tarefa de classificação num espaço $2$-dimensional]{Exemplo de aplicação do k-NN na tarefa de classificação num espaço $2$-dimensional. O algoritmo avalia as $k$ amostras próximas de $x$, criando uma região esférica, e rotula $x$ com a classe de maior frequência. Neste caso, $k = 5$ e a classe atribuída a $x$ deve ser a mesma dos pontos em azul. Fonte: proposto pelo autor.}
+  \caption[Example of a $k$-NN application in the classification task in a $2$-dimensional space]{Example of a $k$-NN application in the classification task in a $2$-dimensional space. The algorithm evaluates the $k$ samples near $x$, creating a spherical region, and labels $x$ with the highest frequency class. In this case, $k = 5$ and the class assigned to $x$ must be the same as the blue points. Source: proposed by the author.}
   \label{fig:knn_exemplo}
 \end{figure}
 
-Seja $D$ o conjunto de dados de treinamento com $N$ amostras da forma apresentada em \ref{eq:svm_dataset}. Logo, a distância entre duas amostras $x_i$ e $x_j$ quaisquer pode ser obtida em termos da distância Euclidiana, definida como:
+Let $D$ be the training dataset with $N$ samples as given in \ref{eq:svm_dataset}. Therefore, the distance between two samples $x_i$ and $x_j$ can be obtained in terms of the Euclidean distance, defined as:
 
 \begin{equation}
-\label{eq:knn_distancia_euclidiana}
+\label{eq:knn_distance_euclidian}
 d(x_i, x_j) = \sqrt{\sum_{r=1}^d (a_r(x_i) - a_r(x_j))^2}
 \end{equation}
-\noindent onde $a_r$ refere-se ao $r$-ésimo atributo do vetor de entrada $x$ e $i, j = 1, 2, \ldots, N$. Outras métricas de distância podem ser atribuídas a $d(x_i, x_j)$, tais como, Manhattan, Chebyshev e Minkowski \citep{duda:12}.
+\noindent where $a_r$ refers to the $r$th attribute of the input vector $x$ and $i, j = 1, 2, \ldots, N$. Other distance metrics can be attributed to $d(x_i, x_j)$, such as, Manhattan, Chebyshev, and Minkowski~\citep{duda:12}.
 
-Para, então, classificar uma nova amostra $x_q$, toma-se $x_1, \ldots, x_k$ instâncias do conjunto de treinamento, cujas distâncias dadas por \ref{eq:knn_distancia_euclidiana}, são dos $k$ pontos mais próximos de $x_q$. Sendo assim, a função que estima a classe de $x_q$ é dada por \citep{mitchell:97}:
+In order to classify a new sample $x_q$, we take $x_1, \ldots, x_k$ instances of the training set, whose distances given by \ref{eq:knn_distance_euclidian}, are of the $k$ points nearest to $x_q$. Thus, the function that estimates the class of $x_q$ is given by \citep{mitchell:97}:
+
 \begin{equation}
 \label{eq:knn_funcao_argmax}
 g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k \delta (y, f(x_i))
 \end{equation}
-\noindent onde
+\noindent where
 \begin{equation}
 \label{eq:knn_delta}
   \delta (y, f(x_i)) =  \begin{cases}
-                1, \quad \text{se}\ y = f(x_i) \\
-                0, \quad \text{caso contrário}
+                1, \quad \text{if}\ y = f(x_i) \\
+                0, \quad \text{otherwise}
               \end{cases}
 \end{equation}
 
-É importante ressaltar que $f(x_i)$ é conhecida, ou seja, é a classe da amostra $x_i$ do conjunto de treinamento.
+It is important to note that $f(x_i)$ is known, that is, it is the class of the sample $x_i$ of the training set.
 
-Uma variação óbvia da função dada na equação \ref{eq:knn_funcao_argmax} é a atribuição de pesos de cada um dos $k$ vizinhos, conforme sua distância, para um ponto $x_q$ sendo classificado \citep{mitchell:97}. Essa variação implica que pontos mais próximos de $x_q$ têm maior influência na sua rotulação. Formalmente, tem-se que \citep{mitchell:97}:
+An obvious variation of the function given in equation \ref{eq:knn_funcao_argmax} is the assignment of weights of each neighbor $k$, according to its distance, to a point $x_q$ being classified \citep{mitchell:97}. This variation implies that points closer to $x_q$ have more influence on its labeling. Formally, we have~\citep{mitchell:97}:
+
 \begin{equation}
 \label{eq:knn_funcao_argmax_pesos}
 g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k w_i \delta (y, f(x_i))
 \end{equation}
-\noindent onde
+\noindent where
 \begin{equation}
 \label{eq:knn_funcao_peso}
   w_i = \frac{1}{d(x_q, x_i)^2}
 \end{equation}
 
-No caso em que $d(x_q, x_i) = 0$, ou seja, $x_q$ e $x_i$ estão exatamente nas mesmas coordenadas, $g(x_q)$ pode assumir o mesmo valor de $f(x_i)$. Se há outras amostras de treinamento $x_i$ com a mesma característica, então $x_q$ pode assumir a classe da maioria delas \citep{mitchell:97}.
+In the case where $d(x_q, x_i) = 0$, that is, $x_q$ and $x_i$ are exactly the same coordinates, $g(x_q)$ can assume the same value of $f(x_i)$. If there are other training samples $x_i$ with the same characteristic, then $x_q$ can assume the class of the one who is the most of them \citep{mitchell:97}.
+
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Árvores de decisão}
-\label{sec:clasificadores_arvores_decisao}
+\label{sec:classifiers_dt}
 Árvore de decisão é um método para aproximação de funções alvo discretas, nas quais a função aprendida é representada por uma árvore de decisão ou, ainda, por um conjunto de regras do tipo \emph{Se-Então} que são de fácil interpretação. É uma das técnicas de aprendizagem mais populares de inferência indutiva\footnote{A tarefa de indução é desenvolver uma regra de classificação que pode determinar a classe de qualquer objeto a partir dos valores de seus atributos \citep{quinlan:86}.} \citep{mitchell:97}.
 
 As amostras de um conjunto de dados são classificadas por uma árvore de decisão por um processo iterativo onde um atributo (nó) é escolhido como raiz até algum nó folha, onde a classe é atribuída à amostra. Cada ramo partindo de um nó representa um dos valores possíveis de um dado atributo \citep{mitchell:97}.
