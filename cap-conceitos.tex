@@ -567,32 +567,29 @@ In the case where $d(x_q, x_i) = 0$, that is, $x_q$ and $x_i$ are exactly the sa
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Árvores de decisão}
+\subsection{Decision tree}
 \label{sec:classifiers_dt}
-Árvore de decisão é um método para aproximação de funções alvo discretas, nas quais a função aprendida é representada por uma árvore de decisão ou, ainda, por um conjunto de regras do tipo \emph{Se-Então} que são de fácil interpretação. É uma das técnicas de aprendizagem mais populares de inferência indutiva\footnote{A tarefa de indução é desenvolver uma regra de classificação que pode determinar a classe de qualquer objeto a partir dos valores de seus atributos \citep{quinlan:86}.} \citep{mitchell:97}.
+Decision tree is a method for approximation of discrete target functions, in which the learned function is represented by a decision tree or by a set of rules of type \emph{If-Then} that are easy to interpret. It is one of the most popular learning techniques of inductive inference \footnote{The task of induction is to develop a classification rule that can determine the class of any object from the values of its attributes~\citep{quinlan:86}.}~\citep{mitchell:97}.
 
-As amostras de um conjunto de dados são classificadas por uma árvore de decisão por um processo iterativo onde um atributo (nó) é escolhido como raiz até algum nó folha, onde a classe é atribuída à amostra. Cada ramo partindo de um nó representa um dos valores possíveis de um dado atributo \citep{mitchell:97}.
+The samples of a dataset are classified by a decision tree by an iterative process where an attribute (node) is chosen as root to some leaf node, where the class is assigned to the sample. Each branch starting from a node represents one of the possible values of a given attribute~\citep{mitchell:97}.
 
-Há uma família de algoritmos de árvore de decisão. Um deles é o Divisor Iterativo 3 (ID3) proposto por \citet{quinlan:86}. O ID3 avalia cada atributo através de um teste estatístico para determinar o quão bem ele, por si só, classifica as amostras de treinamento. O melhor atributo é selecionado como o nó raiz da árvore. Um ramo descendente do nó raiz é criado para cada valor possível deste atributo e as amostras de treinamento são classificadas para o nó descendente adequado. Este processo é então repetido recursivamente utilizando as amostras associadas a cada nó descendente. Esse é um algoritmo de busca guloso, já que ele não retrocede para reconsiderar escolhas anteriores \citep{mitchell:97}. O algoritmo para quando o subconjunto de amostras associado a um nó é da mesma classe ou quando não há relevância estatística para uma nova partição \citep{quinlan:86}.
+There is a family of decision tree algorithms. One of them is the Iterative Dichotomiser 3 (ID3) proposed by~\citet{quinlan:86}. The ID3 evaluates each attribute through a statistical test to determine how well it classifies the training samples. The best attribute is selected as the root node of the tree. A descending branch of the root node is created for each possible value of this attribute, and the training samples are classified into the appropriate descendent node. This process is then repeated recursively using the samples associated with each descendent node. This is a greedy search algorithm, since it does not regress to reconsider previous choices~\citep{mitchell:97}. The algorithm stops when the subset of samples associated with a node is of the same class or when there is no statistical relevance for a new partition \citep{quinlan:86}.
 
-Para medir a impureza de uma partição, o ID3 usa o conceito de entropia, formalmente \citep{quinlan:86}:
+To measure the impurity of a partition, ID3 uses the concept of entropy, formally~\citep{quinlan:86}:
 
 \begin{equation}
 \label{eq:arvore_devisao_entropia}
 H(D) = - y_\oplus log_2 y_\oplus - y_\ominus log_2 y_\ominus
 \end{equation}
-\noindent onde $D$ é o conjunto de dados de treinamento com $N$ amostras da forma apresentada em \ref{eq:svm_dataset}, $y_\oplus$ e $y_\ominus$ é a proporção de amostras positivas e negativas de $D$, respectivamente. É importante notar que a entropia é 0 quando todas as amostras de $D$ pertencem à mesma classe, 1 quando $D$ contém um número igual de amostras positivas e negativas e um valor entre 0 e 1 nos demais casos \citep{mitchell:97}.
+\noindent where $D$ is the training dataset with $N$ samples of the form presented in~\ref{eq:svm_dataset}, $y_\oplus$ and $y_\ominus$ is the proportion of positive and negative samples of $D$, respectively. It is important to note that the entropy is 0 when all samples of $D$ belong to the same class, 1 when $D$ contains an equal number of positive and negative samples, and a value between 0 and 1 in all other cases~\citep{mitchell:97}.
 
-Dada a entropia como uma medida de impureza de um conjunto de amostras de treinamento, pode-se definir o teste estatístico, conhecido como ganho de informação, que mede a efetividade de um atributo na classificação dos dados de treinamento, formalmente \citep{quinlan:86}:
+Given the entropy as a measure of impurity of a set of training samples, one can define the statistical test, known as information gain, that measures the effectiveness of an attribute in the classification of training data, formally~\citep{quinlan:86}:
 \begin{equation}
-\label{eq:arvore_devisao_ganho_informacao}
+\label{eq:dt_information_gain}
 IG(D, a_r) = H(D) - \sum_{v \in V(a_r)} \frac{|D_v|}{|D|} H(D_v)
 \end{equation}
-\noindent onde $V(a_r)$ é o conjunto de todos os possíveis valores do atributo $a_r$, $D_v$ é o subconjunto de $D$ no qual o atributo $a_r$ tem o valor $v$.
+\noindent where $V(a_r)$ is the set of all possible values of the attribute $a_r$, $D_v$ is the subset of $D$ in which the $a_r$ attribute is equal to $v$.
 
-Vale enfatizar que o primeiro termo da equação dado em \ref{eq:arvore_devisao_ganho_informacao} é a entropia do conjunto original $D$ e o segundo termo é o valor esperado da entropia depois que $D$ é particionado usando o atributo $a_r$ \citep{mitchell:97}. Outro aspecto importante é que o algoritmo inicia com o conjunto $D$ original, que é substituído por $D_v$ à medida que a recursão se aprofunda.
+It is worth emphasizing that the first term of the equation given in~\ref{eq:dt_information_gain} is the entropy of the original set $D$ and the second term is the expected value of the entropy after $D$ is partitioned using the attribute $a_r$~\citep{mitchell:97}. Another important aspect is that the algorithm starts with the original $D$ set, which is replaced by $D_v$ as the recursion deepens.
 
-Batizado de C4.5, \citet{quinlan:93} estendeu o ID3 para possibilitar o uso de atributos contínuos, atributos com dados ausentes e melhoria na eficiência computacional. Além disso, essa versão cuida de questões como quão profunda a árvore deve ser para evitar que os dados de treinamento sejam perfeitamente classificados, ou seja, quando o conjunto de treinamento é particionado até que cada subconjunto contenha apenas amostras de uma única classe. A estratégia adotada por \citet{quinlan:93} foi podar a árvore posteriormente à geração da árvore ajustada. Esse processo, apesar de ser mais lento que a proposta anterior do ID3, tornou o algoritmo mais confiável e com maior capacidade de generalização.
-
-
-%% ------------------------------------------------------------------------- %%
+Named as C4.5, \citet{quinlan:93} extended ID3 to enable the use of continuous attributes, attributes with missing data, and improved computational efficiency. In addition, this version takes care of issues such as how deep the tree should be to prevent training data from being perfectly classified, that is, when the training set is partitioned until each subset contains only samples of a single class - the over-fitting phenomenon. The strategy adopted by \citet{quinlan:93} was to prune the tree after the generation of the adjusted tree. This process, although slower than the previous ID3 proposal, made the algorithm more reliable and with greater generalization capacity.
