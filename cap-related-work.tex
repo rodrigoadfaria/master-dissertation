@@ -4,7 +4,29 @@
 
 There are a large number of works of skin detection based on color information and there are a couple of them comparing different techniques and classifiers, mainly from the point of view of performance, color models, skin color modeling and different datasets \citep{vezhnevets:03,kakumanu:07,mahmoodi:16}.
 
-In~\citet{jones:02}, the authors applied a Bayesian decision rule with a $3$-dimensional histogram model constructed from approximately 2 billion pixels collected from 18,696 images over the Internet to perform skin detection. They calculated two different histograms for skin and non-skin in the RGB color space. Using those histograms along with training data, a classifier was derived with the standard likelihood ratio approach of a pixel be skin to not be skin. The best performance at an error rate of 88\% was reached for histograms of size 32.
+On different techniques, statistical models are those which estimate the probability that an observed pixel is associated with skin, based on a huge training dataset. One approach is the single histogram based Look-UP Table (LUT) that is capable to obtain the distribution of skin pixels in a particular color space, by using a set of training pixels \citep{mahmoodi:16}. Considering the RGB color model for instance, a histogram with 256 bins per channel - $256^3$ in total - can be constructed for further counting the probability (see Eq. \ref{eq:lut_probability}) of each possible RGB value \citep{jones:02}.
+
+\begin{equation*}
+    P(rgb) = \frac{\# counts~of~rgb}{total~counts}
+    \label{eq:lut_probability}
+\end{equation*}
+
+In~\citet{jones:02}, the authors applied this technique to figure out the decision boundary of skin pixels distribution by using a $3$-dimensional histogram model constructed from approximately 2 billion pixels. Those pixels were collected from 18,696 images over the Internet to perform skin detection. First, visualization techniques were used to examine the shape of these distributions. Then, by examining the 3D histogram from several angles, \citet{jones:02} realized that its overall shape could be inferred.
+
+So, two different histograms for skin and non-skin in the RGB color space were calculated. Using those histograms along with training data, a surprisingly accurate pixel-wise classifier was derived. The best performance at an error rate of 88\% was reached for histograms of size 32.
+
+On the basis of the output of the skin detector, \citet{jones:02} also trained a classifier to determine whether a naked person is present or not in the scene. The features used from the output to create the feature vector were:
+\begin{itemize}
+    \item Percentage of pixels detected as skin
+    \item Average probability of the skin pixels
+    \item Size in pixels of the largest connected component of skin
+    \item Number of connected components of skin
+    \item Percent of colors with no entries in the skin and nonskin histograms
+    \item Height of the image
+    \item Width of the image
+\end{itemize}
+
+In the last step, 10,679 images were manually classified into 5,453 naked and 5,226 non-naked sets to train a neural network classifier. The neural network outputs a number between 0 and 1, with 1 indicating an naked person in the image. The detection rate achieved was of 88\%, with a false alarm rate of 11.3\%.
 
 Another method explicitly defines, through a number of rules, the boundaries that delimit the grouping of skin pixels in some color space \citep{vezhnevets:03}. This was the approach adopted by \citet{kovac:03} in the YCbCr color space, obtaining a true positive rate of 90.66\%. They~\citep{kovac:03} also performed experiments with the chromaticity channels Cb and Cr only. The results showed that the performance of the classifier is inferior in relation to the approach using all Y, Cb and Cr channels. The key advantage of this method is the simplicity of skin detection rules that leads to the construction of a very fast classifier. On the other hand, achieving high recognition rates with this method is difficult because it is necessary to find a good color space and empirically appropriate decision rules \citep{vezhnevets:03}.
 

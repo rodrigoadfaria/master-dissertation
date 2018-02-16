@@ -59,7 +59,16 @@ Since the data are points in the RGB space, it is possible to plot it for a bett
 \label{sec:datasets_sfa}
 SFA, the name of the dataset proposed by \citet{sfa-skin-dataset:13}, stands for Skin of FERET and AR Database. The SFA is a set of images of frontal faces obtained from two other color image databases: the FERET, created by~\citet{feret:96}, and the AR proposed by~\citet{ar-face-database:98}, which provided 876 and 242 images each, respectively. It is important to notice that AR images have a white background and small variations of skin color. In other words, the environment is more controlled than the images in FERET \cite{sfa-skin-dataset:13}. Figure~\ref{fig:sfa_dataset_exemplo} shows some of the 1,118 samples available.
 
-\begin{figure}[ht]
+\citet{sfa-skin-dataset:13} also extracted different window patches of each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a window of size $n \times n$, where $n$ is odd, with a central pixel, from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in figure~\ref{fig:sfa_dataset_janelas}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.3\textwidth]{sfa-janelas}
+  \caption[Structure of the windows that form the SFA samples]{Structure of the windows that form the SFA samples. In total, there are 3,354 skin samples and 5,590 non-skin samples for each window size. Source: \citet{sfa-skin-dataset:13}.}
+  \label{fig:sfa_dataset_janelas}
+\end{figure}
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.21\textwidth}
         \includegraphics[width=\textwidth]{sfa/ori/img4}
@@ -88,34 +97,13 @@ SFA, the name of the dataset proposed by \citet{sfa-skin-dataset:13}, stands for
     \label{fig:sfa_dataset_exemplo}
 \end{figure}
 
-\citet{sfa-skin-dataset:13} also extracted different window patches of each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a window of size $n \times n$, where $n$ is odd, with a central pixel, from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in figure~\ref{fig:sfa_dataset_janelas}.
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=.3\textwidth]{sfa-janelas}
-  \caption[Structure of the windows that form the SFA samples]{Structure of the windows that form the SFA samples. In total, there are 3,354 skin samples and 5,590 non-skin samples for each window size. Source: \citet{sfa-skin-dataset:13}.}
-  \label{fig:sfa_dataset_janelas}
-\end{figure}
-
-\textcolor{red}{Review} A partir das amostras criadas no SFA, um conjunto de dados foi extraído gerando uma base de dados de pele e não pele similar ao UCI na tabela~\ref{tbl:uci_dataset}. O tamanho da janela utilizado foi $9 \times 9$ e o espaço de cores também foi o RGB. Portanto, o total de amostras empregado nos experimentos é 724.464, sendo 271.674 de pele e 452.790 de não pele. A classe atribuída à cada amostra tem o mesmo valor que no UCI, ou seja, +1 se for pele e -1, caso contrário. A figura~\ref{fig:dataset_sfa} mostra a representação gráfica dos dados plotados em 3 dimensões.
-\begin{figure}[hb]
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \includegraphics[width=\textwidth]{sfa_skinns_plot}
-    \end{minipage}
-    ~ % space
-    \begin{minipage}{0.45\textwidth}
-        \includegraphics[width=\textwidth]{sfa_skin_plot}
-    \end{minipage}
-    \caption[Visão 3-dimensional dos canais RGB do conjunto de dados SFA]{\textcolor{red}{Review} Visão 3-dimensional dos canais RGB do conjunto de dados SFA. Os pontos em azul são amostras de pele e os verdes de não pele. À esquerda tem-se todas as amostras do conjunto de dados gerado; à direita apenas as amostras de pele. Fonte: proposto pelo autor.}
-    \label{fig:dataset_sfa}
-\end{figure}
 
 \subsection{Pratheepan}
 \label{sec:datasets_pratheepan}
 The images in the Pratheepan dataset were downloaded randomly from Google for human skin detection search. There are 78 images of family and face captured with a range of distinct cameras using different color enhancement and under different illumination conditions \cite{tan:12}. Figure~\ref{fig:pra_dataset_exemplo} shows some of the 78 samples available.
 
-\begin{figure}[hb]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.293\textwidth}
         \includegraphics[width=\textwidth]{pra/ori/07-c140-12family-red-rr-398h}
@@ -140,9 +128,8 @@ The images in the Pratheepan dataset were downloaded randomly from Google for hu
 \label{sec:datasets_hgr}
 The database for Hand Gesture Recognition (HGR) contains the gestures from Polish and American Sign Language. There are 1,558 images acquired in different conditions of background, dimensions and lightening. In addition to original and ground truth binary skin mask images, it includes hand feature points location in separate files. Figure~\ref{fig:hgr_dataset_exemplo} shows some of the 1,558 samples available \citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
-The images within were acquired in three different series. A set of 899 was captured in uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and (41) uncontrolled background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions \citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
-\begin{figure}[hb]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.3\textwidth}
         \includegraphics[width=\textwidth]{hgr/ori/D_P_hgr1_id05_2}
@@ -160,6 +147,35 @@ The images within were acquired in three different series. A set of 899 was capt
     \end{subfigure}
     \caption[Examples of HGR skin dataset]{Examples of HGR skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Differently from Pratheepan and SFA, the ground truth is also binary images, but the black color RGB = (0, 0, 0) was assigned to all pixels when they represent skin patches. Source: \citet{kawulok:14, nalepa:14, grzejszczak:16}.}
     \label{fig:hgr_dataset_exemplo}
+\end{figure}
+
+The images within were acquired in three different series. A set of 899 was captured in uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and (41) uncontrolled background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions \citep{kawulok:14, nalepa:14, grzejszczak:16}.
+
+
+\subsection{Compaq}
+\label{sec:datasets_compaq}
+Compaq can be considered as the first large skin dataset and, probably is the most used for skin detection classifiers. It consists of 13,635 images crawled from the Internet, which 4,670 contain skin regions and another subset of 8,965 images not containing any skin. The ground truth images are poorly annotated on the basis of an automatic software tool \citep{mahmoodi:16}.
+
+It is worth mentioning that this database is no longer available and we had obtained a copy of it by contacting the authors. We also had to fix some few images due lack of ground truth or files corrupted. The final amount of images with skin used in the experiments is 4,669. Figure~\ref{fig:compaq_dataset_example} shows some of the 4,669 samples available used in the experiments \citep{jones:02}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{hgr/ori/D_P_hgr1_id05_2}
+        \includegraphics[width=\textwidth]{hgr/gt/D_P_hgr1_id05_2}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.275\textwidth}
+        \includegraphics[width=\textwidth]{hgr/ori/N_P_hgr1_id04_5}
+        \includegraphics[width=\textwidth]{hgr/gt/N_P_hgr1_id04_5}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.337\textwidth}
+        \includegraphics[width=\textwidth]{hgr/ori/V_S_hgr2A2_id03_1}
+        \includegraphics[width=\textwidth]{hgr/gt/V_S_hgr2A2_id03_1}
+    \end{subfigure}
+    \caption[Examples of Compaq skin/non-skin dataset]{Examples of Compaq skin/non-skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source: \citet{jones:02}.}
+    \label{fig:compaq_dataset_example}
 \end{figure}
 
 
@@ -223,27 +239,29 @@ where TP, TN, FP, FN are, respectively, the number of true positive, true negati
 
 
 %------------------------------------------------------
-\section{Primeiro experimento}
-\label{sec:experimento_um}
-O primeiro experimento foi realizado com $k$-NN e SVM, disponíveis no pacote \emph{scikit-learn} \citep{scikit-learn:11}. O espaço de cores usado originalmente foi o RGB, como citado na descrição dos conjuntos de dados em \ref{sec:datasets}. Em ambos os casos, a estratégia escolhida de validação cruzada foi a \emph{10-fold}, que é uma escolha comum desta abordagem na prática \citep{mostafa:12}. Além disso, a técnica de tabela de busca\index{busca!tabela de} do \emph{scikit-learn} também foi utilizada com o objetivo de encontrar os parâmetros mais adequados para cada classificador.
+\section{Machine learning experiments}
+\label{sec:ml_experiments}
+Preliminary experiments were carried out using machine learning techniques in order to establish a bottom line for comparison with the proposed method, mainly in the execution time point of view.
 
-A tabela de busca é usada no \emph{scikit-learn} para encontrar os parâmetros ótimos de um classificador quando eles não podem ser aprendidos pelo estimador, tais como, \emph{kernel} e $\gamma$ na SVM ou número de vizinhos no $k$-NN \citep{scikit-learn:11}. As tabelas de parâmetros utilizadas no treinamento da SVM e $k$-NN podem ser vistas em \ref{tab:svm_tabela_busca} e \ref{tab:knn_tabela_busca}. Os parâmetros de cada linha são combinados na tentativa de encontrar o estimador ótimo. Por exemplo, uma escolha no treinamento da SVM seria \emph{kernel}=rbf, C=100, \emph{gamma}=1e-4. Todas as combinações possíveis são exploradas, sendo que a melhor delas é retornada \citep{scikit-learn:11}.
+The first experiment was carried out with $k$-NN and SVM, available in the scikit-learn package~\citep{scikit-learn:11}. The color space originally used was RGB, as cited in the description of datasets in \ref{sec:datasets}. In both cases, the chosen cross-validation strategy was 10-fold, which is a common choice of this approach in practice \citep{mostafa:12}. In addition, the technique of grid search of scikit-learn was also used with the objective of finding the most suitable parameters for each classifier.
+
+The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and $\gamma$ in the SVM or number of neighbors of $k$-NN \citep{scikit-learn:11}. The parameter tables used in the training of SVM and $k$-NN can be seen in \ref{tab:svm_grid_search} and \ref{tab:knn_grid_search}. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, $\gamma$ = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
 
 \begin{table}[ht]
 \centering
 \begin{small}
 \setlength{\tabcolsep}{10pt}
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
- \thbi{kernel} & \multicolumn{4}{c|}{\thbi{C}} & \multicolumn{3}{c|}{\thbi{gamma}} & \multicolumn{2}{c|}{\thbi{degree}}\\ \cline{1-10}
-rbf    & 1 & 10 & 100 & 1000 & 1e-3 & 1e-4 & 1e-5 &   &   \\ \hline
-poly   & 1 & 10 & 100 & 1000 &      & 1e-4 & 1e-5 & 3 & 4 \\ \hline
-linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}\hline
+ \thbi{kernel} & \multicolumn{3}{c|}{\thbi{C}} & \multicolumn{3}{c|}{\thbi{gamma}} & \multicolumn{2}{c|}{\thbi{degree}}\\ \cline{1-9}
+rbf    & 1 & 10 & 100 & 1e-3 & 1e-4 & 1e-5 &   &   \\ \hline
+poly   & 1 & 10 & 100 &      & 1e-4 & 1e-5 & 3 & 4 \\ \hline
+linear & 1 & 10 & 100 &      &      &      &   &   \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Tabela de busca dos parâmetros do estimador ótimo na SVM]{Tabela de busca dos parâmetros do estimador ótimo na SVM. A coluna kernel refere-se aos kernels usados no treinamento que são gaussiano, polinomial e linear, respectivamente. C é um parâmetro de regularização que diz à SVM a quantidade de erro admitido no treinamento. Gamma é um parâmetro usado somente nos kernels gaussiano e polinomial, conforme citado em \ref{sec:classifiers_svm}. Degree é o grau do polinômio; usado somente no kernel polinomial \citep{scikit-learn:11}.}
-\label{tab:svm_tabela_busca}
+\caption[Grid search table of the parameters of the optimal estimator in the SVM]{Grid search table of the parameters of the optimal estimator in the SVM. The kernel column refers to the kernels used in training that are Gaussian, polynomial and linear, respectively. C is a regularization parameter that tells SVM the amount of error allowed during the training. Gamma is a parameter used only in Gaussian and polynomial kernels, as cited in~\ref{sec:classifiers_svm}. Degree is the degree of the polynomial; used only in the polynomial kernel~\citep{scikit-learn:11}.}
+\label{tab:svm_grid_search}
 \end{table}
 
 \begin{table}[hb]
@@ -251,73 +269,261 @@ linear & 1 & 10 & 100 & 1000 &      &      &      &   &   \\ \hline
 \begin{small}
 \setlength{\tabcolsep}{8pt}
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
- \multicolumn{10}{|c|}{\thbi{n\_neighbors}} & \multicolumn{2}{c|}{\thbi{weights}} & \multicolumn{1}{c|}{\thbi{algorithm}}\\ \cline{1-13}
-3 & 5 & 9 & 15 & 25 & 50 & 100 & 200 & 400 & 800 & distance & uniform & auto \\ \hline
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
+ \multicolumn{7}{|c|}{\thbi{n\_neighbors}} & \multicolumn{2}{c|}{\thbi{weights}} & \multicolumn{1}{c|}{\thbi{algorithm}}\\ \cline{1-10}
+3 & 5 & 9 & 15 & 25 & 31 & 35 & distance & uniform & auto \\ \hline
 
 \end{tabular} 
 \end{small}
-\caption[Tabela de busca dos parâmetros do estimador ótimo no $k$-NN]{Tabela de busca dos parâmetros do estimador ótimo no k-NN. A coluna n\_neighbors refere-se ao número de vizinhos considerado no treinamento. Weights é a função peso usada na predição, onde uniform indica que os pontos têm pesos iguais e distance indica que o inverso da distância é aplicado na classificação, conforme citado em \ref{eq:knn_funcao_peso}. A terceira coluna indica qual algoritmo deve ser utiizado; auto significa que o algoritmo será decidido com base nos dados \citep{scikit-learn:11}.}
-\label{tab:knn_tabela_busca}
+\caption[Grid search table of the parameters of the optimal estimator in k-NN]{Grid search table of the parameters of the optimal estimator in k-NN. The n\_neighbors column refers to the number of neighbors considered in the training. Weights is the weight function used in the prediction, where uniform indicates that the points have equal weights and distance indicates that the inverse of the distance is applied in the classification, as cited in~\ref{eq:knn_funcao_peso}. The third column indicates which algorithm should be used; auto means that the algorithm will be decided based on the data~\citep{scikit-learn:11}.}
+\label{tab:knn_grid_search}
 \end{table}
 
-Os resultados deste experimento podem ser vistos na tabela \ref{tab:resultados_experimento_um}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
-\begin{table}[!htpb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{8pt}
-
-\begin{tabular}{|c|c|c|c|c|c|}\hline
- \thb{Conjunto de dados} & \thb{Classificador} & \thb{Modelo de cores} & \thbi{Precision} & \thbi{Recall} & \thbi{F1-score} \\ \hline
- \multirow{2}{*}{UCI} & $k$-NN & RGB & 0,9995 & 0,9995 & 0,9995 \\ \cline{2-6}
-                      & SVM    & RGB & 0,9995 & 0,9995 & 0,9995 \\ \hline
- \multirow{2}{*}{SFA} & $k$-NN & RGB & 0,9672 & 0,9669 & 0,9670 \\ \cline{2-6}
-                      & SVM    & RGB & 0,9643 & 0,9628 & 0,9638 \\ \hline
-
-\end{tabular}
-\end{small}
-\caption[Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA]{Resultados dos experimentos com $k$-NN e SVM nos conjuntos de dados UCI e SFA. Os parâmetros ótimos do k-NN no treinamento com UCI foram n\_neighbors=3, weights=uniform e com SFA n\_neighbors=15, weights=uniform. Os parâmetros ótimos da SVM no treinamento com UCI e SFA foram kernel=rbf, C=100 e gamma=1e-3.}
-\label{tab:resultados_experimento_um}
-\end{table}
-
-Como pode ser visto na tabela \ref{tab:resultados_experimento_um}, o $k$-NN teve resultados ligeiramente melhores que a SVM no conjunto de dados SFA. Ambos classificadores tiveram medidas de qualidade muito altas no conjunto de dados UCI, próximas a 100\%, o que, provavelmente, é uma situação de sobreajuste. Uma causa possível está na separação dos dados de treinamento e teste. Há muitas repetições entre as amostras, logo, é possível que amostras já vistas pelo classificador durante o treinamento sejam utilizadas na etapa de teste. Por essa razão, os experimentos subsequentes foram realizados somente com o SFA.
-
-%------------------------------------------------------
-\section{Segundo experimento}
-\label{sec:experimento_dois}
-Este experimento, de maneira similar ao realizado na seção \ref{sec:experimento_um}, também foi realizado com $k$-NN e SVM. Porém, o conjunto de dados SFA foi transformado para os espaços de cor HSV, Lab e YCbCr com o objetivo de compreender a influência nos resultados. Além disso, o atributo referente ao componente de luminância foi ignorado para que um teste somente com os componentes de crominância fosse realizado. Novamente, a estratégia escolhida de validação cruzada foi a \emph{10-fold}.
-
-Como o objetivo deste experimento é avaliar a performance do classificador em espaços de cores distintos, os parâmetros ótimos obtidos no experimento \ref{sec:experimento_um} foram fixados aqui.
-
-Os resultados podem ser vistos na tabela \ref{tab:resultados_experimento_dois}. Vale ressaltar que o treinamento foi executado com 10 tarefas em paralelo em ambos os classificadores e 30\% dos dados, aleatoriamente, foram separados para teste.
+The results of this experiment can be seen in the table~\ref{tab:results_experiment_one}. The dataset used was UCI. It is noteworthy that the training was performed splitting the data with 30\% randomly separated for test in both classifiers.
 \begin{table}[!htpb]
 \centering
 \begin{small}
 \setlength{\tabcolsep}{8pt}
 
 \begin{tabular}{|c|c|c|c|c|}\hline
- Modelo de cores & Classificador & \emph{Precision} & \emph{Recall} & \emph{F1-score} \\ \hline
- \multirow{2}{*}{RGB}   & $k$-NN  & 0,9672 & 0,9669 & 0,9670 \\ \cline{2-5}
-                        & SVM     & 0,9643 & 0,9628 & 0,9638 \\ \hline
- \multirow{2}{*}{HSV}   & $k$-NN  & 0,9676 & 0,9673 & 0,9674 \\ \cline{2-5}
-                        & SVM     & 0,9718 & 0,9677 & 0,9679 \\ \hline
- \multirow{2}{*}{HS}    & $k$-NN  & 0,9215 & 0,9194 & 0,9199 \\ \cline{2-5}
-                        & SVM     & 0,9305 & 0,9302 & 0,9302 \\ \hline
- \multirow{2}{*}{Lab}   & $k$-NN  & 0,9671 & 0,9660 & 0,9670 \\ \cline{2-5}
-                        & SVM     & 0,9675 & 0,9665 & 0,9672 \\ \hline
- \multirow{2}{*}{ab}    & $k$-NN  & 0,9444 & 0,9439 & 0,9440 \\ \cline{2-5}
-                        & SVM     & 0,9451 & 0,9447 & 0,9446 \\ \hline
- \multirow{2}{*}{YCbCr} & $k$-NN  & 0,9679 & 0,9677 & 0,9677 \\ \cline{2-5}
-                        & SVM     & 0,9635 & 0,9633 & 0,9632 \\ \hline
- \multirow{2}{*}{CbCr}  & $k$-NN  & 0,9487 & 0,9482 & 0,9483 \\ \cline{2-5}
-                        & SVM     & 0,9496 & 0,9492 & 0,9493 \\ \hline
+ \thb{Classifier} & \thb{Color model} & \thbi{Precision} & \thbi{Recall} & \thbi{F-measure} \\ \hline
+ $k$-NN & RGB & 0,9995 & 0,9995 & 0,9995 \\ \cline{1-5}
+ SVM    & RGB & 0,9995 & 0,9995 & 0,9995 \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Resultados dos experimentos com $k$-NN e SVM no conjunto de dados SFA em espaços de cores distintos]{Resultados dos experimentos com $k$-NN e SVM no conjunto de dados SFA em espaços de cores distintos. As linhas com os modelos de cores HS, ab e CbCr indicam que o componente de luminância não foi utilizado no treinamento.}
-\label{tab:resultados_experimento_dois}
+\caption[Results of the experiments with $k$-NN and SVM in the UCI dataset]{Results of the experiments with $k$-NN and SVM in the UCI dataset. The optimal $k$-NN parameters found during the training in UCI were $n\_neighbors = 3$, $weights = uniform$. In the case of SVM, the optimal parameters found in UCI training were $kernel = rbf$, $C = 100$ and $gamma = 1e-3$.}
+\label{tab:results_experiment_one}
 \end{table}
 
-Os melhores resultados com a SVM e $k$-NN foram obtidos nos espaços de cores HSV e YCbCr, respectivamente. Dentre aqueles onde o componente de luminância foi ignorado, o CbCr teve a melhor performance.
 
-É interessante observar que os indicadores de qualidade do modelo mostram que ambos classificadores tiveram taxas ao redor de 96\% em todos os espaços de cor, quando aplicado com os 3 canais. Além disso, quando o canal de luminância foi ignorado, o desempenho foi inferior - aproximadamente 4 pontos percentuais no pior caso. Por outro lado, a perda de performance pode ser compensada pela redução da complexidade do modelo, já que uma dimensão pode ser descartada, mantendo, ainda, medidas de qualidade relativamente significativas.
+As can be seen in the table~\ref{tab:results_experiment_one}, both classifiers had very high quality measures in the UCI dataset, close to 100\%, which is probably an over-fitting situation. One possible root cause is the splitting of training and test data subsets. We observed that there are many replicates among the samples, so it is possible that samples already seen by the classifier during the training are used in the test step.
+
+In fact, once we used a seed to generate the subsets, we applied the same strategy to split the data and count how many samples of the test subset were seen in the training subset as shown in figure~\ref{fig:uci_split_representation}. Based on the distribution of the splitting and the results of the measures given in table~\ref{tab:results_experiment_one}, we can say that UCI dataset is not suitable for this application.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figuras/uci_split_representation}
+
+    \caption[UCI samples distribution after splitting the dataset in training and testing subsets]{UCI samples distribution after splitting the dataset in training and testing subsets. We used the scikit-learn package function for splitting, where 30\% is the size of test set. The right-most bar, entitled as duplicates, shows how many samples of the test set was seen in training set. In the order of 83\% for skin samples and 86\% for non skin samples. Source: proposed by the author.}
+    \label{fig:uci_split_representation}
+\end{figure}
+
+For the benefit of the doubt, we submitted the learned function given by those classifiers in real images of Pratheepan and SFA datasets. This experiment can help us to understand the ability of the learned model to generalize for upcoming non seen samples.
+
+\begin{table}[!htpb]
+\centering
+\begin{small}
+\setlength{\tabcolsep}{8pt}
+
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+ \thb{Dataset} & \thb{Classifier} & \thb{Precision} & \thbi{Recall} & \thbi{Specificity} & \thbi{F-measure} \\ \hline
+ \multirow{2}{*}{SFA} & $k$-NN & 0.9322 & 0.5895 & 0.9835 & 0.7223 \\ \cline{2-6}
+                      & SVM    & 0.9079 & 0.4839 & 0.9838 & 0.6314 \\ \hline
+ \multirow{2}{*}{Pratheepan} & $k$-NN & 0.5930 & 0.7719 & 0.8568 & 0.6707 \\ \cline{2-6}
+                             & SVM    & 0.6179 & 0.7259 & 0.8841 & 0.6675 \\ \hline
+\end{tabular}
+\end{small}
+\caption[Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets]{Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets. Despite some of the measures are quite good, we can see that they are far way from the ones given during the training in table~\ref{tab:results_experiment_one}, which says that the learned models do not have a good generalization.}
+\label{tab:results_experiment_one_imgs}
+\end{table}
+
+%------------------------------------------------------
+\section{Rule-based experiments}
+\label{sec:rule_based_experiments}
+\noindent In this section we present some experimental evaluations of the proposed extensions described in sections~\ref{sec:proposed_method} and \ref{sec:neighborhood_extended_method}, as well as the original method in  four widely known datasets: SFA, Pratheepan, HGR and Compaq. The latest three of them have also been used in~\citet{brancati:17}.
+
+Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the experiments. Column 1 refers to the dataset used. Column 2 refers to the method being experimented: Original for the original hypothesis;  Reverse refers to the reverse hypothesis with respect to $P_{Cr_{s}}$ parameter; Combined refers to the combination of both of the former methods (see  Sec. \ref{sec:proposed_method}); Neighbors refers to the extension of the method using the neighborhood approach (see  Sec. \ref{sec:neighborhood_extended_method}).
+
+
+\begin{table*}[ht]
+\centering
+
+\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+ Dataset & Hypothesis & Precision & Recall & Specificity & F-measure\\ \cline{1-6}
+\multirow{3}{*}{Compaq}
+& Original     & 0.4354            & \textbf{0.8046}   & 0.8046            & 0.5650 \\ \cline{2-6}
+& Reverse      & 0.3971            & 0.7232            & 0.7921            & 0.5127 \\ \cline{2-6}
+& Combined     & \textbf{0.4906}   & 0.6251            & \textbf{0.8856}   & 0.5498 \\ \cline{2-6}
+& Neighbors    & 0.4708            & 0.7421            & 0.8463            & \textbf{0.5761} \\ \hhline{======}
+
+\multirow{3}{*}{Pratheepan} 
+& Original     & 0.5513            & \textbf{0.8199}   & 0.8230            & 0.6592 \\ \cline{2-6}
+& Reverse      & 0.5249            & 0.7326            & 0.8188            & 0.6116 \\ \cline{2-6}
+& Combined     & \textbf{0.6681}   & 0.6683            & \textbf{0.9164}   & 0.6682 \\ \cline{2-6}
+& Neighbors    & 0.6280            & 0.7515            & 0.8871            & \textbf{0.6843} \\ \hhline{======}
+
+\multirow{3}{*}{HGR}
+& Original     & 0.8938            & 0.7664            & 0.9274            & 0.8252 \\ \cline{2-6}
+& Reverse      & 0.7929            & \textbf{0.8429}   & 0.8337            & 0.8171 \\ \cline{2-6}
+& Combined     & \textbf{0.8994}   & 0.6952            & \textbf{0.9390}   & 0.7843 \\ \cline{2-6}
+& Neighbors    & 0.8818            & 0.7935            & 0.9211            & \textbf{0.8353} \\ \hhline{======}
+
+\multirow{3}{*}{SFA}
+& Original     & 0.8636             & 0.4214            & 0.9692            & 0.5664 \\ \cline{2-6}
+& Reverse      & 0.8563             & \textbf{0.7730}   & 0.9381            & \textbf{0.8125} \\ \cline{2-6}
+& Combined     & \textbf{0.9288}    & 0.3958            & \textbf{0.9894}   & 0.5551 \\ \cline{2-6}
+& Neighbors    & 0.9176             & 0.5111            & 0.9826            & 0.6565 \\ \hline
+\end{tabular}
+
+\caption{Quantitative result metrics of the methods. For each dataset, we have four different applications: the original hypothesis with respect to $P_{Cb_{s}}$, the reverse hypothesis with respect to $P_{Cr_{s}}$, the one which combines both, and the extension using the neighborhood approach.}
+\label{tab:merged_rules_results}
+
+\end{table*}
+
+
+Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, and \ref{fig:results_hgr}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
+
+
+\begin{figure*}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.13\textwidth}
+        \includegraphics[width=2cm]{sfa/ori/img4}
+        \includegraphics[width=2cm]{sfa/ori/img51}
+        \includegraphics[width=2cm]{sfa/ori/img112}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.13\textwidth}
+        \includegraphics[width=2cm]{sfa/gt/img4}
+        \includegraphics[width=2cm]{sfa/gt/img51}
+        \includegraphics[width=2cm]{sfa/gt/img112}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.13\textwidth}
+        \includegraphics[width=2cm]{sfa/cbs/img4}
+        \includegraphics[width=2cm]{sfa/cbs/img51}
+        \includegraphics[width=2cm]{sfa/cbs/img112}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.13\textwidth}
+        \includegraphics[width=2cm]{sfa/crs/img4}
+        \includegraphics[width=2cm]{sfa/crs/img51}
+        \includegraphics[width=2cm]{sfa/crs/img112}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.13\textwidth}
+        \includegraphics[width=2cm]{sfa/cmb/img4}
+        \includegraphics[width=2cm]{sfa/cmb/img51}
+        \includegraphics[width=2cm]{sfa/cmb/img112}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.13\textwidth}
+        \includegraphics[width=2cm]{sfa/ngh/img4}
+        \includegraphics[width=2cm]{sfa/ngh/img51}
+        \includegraphics[width=2cm]{sfa/ngh/img112}
+        \caption{}
+    \end{subfigure}
+
+    \caption[Image samples with the results of each method in SFA dataset]{Image samples with the results of each method in SFA dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \label{fig:results_sfa}
+\end{figure*}
+
+\begin{figure*}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{pra/ori/07-c140-12family-red-rr-398h}
+        \includegraphics[width=2.28cm]{pra/ori/buck_family}
+        \includegraphics[width=2.28cm]{pra/ori/3115267-My-very-large-Indian-family-2}
+        \includegraphics[width=2.28cm]{pra/ori/chenhao0017me9}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{pra/gt/07-c140-12family-red-rr-398h}
+        \includegraphics[width=2.28cm]{pra/gt/buck_family}
+        \includegraphics[width=2.28cm]{pra/gt/3115267-My-very-large-Indian-family-2}
+        \includegraphics[width=2.28cm]{pra/gt/chenhao0017me9}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{pra/cbs/07-c140-12family-red-rr-398h}
+        \includegraphics[width=2.28cm]{pra/cbs/buck_family}
+        \includegraphics[width=2.28cm]{pra/cbs/3115267-My-very-large-Indian-family-2}
+        \includegraphics[width=2.28cm]{pra/cbs/chenhao0017me9}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{pra/crs/07-c140-12family-red-rr-398h}
+        \includegraphics[width=2.28cm]{pra/crs/buck_family}
+        \includegraphics[width=2.28cm]{pra/crs/3115267-My-very-large-Indian-family-2}
+        \includegraphics[width=2.28cm]{pra/crs/chenhao0017me9}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{pra/cmb/07-c140-12family-red-rr-398h}
+        \includegraphics[width=2.28cm]{pra/cmb/buck_family}
+        \includegraphics[width=2.28cm]{pra/cmb/3115267-My-very-large-Indian-family-2}
+        \includegraphics[width=2.28cm]{pra/cmb/chenhao0017me9}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{pra/ngh/07-c140-12family-red-rr-398h}
+        \includegraphics[width=2.28cm]{pra/ngh/buck_family}
+        \includegraphics[width=2.28cm]{pra/ngh/3115267-My-very-large-Indian-family-2}
+        \includegraphics[width=2.28cm]{pra/ngh/chenhao0017me9}
+        \caption{}
+    \end{subfigure}
+
+    \caption[Image samples with the results of each method in Pratheepan dataset]{Image samples with the results of each method in Pratheepan dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \label{fig:results_pratheepan}
+\end{figure*}
+
+\begin{figure*}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{hgr/ori/D_P_hgr1_id05_2}
+        \includegraphics[width=2.28cm]{hgr/ori/N_P_hgr1_id04_5}
+        \includegraphics[width=2.28cm]{hgr/ori/V_S_hgr2A2_id03_1}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{hgr/gt/D_P_hgr1_id05_2}
+        \includegraphics[width=2.28cm]{hgr/gt/N_P_hgr1_id04_5}
+        \includegraphics[width=2.28cm]{hgr/gt/V_S_hgr2A2_id03_1}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{hgr/cbs/D_P_hgr1_id05_2}
+        \includegraphics[width=2.28cm]{hgr/cbs/N_P_hgr1_id04_5}
+        \includegraphics[width=2.28cm]{hgr/cbs/V_S_hgr2A2_id03_1}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{hgr/crs/D_P_hgr1_id05_2}
+        \includegraphics[width=2.28cm]{hgr/crs/N_P_hgr1_id04_5}
+        \includegraphics[width=2.28cm]{hgr/crs/V_S_hgr2A2_id03_1}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{hgr/cmb/D_P_hgr1_id05_2}
+        \includegraphics[width=2.28cm]{hgr/cmb/N_P_hgr1_id04_5}
+        \includegraphics[width=2.28cm]{hgr/cmb/V_S_hgr2A2_id03_1}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=2.28cm]{hgr/ngh/D_P_hgr1_id05_2}
+        \includegraphics[width=2.28cm]{hgr/ngh/N_P_hgr1_id04_5}
+        \includegraphics[width=2.28cm]{hgr/ngh/V_S_hgr2A2_id03_1}
+        \caption{}
+    \end{subfigure}
+
+    \caption[Image samples with the results of each method in HGR dataset]{Image samples with the results of each method in HGR dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \label{fig:results_hgr}
+\end{figure*}
+
+
+%------------------------------------------------------
+\section{Results and Discussion}
+
+\noindent The original method was compared with six well known rule-based methods in literature using four different datasets, three of them, HGR, Pratheepan and Compaq, have also been used here. 
+
+Because the method had the best \textit{F-measure} in the HGR and Pratheepan datasets in comparison with the other six methods and, in addition, because it performed the top first \textit{Precision} in HGR and  second in Pratheepan, we decided to compare the proposed extensions only to the original method.
+
+Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the experiments. Column 1 refers to the dataset used. Column 2 refers to the method being experimented: Original for the original hypothesis;  Reversed refers to the reverse hypothesis with respect to $P_{Cr_{s}}$ parameter; Combined refers to the combination of both of the former methods (see  Sec. \ref{sec:proposed_method}); Neighbors refers to the extension of the method using the neighborhood approach.
+
+As one can see, the reverse hypothesis performed better than the original method and achieved the best \textit{Recall} in HGR and SFA. It also achieved the best \textit{F-measure} in SFA with a 0.8125 rate, which gave almost 0.25 in gain compared to the original.
+
+In general, the reverse method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it has very high \textit{F-measure} rates.
+
+The combined method along with the neighborhood approach achieved the best \textit{F-measure} in HGR and Pratheepan. Moreover, the other metrics still are in a very high rate for all datasets, being in the top second in almost cases.
+
+Therefore, the combined and extended approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that are useful in different application domains, mainly near real time systems (processing time of about 10ms for a typical image of dimensions 300x400).
