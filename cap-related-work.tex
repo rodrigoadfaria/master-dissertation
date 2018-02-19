@@ -26,11 +26,41 @@ On the basis of the output of the skin detector, \citet{jones:02} also trained a
     \item Width of the image
 \end{itemize}
 
-In the last step, 10,679 images were manually classified into 5,453 naked and 5,226 non-naked sets to train a neural network classifier. The neural network outputs a number between 0 and 1, with 1 indicating an naked person in the image. The detection rate achieved was of 88\%, with a false alarm rate of 11.3\%.
+In the last step, 10,679 images were manually classified into 5,453 naked and 5,226 non-naked image sets to train a neural network classifier. The neural network outputs a number between 0 and 1, with 1 indicating a naked person in the image. The detection rate achieved was of 88\%, with a false alarm rate of 11.3\%.
 
-Another method explicitly defines, through a number of rules, the boundaries that delimit the grouping of skin pixels in some color space \citep{vezhnevets:03}. This was the approach adopted by \citet{kovac:03} in the YCbCr color space, obtaining a true positive rate of 90.66\%. They~\citep{kovac:03} also performed experiments with the chromaticity channels Cb and Cr only. The results showed that the performance of the classifier is inferior in relation to the approach using all Y, Cb and Cr channels. The key advantage of this method is the simplicity of skin detection rules that leads to the construction of a very fast classifier. On the other hand, achieving high recognition rates with this method is difficult because it is necessary to find a good color space and empirically appropriate decision rules \citep{vezhnevets:03}.
+Skin detection is sometimes used as a primary task for other applications. \citet{hsu:02} have embedded skin segmentation with the purpose to build a face detector application. The algorithm first performs a lighting compensation on the R, G, and B components of the pixels of the image. Then, these color corrected components are non-linearly transformed into YCbCr space. The skin pixels are detected using an elliptical skin model with Mahalanobis distance, assuming a Gaussian distribution of skin tone color in the color space.
 
-Differently from~\citet{kovac:03}, the authors of~\citet{yogarajah:11} developed a technique where the thresholds defined in the rules are dynamically adapted. The method consists of detecting the region of the eye and extracting an elliptical region to delimit the corresponding face. A Sobel filter is applied to detect the edges of the resulting region which is subjected to a dilation. The resulting image is subtracted from the elliptical image. As a result, there is a more uniform skin region where the thresholds are calculated. The technique was used as a preprocessing step for \citet{tan:12} in a strategy combining a $2$-dimensional density histogram and a Gaussian model for skin color detection. The results showed an accuracy of 90.39\%.
+The experiments have shown good skin detection results, around 96\% detection rate on HH1 MPEG7 video and 80\% on Champion datasets, which contain images with frontal, near-frontal, half-profile and profile
+faces under varying backgrounds and illumination conditions. On the other hand, the results also showed a high false positive rate. This drawback is reduced further with facial feature detection procedure based on the spatial arrangement of the detected skin patches.
+
+Another typical method explicitly defines, through a number of rules, the boundaries that delimit the grouping of skin pixels in some color space \citep{vezhnevets:03}. This was the approach adopted by \citet{kovac:03} in the RGB color space, obtaining a true positive rate of 90.66\%. Basically, to find out the skin cluster in the RGB color space, the skin color is determined with the following rules \citep{kovac:03}:
+
+\begin{align*}
+\text{Skin colour at uniform daylight illumination}\\
+R > 95, G > 40, B > 20 \\
+max(R, G, B) - min(R, G, B) > 15 \\
+|R - G| > 15 \\
+R > G \\
+R > B
+\end{align*}
+
+\begin{align*}
+\text{Skin colour at flashlight (light daylight) illumination}\\
+R > 220, G > 210, B > 170 \\
+|R - G| \leq 15 \\
+R > B \\
+G > B
+\end{align*}
+
+They~\citep{kovac:03} also performed experiments in comparison with \citet{hsu:02}, where only the chromaticity channels Cb and Cr from the YCbCr color space are used. The results showed that the performance of the classifier is inferior in relation to the approach using all the three channels. \citet{hsu:02} method indeed diminished the influence of noise in dark images, but in images that are captured under standard daylight illumination they label too many pixels as skin, decreasing the performance of the face detector by increasing the number of false positive pixels \citep{kovac:03}.
+
+The key advantage of this method is the simplicity of skin detection rules that leads to the construction of a very fast classifier. On the other hand, achieving high recognition rates with this method is difficult because it is necessary to find a good color space and empirically appropriate decision rules~\citep{vezhnevets:03}.
+
+Differently from~\citet{kovac:03}, the authors of~\citet{yogarajah:11} developed a technique where the thresholds defined in the rules are dynamically adapted. The method consists of detecting the region of the eye and extracting an elliptical region to delimit the corresponding face. A Sobel filter is applied to detect the edges of the resulting region which is subjected to a dilation in order to get the optimal non-smooth regions, (i.e. eyes and mouth). The resulting image is subtracted from the elliptical image. As a result, there is a more uniform skin region where the thresholds are calculated.
+
+Every single pixel in the color image is classified as skin and non-skin, based on the calculated dynamic threshold values. When the algorithm detects multiple possible face regions in the image, a dynamic threshold is constructed for each of them and, subsequently submitted to perform skin segmentation on the whole image. Finally, a logical OR operation is applied in all of the segmented regions obtained as of each dynamic threshold~\citep{yogarajah:11}.
+
+The technique was used as a preprocessing step for~\citet{tan:12} in a strategy combining a $2$-dimensional density histogram and a Gaussian model for skin color detection. The results showed an accuracy of 90.39\%.
 
 \citet{naji:12} constructed an explicit classifier in the HSV color space for 4 different skin ethnic groups in parallel. After primitive segmentation, a rule-based region growth algorithm is applied, in which the output of the first layer is used as a seed, and then the final mask in other layers is constructed iteratively by neighboring skin pixels. The number of true positive pixels reported was of 96.5\%.
 

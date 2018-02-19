@@ -105,19 +105,24 @@ The images in the Pratheepan dataset were downloaded randomly from Google for hu
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.293\textwidth}
+    \begin{subfigure}[t]{0.238\textwidth}
         \includegraphics[width=\textwidth]{pra/ori/07-c140-12family-red-rr-398h}
         \includegraphics[width=\textwidth]{pra/gt/07-c140-12family-red-rr-398h}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.31\textwidth}
+    \begin{subfigure}[t]{0.25\textwidth}
         \includegraphics[width=\textwidth]{pra/ori/3115267-My-very-large-Indian-family-2}
         \includegraphics[width=\textwidth]{pra/gt/3115267-My-very-large-Indian-family-2}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.31\textwidth}
+    \begin{subfigure}[t]{0.25\textwidth}
         \includegraphics[width=\textwidth]{pra/ori/buck_family}
         \includegraphics[width=\textwidth]{pra/gt/buck_family}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.141\textwidth}
+        \includegraphics[width=\textwidth]{pra/ori/chenhao0017me9}
+        \includegraphics[width=\textwidth]{pra/gt/chenhao0017me9}
     \end{subfigure}
     \caption[Examples of Pratheepan skin dataset]{Examples of Pratheepan skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source: \citet{tan:12}.}
     \label{fig:pra_dataset_exemplo}
@@ -160,19 +165,29 @@ It is worth mentioning that this database is no longer available and we had obta
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{hgr/ori/D_P_hgr1_id05_2}
-        \includegraphics[width=\textwidth]{hgr/gt/D_P_hgr1_id05_2}
+    \begin{subfigure}[t]{0.269\textwidth}
+        \includegraphics[width=\textwidth]{cpq/ori/318196}
+        \includegraphics[width=\textwidth]{cpq/gt/318196}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.275\textwidth}
-        \includegraphics[width=\textwidth]{hgr/ori/N_P_hgr1_id04_5}
-        \includegraphics[width=\textwidth]{hgr/gt/N_P_hgr1_id04_5}
+    \begin{subfigure}[t]{0.214\textwidth}
+        \includegraphics[width=\textwidth]{cpq/ori/795505}
+        \includegraphics[width=\textwidth]{cpq/gt/795505}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.337\textwidth}
-        \includegraphics[width=\textwidth]{hgr/ori/V_S_hgr2A2_id03_1}
-        \includegraphics[width=\textwidth]{hgr/gt/V_S_hgr2A2_id03_1}
+    \begin{subfigure}[t]{0.132\textwidth}
+        \includegraphics[width=\textwidth]{cpq/ori/1923132}
+        \includegraphics[width=\textwidth]{cpq/gt/1923132}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.14\textwidth}
+        \includegraphics[width=\textwidth]{cpq/ori/2747136}
+        \includegraphics[width=\textwidth]{cpq/gt/2747136}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.12\textwidth}
+        \includegraphics[width=\textwidth]{cpq/ori/3003632}
+        \includegraphics[width=\textwidth]{cpq/gt/3003632}
     \end{subfigure}
     \caption[Examples of Compaq skin/non-skin dataset]{Examples of Compaq skin/non-skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source: \citet{jones:02}.}
     \label{fig:compaq_dataset_example}
@@ -347,7 +362,7 @@ Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the ex
 & Combined     & \textbf{0.4906}   & 0.6251            & \textbf{0.8856}   & 0.5498 \\ \cline{2-6}
 & Neighbors    & 0.4708            & 0.7421            & 0.8463            & \textbf{0.5761} \\ \hhline{======}
 
-\multirow{3}{*}{Pratheepan} 
+\multirow{3}{*}{Pratheepan}
 & Original     & 0.5513            & \textbf{0.8199}   & 0.8230            & 0.6592 \\ \cline{2-6}
 & Reverse      & 0.5249            & 0.7326            & 0.8188            & 0.6116 \\ \cline{2-6}
 & Combined     & \textbf{0.6681}   & 0.6683            & \textbf{0.9164}   & 0.6682 \\ \cline{2-6}
@@ -366,7 +381,7 @@ Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the ex
 & Neighbors    & 0.9176             & 0.5111            & 0.9826            & 0.6565 \\ \hline
 \end{tabular}
 
-\caption{Quantitative result metrics of the methods. For each dataset, we have four different applications: the original hypothesis with respect to $P_{Cb_{s}}$, the reverse hypothesis with respect to $P_{Cr_{s}}$, the one which combines both, and the extension using the neighborhood approach.}
+\caption[Quantitative result metrics of the proposed enhancements and \citet{brancati:17}]{Quantitative result metrics of the proposed enhancements and \citet{brancati:17}. For each dataset, we have four different applications: the original hypothesis with respect to $P_{Cb_{s}}$, the reverse hypothesis with respect to $P_{Cr_{s}}$, the one which combines both, and the extension using the neighborhood approach.}
 \label{tab:merged_rules_results}
 
 \end{table*}
@@ -377,40 +392,46 @@ Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, and \ref{fig:result
 
 \begin{figure*}[!htb]
     \centering
-    \begin{subfigure}[t]{0.13\textwidth}
-        \includegraphics[width=2cm]{sfa/ori/img4}
-        \includegraphics[width=2cm]{sfa/ori/img51}
-        \includegraphics[width=2cm]{sfa/ori/img112}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{sfa/ori/img4}
+        \includegraphics[width=\textwidth]{sfa/ori/img51}
+        \includegraphics[width=\textwidth]{sfa/ori/img112}
+        \includegraphics[width=\textwidth]{sfa/ori/img14}
         \caption{}
     \end{subfigure}
-    \begin{subfigure}[t]{0.13\textwidth}
-        \includegraphics[width=2cm]{sfa/gt/img4}
-        \includegraphics[width=2cm]{sfa/gt/img51}
-        \includegraphics[width=2cm]{sfa/gt/img112}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{sfa/gt/img4}
+        \includegraphics[width=\textwidth]{sfa/gt/img51}
+        \includegraphics[width=\textwidth]{sfa/gt/img112}
+        \includegraphics[width=\textwidth]{sfa/gt/img14}
         \caption{}
     \end{subfigure}
-    \begin{subfigure}[t]{0.13\textwidth}
-        \includegraphics[width=2cm]{sfa/cbs/img4}
-        \includegraphics[width=2cm]{sfa/cbs/img51}
-        \includegraphics[width=2cm]{sfa/cbs/img112}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{sfa/cbs/img4}
+        \includegraphics[width=\textwidth]{sfa/cbs/img51}
+        \includegraphics[width=\textwidth]{sfa/cbs/img112}
+        \includegraphics[width=\textwidth]{sfa/cbs/img14}
         \caption{}
     \end{subfigure}
-    \begin{subfigure}[t]{0.13\textwidth}
-        \includegraphics[width=2cm]{sfa/crs/img4}
-        \includegraphics[width=2cm]{sfa/crs/img51}
-        \includegraphics[width=2cm]{sfa/crs/img112}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{sfa/crs/img4}
+        \includegraphics[width=\textwidth]{sfa/crs/img51}
+        \includegraphics[width=\textwidth]{sfa/crs/img112}
+        \includegraphics[width=\textwidth]{sfa/crs/img14}
         \caption{}
     \end{subfigure}
-    \begin{subfigure}[t]{0.13\textwidth}
-        \includegraphics[width=2cm]{sfa/cmb/img4}
-        \includegraphics[width=2cm]{sfa/cmb/img51}
-        \includegraphics[width=2cm]{sfa/cmb/img112}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{sfa/cmb/img4}
+        \includegraphics[width=\textwidth]{sfa/cmb/img51}
+        \includegraphics[width=\textwidth]{sfa/cmb/img112}
+        \includegraphics[width=\textwidth]{sfa/cmb/img14}
         \caption{}
     \end{subfigure}
-    \begin{subfigure}[t]{0.13\textwidth}
-        \includegraphics[width=2cm]{sfa/ngh/img4}
-        \includegraphics[width=2cm]{sfa/ngh/img51}
-        \includegraphics[width=2cm]{sfa/ngh/img112}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{sfa/ngh/img4}
+        \includegraphics[width=\textwidth]{sfa/ngh/img51}
+        \includegraphics[width=\textwidth]{sfa/ngh/img112}
+        \includegraphics[width=\textwidth]{sfa/ngh/img14}
         \caption{}
     \end{subfigure}
 
@@ -514,7 +535,7 @@ Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, and \ref{fig:result
 %------------------------------------------------------
 \section{Results and Discussion}
 
-\noindent The original method was compared with six well known rule-based methods in literature using four different datasets, three of them, HGR, Pratheepan and Compaq, have also been used here. 
+\noindent The original method was compared with six well known rule-based methods in literature using four different datasets, three of them, HGR, Pratheepan and Compaq, have also been used here.
 
 Because the method had the best \textit{F-measure} in the HGR and Pratheepan datasets in comparison with the other six methods and, in addition, because it performed the top first \textit{Precision} in HGR and  second in Pratheepan, we decided to compare the proposed extensions only to the original method.
 

@@ -157,7 +157,9 @@ Overlapping the CMY primary colors in equal amounts to generate the black color 
 \subsection{Color models of the YUV family}
 \label{sec:modelo_cores_yuv}
 
-The acronym YUV stands to a family of color spaces of which the luminance information, represented by the Y component, is coded separately from the chrominance, given by the components U and V. The components U and V are representations of signals of the difference of the blue subtracted from luminance (B-Y) and red subtracted from luminance (R-Y). It is used to represent colors in analogue television transmission systems in the Phase Alternating Line (PAL) and Sequential Color with Memory (SECAM)~\citep{pedrini:08}.
+Color models of this family is also known as orthogonal color spaces. They are able to reduce the redundancy present in RGB color channels and represent the color with statistically independent components - as independent as possible \citep{kakumanu:07}.
+
+The acronym YUV stands to a set of color spaces of which the luminance information, represented by the Y component, is coded separately from the chrominance, given by the components U and V. The components U and V are representations of signals of the difference of the blue subtracted from luminance (B-Y) and red subtracted from luminance (R-Y). It is used to represent colors in analogue television transmission systems in the Phase Alternating Line (PAL) and Sequential Color with Memory (SECAM)~\citep{pedrini:08}.
 
 The transformation of the RGB space to YUV is given by:\\
 \begin{equation}
@@ -195,7 +197,7 @@ where $0 \leq R, G, B \leq 1$.
 
 Another color model of the YUV family is the YCbCr, mathematically defined by a coordinate transformation with respect to some RGB space~\citep{pedrini:08}.
 
-The YCbCr model is widely used in digital videos. In this system, the Y component represents luminance, Cb component gives the measurement of the difference between the blue color and a reference value, similar to the Cr component which is the measurement of the difference between the red color and a reference value~\citep{pedrini:08}.
+The YCbCr model is widely used in digital videos. In this system, the Y component represents luminance, computed as a weighted sum of RGB values. Cb component gives the measurement of the difference between the blue color and a reference value, similar to the Cr component which is the measurement of the difference between the red color and a reference value~\citep{pedrini:08}.
 
 The transformation of the RGB space to YCbCr is given by:\\
 \begin{equation}
@@ -351,7 +353,7 @@ Splitting the data into disjoint training and testing subsets is an effective ap
 
 The cross-validation consists of dividing the dataset $D$ into $K$ disjoint subsets $D_1, D_2, \ldots, D_K$, where each subset has an approximate size of $N / K$. The model is then trained on each of these subsets, except one that is maintained as a validation set, in which the error measure is calculated. This process is repeated $K$ times, in such a way that each of the subsets has the opportunity to act as the test set. By this reason, this approach is also known as \emph{K-fold}. At the end of all $K$ iterations, the mean error obtained by each estimator is used as the performance measure of the classifier \citep{mostafa:12}.
 
-Some of the classifiers that were used in the preliminary experiments of the chapter \ref{cap:experimentos} will be briefly discussed in the sections \ref{sec:classifiers_svm}, \ref{sec:classifiers_knn} and \ref{sec:classifiers_dt}.
+Some of the classifiers that were used in the preliminary experiments of the chapter \ref{cap:experimentos} will be briefly discussed in the sections \ref{sec:classifiers_svm} and \ref{sec:classifiers_knn}.
 
 
 
@@ -563,33 +565,3 @@ g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k w_i \delta (y, f(x_i))
 \end{equation}
 
 In the case where $d(x_q, x_i) = 0$, that is, $x_q$ and $x_i$ are exactly the same coordinates, $g(x_q)$ can assume the same value of $f(x_i)$. If there are other training samples $x_i$ with the same characteristic, then $x_q$ can assume the class of the one who is the most of them \citep{mitchell:97}.
-
-
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Decision tree}
-\label{sec:classifiers_dt}
-Decision tree is a method for approximation of discrete target functions, in which the learned function is represented by a decision tree or by a set of rules of type \emph{If-Then} that are easy to interpret. It is one of the most popular learning techniques of inductive inference \footnote{The task of induction is to develop a classification rule that can determine the class of any object from the values of its attributes~\citep{quinlan:86}.}~\citep{mitchell:97}.
-
-The samples of a dataset are classified by a decision tree by an iterative process where an attribute (node) is chosen as root to some leaf node, where the class is assigned to the sample. Each branch starting from a node represents one of the possible values of a given attribute~\citep{mitchell:97}.
-
-There is a family of decision tree algorithms. One of them is the Iterative Dichotomiser 3 (ID3) proposed by~\citet{quinlan:86}. The ID3 evaluates each attribute through a statistical test to determine how well it classifies the training samples. The best attribute is selected as the root node of the tree. A descending branch of the root node is created for each possible value of this attribute, and the training samples are classified into the appropriate descendent node. This process is then repeated recursively using the samples associated with each descendent node. This is a greedy search algorithm, since it does not regress to reconsider previous choices~\citep{mitchell:97}. The algorithm stops when the subset of samples associated with a node is of the same class or when there is no statistical relevance for a new partition \citep{quinlan:86}.
-
-To measure the impurity of a partition, ID3 uses the concept of entropy, formally~\citep{quinlan:86}:
-
-\begin{equation}
-\label{eq:arvore_devisao_entropia}
-H(D) = - y_\oplus log_2 y_\oplus - y_\ominus log_2 y_\ominus
-\end{equation}
-\noindent where $D$ is the training dataset with $N$ samples of the form presented in~\ref{eq:svm_dataset}, $y_\oplus$ and $y_\ominus$ is the proportion of positive and negative samples of $D$, respectively. It is important to note that the entropy is 0 when all samples of $D$ belong to the same class, 1 when $D$ contains an equal number of positive and negative samples, and a value between 0 and 1 in all other cases~\citep{mitchell:97}.
-
-Given the entropy as a measure of impurity of a set of training samples, one can define the statistical test, known as information gain, that measures the effectiveness of an attribute in the classification of training data, formally~\citep{quinlan:86}:
-\begin{equation}
-\label{eq:dt_information_gain}
-IG(D, a_r) = H(D) - \sum_{v \in V(a_r)} \frac{|D_v|}{|D|} H(D_v)
-\end{equation}
-\noindent where $V(a_r)$ is the set of all possible values of the attribute $a_r$, $D_v$ is the subset of $D$ in which the $a_r$ attribute is equal to $v$.
-
-It is worth emphasizing that the first term of the equation given in~\ref{eq:dt_information_gain} is the entropy of the original set $D$ and the second term is the expected value of the entropy after $D$ is partitioned using the attribute $a_r$~\citep{mitchell:97}. Another important aspect is that the algorithm starts with the original $D$ set, which is replaced by $D_v$ as the recursion deepens.
-
-Named as C4.5, \citet{quinlan:93} extended ID3 to enable the use of continuous attributes, attributes with missing data, and improved computational efficiency. In addition, this version takes care of issues such as how deep the tree should be to prevent training data from being perfectly classified, that is, when the training set is partitioned until each subset contains only samples of a single class - the over-fitting phenomenon. The strategy adopted by \citet{quinlan:93} was to prune the tree after the generation of the adjusted tree. This process, although slower than the previous ID3 proposal, made the algorithm more reliable and with greater generalization capacity.
