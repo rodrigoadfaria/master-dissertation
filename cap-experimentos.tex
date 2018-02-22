@@ -387,7 +387,7 @@ Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the ex
 \end{table*}
 
 
-Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, and \ref{fig:results_hgr}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
+Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, \ref{fig:results_hgr} and \ref{fig:results_cpq}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
 
 
 \begin{figure*}[!htb]
@@ -529,6 +529,61 @@ Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, and \ref{fig:result
 
     \caption[Image samples with the results of each method in HGR dataset]{Image samples with the results of each method in HGR dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
     \label{fig:results_hgr}
+\end{figure*}
+
+\begin{figure*}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{cpq/ori/318196}
+        \includegraphics[width=\textwidth]{cpq/ori/795505}
+        \includegraphics[width=\textwidth]{cpq/ori/1923132}
+        \includegraphics[width=\textwidth]{cpq/ori/2747136}
+        \includegraphics[width=\textwidth]{cpq/ori/3003632}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{cpq/gt/318196}
+        \includegraphics[width=\textwidth]{cpq/gt/795505}
+        \includegraphics[width=\textwidth]{cpq/gt/1923132}
+        \includegraphics[width=\textwidth]{cpq/gt/2747136}
+        \includegraphics[width=\textwidth]{cpq/gt/3003632}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{cpq/cbs/318196}
+        \includegraphics[width=\textwidth]{cpq/cbs/795505}
+        \includegraphics[width=\textwidth]{cpq/cbs/1923132}
+        \includegraphics[width=\textwidth]{cpq/cbs/2747136}
+        \includegraphics[width=\textwidth]{cpq/cbs/3003632}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{cpq/crs/318196}
+        \includegraphics[width=\textwidth]{cpq/crs/795505}
+        \includegraphics[width=\textwidth]{cpq/crs/1923132}
+        \includegraphics[width=\textwidth]{cpq/crs/2747136}
+        \includegraphics[width=\textwidth]{cpq/crs/3003632}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{cpq/cmb/318196}
+        \includegraphics[width=\textwidth]{cpq/cmb/795505}
+        \includegraphics[width=\textwidth]{cpq/cmb/1923132}
+        \includegraphics[width=\textwidth]{cpq/cmb/2747136}
+        \includegraphics[width=\textwidth]{cpq/cmb/3003632}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.15\textwidth}
+        \includegraphics[width=\textwidth]{cpq/ngh/318196}
+        \includegraphics[width=\textwidth]{cpq/ngh/795505}
+        \includegraphics[width=\textwidth]{cpq/ngh/1923132}
+        \includegraphics[width=\textwidth]{cpq/ngh/2747136}
+        \includegraphics[width=\textwidth]{cpq/ngh/3003632}
+        \caption{}
+    \end{subfigure}
+
+    \caption[Image samples with the results of each method in Compaq dataset]{Image samples with the results of each method in Compaq dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \label{fig:results_cpq}
 \end{figure*}
 
 
