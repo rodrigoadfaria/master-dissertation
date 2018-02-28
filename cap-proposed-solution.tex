@@ -4,6 +4,8 @@
 
 \noindent A state of the art skin detection method has been recently developed by \cite{brancati:17}. Here, we review the method and extend it adding more rules to enforce the constraints and seeking for a better performance in terms of false positive rate without hurting the performance of the original method.
 
+%% ------------------------------------------------------------------------- %%
+
 \section{Original Method}
 \label{sec:original_method}
 In order to describe the proposed extensions, we will first transcribe the original method that is based on the definition of image-specific trapezoids, named $T_{YCb}$ and $T_{YCr}$, in the \textit{YCb} and \textit{YCr} subspaces, respectively. The trapezoids are essential to verify a relation between the chrominance components $Cb$ and $Cr$ in these subspaces \citep{brancati:17}.
@@ -110,6 +112,7 @@ where:
     sf = \frac{min( (Y_1 - Y_0), (Y_3 - Y_2) )} {max( (Y_1 - Y_0), (Y_3 - Y_2) )}
 \end{equation}
 
+%% ------------------------------------------------------------------------- %%
 
 \section{Extended Method}
 \label{sec:proposed_method}
@@ -155,9 +158,48 @@ Doing this simple extension, we are now able to apply the method to the same set
     \label{fig:pixel_neighborhood}
 \end{figure}
 
+%% ------------------------------------------------------------------------- %%
 
 \section{Neighborhood Extended Method}
 \label{sec:neighborhood_extended_method}
 \noindent Both methods presented in Sec. \ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we can improve the method using neighbor pixels information, when evaluating a pixel $P$, in order to decide if $P$ represents human skin, or not. Let $N_8^-(P)$ the 8-connected neighbors of $P$ that can be reached before $P$ when scanning the image in raster order (blue points in Fig.~\ref{fig:pixel_neighborhood}).
 
 Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel.
+
+%% ------------------------------------------------------------------------- %%
+
+\section{Trapezoids Parameters Tuning with a Grid Search Strategy}
+\label{sec:trapezoids_params_tunning}
+\noindent As we could see on previous sections, this model is based on the definition of trapezoids to fit the skin color pixels distribution from a given image. According to~\citet{brancati:17}, the coordinates of each trapezoid within the $YCr$ and $YCb$ sub-spaces are calculated based on the $Y$ luminance component values. $Y_0$ and $Y_1$ are those used to define the shorter base of the upper trapezoid, and $Y_2$ and $Y_3$ the points used to define the shorter base of the lower trapezoid.
+
+$Y_0$ and $Y_1$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$ (see Fig.~\ref{fig:crmax_computation} for an example). Similarly, $Y_2$ and $Y_3$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cb = Cb_{min}$.
+
+To the best of our knowledge, there is any justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to shot different combination of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
+
+Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, but once the trapezoids definition do not change among them, we think that employing it only in combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, $F-measure$, $Precision$, and $Recall$ metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
+
+\begin{codebox}
+\kern-1.5em $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$\\
+\li $Ymin \gets 5$
+\li $Results \gets []$
+\li \While $Ymin \leq 95$
+\li \Do
+        $Ymax \gets Ymin$
+\li     \While $Ymax \leq 95$
+\li     \Do
+            $\proc{Set-Combined-Method-Y-Parameters}(Ymin, Ymax)$ \label{alg:tpgs-set-cmb-y}
+\li         $\proc{Segment-Dataset-Images}(dataset)$    \label{alg:tpgs-segment-dtset}
+\li         $Precision, Recall, Fmeasure \gets \proc{Compute-Metrics}(dataset)$ \label{alg:tpgs-compt-metrcs}
+\li         $\proc{Push}(Results, Ymin, Ymax, Precision, Recall, Fmeasure)$ \label{alg:tpgs-push-rslts}
+\li\li      $Ymax \gets Ymax + 5$
+        \End
+\li      $Ymin \gets Ymin + 5$
+    \End
+\li
+\li $\proc{Sort-By}(Results, Fmeasure, Precision, Recall)$
+\li \Return $Results$
+\end{codebox}
+
+In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $Ymin$ and $Ymax$ in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts} and sorted according the criteria aforementioned in the end of the procedure.
+
+Detailed output of this experiments and analysis can be seen in chapter~\ref{cap:experimentos}, specifically in section~\ref{sec:grid_search_experiments}, where an examination of the behavior of the most performing parameters is given as well as others which did not succeed.
