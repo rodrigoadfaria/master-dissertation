@@ -30,8 +30,7 @@ In the last step, 10,679 images were manually classified into 5,453 naked and 5,
 
 Skin detection is sometimes used as a primary task for other applications. \citet{hsu:02} have embedded skin segmentation with the purpose to build a face detector application. The algorithm first performs a lighting compensation on the R, G, and B components of the pixels of the image. Then, these color corrected components are non-linearly transformed into YCbCr space. The skin pixels are detected using an elliptical skin model with Mahalanobis distance, assuming a Gaussian distribution of skin tone color in the color space.
 
-The experiments have shown good skin detection results, around 96\% detection rate on HH1 MPEG7 video and 80\% on Champion datasets, which contain images with frontal, near-frontal, half-profile and profile
-faces under varying backgrounds and illumination conditions. On the other hand, the results also showed a high false positive rate. This drawback is reduced further with facial feature detection procedure based on the spatial arrangement of the detected skin patches.
+The experiments have shown good skin detection results, around 96\% detection rate on HH1 MPEG7 video and 80\% on Champion datasets, which contain images with frontal, near-frontal, half-profile and profile faces under varying backgrounds and illumination conditions. On the other hand, the results also showed a high false positive rate. This drawback is reduced further with facial feature detection procedure based on the spatial arrangement of the detected skin patches.
 
 Another typical method explicitly defines, through a number of rules, the boundaries that delimit the grouping of skin pixels in some color space \citep{vezhnevets:03}. This was the approach adopted by \citet{kovac:03} in the RGB color space, obtaining a true positive rate of 90.66\%. Basically, to find out the skin cluster in the RGB color space, the skin color is determined with the following rules \citep{kovac:03}:
 
@@ -53,6 +52,15 @@ G > B
 \end{align*}
 
 They~\citep{kovac:03} also performed experiments in comparison with \citet{hsu:02}, where only the chromaticity channels Cb and Cr from the YCbCr color space are used. The results showed that the performance of the classifier is inferior in relation to the approach using all the three channels. \citet{hsu:02} method indeed diminished the influence of noise in dark images, but in images that are captured under standard daylight illumination they label too many pixels as skin, decreasing the performance of the face detector by increasing the number of false positive pixels \citep{kovac:03}.
+
+\citet{chai:99} proposed a similar method in YCbCr color space, where a skin color map was designed using a histogram approach based on a given set of training images. \citet{chai:99} observed that the Cb and Cr distributions of skin color fall in the ranges [77, 127] and [133, 173], respectively, regardless the skin color variation in different races.
+
+However, after an exhaustive image histogram analysis, \citet{basilio:11} found that the thresholds given by \citet{chai:99} was robust only against images with Caucasian people. Once their~\citep{basilio:11} purpose was to find human skin from different people races, from any place of the world, a new threshold for each chromaticity (Cb, Cr) channel has been set up, regardless of skin  color:
+
+\begin{align*}
+80  \leq Cb \leq 120 \\
+133 \leq Cr \leq 173
+\end{align*}
 
 The key advantage of this method is the simplicity of skin detection rules that leads to the construction of a very fast classifier. On the other hand, achieving high recognition rates with this method is difficult because it is necessary to find a good color space and empirically appropriate decision rules~\citep{vezhnevets:03}.
 

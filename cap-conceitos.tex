@@ -353,7 +353,7 @@ Splitting the data into disjoint training and testing subsets is an effective ap
 
 The cross-validation consists of dividing the dataset $D$ into $K$ disjoint subsets $D_1, D_2, \ldots, D_K$, where each subset has an approximate size of $N / K$. The model is then trained on each of these subsets, except one that is maintained as a validation set, in which the error measure is calculated. This process is repeated $K$ times, in such a way that each of the subsets has the opportunity to act as the test set. By this reason, this approach is also known as \emph{K-fold}. At the end of all $K$ iterations, the mean error obtained by each estimator is used as the performance measure of the classifier \citep{mostafa:12}.
 
-Some of the classifiers that were used in the preliminary experiments of the chapter \ref{cap:experimentos} will be briefly discussed in the sections \ref{sec:classifiers_svm} and \ref{sec:classifiers_knn}.
+Some of the classifiers that were used in the preliminary experiments of the chapter \ref{cap:experimentos} will be briefly discussed in the section \ref{sec:classifiers_svm}.
 
 
 
@@ -510,58 +510,3 @@ Also known as Radial Basis Function (RBF), the Gaussian \emph{kernel} correspond
 \end{enumerate}
 
 For the RBF and polynomial \emph{kernels}, the $\gamma$ parameter can be seen as the inverse of the radius of influence of samples selected by the model as support vectors \citep{scikit-learn:11}.
-
-
-
-%% ------------------------------------------------------------------------- %%
-\subsection{\emph{k}-Nearest Neighbors}
-\label{sec:classifiers_knn}
-The $k$-Nearest Neighbors ($k$-NN) is an algorithm based on instances, which means that the target function is not learned based on training samples; they are simply stored, so that the relation between a new sample and the stored training samples is evaluated, and a target function is then assigned to it~\citep{mitchell:97}.
-
-As the name suggests, $k$-NN classifies a new point $x$ by assigning it the highest frequency class of the $k$ closest samples, that is, the decision of the class of $x$ is made by majority of the votes of the $k$ nearest neighbors, and for this reason, it is interesting that the choice of $k$ be an odd number to avoid draws \citep{duda:12}.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=.65\textwidth]{knn_exemplo}
-  \caption[Example of a $k$-NN application in the classification task in a $2$-dimensional space]{Example of a $k$-NN application in the classification task in a $2$-dimensional space. The algorithm evaluates the $k$ samples near $x$, creating a spherical region, and labels $x$ with the highest frequency class. In this case, $k = 5$ and the class assigned to $x$ must be the same as the blue points. Source: proposed by the author.}
-  \label{fig:knn_exemplo}
-\end{figure}
-
-Let $D$ be the training dataset with $N$ samples as given in \ref{eq:svm_dataset}. Therefore, the distance between two samples $x_i$ and $x_j$ can be obtained in terms of the Euclidean distance, defined as:
-
-\begin{equation}
-\label{eq:knn_distance_euclidian}
-d(x_i, x_j) = \sqrt{\sum_{r=1}^d (a_r(x_i) - a_r(x_j))^2}
-\end{equation}
-\noindent where $a_r$ refers to the $r$th attribute of the input vector $x$ and $i, j = 1, 2, \ldots, N$. Other distance metrics can be attributed to $d(x_i, x_j)$, such as, Manhattan, Chebyshev, and Minkowski~\citep{duda:12}.
-
-In order to classify a new sample $x_q$, we take $x_1, \ldots, x_k$ instances of the training set, whose distances given by \ref{eq:knn_distance_euclidian}, are of the $k$ points nearest to $x_q$. Thus, the function that estimates the class of $x_q$ is given by \citep{mitchell:97}:
-
-\begin{equation}
-\label{eq:knn_funcao_argmax}
-g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k \delta (y, f(x_i))
-\end{equation}
-\noindent where
-\begin{equation}
-\label{eq:knn_delta}
-  \delta (y, f(x_i)) =  \begin{cases}
-                1, \quad \text{if}\ y = f(x_i) \\
-                0, \quad \text{otherwise}
-              \end{cases}
-\end{equation}
-
-It is important to note that $f(x_i)$ is known, that is, it is the class of the sample $x_i$ of the training set.
-
-An obvious variation of the function given in equation \ref{eq:knn_funcao_argmax} is the assignment of weights of each neighbor $k$, according to its distance, to a point $x_q$ being classified \citep{mitchell:97}. This variation implies that points closer to $x_q$ have more influence on its labeling. Formally, we have~\citep{mitchell:97}:
-
-\begin{equation}
-\label{eq:knn_funcao_argmax_pesos}
-g(x_q) \gets \argmax_{y \in Y} \sum_{i=1}^k w_i \delta (y, f(x_i))
-\end{equation}
-\noindent where
-\begin{equation}
-\label{eq:knn_funcao_peso}
-  w_i = \frac{1}{d(x_q, x_i)^2}
-\end{equation}
-
-In the case where $d(x_q, x_i) = 0$, that is, $x_q$ and $x_i$ are exactly the same coordinates, $g(x_q)$ can assume the same value of $f(x_i)$. If there are other training samples $x_i$ with the same characteristic, then $x_q$ can assume the class of the one who is the most of them \citep{mitchell:97}.
