@@ -1,11 +1,56 @@
 %% ------------------------------------------------------------------------- %%
 \chapter{Theoretical Background}
 \label{cap:conceitos}
-In this chapter, the theoretical concepts that apply to this research are stated. First, a short introduction to color models is provided in order to give an overview of the main characteristics of some of the most used in the computer vision and image processing area, on which this research is based. Thereafter, some machine learning methods are defined and explained, once they were used in the preliminary experiments of this work.                                                                                                                               
+The image analysis is one of the most important tasks in a computer vision system. Its goal is to create a suitable description with enough information to differentiate the objects in the scene. In general, this description is typically based on shapes, textures, gray levels or color of those objects in the image. With this description, useful interpretation can be extracted from the image by means of an automatic computer system that facilitates human perception.
+
+There is no general agreement among authors regarding where image processing stops and computer vision starts. The first, as the title says, processes the image by applying some transformations on it such that smoothing, sharpening, noise reduction, lightening enhancement, contrasting, stretching, and compression. These will result on a more enhanced and readable image. In addition, the input and output of the process are always images. On the other hand, computer vision has the ultimate goal to use computers to emulate human vision, including learning and being able to make inferences and take actions based on visual inputs \citep{gonzalez:02}. In general, computer vision systems benefit from image processing techniques as pre-processing steps to build better applications. Thus, we can see that they definitely are not different fields, but there is an overlapping between them.
+
+Once this work is intended to explore new methods on human skin detection, we will use techniques from both fields. Color space transformation from image processing, for example, as well as human skin segmentation and understanding as part of computer vision. This is a tentative to imitate the human visual system and its capability to recognize others from the same specie -- of course, humans use other characteristics to identify other humans like shape, high, gender, and others, but skin is also part of this recognition system.
+
+\textcolor{red}{Fix this at the end of chapter definition} Therefore, in this chapter, the theoretical concepts that apply to this research are stated. First, a short introduction to color models is provided in order to give an overview of the main characteristics of some of the most used in the computer vision and image processing area, on which this research is based. Thereafter, some machine learning methods are defined and explained, once they were used in the preliminary experiments of this work.                                                                                                                               
+%% ------------------------------------------------------------------------- %%
+\section{Digital image}
+\label{sec:digital_image}
+By definition, an image is a two-dimensional function $f(x, y)$, where $x$ and $y$ are spatial coordinates, and the amplitude of $f$ at any pair of coordinates $(x, y)$ is called the \textit{intensity} or \textit{gray level} of the image at that point. The image is said digital when the function $f(x, y)$ is converted to a discrete form. This is made by a process called \textit{digitalization}, which consists in two steps: \textit{sampling} and \textit{quantization} \citep{gonzalez:02}.
+
+Each element of the discrete function $f(x, y)$ is called \textit{pixel} (picture element), where $0 \leq x \leq W - 1$ and $0 \leq y \leq H - 1$. This means that the image can be represented in a matrix form (see Eq.~\ref{eq:image_function}), where $W$ is the number of lines and $H$ the number of columns of the matrix. Therefore, $W$ and $H$ defines the size or resolution of the image \citep{pedrini:08}.
+
+\begin{equation*}
+f(x, y) = 
+ \begin{bmatrix}
+  f(0, 0)     & f(0, 1)     & \cdots & f(0, H - 1) \\
+  f(1, 0)     & f(1, 1)     & \cdots & f(1, H - 1) \\
+  \vdots      & \vdots      & \ddots & \vdots  \\
+  f(W - 1, 0) & f(W - 1, 1) & \cdots & f(W - 1, H - 1) 
+ \end{bmatrix}
+\label{eq:image_function}
+\end{equation*}
+
+Usually, pixels are stored, and therefore read, in this matrix in an order known as \textit{raster}. This information is important so that capture and display devices can be able to establish a common interface, and make necessary transformations in the coordinates, when necessary.
+
+%% ------------------------------------------------------------------------- %%
+\section{Basic relationship between image components}
+\label{sec:image_components_relation}
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Neighborhood}
+\label{sec:neighborhood}
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Connectivity}
+\label{sec:connectivity}
+
+%% ------------------------------------------------------------------------- %%
+\section{Image segmentation}
+\label{sec:image_segmentation}
+
+%% ------------------------------------------------------------------------- %%
+\section{Pattern recognition}
+\label{sec:pattern_recognition}
 
 %% ------------------------------------------------------------------------- %%
 \section{Color models}
-\label{sec:fundamentos}
+\label{sec:color_models}
 
 The use of color images in computer vision or image processing can be motivated by two main factors. The first refers to the powerful characteristic of color to function as a descriptor that often simplifies the identification and extraction of an object in a scene. The second is related to the ability of humans to discern thousands of tonalities and intensities compared to only a few dozen levels of gray \citep{gonzalez:02}.
 
@@ -33,7 +78,7 @@ The principle of equality of visual spacing between the components of the model 
 
 The model is represented by a cylindrical shape and it can be seen in the figure ~\ref{fig:munsell-system}. The hue is arranged in the circular axis consisting of five base as well as five secondary colors, the saturation in the radial axis and the luminance in the vertical axis in a range varying from 0 to 10.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=.55\textwidth]{munsell-system}
   % fonte https://commons.wikimedia.org/wiki/File:Munsell-system.svg
@@ -70,7 +115,7 @@ where $x + y+ z = 1$.
 
 Combinations of negative values and other problems related to selecting a set of real primaries are eliminated. The chromaticity coordinates $x$ and $y$ allow to represent all colors in a two-dimensional plane, also known as a chromaticity diagram, which can be seen in the figure ~\ref{fig:cie-cromaticity-diagram}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=.5\textwidth]{cie-cromaticity-diagram}
   % fonte https://en.wikipedia.org/wiki/File:CIE1931xy_blank.svg
@@ -98,7 +143,7 @@ The RGB model, an acronym for Red, Green, and Blue, is an additive color model i
 This system was based on the trichromatic theory of Thomas Young and Hermann Helmholtz in the mid-19th century and can be represented graphically
 through the unit cube defined on the axes R, G and B, as illustrated in the figure~\ref{fig:rgb-cube} \citep{konstantinos:00}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=.35\textwidth]{rgb-cube}
   % http://www.scratchapixel.com/old/lessons/3d-basic-lessons/lesson-5-colors-and-digital-images/color-spaces/
@@ -219,11 +264,11 @@ The transformation of the RGB space to YCbCr is given by:\\
 \subsection{Color models of the HSI family}
 \label{sec:modelo_cores_hsi}
 
-Hue, Saturation, and Intensity (HSI) models are best suited for image processing applications from the user's point of view, due the correlation with human perception of the color~\citep{konstantinos:00}.
+Hue, Saturation, and Intensity (HSI) models are best suited for image processing applications from the user's point of view, due the correlation with human perception of the color\citep{konstantinos:00}.
 
 In this model, as in YIQ, the intensity given by I component is decomposed from the chrominance information, represented by the hue (H) and saturation (S) \citep{konstantinos:00}. The combination of these components results in a pyramidal structure which can be seen in figure~\ref{fig:hsi-model}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=.7\textwidth]{hsi-model}
   % http://www.blackice.com/images/HSIColorModel.jpg
@@ -352,161 +397,3 @@ Still on the results of the classifier, it is important to point out that learni
 Splitting the data into disjoint training and testing subsets is an effective approach when a large amount of data is available. However, when data is limited, retaining part of them for the test set further reduces the number of samples available for training \citep{mitchell:97}. Therefore, another approach, known as cross-validation, can be applied so that the entire dataset is used in training and testing.
 
 The cross-validation consists of dividing the dataset $D$ into $K$ disjoint subsets $D_1, D_2, \ldots, D_K$, where each subset has an approximate size of $N / K$. The model is then trained on each of these subsets, except one that is maintained as a validation set, in which the error measure is calculated. This process is repeated $K$ times, in such a way that each of the subsets has the opportunity to act as the test set. By this reason, this approach is also known as \emph{K-fold}. At the end of all $K$ iterations, the mean error obtained by each estimator is used as the performance measure of the classifier \citep{mostafa:12}.
-
-Some of the classifiers that were used in the preliminary experiments of the chapter \ref{cap:experimentos} will be briefly discussed in the section \ref{sec:classifiers_svm}.
-
-
-
-%% ------------------------------------------------------------------------- %%
-\subsection{Support vector machines}
-\label{sec:classifiers_svm}
-Support Vector Machines (SVM) are a machine learning technique based on the Statistical Learning Theory \citep{vapnik:13}, whose objective was to solve problems of classification of patterns. In practice, an SVM has the ability to generate a hyperplane or set of hyperplanes in a space of high or infinite dimensionality, which can be used for classification, regression, or other tasks \citep{duda:12}.
-
-Derived from the technique name itself, the support vectors are the training set samples that define the optimal hyperplane and are the most difficult patterns to classify \citep{duda:12}. Intuitively, they are the most relevant patterns for the classification task, since a change in these vectors directly implies in the result of the optimal hyperplane \footnote{The optimal separation hyperplane of an SVM is that of a class of hyperplanes with the highest separation margin between the two training sets \citep{cortes:95}.}.
-
-Let the training dataset with $N$ samples of the form:
-\begin{equation}
-\label{eq:svm_dataset}
-    D = (x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)
-\end{equation}
-\noindent where each $x_i$ is a $d$-dimensional vector of the form given by \ref{eq:vetor_caracteristicas}, $i = 1, 2, \ldots, N$, $y_i \in Y$ and $Y = \{+1, -1\}$. Therefore, the training dataset contain $N$ observations with its respective labels.
-
-Supposing that $D$ is linearly separable, one can separate the data by means of a hyperplane using a classifier, also linear, defined by the equation \citep{lorena:03}:
-\begin{equation}
-\label{eq:svm_hyperplano_otimo}
-w \cdot x + b = 0
-\end{equation}
-\noindent where $w \cdot x$ is a dot product, $w$ is the normal vector to the hyperplane and $b$ is a bias term. The parameter $\ffrac{b}{||w||}$ determines the offset of the hyperplane in relation to the origin.
-
-From this definition, two other parallel hyperplanes to the optimal hyperplane can be obtained, according to the equations in~\ref{eq:svm_hyperplanos_paralelos}, so that a delimited region, known as margin, rises between them.
-
-\begin{equation}
-\label{eq:svm_hyperplanos_paralelos}
-\begin{cases}
-    w \cdot x + b = +1\\
-    w \cdot x + b = -1
-\end{cases}
-\end{equation}
-
-In addition, some constraints are defined to avoid that there are no points between $w \cdot x + b = 0 $ and $w \cdot x + b = \pm 1$. Formally, we have \citep{lorena:03}:
-
-\begin{equation}
-\label{eq:svm_hyperplanos_paralelos_restricoes}
-\begin{cases}
-    w \cdot x_i + b \geq +1, & \text{if}\ y_i = +1\\
-    w \cdot x_i + b \leq -1, & \text{if}\ y_i = -1
-\end{cases}
-\end{equation}
-\noindent or, similarly:
-\begin{equation}
-\label{eq:svm_hyperplanos_paralelos_restricoes_equiv}
-    y_i (w \cdot x_i + b) \geq 1
-\end{equation}
-
-According to \citet{campbell:00}, in the system given by equation \ref{eq:svm_hyperplanos_paralelos_restricoes}, it is assumed that the margin is always greater than the distance between $w \cdot x + b = 0$ and $|w \cdot x + b = 1|$ and, for this reason, SVMs of this nature are usually referred as hard-margin SVMs. Figure~\ref{fig:svm_support_vectors} shows the graphical representation of these concepts.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=.5\textwidth]{svm_support_vectors}
-  \caption[Example of a problem of separable binary classes in a $2$-dimensional space]{Example of a problem of separable binary classes in a $2$-dimensional space. The support vectors, marked with gray squares, define the margin with highest separation between the two classes. Source: \citet{cortes:95}.}
-  \label{fig:svm_support_vectors}
-\end{figure}
-
-Geometrically, the distance between the two parallel hyperplanes to the optimal hyperplane is $\ffrac{2}{||w||}$. Consequently, one can deduce that the distance between the optimal hyperplane and $w \cdot x + b = \pm 1$ is $\ffrac{1}{||w||}$. Then, the minimization of $||w||$ maximizes the margin and, thus, we have an optimization problem in which we want to minimize $||w||^2$ subject to the constraints in \ref{eq:svm_hyperplanos_paralelos_restricoes_equiv} \citep{lorena:03}. Therefore, optimal $w$ and $b$ that solve this problem define the classifier and can be obtained by Lagrange multipliers \citep{campbell:00}:
-
-\begin{equation}
-\label{eq:svm_margens_rigidas}
-\text{Maximize: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j x_i\cdot x_j
-\end{equation}
-
-\begin{equation}
-\label{eq:svm_margens_rigidas_restricoes}
-\text{Subject to: }
-\begin{cases}
-    \alpha_i \geq 0\\[1em]
-    \sum_{i=1}^N \alpha_i y_i = 0
-\end{cases}
-\end{equation}
-\noindent where $\alpha$ are the Lagrange multipliers.
-
-It is important to note that this type of SVM succeeds in linearly separable training datasets. In cases where the data are non-linearly separable, some classification errors are allowed for the training set, by the inclusion of relaxation variables \citep{lorena:03}. These changes were produced by \citet{cortes:95} and are part of a technique called margin smoothing, and therefore, SVMs of this family are also called soft-margin SVMs. So, the optimization problem becomes \citep{lorena:03}:
-\begin{equation}
-\label{eq:svm_margens_suaves_def}
-\text{Minimize: } ||w||^2 + C\sum_{i=1}^N \xi_i
-\end{equation}
-
-\begin{equation}
-\label{eq:svm_margens_suaves_def_restricoes}
-\text{Subject to: }
-\begin{cases}
-    \xi_i \geq 0\\[1em]
-    y_i (w \cdot x_i + b) \geq 1 - \xi_i
-\end{cases}
-\end{equation}
-\noindent where $C$ is an regularization constant, empirically determined, that imposes a different weight for training in relation to generalization. Thus, the problem can be solved in the same way with the equation in \ref{eq:svm_margens_rigidas}, but with some changes in the constraints \citep{lorena:03}:
-
-\begin{equation}
-\label{eq:svm_margens_suaves_restricoes}
-\text{Subject to: }
-\begin{cases}
-    0 \leq \alpha_i \leq C\\[1em]
-    \sum_{i=1}^N \alpha_i y_i = 0
-\end{cases}
-\end{equation}
-
-In general, most classification problems prevent linear classifiers from being used because it is not possible to obtain satisfactory results in the partitioning of training data by a hyperplane. However, linear SVMs can be extended to deal with this situation by mapping the input space into a higher-dimensional feature space, typically much larger than the original space~\citep{duda:12}, of the form:
-
-\begin{equation}
-\label{eq:svm_dataset_transformado}
-    D' = (\Phi(x_1), y_1), (\Phi(x_2), y_2), \ldots, (\Phi(x_N), y_N)
-\end{equation}
-
-The proper choice of a function $\Phi$ makes the training set linearly separable in the transformed space \citep{lorena:03}. The shape of the optimal hyperplane is now defined by:
-\begin{equation}
-\label{eq:svm_hyperplano_otimo_trasnformado}
-w \cdot \Phi(x) + b = 0
-\end{equation}
-
-Therefore, the concepts of support vectors, margin, parallel hyperplanes, and hence, optimization problem to find the solution for the $w$ and $b$ parameters apply here in a similar manner. Formally, the optimization problem can be solved as~\citep{lorena:03}:
-\begin{equation}
-\label{eq:svm_nao_linear}
-\text{Maximize: } \sum_{i=1}^N \alpha_i - \frac{1}{2} \sum_{i, j=1}^N \alpha_i \alpha_j y_i y_j \Phi(x_i)\cdot \Phi(x_j)
-\end{equation}
-\noindent subject to the same constrains given by~\ref{eq:svm_margens_suaves_restricoes}.
-
-Now, there is a need to define as the inner product $\Phi(x_i) \cdot \Phi(x_j)$ between two vectors $x_i, x_j \in D$ is realized, whose answer lies in the introduction of the concept of \emph{kernels}~\citep{lorena:03}.
-
-\emph{Kernels} are functions that have the purpose of projecting the input vectors in a features space with exponential or infinite number of dimensions~\citep{taylor:04}, of the form:
-\begin{equation}
-\label{eq:svm_kernels}
-k(x_i, x_j) =  \Phi(x_i) \cdot \Phi(x_j)
-\end{equation}
-
-Thus, it is possible to apply a \emph{kernel} as described in the equation~\ref{eq:svm_kernels} in the SVM optimization step, efficiently calculating the internal product from the input data, without even explicitly computing the mapping of the $\Phi$ function~\citep{taylor:04}.
-
-Some of the most commonly used \emph{kernels} are~\citep{lorena:03}:
-\begin{enumerate}[label=(\roman*)]
-\item Linear \emph{kernel}
-\begin{equation}
-\label{eq:svm_kernel_linear}
-k(x_i, x_j) =  (x_i \cdot x_j)
-\end{equation}
-The linear \emph{kernel} is the simplest of the \emph{kernel} functions and it is given by the internal product of two vectors $x_i$ and $x_j$.
-
-\item Polynomial \emph{kernel}
-\begin{equation}
-\label{eq:svm_kernel_polinomial}
-k(x_i, x_j) =  ({\gamma x_i \cdot x_j + r} )^g
-\end{equation}
-Where $g$ is the degree of the polynomial and $r$ is a constant term. For this \emph{kernel}, the $\Phi$ mappings are also polynomial functions, so the complexity is proportional to the choice of $g$~\citep{lorena:03}.
-
-\item Gaussian \emph{kernel}
-\begin{equation}
-\label{eq:svm_kernel_rbf}
-k(x_i, x_j) =  \exp{\big(-\gamma {||x_i - x_j||}^2 \big)}
-\end{equation}
-Also known as Radial Basis Function (RBF), the Gaussian \emph{kernel} corresponds to a features space of infinite dimension~\citep{lorena:03}.
-
-\end{enumerate}
-
-For the RBF and polynomial \emph{kernels}, the $\gamma$ parameter can be seen as the inverse of the radius of influence of samples selected by the model as support vectors \citep{scikit-learn:11}.
