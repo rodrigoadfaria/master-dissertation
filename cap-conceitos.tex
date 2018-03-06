@@ -7,34 +7,97 @@ There is no general agreement among authors regarding where image processing sto
 
 Once this work is intended to explore new methods on human skin detection, we will use techniques from both fields. Color space transformation from image processing, for example, as well as human skin segmentation and understanding as part of computer vision. This is a tentative to imitate the human visual system and its capability to recognize others from the same specie -- of course, humans use other characteristics to identify other humans like shape, high, gender, and others, but skin is also part of this recognition system.
 
-\textcolor{red}{Fix this at the end of chapter definition} Therefore, in this chapter, the theoretical concepts that apply to this research are stated. First, a short introduction to color models is provided in order to give an overview of the main characteristics of some of the most used in the computer vision and image processing area, on which this research is based. Thereafter, some machine learning methods are defined and explained, once they were used in the preliminary experiments of this work.                                                                                                                               
+\textcolor{red}{Fix this at the end of chapter definition} Therefore, in this chapter, the theoretical concepts that apply to this research are stated. First, a short introduction to color models is provided in order to give an overview of the main characteristics of some of the most used in the computer vision and image processing area, on which this research is based. Thereafter, some machine learning methods are defined and explained, once they were used in the preliminary experiments of this work.
+
 %% ------------------------------------------------------------------------- %%
 \section{Digital image}
 \label{sec:digital_image}
-By definition, an image is a two-dimensional function $f(x, y)$, where $x$ and $y$ are spatial coordinates, and the amplitude of $f$ at any pair of coordinates $(x, y)$ is called the \textit{intensity} or \textit{gray level} of the image at that point. The image is said digital when the function $f(x, y)$ is converted to a discrete form. This is made by a process called \textit{digitalization}, which consists in two steps: \textit{sampling} and \textit{quantization} \citep{gonzalez:02}.
+By definition, an image is a two-dimensional function $f(x, y)$, where $x$ and $y$ are spatial coordinates, and the amplitude of $f$ at any pair of coordinates $(x, y)$ is called the \textit{intensity} or \textit{gray level} of the image at that point. The image is said digital when the function $f(x, y)$ is converted to a discrete form. This is made by a process called \textit{digitalization}, which consists of two steps: \textit{sampling} and \textit{quantization} \citep{gonzalez:02}.
 
 Each element of the discrete function $f(x, y)$ is called \textit{pixel} (picture element), where $0 \leq x \leq W - 1$ and $0 \leq y \leq H - 1$. This means that the image can be represented in a matrix form (see Eq.~\ref{eq:image_function}), where $W$ is the number of lines and $H$ the number of columns of the matrix. Therefore, $W$ and $H$ defines the size or resolution of the image \citep{pedrini:08}.
 
 \begin{equation*}
-f(x, y) = 
+f(x, y) =
  \begin{bmatrix}
   f(0, 0)     & f(0, 1)     & \cdots & f(0, H - 1) \\
   f(1, 0)     & f(1, 1)     & \cdots & f(1, H - 1) \\
   \vdots      & \vdots      & \ddots & \vdots  \\
-  f(W - 1, 0) & f(W - 1, 1) & \cdots & f(W - 1, H - 1) 
+  f(W - 1, 0) & f(W - 1, 1) & \cdots & f(W - 1, H - 1)
  \end{bmatrix}
 \label{eq:image_function}
 \end{equation*}
 
-Usually, pixels are stored, and therefore read, in this matrix in an order known as \textit{raster}. This information is important so that capture and display devices can be able to establish a common interface, and make necessary transformations in the coordinates, when necessary.
+Usually, pixels are stored, and therefore read, in this matrix in an order known as \textit{raster}. This information is important so that capture and display devices can be able to establish a common interface, and make necessary transformations in the coordinates, when needed.
+
+In a monochromatic digital image, the value of a pixel is a scalar in the range $[L_{min}, L_{max}]$, where $L$ is the (integer) number of gray-levels~\citep{pedrini:08}.
+
+In a multispectral image, each pixel has a vector value such that $f(x, y) = (L_1, L_2, \ldots L_n)$ where $L_{min} \leq L_i \leq L_{max}$ and $n = 1, 2, 3, \ldots, n$. In general, $L_i$ can represent different measures for each of $(x, y)$ coordinate as well as different intervals~\citep{pedrini:08}.
+
+A colored image is a multispectral image, where the color in each $(x, y)$ point is given by three variables: brightness, hue and saturation \citep{pedrini:08}. The brightness gives the notion of chromatic intensity. Hue represents the dominant color perceived by an observer. Saturation refers to the relative purity or amount of white light applied to the hue. Combined, hue and saturation are known as chromaticity and, therefore, a color must be characterized by its brightness and chromaticity \citep{gonzalez:02}.
+
 
 %% ------------------------------------------------------------------------- %%
-\section{Basic relationship between image components}
+\section{Basic relationship between pixels}
 \label{sec:image_components_relation}
+There is a number of applications in image processing and computer vision that uses information of relationship among pixels to create knowledge. Some of these important relationships will be described in the following sections once we will apply it in further chapter~\ref{cap:proposed-solution}. It's worth mentioning that we defined an image as a function $f(x, y)$. In this section, when referring to a particular pixel we will denote it in lowercase letters such as $p$.
+
+
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Neighborhood}
 \label{sec:neighborhood}
+A pixel $p$ with coordinates $(x, y)$ has four horizontal and vertical neighbors whose coordinates are given by:
+
+\begin{equation*}
+    (x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)
+    \label{eq:n4_neighbors}
+\end{equation*}
+
+This set of pixels, called the 4-\textit{neighbors} of $p$, is denoted by $N_4(p)$ \citep{gonzalez:02}. See figure~\ref{fig:n4-neighbors} for a reference on how this neighborhood looks like.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \draw[step=0.75cm,black,thin] (0,0) grid (0.75,2.25);
+    \draw[black,thin] (0.75,0.75) rectangle (1.5,1.5);
+    \draw[black,thin] (-0.75,0.75) rectangle (0,1.5);
+    \fill[gray!40, draw=black] (0,0.75) rectangle (0.75,1.5);
+    
+    \end{tikzpicture}
+
+    \caption[The 4-neighbors representation of a pixel $p$]{The 4-neighbors representation of a pixel $p$. The pixel $p$ is centered on the grid with gray background.}
+    \label{fig:n4-neighbors}
+\end{figure}
+
+Each pixel of the image is a unite distance from $(x, y)$. Some neighbors of $p$ might lie outside of the image boundaries if $(x, y)$ is on the border of the image \citep{gonzalez:02}. Those who will use neighborhood operations in the image might take this in consideration to avoid index out of range in those areas.
+
+The four coordinates of the diagonals of $p$ are given by:
+\begin{equation*}
+    (x + 1, y + 1), (x + 1, y - 1), (x - 1, y + 1), (x - 1, y - 1)
+    \label{eq:nd_neighbors}
+\end{equation*}
+
+This set of pixels are denoted by $N_D(p)$. When combined, the 4-\textit{neighbors} and $N_D(p)$ will generate the 8-\textit{neighbors} of $p$, known as $N_8(p)$ \citep{gonzalez:02}. Formally, we have:
+\begin{equation*}
+    N_8(p) = N_4(p) \cup N_D(p)
+    \label{eq:n8_neighbors}
+\end{equation*}
+
+See figure~\ref{fig:n8-neighbors} for a reference on how the $N_8(p)$ neighborhood looks like.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \draw[step=0.75cm,black,thin] (0,0) grid (2.25,2.25);
+    \fill[gray!40, draw=black] (0.75,0.75) rectangle (1.5,1.5);
+    \end{tikzpicture}
+
+    \caption[The 8-neighbors representation of a pixel $p$]{The 8-neighbors representation of a pixel $p$. The pixel $p$ is centered on the grid with gray background.}
+    \label{fig:n8-neighbors}
+\end{figure}
+
+Despite these are the most common neighbors used in applications, other different distances from $p$ as well as connectivity can be applied. The idea of neighborhood can also be extended to 3-dimensional images where, instead of pixels, the voxels are the coordinates considered.
+
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Connectivity}
