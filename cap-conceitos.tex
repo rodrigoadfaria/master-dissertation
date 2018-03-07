@@ -29,7 +29,7 @@ f(x, y) =
 
 Usually, pixels are stored, and therefore read, in this matrix in an order known as \textit{raster}. This information is important so that capture and display devices can be able to establish a common interface, and make necessary transformations in the coordinates, when needed.
 
-In a monochromatic digital image, the value of a pixel is a scalar in the range $[L_{min}, L_{max}]$, where $L$ is the (integer) number of gray-levels~\citep{pedrini:08}.
+In a monochromatic digital image, the value of a pixel is a scalar in the range $[L_{min}, L_{max}]$, where $L$ is the (integer) number of gray levels~\citep{pedrini:08}.
 
 In a multispectral image, each pixel has a vector value such that $f(x, y) = (L_1, L_2, \ldots L_n)$ where $L_{min} \leq L_i \leq L_{max}$ and $n = 1, 2, 3, \ldots, n$. In general, $L_i$ can represent different measures for each of $(x, y)$ coordinate as well as different intervals~\citep{pedrini:08}.
 
@@ -62,7 +62,7 @@ This set of pixels, called the 4-\textit{neighbors} of $p$, is denoted by $N_4(p
     \draw[black,thin] (0.75,0.75) rectangle (1.5,1.5);
     \draw[black,thin] (-0.75,0.75) rectangle (0,1.5);
     \fill[gray!40, draw=black] (0,0.75) rectangle (0.75,1.5);
-    
+
     \end{tikzpicture}
 
     \caption[The 4-neighbors representation of a pixel $p$]{The 4-neighbors representation of a pixel $p$. The pixel $p$ is centered on the grid with gray background.}
@@ -102,6 +102,66 @@ Despite these are the most common neighbors used in applications, other differen
 %% ------------------------------------------------------------------------- %%
 \subsection{Connectivity}
 \label{sec:connectivity}
+Connectivity between pixels is a very important concept used to establish the boundaries of objects and regions in an image. To figure out if two pixels are connected, it must be determined if they are neighbors and if their gray levels satisfy some similarity criteria, such as gray levels, color or texture equality. For instance, in a binary image, where the pixels values vary in the range $[0, 1]$, two pixels may be 4-\textit{neighbors}, but they are connected if and only if they have the same value \citep{gonzalez:02}.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Arithmetic and logic operations}
+\label{sec:ari_logic_operations}
+Image arithmetic applies one of the standard arithmetic operations or a logical operator to two or more images. The operators are applied in a pixel-wise manner. In other words, the value of a pixel in the output image depends only on the values of the corresponding pixels in the input images. Hence, the images -- or the subsets, if is the case -- must be of the same size. Although image arithmetic is the most simple form of image processing, they are used extensively in a wide range of applications and its use can potentially produce very interesting practical results. A main advantage of arithmetic operators is that the process is very simple and therefore fast.
+
+The most common arithmetic operations between two pixels, say $f_1(x, y)$ and $f_2(x, y)$ of two different images $f_1$ and $f_2$, are the addition, subtraction, multiplication and division as shown in table~\ref{tab:img_ari_operations} \citep{pedrini:08}.
+
+\begin{table}[hb]
+\centering
+\begin{small}
+\setlength{\tabcolsep}{12pt}
+\renewcommand{\arraystretch}{1.75}
+
+\begin{tabular}{|c|c|}\hline
+ \thb{Name}     & \thb{Operation} \\ \hline
+ Addition       & $f_1(x, y) + f_2(x, y)$ \\ \cline{1-2}
+ Subtraction    & $f_1(x, y) - f_2(x, y)$ \\ \cline{1-2}
+ Multiplication & $f_1(x, y) * f_2(x, y)$ \\ \cline{1-2}
+ Division       & $f_1(x, y) / f_2(x, y)$ \\ \hline
+
+\end{tabular}
+\end{small}
+\caption{Definition of addition, subtraction, multiplication and division arithmetic operations in two $f_1$ and $f_2$ images.}
+\label{tab:img_ari_operations}
+\end{table}
+
+Addition is used often for image averaging to reduce noise. Subtraction is used frequently for static background removal. Multiplication as well as division is applied to correct gray level shading~\citep{gonzalez:02}.
+
+Once the arithmetic operations can potentially produce images with values out of the gray levels given in the original images, additional effort is frequently needed to work around this situation. For instance, when adding two images, some pixels of the resulting image may be greater than 255. Similarly, when subtracting two images, some pixels me be with negative values. One way to solve this issue is, after the arithmetic operation, perform a transformation in the gray levels of the resulting image to keep them within a suitable range~\citep{pedrini:08}.
+
+Logic operations are also useful in computer vision and image processing applications. They are applied only in binary images, while arithmetic operations can be used with higher gray levels. The terminology adopted among authors and application developers is that pixels with zero value (black color) belongs to the objects while one value (white color) corresponds to the background. Table~\ref{tab:img_log_operations} shows how the logic operations can be computed~\citep{pedrini:08}.
+
+\begin{table}[ht]
+\centering
+\begin{small}
+\setlength{\tabcolsep}{12pt}
+\renewcommand{\arraystretch}{1.75}
+
+\begin{tabular}{|c|c|}\hline
+ \thb{Name}     & \thb{Operation} \\ \hline
+ AND    & $f_1(x, y)$ AND $f_2(x, y)$ \\ \cline{1-2}
+ OR     & $f_1(x, y)$ OR $f_2(x, y)$ \\ \cline{1-2}
+ XOR    & $f_1(x, y)$ XOR $f_2(x, y)$ \\ \cline{1-2}
+ NOT    & NOT($f_1(x, y)$) \\ \hline
+
+\end{tabular}
+\end{small}
+\caption{Definition of AND, OR, XOR and NOT logic operations in two $f_1$ and $f_2$ images.}
+\label{tab:img_log_operations}
+\end{table}
+
+The AND operation outputs 1 in the resulting image when both pixels, at same coordinates in the input images, are equal 1. XOR operation outputs 1 when only one of the pixels -- but not both -- has value 1; 0 otherwise. The result of OR operation is 1 when at least one of the pixels has 1 value. The NOT operation reverse the value of the pixel in the image \citep{pedrini:08}.
+
+All the logic operators can be combined to create other more complex and robust operators. They can be used to combine information between images or to extract information of regions of interest from them~\citep{pedrini:08}.
+
+In addition to the pixel-wise processing, logic and arithmetic operations can be used for neighborhood processing. Typically, this kind of processing uses masks, where terms such as windows and filters are often used as synonym of masks. The idea of the masks is to turn the value of the pixel a function of its own value and its neighbors. It is note mentioning that masks application are made under high computational cost. Therefore, they must be used carefully~\citep{pedrini:08}.
+
 
 %% ------------------------------------------------------------------------- %%
 \section{Image segmentation}
@@ -410,53 +470,3 @@ The conversion of the RGB space to HSL is given by the equations:
 \noindent where $m = min(R, G ,B)$ and $M = max(R, G ,B)$. The lightness $V$ and saturation $S$ are normalized between 0 and 1. Note that the transformation of the $H$ component is the same as that used in the conversion of the RGB to HSV space in \ref{eq:rgb_para_hsv} and varies between 0 and 360 degrees.
 
 All the color models of this family have the property of thinking of lighter colors, obtained by increasing the brightness or lightness, and darker colors, by the diminution of the same values. The intermediate colors are produced by decreasing the saturation~\citep{pedrini:08}.
-
-
-%% ------------------------------------------------------------------------- %%
-\section{Machine learning}
-\label{sec:classificadores}
-Machine learning is an area that is concerned with the development of computer programs capable of improving automatically with the experience \citep{mitchell:97}. This definition is closely linked to the way humans learn. Research efforts in this area have been carried out with the purpose of bringing this relationship closer.
-
-As an example, in showing the image of a tree to a three-year-old child, she will most likely know how to recognize it, as she must have been exposed to situations where she has seen similar images, and was trained to do so answer. Then, she learned what a tree is by looking at them, not necessarily by precise mathematical definitions. In other words, the learning was done on the basis of data that are often used to obtain empirical solutions to certain problems where there is no possibility of creating an analytical solution \citep{mostafa:12}.
-
-Similarly, an algorithm can be trained to differentiate a tree from other objects based on a set of data that has descriptions about the trees, such as height, colors, thickness, length, and so on. These descriptions are also called attributes, properties or features, and are submitted to a classifier that evaluates the presented evidences and makes a decision about the object being analyzed \citep{duda:12}. This task begins with the definition of a feature vector in a $d$-dimensional space, of the form \citep{duda:12}:
-
-\begin{equation}
-\label{eq:vetor_caracteristicas}
-  x = 
-  \begin{bmatrix}
-    a_1 \\ a_2 \\ \vdots \\ a_d
-  \end{bmatrix}
-\end{equation}
-\noindent where $x \in X$ and $X$ is the input space, that is, all of the $x$ possible vectors.
-
-The dataset is formed by $N$ of these vectors and, therefore, the problem now is to partition the feature space in such a way that a decision boundary is formed \citep{duda:12}. We can then assign a specific class or label $y$ for a given vector, where $y \in Y$ and $Y$ is a finite set of classes which, in the binary case, is of the form $Y = \{+1, -1\}$. Figure~\ref{fig:decision_boundary} shows partitioning examples of a $2$-dimensional space of skin and non-skin samples from the SFA dataset \footnote{This dataset will be detailed in the section \ref{sec:datasets}.}.
-
-\begin{figure}[ht]
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\textwidth]{decision_boundary_linear}
-        \label{fig:decision_boundary_linear}
-    \end{minipage}
-    ~ % space
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\textwidth]{decision_boundary_smooth}
-        \label{fig:decision_boundary_smooth}
-    \end{minipage}
-    \caption[Decision boundary in the 2-dimensional space]{Decision boundary in the 2-dimensional space of skin and non-skin samples of the SFA dataset. The axes represent the channels $a$ and $b$ of the Lab color model. The figures on the left and right show the separation of the feature space by linear and non-linear functions, respectively. It is noteworthy that, computational complexity increases significantly in cases where there are many features. Source: proposed by the author.}
-    \label{fig:decision_boundary}
-\end{figure}
-
-Note that the decision boundary is a hypothetical function that the learning algorithm must produce based on training data. It should be as close as possible to a target function or objective function $f: X \mapsto Y$ that is unknown \citep{mostafa:12}.
-
-This type of approach is characterized as supervised learning, that is, the training data contain explicit samples of how the correct output should be on an input vector \citep{mostafa:12}.
-
-In unsupervised learning, also known as clustering, it is unknown what classes the training data belong to. The mission of the classifier, in this case, is to agglomerate input data into natural clusters \citep{duda:12}. Therefore, unsupervised learning can be seen as a task of finding patterns or structures spontaneously from the input data \citep{mostafa:12}.
-
-Another approach is reinforcement learning which, just as in unsupervised learning, does not use labeled input data. The output proposed by the training is used along with a measure of its quality to improve the results of the classifier \citep{mostafa:12}.
-
-Still on the results of the classifier, it is important to point out that learning the parameters of a target function and testing it on the same data is a fundamental error because the model would repeat the labels of the samples as soon as they were trained, implying a perfect fit of the data. However, it would not be enough to predict anything useful about new input data. This phenomenon is called over-fitting and to avoid it, the dataset is then partitioned so as to store some of the data for a subsequent test step, in order to find the best-performing estimator \citep{mostafa:12}.
-
-Splitting the data into disjoint training and testing subsets is an effective approach when a large amount of data is available. However, when data is limited, retaining part of them for the test set further reduces the number of samples available for training \citep{mitchell:97}. Therefore, another approach, known as cross-validation, can be applied so that the entire dataset is used in training and testing.
-
-The cross-validation consists of dividing the dataset $D$ into $K$ disjoint subsets $D_1, D_2, \ldots, D_K$, where each subset has an approximate size of $N / K$. The model is then trained on each of these subsets, except one that is maintained as a validation set, in which the error measure is calculated. This process is repeated $K$ times, in such a way that each of the subsets has the opportunity to act as the test set. By this reason, this approach is also known as \emph{K-fold}. At the end of all $K$ iterations, the mean error obtained by each estimator is used as the performance measure of the classifier \citep{mostafa:12}.
