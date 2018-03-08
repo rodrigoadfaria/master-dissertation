@@ -65,7 +65,7 @@ This set of pixels, called the 4-\textit{neighbors} of $p$, is denoted by $N_4(p
 
     \end{tikzpicture}
 
-    \caption[The 4-neighbors representation of a pixel $p$]{The 4-neighbors representation of a pixel $p$. The pixel $p$ is centered on the grid with gray background.}
+    \caption[The 4-neighbors representation of a pixel $p$]{The 4-neighbors representation of a pixel $p$. The pixel $p$ is centered on the grid with gray background. Source: adapted from~\citet{pedrini:08}.}
     \label{fig:n4-neighbors}
 \end{figure}
 
@@ -92,7 +92,7 @@ See figure~\ref{fig:n8-neighbors} for a reference on how the $N_8(p)$ neighborho
     \fill[gray!40, draw=black] (0.75,0.75) rectangle (1.5,1.5);
     \end{tikzpicture}
 
-    \caption[The 8-neighbors representation of a pixel $p$]{The 8-neighbors representation of a pixel $p$. The pixel $p$ is centered on the grid with gray background.}
+    \caption[The 8-neighbors representation of a pixel $p$]{The 8-neighbors representation of a pixel $p$. The pixel $p$ is centered on the grid with gray background. Source: adapted from~\citet{pedrini:08}.}
     \label{fig:n8-neighbors}
 \end{figure}
 
@@ -127,7 +127,7 @@ The most common arithmetic operations between two pixels, say $f_1(x, y)$ and $f
 
 \end{tabular}
 \end{small}
-\caption{Definition of addition, subtraction, multiplication and division arithmetic operations in two $f_1$ and $f_2$ images.}
+\caption[Definition of addition, subtraction, multiplication and division arithmetic operations in two $f_1$ and $f_2$ images]{Definition of addition, subtraction, multiplication and division arithmetic operations in two $f_1$ and $f_2$ images. Source: adapted from~\citet{pedrini:08}.}
 \label{tab:img_ari_operations}
 \end{table}
 
@@ -152,7 +152,7 @@ Logic operations are also useful in computer vision and image processing applica
 
 \end{tabular}
 \end{small}
-\caption{Definition of AND, OR, XOR and NOT logic operations in two $f_1$ and $f_2$ images.}
+\caption[Definition of AND, OR, XOR and NOT logic operations in two $f_1$ and $f_2$ images]{Definition of AND, OR, XOR and NOT logic operations in two $f_1$ and $f_2$ images. Source: adapted from~\citet{pedrini:08}.}
 \label{tab:img_log_operations}
 \end{table}
 
@@ -161,6 +161,30 @@ The AND operation outputs 1 in the resulting image when both pixels, at same coo
 All the logic operators can be combined to create other more complex and robust operators. They can be used to combine information between images or to extract information of regions of interest from them~\citep{pedrini:08}.
 
 In addition to the pixel-wise processing, logic and arithmetic operations can be used for neighborhood processing. Typically, this kind of processing uses masks, where terms such as windows and filters are often used as synonym of masks. The idea of the masks is to turn the value of the pixel a function of its own value and its neighbors. It is note mentioning that masks application are made under high computational cost. Therefore, they must be used carefully~\citep{pedrini:08}.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Image boundaries}
+\label{sec:image_boundaries}
+
+When working with neighborhood operations, the mask being used, independently of its size, can fall beyond the image boundaries. In other words, this means that, for an image $f$, with size $W \times H$, some part of the mask operator will be located in a nonexistent pixel from an index out of the range given by $W \times H$ matrix.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \draw[step=0.75cm,black,thin] (0,0) grid (7.5,6.0);
+    \fill[pattern=north east lines, pattern color=blue, draw=black] (4.5,5.25) rectangle (5.25,6.0);
+    \fill[pattern=north east lines, pattern color=blue, draw=black] (5.25,4.5) rectangle (6.0,5.25);
+    \fill[pattern=north east lines, pattern color=blue, draw=black] (5.25,5.25) rectangle (6.0,6.0);
+    \fill[pattern=north east lines, pattern color=blue, draw=black] (5.25,6.0) rectangle (6.0,6.75);
+    \fill[pattern=north east lines, pattern color=blue, draw=black] (6.0,5.25) rectangle (6.75,6.0);
+    \end{tikzpicture}
+
+    \caption[Representation of an 4-\textit{neighbors} window mask going beyond image borders]{Representation of an 4-\textit{neighbors} window mask going beyond image borders. Here we can solve this problem, for instance ignoring the first and last lines and columns of the whole image during the operation. Source: adapted from~\citet{pedrini:08}.}
+    \label{fig:img_boundaries}
+\end{figure}
+
+There are several ways to work around this problem. One simple mechanism is to simply ignore the pixels on the border where the mask go beyond. Despite this will avoid index out of bound errors, border pixels of the image will not be looked at. Another approach is to copy the corresponding pixels from the input image. Once again, the resulting image will have some not processed pixels in the border. Another strategy is to apply a different mask for the borders, which may consider the difference in the corners as well, to perform the operation, which can turn the operation more complex and computational costly~\citep{pedrini:08}.
 
 
 %% ------------------------------------------------------------------------- %%
