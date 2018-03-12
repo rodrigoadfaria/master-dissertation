@@ -1,12 +1,12 @@
 %% ------------------------------------------------------------------------- %%
-\chapter{Proposed Solution}
+\chapter{Proposed solution}
 \label{cap:proposed-solution}
 
 \noindent A state of the art skin detection method has been recently developed by \cite{brancati:17}. Here, we review the method and extend it adding more rules to enforce the constraints and seeking for a better performance in terms of false positive rate without hurting the performance of the original method.
 
 %% ------------------------------------------------------------------------- %%
 
-\section{Original Method}
+\section{Original method}
 \label{sec:original_method}
 In order to describe the proposed extensions, we will first transcribe the original method that is based on the definition of image-specific trapezoids, named $T_{YCb}$ and $T_{YCr}$, in the \textit{YCb} and \textit{YCr} subspaces, respectively. The trapezoids are essential to verify a relation between the chrominance components $Cb$ and $Cr$ in these subspaces \citep{brancati:17}.
 
@@ -112,9 +112,9 @@ where:
     sf = \frac{min( (Y_1 - Y_0), (Y_3 - Y_2) )} {max( (Y_1 - Y_0), (Y_3 - Y_2) )}
 \end{equation}
 
-%% ------------------------------------------------------------------------- %%
 
-\section{Extended Method}
+%% ------------------------------------------------------------------------- %%
+\section{Extended method}
 \label{sec:proposed_method}
 The hypothesis defined in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
 
@@ -158,17 +158,72 @@ Doing this simple extension, we are now able to apply the method to the same set
     \label{fig:pixel_neighborhood}
 \end{figure}
 
-%% ------------------------------------------------------------------------- %%
 
-\section{Neighborhood Extended Method}
+%% ------------------------------------------------------------------------- %%
+\section{Neighborhood extended method}
 \label{sec:neighborhood_extended_method}
-\noindent Both methods presented in Sec. \ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we can improve the method using neighbor pixels information, when evaluating a pixel $P$, in order to decide if $P$ represents human skin, or not. Let $N_8^-(P)$ the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order (blue points in Fig.~\ref{fig:pixel_neighborhood}).
+\noindent Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we can improve the method using neighbor pixels information, when evaluating a pixel $P$, in order to decide if $P$ represents human skin, or not. Let $N_8^-(P)$ the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order (blue points in Fig.~\ref{fig:pixel_neighborhood}).
 
-Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel.
+Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel. Figure~\ref{fig:n8-flowchart} shows a flowchart of the aforementioned procedure described.
+
+\begin{figure}[ht]
+    \centering
+
+    % Define block styles
+    \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+        text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+    \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+        text width=5em, text centered, rounded corners, minimum height=4em]
+    \tikzstyle{line} = [draw, -latex']
+    \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+        minimum height=2em]
+        
+    \begin{tikzpicture}[node distance = 3cm, auto]
+        % Place nodes
+        \node [block] (pcrs) {calculate \ref{condition_c00} and \ref{condition_c11} rules};
+        \node [block, left of=pcrs] (pcbs) {calculate \ref{condition_c0} and \ref{condition_c1} rules};
+        \node [decision, below of=pcrs] (bothtrue) {both true?};
+        \node [block, right of=bothtrue, node distance=4cm, fill=gray!20] (isskin) {$P$ is skin};
+        \node [decision, below of=bothtrue] (bothfalse) {both false?};
+        \node [block, right of=bothfalse, node distance=4cm, fill=gray!20] (noskin) {$P$ is non skin};
+        \node [decision, right of=noskin, node distance=4cm] (n8decision) {skin pixels $\geq 3$};
+        \node [block, below of=n8decision, node distance=3cm] (n8) {check decision in $N_8^-(P)$};
+        % Draw edges
+        \path [line] (pcrs) -- (bothtrue);
+        \path [line] (bothtrue) -- node {no} (bothfalse);
+        \path [line] (bothfalse) -- node {yes} (noskin);
+        \path [line] (bothfalse) |- node [near start] {no} (n8);
+        \path [line] (bothtrue) -- node {yes}  (isskin);
+        \path [line] (n8) -- (n8decision);
+        \path [line] (n8decision) |- node [near start] {yes} (isskin);
+        \path [line] (n8decision) -- node [near start] {no} (noskin);
+        \path [line] (pcbs) |- (bothtrue);
+    \end{tikzpicture}
+    
+    \caption[Flowchart of our proposed neighbors method]{Flowchart of our proposed neighbors method. In \textbf{both false} decision, the \textbf{no} path means that one of the rules is true and we are in doubt if $P$ is skin or not -- here is where the neighbors are used to find out the label of $P$. Source: proposed by the author.}
+    \label{fig:n8-flowchart}
+\end{figure}
+
 
 %% ------------------------------------------------------------------------- %%
+\section{Supplementary neighborhood operations}
+\label{sec:sup_neighborhood_operations}
+The given neighborhood method presented in section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect}. This is caused due the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we should look for all the eight neighbors of the pixel $P$ being evaluated.
 
-\section{Trapezoids Parameters Tuning with a Grid Search Strategy}
+Therefore, we created an adaptation of the neighborhood method shown in~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and apply the 8-\textit{neighbors} operations in four different ways:
+
+\begin{enumerate}[label={(\arabic*)}]
+    \item we look into the rules answer performing an AND. In other words, if both original and reverse rules are saying this pixel is skin, then we classify it as skin;
+    \item we look into the rules answer performing an OR. In other words, if one of the rules (original or reverse) is saying this pixel is skin, then we classify it as skin;
+    \item we look into the neighbors only querying the original ($P_{Cb_s}$) rules;
+    \item we look into the neighbors only querying the reversed ($P_{Cr_s}$) rules.
+\end{enumerate}
+
+Of course, this variation will add some additional computational cost once we will scan the image one more time. This implementation can be enhanced, but the idea here is to only explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Some experiments can be seen further in section~\ref{sec:sno_experiments}.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Trapezoids parameters tuning with a grid search strategy}
 \label{sec:trapezoids_params_tunning}
 \noindent As we could see on previous sections, this model is based on the definition of trapezoids to fit the skin color pixels distribution from a given image. According to~\citet{brancati:17}, the coordinates of each trapezoid within the $YCr$ and $YCb$ sub-spaces are calculated based on the $Y$ luminance component values. $Y_0$ and $Y_1$ are those used to define the shorter base of the upper trapezoid, and $Y_2$ and $Y_3$ the points used to define the shorter base of the lower trapezoid.
 
@@ -177,6 +232,8 @@ $Y_0$ and $Y_1$ are, respectively, the 5${th}$ and 95$th$ percentile of the lumi
 To the best of our knowledge, there is any justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to shot different combination of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
 
 Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, but once the trapezoids definition do not change among them, we think that employing it only in combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, $F-measure$, $Precision$, and $Recall$ metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
+
+In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $Ymin$ and $Ymax$ in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts} and sorted according the criteria aforementioned in the end of the procedure.
 
 \begin{codebox}
 \kern-1.5em $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$\\
@@ -199,7 +256,5 @@ Thus, we used a well-known technique called grid search to find the best range c
 \li $\proc{Sort-By}(Results, Fmeasure, Precision, Recall)$
 \li \Return $Results$
 \end{codebox}
-
-In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $Ymin$ and $Ymax$ in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts} and sorted according the criteria aforementioned in the end of the procedure.
 
 Detailed output of this experiments and analysis can be seen in chapter~\ref{cap:experimentos}, specifically in section~\ref{sec:grid_search_experiments}, where an examination of the behavior of the most performing parameters is given as well as others which did not succeed.

@@ -29,6 +29,18 @@ f(x, y) =
 
 Usually, pixels are stored, and therefore read, in this matrix in an order known as \textit{raster}. This information is important so that capture and display devices can be able to establish a common interface, and make necessary transformations in the coordinates, when needed.
 
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \draw[thick,->] (0,4.5) -- (4.5,4.5) node[anchor=south west] {W};
+    \draw[thick,->] (0,4.5) -- (0,0) node[anchor=south east] {H};
+    \end{tikzpicture}
+
+    \caption[Representation of the raster order of an image]{Representation of the raster order of an image. The origin coordinates $(0, 0)$ starts in the top left corner, where both axes rise. Source: proposed by the author.}
+    \label{fig:raster}
+\end{figure}
+
+
 In a monochromatic digital image, the value of a pixel is a scalar in the range $[L_{min}, L_{max}]$, where $L$ is the (integer) number of gray levels~\citep{pedrini:08}.
 
 In a multispectral image, each pixel has a vector value such that $f(x, y) = (L_1, L_2, \ldots L_n)$ where $L_{min} \leq L_i \leq L_{max}$ and $n = 1, 2, 3, \ldots, n$. In general, $L_i$ can represent different measures for each of $(x, y)$ coordinate as well as different intervals~\citep{pedrini:08}.
@@ -167,7 +179,7 @@ In addition to the pixel-wise processing, logic and arithmetic operations can be
 \subsection{Image boundaries}
 \label{sec:image_boundaries}
 
-When working with neighborhood operations, the mask being used, independently of its size, can fall beyond the image boundaries. In other words, this means that, for an image $f$, with size $W \times H$, some part of the mask operator will be located in a nonexistent pixel from an index out of the range given by $W \times H$ matrix.
+When working with neighborhood operations, the mask being used, independently of its size, can fall beyond the image boundaries. In other words, this means that, for an image $f$, with size $W \times H$, some part of the mask operator will be located in a nonexistent pixel from an index out of the range given by $W \times H$ matrix. Figure~\ref{fig:img_boundaries} shows an example of this phenomena in a $10 \times 8$ image being used as input for an 4-\textit{neighbors} operator.
 
 \begin{figure}[ht]
     \centering
