@@ -170,14 +170,14 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
     \centering
 
     % Define block styles
-    \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    \tikzstyle{decision} = [diamond, draw, fill=blue!20,
         text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
-    \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    \tikzstyle{block} = [rectangle, draw, fill=blue!20,
         text width=5em, text centered, rounded corners, minimum height=4em]
     \tikzstyle{line} = [draw, -latex']
     \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
         minimum height=2em]
-        
+
     \begin{tikzpicture}[node distance = 3cm, auto]
         % Place nodes
         \node [block] (pcrs) {calculate \ref{condition_c00} and \ref{condition_c11} rules};
@@ -199,7 +199,7 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
         \path [line] (n8decision) -- node [near start] {no} (noskin);
         \path [line] (pcbs) |- (bothtrue);
     \end{tikzpicture}
-    
+
     \caption[Flowchart of our proposed neighbors method]{Flowchart of our proposed neighbors method. In \textbf{both false} decision, the \textbf{no} path means that one of the rules is true and we are in doubt if $P$ is skin or not -- here is where the neighbors are used to find out the label of $P$. Source: proposed by the author.}
     \label{fig:n8-flowchart}
 \end{figure}

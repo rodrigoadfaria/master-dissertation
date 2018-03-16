@@ -200,12 +200,32 @@ There are several ways to work around this problem. One simple mechanism is to s
 
 
 %% ------------------------------------------------------------------------- %%
+\section{Image histogram}
+\label{sec:image_histogram}
+In an image processing context, the histogram of an image normally refers to a histogram of the pixel intensity values. The most common representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value \citep{gonzalez:02}.
+
+For instance, in an 8-bit grayscale image there are 256 different possible intensities, and so the histogram will graphically display 256 numbers showing the counting of occurrences of those grayscale values. It is also possible to compute histograms of color images. In this particular case, the channels of the color space in use are split individually from where a separate histogram is calculated.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{obama_gs}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.54\textwidth}
+        \includegraphics[width=\textwidth]{obama_histogram}
+    \end{subfigure}
+    \caption[Grayscale image with its respective histogram]{Grayscale image with its respective histogram. Left image is a sample from Pratheepan dataset, transformed to grayscale. On the right we have its histogram of pixel intensity values in the range [0, 255].}
+    \label{fig:obama_hist}
+\end{figure}
+
+A histogram can be seen as a probability distribution, once the number of pixels for a given intensity level gives an estimate of the probability of occurrence of this intensity level~\citep{gonzalez:02}. Several statistical measures can be obtained from a histogram such that minimum and maximum values, mean, median, standard deviation, and percentiles \citep{pedrini:08}. Those measures as well as the histogram itself are fundamental for the methods described in chapter~\ref{cap:proposed-solution} of the proposed solution.
+
+
+%% ------------------------------------------------------------------------- %%
 \section{Image segmentation}
 \label{sec:image_segmentation}
 
-%% ------------------------------------------------------------------------- %%
-\section{Pattern recognition}
-\label{sec:pattern_recognition}
 
 %% ------------------------------------------------------------------------- %%
 \section{Color models}

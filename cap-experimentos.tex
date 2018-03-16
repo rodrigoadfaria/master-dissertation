@@ -11,11 +11,11 @@ In this section we present some experimental evaluations of the proposed extensi
 
 \subsection{UCI}
 \label{sec:datasets_uci}
-Named UCI in this work, this dataset was proposed by~\citet{uci-skin-dataset:12} and obtained from the machine learning repository of the University of California in Irvine \citep{lichman:13}. The dataset consists of images of various skin and non-skin textures obtained from thousands of arbitrary faces images of different ages, sex and races \citep{pal-texas:04, feret:96}.
+Named UCI in this work, this dataset was proposed by~\citet{uci-skin-dataset:12} and obtained from the machine learning repository of the University of California in Irvine \citep{lichman:13}. The dataset consists pixel samples of images of various skin and non-skin textures obtained from thousands of arbitrary faces images of different ages, sex and races \citep{pal-texas:04, feret:96}.
 
 The UCI contains 245,057 samples, composed of 3 attributes that constitute the input vector $x = [x_1, x_2, x_3]$, $x \in \mathbb{R}^{d}$, where $d$ is the space dimension which represents, respectively, blue (B), green (G) and red (R) channels of the RGB color model. In addition, a fourth column determines the class to which the sample $x$ belongs, denoted by $y$, where $y \in Y$ and $Y = \{+1, -1\}$. In other words, each sample is an RGB pixel with a given label.
 
-The table~\ref{tbl:uci_dataset} exemplifies a short excerpt from the UCI database. It is worth mentioning that of the 245,057 samples, 194,198 are non-skin pixels and 50,859 pixels with different skin tones. In addition, the images that were used to extract the dataset were not made available by the authors.
+The table~\ref{tbl:uci_dataset} exemplifies a short excerpt from the UCI database. It is worth mentioning that 194,198 out of the 245,057 are non-skin pixels and 50,859 pixels with different skin tones. In addition, the images that were used to extract the dataset were not made available by the authors.
 
 \begin{table}[hb]
 \centering
@@ -223,7 +223,7 @@ It is worth mentioning that this database is no longer available and we had obta
 
 where TP, TN, FP, FN are, respectively, the number of true positive, true negative, false positive, and false negative pixels counted in the image, which are obtained from the confusion matrix (see table~\ref{tab:confusion_matrix}).
 
-\begin{table}[hb]
+\begin{table}[H]
     \centering
 
     \begin{tikzpicture}[
@@ -257,11 +257,11 @@ where TP, TN, FP, FN are, respectively, the number of true positive, true negati
 %------------------------------------------------------
 \section{Machine learning experiments}
 \label{sec:ml_experiments}
-Preliminary experiments were carried out using machine learning techniques in order to establish a bottom line for comparison with the proposed method, mainly in the execution time point of view.
+Preliminary experiments were carried out using machine learning techniques in order to evaluate the UCI dataset, described in section~\ref{sec:datasets_uci}, once we do not have the original images used to create it. The idea is to establish a bottom line to understand if this dataset can be useful for further experiments.
 
 The first experiment was carried out with $k$-NN and SVM, available in the scikit-learn package~\citep{scikit-learn:11}. The color space originally used was RGB, as cited in the description of datasets in \ref{sec:datasets}. In both cases, the chosen cross-validation strategy was 10-fold, which is a common choice of this approach in practice \citep{mostafa:12}. In addition, the technique of grid search of scikit-learn was also used with the objective of finding the most suitable parameters for each classifier.
 
-The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and $\gamma$ in the SVM or number of neighbors of $k$-NN \citep{scikit-learn:11}. The parameter tables used in the training of SVM and $k$-NN can be seen in \ref{tab:svm_grid_search} and \ref{tab:knn_grid_search}. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, $\gamma$ = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
+The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and \emph{gamma} in the SVM or number of neighbors of $k$-NN \citep{scikit-learn:11}. The parameter tables used in the training of SVM and $k$-NN can be seen in \ref{tab:svm_grid_search} and \ref{tab:knn_grid_search}. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, \emph{gamma} = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
 
 \begin{table}[ht]
 \centering
@@ -356,7 +356,7 @@ Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the ex
 \centering
 
 \begin{tabular}{|c|c|c|c|c|c|c|}\hline
- Dataset & Hypothesis & Precision & Recall & Specificity & F-measure\\ \cline{1-6}
+\thb{Dataset} & \thb{Hypothesis} & \thb{Precision} & \thb{Recall} & \thb{Specificity} & \thb{F-measure}\\ \cline{1-6}
 \multirow{3}{*}{Compaq}
 & Original     & 0.4354            & \textbf{0.8046}   & 0.8046            & 0.5650 \\ \cline{2-6}
 & Reverse      & 0.3971            & 0.7232            & 0.7921            & 0.5127 \\ \cline{2-6}
@@ -591,6 +591,44 @@ Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, \ref{fig:results_hg
 %% ------------------------------------------------------------------------- %%
 \section{Supplementary neighborhood operations experiments}
 \label{sec:sno_experiments}
+In this section we will show some experimental results of the supplementary neighborhood adaptation described in~\ref{sec:sup_neighborhood_operations}. In short, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Finally, we count those answers in four different strategies. The results can be seen in table~\ref{tab:sup_neighbors_results}.
+
+\begin{table*}[ht]
+\centering
+
+\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+\thb{Dataset} & \thb{\vtop{\hbox{\strut Hypothesis}\hbox{\strut (Neighbors)}}} & \thb{Precision} & \thb{Recall} & \thb{Specificity} & \thb{F-measure}\\ \cline{1-6}
+\multirow{3}{*}{Compaq}
+& AND               & \textbf{0.5121}   & 0.6252            & \textbf{0.8941}   & 0.5630 \\ \cline{2-6}
+& OR                & 0.3786            & \textbf{0.9037}   & 0.7203            & 0.5336 \\ \cline{2-6}
+& $P_{Cr_s}$ only   & 0.4132            & 0.7254            & 0.8032            & 0.5265 \\ \cline{2-6}
+& $P_{Cb_s}$ only   & 0.4478            & 0.8053            & 0.8120            & \textbf{0.5755} \\ \hhline{======}
+
+\multirow{3}{*}{Pratheepan}
+& AND               & \textbf{0.6731}   & 0.6789            & \textbf{0.9127}   & \textbf{0.6760} \\ \cline{2-6}
+& OR                & 0.4624            & \textbf{0.8837}   & 0.7321            & 0.6072 \\ \cline{2-6}
+& $P_{Cr_s}$ only   & 0.5285            & 0.7414            & 0.8163            & 0.6171 \\ \cline{2-6}
+& $P_{Cb_s}$ only   & 0.5630            & 0.8218            & 0.8292            & 0.6682 \\ \hhline{======}
+
+\multirow{3}{*}{HGR}
+& AND     & 0.8938            & 0.7664            & 0.9274            & 0.8252 \\ \cline{2-6}
+& OR      & 0.7929            & \textbf{0.8429}   & 0.8337            & 0.8171 \\ \cline{2-6}
+& $P_{Cr_s}$ only     & \textbf{0.8994}   & 0.6952            & \textbf{0.9390}   & 0.7843 \\ \cline{2-6}
+& $P_{Cb_s}$ only    & 0.8818            & 0.7935            & 0.9211            & \textbf{0.8353} \\ \hhline{======}
+
+\multirow{3}{*}{SFA}
+& AND               & \textbf{0.9345}   & 0.3947            & \textbf{0.9899}   & 0.5549 \\ \cline{2-6}
+& OR                & 0.8345            & \textbf{0.8181}   & 0.9176            & \textbf{0.8262} \\ \cline{2-6}
+& $P_{Cr_s}$ only   & 0.8612            & 0.7922            & 0.9375            & 0.8252 \\ \cline{2-6}
+& $P_{Cb_s}$ only   & 0.8685            & 0.4207            & 0.9703            & 0.5668 \\ \hline
+\end{tabular}
+
+\caption[Quantitative result metrics of the proposed supplementary neighborhood adaptation]{Quantitative result metrics of the proposed supplementary neighborhood adaptation. For each dataset, we have four different applications of the neighbors operations, respectively: applying an AND between the original and reverse rules, applying an OR between the original and reverse rules, considering the $P_{Cr_{s}}$ only, and considering the $P_{Cb_{s}}$ only.}
+\label{tab:sup_neighbors_results}
+
+\end{table*}
+
+It is worth mentioning that the goal here is to explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Therefore, we are not worried about the additional computational cost taken to scan the image one more time. Even though, this implementation can be enhanced by, for instance, keeping the latest three lines of the image scanned in memory to be verified by the 8-\textit{neighbors} window backward to have a final decision when evaluating a pixel.
 
 
 %------------------------------------------------------
