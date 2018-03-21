@@ -586,12 +586,12 @@ Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, \ref{fig:results_hg
     \caption[Image samples with the results of each method in Compaq dataset]{Image samples with the results of each method in Compaq dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
     \label{fig:results_cpq}
 \end{figure*}
-
+\clearpage
 
 %% ------------------------------------------------------------------------- %%
 \section{Supplementary neighborhood operations experiments}
 \label{sec:sno_experiments}
-In this section we will show some experimental results of the supplementary neighborhood adaptation described in~\ref{sec:sup_neighborhood_operations}. In short, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Finally, we count those answers in four different strategies. The results can be seen in table~\ref{tab:sup_neighbors_results}.
+In this section we will show some experimental results of the supplementary neighborhood adaptation described in section~\ref{sec:sup_neighborhood_operations}. In short, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Finally, we count those answers in four different strategies. The results can be seen in table~\ref{tab:sup_neighbors_results}.
 
 \begin{table*}[ht]
 \centering
@@ -611,24 +611,30 @@ In this section we will show some experimental results of the supplementary neig
 & $P_{Cb_s}$ only   & 0.5630            & 0.8218            & 0.8292            & 0.6682 \\ \hhline{======}
 
 \multirow{3}{*}{HGR}
-& AND     & 0.8938            & 0.7664            & 0.9274            & 0.8252 \\ \cline{2-6}
-& OR      & 0.7929            & \textbf{0.8429}   & 0.8337            & 0.8171 \\ \cline{2-6}
-& $P_{Cr_s}$ only     & \textbf{0.8994}   & 0.6952            & \textbf{0.9390}   & 0.7843 \\ \cline{2-6}
-& $P_{Cb_s}$ only    & 0.8818            & 0.7935            & 0.9211            & \textbf{0.8353} \\ \hhline{======}
+& AND               & \textbf{0.9007}   & 0.7203            & \textbf{0.9378}   & 0.8005 \\ \cline{2-6}
+& OR                & 0.7978            & \textbf{0.9084}   & 0.8238            & \textbf{0.8495} \\ \cline{2-6}
+& $P_{Cr_s}$ only   & 0.7937            & 0.8600            & 0.8331            & 0.8256 \\ \cline{2-6}
+& $P_{Cb_s}$ only   & 0.8818            & 0.7935            & 0.9211            & 0.8353 \\ \hhline{======}
 
 \multirow{3}{*}{SFA}
 & AND               & \textbf{0.9345}   & 0.3947            & \textbf{0.9899}   & 0.5549 \\ \cline{2-6}
-& OR                & 0.8345            & \textbf{0.8181}   & 0.9176            & \textbf{0.8262} \\ \cline{2-6}
+& OR                & 0.8345            & \textbf{0.8181}   & 0.9176            & 0.8262 \\ \cline{2-6}
 & $P_{Cr_s}$ only   & 0.8612            & 0.7922            & 0.9375            & 0.8252 \\ \cline{2-6}
-& $P_{Cb_s}$ only   & 0.8685            & 0.4207            & 0.9703            & 0.5668 \\ \hline
+& $P_{Cb_s}$ only   & 0.8953            & 0.7690            & 0.9286            & \textbf{0.8273} \\ \hline
 \end{tabular}
 
-\caption[Quantitative result metrics of the proposed supplementary neighborhood adaptation]{Quantitative result metrics of the proposed supplementary neighborhood adaptation. For each dataset, we have four different applications of the neighbors operations, respectively: applying an AND between the original and reverse rules, applying an OR between the original and reverse rules, considering the $P_{Cr_{s}}$ only, and considering the $P_{Cb_{s}}$ only.}
+\caption[Quantitative result metrics of the proposed supplementary neighborhood adaptation]{Quantitative result metrics of the proposed supplementary neighborhood adaptation. For each dataset, we have four different applications of the neighbors operations, respectively: applying an AND between the original and reverse rules, applying an OR between the original and reverse rules, considering the $P_{Cr_{s}}$ (reverse) only, and considering the $P_{Cb_{s}}$ (original) only.}
 \label{tab:sup_neighbors_results}
 
 \end{table*}
 
 It is worth mentioning that the goal here is to explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Therefore, we are not worried about the additional computational cost taken to scan the image one more time. Even though, this implementation can be enhanced by, for instance, keeping the latest three lines of the image scanned in memory to be verified by the 8-\textit{neighbors} window backward to have a final decision when evaluating a pixel.
+
+From the table~\ref{tab:sup_neighbors_results} we can see that the application of the neighborhood approach using AND gives us the best precision and specificity in all datasets. On the other hand, we lost performance in the recall in relation to the others approaches. Speaking of recall, the loss is in the order of 20\% up to 30\% in the Compaq, Pratheepan and HGR datasets, and approximately 50\% in the SFA.
+
+Clearly there is a trade-off between increasing precision and decreasing recall and vice versa, just as in the experiments done in section~\ref{sec:rule_based_experiments} with all methods. When we use a more relaxed rule, as in the case of the OR or the isolated rules, we get a better recall, but there is also an abrupt drop in precision and specificity. Another side effect of this phenomenon is to increase the false positive rate.
+
+The AND conjunction approach is most similar to that implemented in neighborhood extended method (see Sec.~\ref{sec:neighborhood_extended_method}). The results obtained by that approach show low variability in relation to the adaptations shown in the experiments in this section. Therefore, for the sake of implementation, the approach given in the neighborhood implementation may be a good starting point. Nevertheless, we can apply some other complementary technique, such as weights in the pixels, to measure those more or less relevant to the decision making in the neighborhood. This can potentially diminish the effect of this trade-off and obtain more harmonic measures while removing the undesired \textit{diagonal effect}.
 
 
 %------------------------------------------------------
