@@ -124,7 +124,7 @@ FUNCTION {output}
 FUNCTION {output.check}
 { 't :=
   duplicate$ empty$
-    { pop$ "empty " t * " Em " * cite$ * warning$ }
+    { pop$ "empty " t * " in " * cite$ * warning$ }
     'output.nonnull
   if$
 }
@@ -132,7 +132,6 @@ FUNCTION {output.check}
 FUNCTION {fin.entry}
 { add.period$
   write$
-  "   {\scriptsize Citado na p\'{a}g.}" write$
   newline$
 }
 
@@ -236,7 +235,7 @@ FUNCTION {format.names}
               if$
               t "others" =
                 { " {\rm{\em et~al.}}" * }
-                { " e " * t * }
+                { " and " * t * }
               if$
             }
           if$
@@ -329,7 +328,7 @@ FUNCTION {format.full.names}
               if$
               t "others" =
                 { " {\rm{\em et~al.}}" * }
-                { " e " * t * }
+                { " and " * t * }
               if$
             }
           if$
@@ -494,8 +493,8 @@ FUNCTION {format.edition}
 { edition empty$
     { "" }
     { output.state mid.sentence =
-        { edition "l" change.case$ " edi\c{c}\~{a}o" * }
-        { edition "t" change.case$ " edi\c{c}\~{a}o" * }
+        { edition "l" change.case$ " edition" * }
+        { edition "t" change.case$ " edition" * }
       if$
     }
   if$
@@ -527,8 +526,8 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { pages multi.page.check
-        { "p\'{a}ginas" pages n.dashify tie.or.space.connect }
-        { "p\'{a}gina" pages tie.or.space.connect }
+        { "pages" pages n.dashify tie.or.space.connect }
+        { "page" pages tie.or.space.connect }
       if$
     }
   if$
@@ -603,8 +602,8 @@ FUNCTION {format.in.ed.booktitle}
 { booktitle empty$
     { "" }
     { editor empty$
-        { "Em " booktitle emphasize * }
-        { "Em " format.editors * ", " * booktitle emphasize * }
+        { "In " booktitle emphasize * }
+        { "In " format.editors * ", " * booktitle emphasize * }
       if$
     }
   if$
@@ -631,7 +630,7 @@ FUNCTION {format.thesis.type}
 
 FUNCTION {format.tr.number}
 { type empty$
-    { "Relat\'{o}rio T\'{e}cnico" }
+    { "Technical Report" }
     'type
   if$
   number empty$
@@ -923,7 +922,7 @@ FUNCTION {mastersthesis}
   new.block
   format.title "title" output.check
   new.block
-  "Disserta\c{c}\~{a}o de Mestrado" format.thesis.type output.nonnull
+  "Master's thesis" format.thesis.type output.nonnull
   school "school" output.check
   address output
   % format.date "year" output.check
@@ -957,7 +956,7 @@ FUNCTION {phdthesis}
   new.block
   format.btitle "title" output.check
   new.block
-  "Tese de Doutorado" format.thesis.type output.nonnull
+  "PhD thesis" format.thesis.type output.nonnull
   school "school" output.check
   address output
   % format.date "year" output.check
@@ -1021,29 +1020,29 @@ FUNCTION {unpublished}
 FUNCTION {default.type} { misc }
 
 
-MACRO {jan} {"Janeiro"}
+MACRO {jan} {"January"}
 
-MACRO {feb} {"Fevereiro"}
+MACRO {feb} {"February"}
 
-MACRO {mar} {"Mar\c{c}o"}
+MACRO {mar} {"March"}
 
-MACRO {apr} {"Abril"}
+MACRO {apr} {"April"}
 
-MACRO {may} {"Maio"}
+MACRO {may} {"May"}
 
-MACRO {jun} {"Junho"}
+MACRO {jun} {"June"}
 
-MACRO {jul} {"Julho"}
+MACRO {jul} {"July"}
 
-MACRO {aug} {"Agosto"}
+MACRO {aug} {"August"}
 
-MACRO {sep} {"Setembro"}
+MACRO {sep} {"September"}
 
-MACRO {oct} {"Outubro"}
+MACRO {oct} {"October"}
 
-MACRO {nov} {"Novembro"}
+MACRO {nov} {"November"}
 
-MACRO {dec} {"Dezembro"}
+MACRO {dec} {"December"}
 
 
 
@@ -1117,7 +1116,7 @@ FUNCTION {format.lab.names}
         'skip$
         { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { " {\rm{\em et~al.}}" * }
-            { " e " * s #2 "{vv~}{ll}" format.name$ * }
+            { " and " * s #2 "{vv~}{ll}" format.name$ * }
           if$
         }
       if$
