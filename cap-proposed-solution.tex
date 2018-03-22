@@ -208,7 +208,7 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
 %% ------------------------------------------------------------------------- %%
 \section{Supplementary neighborhood operations}
 \label{sec:sup_neighborhood_operations}
-The given neighborhood method presented in section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect}. This is caused due the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we should look for all the eight neighbors of the pixel $P$ being evaluated.
+The given neighborhood method presented in section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). This is caused due the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we should look for all the eight neighbors of the pixel $P$ being evaluated.
 
 Therefore, we created an adaptation of the neighborhood method shown in~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and apply the 8-\textit{neighbors} operations in four different ways:
 
@@ -220,6 +220,41 @@ Therefore, we created an adaptation of the neighborhood method shown in~\ref{sec
 \end{enumerate}
 
 Of course, this variation will add some additional computational cost once we will scan the image one more time. This implementation can be enhanced, but the idea here is to only explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Some experiments can be seen further in section~\ref{sec:sno_experiments}.
+
+\begin{figure*}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.18\textwidth}
+        \includegraphics[width=3.0cm]{sfa/ori/img14}
+        \includegraphics[width=3.0cm]{pra/ori/chenhao0017me9}
+        \includegraphics[width=3.0cm]{hgr/ori/N_P_hgr1_id04_5}
+        \includegraphics[width=3.0cm]{cpq/ori/1923132}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.18\textwidth}
+        \includegraphics[width=3.0cm]{sfa/gt/img14}
+        \includegraphics[width=3.0cm]{pra/gt/chenhao0017me9}
+        \includegraphics[width=3.0cm]{hgr/gt/N_P_hgr1_id04_5}
+        \includegraphics[width=3.0cm]{cpq/gt/1923132}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.18\textwidth}
+        \includegraphics[width=3.0cm]{sfa/cmb/img14}
+        \includegraphics[width=3.0cm]{pra/cmb/chenhao0017me9}
+        \includegraphics[width=3.0cm]{hgr/cmb/N_P_hgr1_id04_5}
+        \includegraphics[width=3.0cm]{cpq/cmb/1923132}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.18\textwidth}
+        \includegraphics[width=3.0cm]{sfa/ngh/dgn/img14}
+        \includegraphics[width=3.0cm]{pra/ngh/dgn/chenhao0017me9}
+        \includegraphics[width=3.0cm]{hgr/ngh/dgn/N_P_hgr1_id04_5}
+        \includegraphics[width=3.0cm]{cpq/ngh/dgn/1923132}
+        \caption{}
+    \end{subfigure}
+
+    \caption[Image samples with the diagonal effect after the neighbors method segmentation]{Image samples with the diagonal effect after the neighbors method segmentation. Each image is from (top-down) SFA, Pratheepan, HGR, and Compaq datasets, respectively, where: (a) original image (b) ground truth (c) combined method (f) neighbors method. Independently of the classification accuracy, we can clearly see the diagonal effect present in the output of the neighbors method segmentation in comparison with combined. Besides being a visually undesirable effect, this phenomenon causes us to have an increase in the false positive rate.}
+    \label{fig:diagonal_effect}
+\end{figure*}
 
 
 %% ------------------------------------------------------------------------- %%
