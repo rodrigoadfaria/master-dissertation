@@ -233,12 +233,65 @@ Image segmentation is usually the first task of any image analysis process. All 
 
 One of the \emph{similarity} methods it is the thresholding: a popular and clever method used to segment regions of an image, especially in applications where speed is an important factor -- that is the case for skin detection, once it is used, in general, for face detection, gesture analysis, face tracking, video surveillance systems, medical image analysis, and other human-related image processing applications. Due the simplicity of implementation, several authors apply this technique on skin detection task~\citep{kovac:03, chai:99, basilio:11, kaur:12, shaik:15, kumar:15}. Others extend this application by using adaptive thresholding~\citep{yogarajah:11, tan:12}.
 
-The method proposed by~\citet{brancati:17}, where a set of dynamic correlation rules are computed to determine skin pixels can be classified as the kind of \emph{similarity} method. Subsequently, our proposed enhancements described in chapter~\ref{cap:proposed-solution}, in a pixel-based manner, is also of this kind. For that reason, a brief introduction on thresholding will be given in section~\ref{sec:thresholding}.
+The method proposed by~\citet{brancati:17}, where a set of dynamic correlation rules are computed to determine skin pixels can be classified as the kind of \emph{similarity} method. Subsequently, our proposed enhancements described in chapter~\ref{cap:proposed-solution}, in a pixel-based manner, is also of this kind. Other methods detailed in chapter~\ref{cap:related-work}, aforementioned, and used in~\citet{brancati:17} as well here for comparison, are thresholding based. For that reason, a brief introduction on thresholding will be given in section~\ref{sec:thresholding}.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Thresholding}
 \label{sec:thresholding}
+Histogram thresholding is one of the simplest pixel-based techniques for image segmentation due its intuitive properties and uncomplicated implementation~\citep{gonzalez:02}. Roughly speaking, if an image is composed of distinct regions -- which means each region in the histogram are represented by a peak, similar to a Gaussian distribution --, adjacent regions could be split into separated groups, once adjacent peaks are likely separated by a valley~\citep{konstantinos:00}. Those valleys can be determined by means of one or more threshold values. However, to find out the threshold value that is the lower bound of a valley is definitely not a trivial task~\citep{konstantinos:00}.
+
+
+\begin{figure}[h]
+\centering
+
+\begin{tikzpicture}
+    \begin{axis}[width=0.45\textwidth,
+       height=0.3\textwidth,ybar,enlargelimits=0.02,yticklabels=\empty,xticklabels=\empty,bar width=0.2,axis x line*=bottom,axis y line*=left,xlabel={(a)}]
+    \addplot [draw=blue,pattern=horizontal lines light blue] coordinates {(1,1) (2,2) (3,3) (4,4) (5,5) (6,7) (7
+    ,8) (8,9) (9,9) (10,8) (11,6) (12,6) (13,5) (14,4) (15,3) (16,2) (17,1) (18,0.5) (19,1) (20,2) (21,3) (22,4) (23,5) (24,6) (25,6) (26,5) (27,4) (28,3) (29,2) (30,1)};
+    \addplot[mark=none] coordinates {(17.5,0.5)} node[pin=90:{$T$}]{} ;
+    \end{axis}
+\end{tikzpicture}
+~
+\begin{tikzpicture}
+    \begin{axis}[width=0.65\textwidth,
+       height=0.3\textwidth,ybar,enlargelimits=0.02,yticklabels=\empty,xticklabels=\empty,bar width=0.2,axis x line*=bottom,axis y line*=left,xlabel={(b)}]
+    \addplot [draw=blue,pattern=horizontal lines light blue] coordinates {(1,1) (2,2) (3,3) (4,4) (5,5) (6,7) (7
+    ,8) (8,9) (9,9) (10,8) (11,6) (12,6) (13,5) (14,4) (15,3) (16,2) (17,1) (18,0.5) (19,1) (20,2) (21,3) (22,4) (23,5) (24,6) (25,6) (26,5) (27,4) (28,3) (29,2) (30,1) (31,0.5) (32,1) (33,2) (34,3) (35,4) (36,4.5) (37,5) (38,5.5) (39,6) (40,5) (41,3) (42,2) (43,1)};
+    \addplot[mark=none] coordinates {(17.5,0.5)} node[pin=90:{$T_1$}]{} ;
+    \addplot[mark=none] coordinates {(30.5,0.5)} node[pin=90:{$T_2$}]{} ;
+    \end{axis}
+\end{tikzpicture}
+
+\caption[Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds]{Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds. Source: adapted from~\citep{gonzalez:02}.}
+\label{fig:histogram_thresholding}
+\end{figure}
+
+
+Let Figure~\ref{fig:histogram_thresholding}(a) the gray levels histogram of an image $f(x, y)$. We can clearly see two dominant groups of pixels. One obvious way to separate the objects in this image is to select a threshold $T$ that splits these groups. In other words, for every single point $(x, y)$, if $f(x, y) \leq T$, then $(x, y)$ belongs to the first object (or group), otherwise it belongs to the second object. In general, one of these objects are seen as the background of the image and the other the portion of interest in the image~\citep{gonzalez:02}.
+
+The resulting image $g(x, y)$ after applying the thresholding is given by:
+\begin{equation}
+g(x, y) =   \begin{cases}
+                0, \quad &\text{if}\ f(x, y) \leq T\\[0.7em]
+                1, \quad &\text{otherwise}
+            \end{cases}
+\end{equation}
+
+Therefore, pixels labeled 1 corresponds to the object left of $T$ in histogram, and pixels labeled 0 corresponds to the object right of $T$ in histogram -- or background as commonly used in literature. The \emph{single-level thresholding} procedure that produces $g(x, y)$ image is known as~\emph{binarization}~\citep{gonzalez:02}.
+
+Figure~\ref{fig:histogram_thresholding}(b) shows a slightly more general case of thresholding, where three distinct groups of the histogram are split by $T_1$ and $T_2$ threshold values. Here, \emph{multi-level thresholding} classifies a point $(x, y)$ as belonging to a specific object class as follows~\citep{gonzalez:02}:
+\begin{equation}
+g(x, y) =   \begin{cases}
+                l_1, \quad &\text{if}\ f(x, y) \leq T_1\\[0.7em]
+                l_2, \quad &\text{if}\ T_1 < f(x, y) \leq T_2\\[0.7em]
+                l_3, \quad &\text{if}\ f(x, y) > T_2
+            \end{cases}
+\end{equation}
+where $l_1, l_2, l_3$ are different gray levels used to represent each interval given by the thresholding values.
+
+When $T$ depends only on $f(x, y)$, that is, only on gray level values, the threshold is called \emph{global}. When another property -- e.g. the average gray level of a neighborhood centered on $(x, y)$ -- is used to define $T$, the threshold is called \emph{local}. If, in addition, $T$ depends on spatial coordinates $x$ and $y$, the threshold is called \emph{dynamic} or \emph{adaptive}~\citep{gonzalez:02}. This latest is fundamental to either the method developed by~\citet{brancati:17} and those enhancements made by us in chapter~\ref{cap:proposed-solution}. We can look for them as a particular case of adaptive thresholding to fit the skin model in trapezoidal distributions.
 
 
 %% ------------------------------------------------------------------------- %%
