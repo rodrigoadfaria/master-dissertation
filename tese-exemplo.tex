@@ -337,6 +337,8 @@ Skin detection plays an important role in a wide range of image processing and c
     $OR$        & OR logic operator \\
     $XOR$       & XOR logic operator \\
     $NOT$       & NOT logic operator \\
+    $T$         & Threshold value in image histogram split \\
+    $T_n$       & Multi-threshold values in image histogram split \\
     $L^*$       & Luminance \\
     $a^*$       & Green/red axis on $L^*a^*b^*$ color model \\
     $b^*$       & Blue/yellow axis on $L^*a^*b^*$ color model \\
@@ -346,12 +348,54 @@ Skin detection plays an important role in a wide range of image processing and c
     $max$       & Max operator \\
     $min$       & Min operator \\
     $\mathbb{R}$& Set of real numbers \\
-    $D$         & Dataset \\
-    $N$         & Dataset cardinality \\
-    $K$         & Numbers of dataset partitions in cross-validation \\
+    $P$         & A point (pixel) in an image \\
+    $P_Y$       & $Y$ component of a pixel $P$ in $YCbCr$ model \\
+    $Y_{Cb}$    & Subspace of $Cb$ points in function of $Y$ \\
+    $Y_{Cr}$    & Subspace of $Cr$ points in function of $Y$ \\
+    $T_{YCb}$   & Trapezoid of $Y_{Cb}$ subspace \\
+    $T_{YCr}$   & Trapezoid of $Y_{Cr}$ subspace \\
+    $A_{T_{YCb}}$& Area of $Y_{Cb}$ trapezoid \\
+    $A_{T_{YCr}}$& Area of $Y_{Cr}$ trapezoid \\
+\end{tabular}
+\clearpage
+\begin{tabular}{ll}
+    $Y_{min}$   & Minimum value of $Y$ luminance distribution \\
+    $Y_{max}$   & Maximum value of $Y$ luminance distribution \\
+    $Y_{0}$     & Top-left coordinate of $T_{YCr}$ trapezoid \\
+    $Y_{1}$     & Top-right coordinate of $T_{YCr}$ trapezoid \\
+    $Y_{2}$     & Top-right coordinate of $T_{YCb}$ trapezoid \\
+    $Y_{3}$     & Top-right coordinate of $T_{YCb}$ trapezoid \\
+    $Y_{min}$   & Minimum value of $Y$ component \\
+    $Y_{max}$   & Maximum value of $Y$ component \\
+    $Cr_{min}$  & Minimum $Cr$ value used to compute $T_{YCr}$ trapezoid \\
+    $Cr_{max}$  & Maximum $Cr$ value used to compute $T_{YCr}$ trapezoid \\
+    $Cb_{min}$  & Minimum $Cb$ value used to compute $T_{YCb}$ trapezoid \\
+    $Cb_{max}$  & Maximum $Cb$ value used to compute $T_{YCb}$ trapezoid \\
+    $h_{Cr}$    & Height of $T_{YCr}$ trapezoid \\
+    $h_{Cb}$    & Height of $T_{YCb}$ trapezoid \\
+    $H_{Cr}(P_Y)$& Height of other $T_{YCr}$ coordinates \\
+    $H_{Cb}(P_Y)$& Height of other $T_{YCb}$ coordinates \\
+    $\Delta_{Cr}(P_Y)$& Distance between $(P_Y, H_{Cr}(P_Y))$ and the base of $T_{YCr}$ trapezoid \\
+    $\Delta_{Cb}(P_Y)$& Distance between $(P_Y, H_{Cb}(P_Y))$ and the base of $T_{YCb}$ trapezoid \\
+    $\Delta'_{Cr}(P_Y)$& Normalized distance with respect to the difference in size of the $T_{YCr}$ trapezoid \\
+    $\Delta'_{Cb}(P_Y)$& Normalized distance with respect to the difference in size of the $T_{YCb}$ trapezoid \\
+    $\alpha$    & Rate between $\Delta'_{Cr}(P_Y)$ and $\Delta'_{Cb}(P_Y)$ normalized distances \\
+    $sf$        & Rate between the longer and shorter upper side of $T_{YCr}$ and $T_{YCb}$ trapezoids \\
+    $P_{Cr}$    & $Cr$ component of a pixel $P$ \\
+    $P_{Cb}$    & $Cb$ component of a pixel $P$ \\
+    $P_{Cr_{s}}$& Estimated value of $P_{Cr}$ point \\
+    $P_{Cb_{s}}$& Estimated value of $P_{Cb}$ point \\
+    $dP_{Cr_{s}}$& Estimated distance value of $P_{Cr}$ point \\
+    $dP_{Cb_{s}}$& Estimated distance value of $P_{Cb}$ point \\
+    $dP_{Cr}$   & Distance between $P_{Cr}$ point and $Cr_{min}$ \\
+    $dP_{Cb}$   & Distance between $P_{Cb}$ point and $Cb_{max}$ \\
+    $I_P$       & Minimum difference between the values $P_{Cr}$ and $P_{Cb}$ with respect to $P_{Cb_s}$ \\
+    $J_P$       & Maximum distance between the points $(P_Y, P_{Cb})$ and $(P_Y, P_{Cb_s})$ \\
+    $I'_P$      & Minimum difference between the values $P_{Cr}$ and $P_{Cb}$ with respect to $P_{Cr_s}$ \\
+    $J'_P$      & Maximum distance between the points $(P_Y, P_{Cr})$ and $(P_Y, P_{Cr_s})$ \\
     $C$         & Regularization parameter \\
     $\gamma$    & Polynomial/RBF kernel parameter of a nonlinear SVM \\
-    $d(x_i, x_j)$ & Distance function between $x_i$ and $x_j$ vectors \\
+    $d(x_i, x_j)$& Distance function between $x_i$ and $x_j$ vectors \\
     $\argmax$   & Arguments of maxima operator \\
 \end{tabular}
 
