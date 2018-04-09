@@ -30,20 +30,36 @@ Sendo assim, a motivação deste trabalho está em analisar problemas reais de v
 \section{Contributions}
 \label{sec:contributions}
 
-\textcolor{red}{Enter with the contributions here}.
+In this work, we have done a comprehensive and detailed study of various methods of skin detection within those based on rules. On the basis of~\citet{brancati:17}, seen by us as the state of the art in this field, we created variations that brought significant improvements. In addition, we analyzed the methods in question in order to provide the researchers, practitioners, enthusiasts, and other readers with a detailed understanding of the nuances involved in those methods, such as parameter selection and optimization, through a series of quantitative experiments, as well as qualitative analysis based on our observations.
+
+Thus, we can enumerate some of the contributions that came as a result of this research project:
+\begin{enumerate}
+    \item Implementation of three variations of the skin detection method proposed by~\citet{brancati:17} on the basis of the inversely proportional behavior of the chrominance components ($Cb$ and $Cr$) of the $YCbCr$ color model. Furthermore, extensive quantitative and qualitative experiments performed in a wide range of image datasets well-known in this field;
+    \item Adapted version of the neighborhood method (8-$neighbors$ window) presented in section~\ref{sec:neighborhood_extended_method};
+    \item A grid search implementation to try different combinations of trapezoids parameters in order to optimize them (if possible) and understand those who have been used so far.
+\end{enumerate}
+
+Part of our contributions was published earlier in 2018 in the \emph{Proceedings of the 13th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications - VISAPP}~\citep{faria:18}.
 
 
 %% ------------------------------------------------------------------------- %%
-\section{Objetivos}
-\label{sec:objetivo}
+\section{Objectives}
+\label{sec:objectives}
 
-O principal objetivo deste projeto de mestrado está na avaliação de conjuntos \emph{fuzzy} na aplicação em problemas de classificação em visão computacional, estabelecendo mecanismos comparativos, por meio de indicadores quantitativos e qualitativos, para mensurar seu desempenho em relação aos conjuntos clássicos.
+Skin detection is a very complex problem due the numerous similar materials with human skin tone and texture, and also because of illumination conditions, ethnicity, sensor capturing singularities, geometric variations, etc. Because it is a primary task in image processing, additional requirements as real time processing, robustness and accuracy are also desirable.
 
-Além disso, a escolha do espaço de cores para a modelagem dos dados como conjuntos \emph{fuzzy} também será analisada com o intuito de compreender sua influência nos resultados obtidos pelo classificador.
+Although many advances have been observed in literature, from what we have seen until the development of this research, it is possible to say that it is not yet a completely solved problem. Basically, there are three approaches for skin detection: rule-based, machine learning based and hybrid. They differ in terms of classification accuracy and computational efficiency. In general, rule-based methods do not require a training step and they can be very competitive in terms of computational cost.
+
+Therefore, the main objective of this research is to create or improve new methods for skin detection, according to the rule-based approach. More specifically, our main objective is to achieve improvements in the method proposed by~\citet{brancati:17} in order to reduce the false positive rate. In addition, we have other secondary objectives, such as:
+\begin{itemize}
+    \item Publish articles with the results in renowned conference or journals in the area;
+    \item Complete the master's degree in three years, which includes the credits in disciplines as well as the research project and this thesis.
+\end{itemize}
+
 
 
 %% ------------------------------------------------------------------------- %%
-\section{Organização do texto}
-\label{sec:organizacao_trabalho}
-
-Quanto à organização deste trabalho, no capítulo~\ref{cap:conceitos} são explicitados conceitos fundamentais sobre diferentes modelos de cores, teoria \emph{fuzzy} e classificadores utilizados no desenvolvimento deste estudo. No capítulo~\ref{cap:experimentos}, são expostos os resultados de experimentos preliminares com conjuntos de dados de pele de seres humanos, bem como a avaliação da influência do modelo de cores escolhido para tratar este tipo de problema de classificação. Por fim, o capítulo~\ref{cap:conclusoes} apresenta o plano de trabalho com as atividades a serem realizadas no âmbito desta pesquisa.
+\section{Organization}
+\label{sec:text_organization}
+In this chapter we have presented the background of this work as well as the motivation, main contributions, and objectives behind it. Chapter~\ref{cap:related-work} presents other relevant research works that also address the problem of skin detection in several approaches. In Chapter~\ref{cap:conceitos} we provide an overview of the theoretical concepts that apply to this research. Next, in Chapter~\ref{cap:proposed-solution} we present a state of the art skin detection method recently developed by~\citet{brancati:17}. We review the method and extend it adding more rules to enforce the constraints and seeking for a better accuracy in terms of false positive rate without hurting the performance of the original method. Then, in Chapter~\ref{cap:experimentos} we present the evaluation of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a
+brief definition of the evaluation metrics used is shown for the sake of clarity. Finally, Chapter~\ref{cap:conclusoes} winds up this thesis by discussing our observations along the research, focused on the experimental results, and directs the readers towards future works.
