@@ -18,12 +18,18 @@ Basically, there are three approaches for skin detection: rule-based, machine le
 In this work we propose an improvement of a novel method on rule-based skin detection that works in the YCbCr color space~\citep{brancati:17}. Our motivation is based on the hypothesis that the original rule can be complemented with another rule that is a reversal interpretation of the one proposed originally. Besides that, we also take in consideration that a skin pixel does not appear isolated, so we propose another variation based on neighborhood operations. The set of rules evaluate the combinations of chrominance Cb, Cr values to identify the skin pixels depending on the shape and size of dynamically generated skin color clusters \citep{brancati:17}. The method is very efficient in terms of computational effort as well as robust in very complex image scenes.
 
 %% ------------------------------------------------------------------------- %%
-\section{Motivação}
-\label{sec:consideracoes_preliminares}
+\section{Motivation}
+\label{sec:motivation}
 
-Há diversos objetos ou observações na natureza que não podem ser classificados com conjuntos clássicos pelo fato de que a relação de pertinência não é bem definida \citep{pedrycz:98}. Especificamente no campo da visão computacional, vários problemas reais de classificação só podem ser resolvidos quando da análise do contexto onde o problema está inserido.
+Perhaps this was the most iconic section I have written in this thesis. And here, first of all, I would kindly like to ask my dear Professor and advisor Roberto Hirata to excuse me for (first) summarizing the reasons that brought me to this Master's program, from a personal point of view, of course. Later, I will write down the specific reasons to choose this research topic.
 
-Sendo assim, a motivação deste trabalho está em analisar problemas reais de visão computacional cujos conjuntos de dados possuem incerteza e imprecisão, modelando-os por meio de conjuntos \emph{fuzzy}, explorando a capacidade desses conjuntos de expressarem transições graduais de pertinência e não pertinência.
+When I look at the word motivation, it is impossible not to establish self-questioning such as: (i) What made you do a master's degree in Computer Science? (ii) Why did not you pursue some other type of postgraduate course? And, of course, (iii) why did you choose this topic for the research? Responding to these questions, I must possibly bring to the reader the feeling that has moved me to this point.
+
+I was born into a family of five siblings (seven in total) and grew up in a very poor rural zone of the interior of Minas Gerais. I always believed that studying was the only way to change the future of my own and my family. I graduated from public school and became a bachelor in Information Systems with a scholarship. However, I always had the dream of studying at a renowned teaching institution such as the University of São Paulo. Partly because I would like to become a Teacher, something I did for a few opportunities. That answers the first question.
+
+I am really passionate about my profession. I have ten years of experience in software development, embedded systems and, more recently, in the semiconductor industry. I felt that something was missing in my background education. The master's degree showed me, mainly, the magic of formal mathematics and the importance it has in fundamental areas in society such as computing, engineering, physics and others. And the Institute of Mathematics and Statistics of USP played a decisive role in this respect, which answers the second question.
+
+And last but not least, the subject of the research (third question) has been something that was attractive for us from the beginning of the program. First, with a project on race classification in partnership with the industry. Then, with the intensification in the search for related works, with the problem of skin detection. The latter led us to the brilliant work of~\citet{brancati:17}: a new rule-based skin detection method that works in the YCbCr color space. Here, more specifically, our motivation was to propose improvements based on the hypothesis that: (1) the original rule can be reversed and, (2) human skin pixels do not appear isolated, i.e. neighborhood operations are taken in consideration.
 
 
 %% ------------------------------------------------------------------------- %%
