@@ -1,8 +1,14 @@
 %% ------------------------------------------------------------------------- %%
-\chapter{Plano de Trabalho}
+\chapter{Conclusions}
 \label{cap:conclusoes}
 
-Os créditos em disciplinas necessários para o programa de mestrado em Ciência da Computação no IME-USP foram cumpridos de fevereiro de 2015 até junho de 2016, conforme a tabela \ref{tab:disciplinas}. Em meados de 2015, iniciou-se a pesquisa bibliográfica para o desenvolvimento deste projeto. Durante esse período, até o presente momento, foram realizados os experimentos preliminares que estão incorporados neste texto para a etapa de qualificação. Após apresentação, as recomendações da comissão julgadora serão ponderadas e devem ser refletidas nas atividades subsequentes listadas na seção \ref{sec:atividades_previstas}.
+
+%------------------------------------------------------
+\section{Work plan}
+\label{sec:work_plan}
+
+The credits in the required subjects for the master's program in Computer Science at IME-USP were fulfilled from March 2015 until June 2016, according to the table~\ref{tab:subjects}. In the middle of 2015, we started the bibliographic research for the development of this project. During this period up to the examining committee, preliminary experiments were carried out which served as a basis for subsequent steps. It is worth mentioning that the most important recommendation was done by a Committee's member, Prof. Dr. Roberto Marcondes, who has indicated for us the fundamental related paper of this work.
+
 
 \begin{table}[!htpb]
 \centering
@@ -10,60 +16,50 @@ Os créditos em disciplinas necessários para o programa de mestrado em Ciência
 \setlength{\tabcolsep}{6pt}
 
 \begin{tabular}{|c|l|c|}\hline
- \thb{Código} & \thb{Disciplina} & \thb{Término} \\ \hline
- MAC5832 & Aprendizagem Computacional: Modelos, Algoritmos e Aplicações & jun/2015 \\ \hline
- MAC5744 & Introdução à Computação Gráfica	& jun/2015 \\ \hline
- MAC5768 & Visão e Processamento de Imagens - Parte I & jun/2015 \\ \hline
- MAC5711 & Análise de Algoritmos & nov/2015 \\ \hline
- MAC6914 & Métodos de Aprendizagem em Visão Computacional & nov/2015 \\ \hline
- MAC4722 & Linguagens, Autômatos e Computabilidade & jun/2016 \\ \hline
- MAC5714 & Programação Orientada a Objetos & jun/2016 \\\hline
+ \thb{Code} & \thb{Name} & \thb{Conclusion} \\ \hline
+ MAC5832 & Machine Learning: Models, Algorithms and Applications    & Jun/2015 \\ \hline
+ MAC5744 & Introduction to Computer Graphics                        & Jun/2015 \\ \hline
+ MAC5768 & Computer Vision and Image Processing - Part I            & Jun/2015 \\ \hline
+ MAC5711 & Analysis of Algorithms                                   & Nov/2015 \\ \hline
+ MAC6914 & Learning Methods in Computer Vision                      & Nov/2015 \\ \hline
+ MAC4722 & Languages, Automata and Computability                    & Jun/2016 \\ \hline
+ MAC5714 & Object-Oriented Programming                              & Jun/2016 \\\hline
 
 \end{tabular}
 \end{small}
-\caption{Disciplinas cursadas no programa de mestrado em Ciência da Computação no IME-USP.}
-\label{tab:disciplinas}
+\caption{Subjects taken in the course of the master's program in Computer Science at IME-USP.}
+\label{tab:subjects}
 \end{table}
 
-%------------------------------------------------------
-\section{Atividades previstas}
-\label{sec:atividades_previstas}
+The suggestions and recommendations of the examining committee were considered and reflected in the tasks bellow, represented in the schedule available in Table~\ref{tab:schedule}. We will briefly describe what has happened with each one since then.
+
 \begin{enumerate}
-    \item \textbf{Revisar leituras adicionais:} outras referências deverão ser adicionadas ao presente trabalho, principalmente, conteúdo relacionado a métodos de \emph{kernel}, que servirão de embasamento para compreender e estudar a técnica de \emph{kernels} em conjuntos \emph{fuzzy} proposta por \citet{guevara:14}.
+    \item \textbf{Review additional work:} other related work must be added to our project, mainly related to \emph{kernel} methods, which will serve as a basis for understanding and studying the \emph{kernels} technique in \emph{fuzzy} sets proposed by \citet{guevara:14}.
 
-    \item \textbf{Incorporar novos conjuntos de dados:} essa atividade consiste em analisar e integrar novos conjuntos de dados ao projeto para utilização nos experimentos, tanto de bancos de imagens de cor de pele, como outros conjuntos de imagens coloridas onde a classificação de dados intervalares possa ser aplicada.
+    \item \textbf{Incorporate new datasets:} this task consists of analyzing and integrating new datasets to the project for use in experiments, both of skin color-image datasets as well as others of color images where the classification of interval data can be applied.
 
-    \item \textbf{Investigar características passíveis de uso em classificadores de dados intervalares:} os classificadores treinados durante a etapa de experimentos preliminares consistiam apenas da informação de cor da imagem, independente do espaço de cores escolhido. Portanto, essa atividade visa compreender o papel de outros atributos, tais como textura e características locais, durante o treinamento e se a inclusão de tais atributos, de fato, pode acarretar em melhoria de performance.
+    \item \textbf{Investigate appropriate features for interval data classifiers:} the classifiers trained during the preliminary experiments stage consisted only of the color information of the image, regardless of the chosen color space. Therefore, this task aims to understand the role of other attributes, such as texture and local characteristics, during training and whether the inclusion of such attributes, in fact, can lead to performance improvement.
 
-    \item \textbf{Desenvolver novas ferramentas:} novas ferramentas devem ser desenvolvidas para dar suporte aos experimentos subsequentes, tais como a tabela de busca implementada para otimização de parâmetros do \emph{FuzzyDT}. Todo software criado por este projeto de pesquisa será disponibilizado para toda a comunidade científica em formato de código livre.
+    \item \textbf{Develop new tools:} new tools must be developed to support subsequent experiments, such as the grid search implemented for \emph{FuzzyDT} parameter optimization. All software created by this research project will be made available to the entire scientific community in open source code format.
 
-    \item \textbf{Elaborar novos experimentos:} com base nas ferramentas desenvolvidas e conjuntos de dados estabelecidos, elaborar e executar novos experimentos.
+    \item \textbf{Design new experiments:} based on established tools and datasets, develop and run new experiments.
 
-    \item \textbf{Analisar os resultados:} os resultados obtidos deverão ser avaliados e reportados no projeto de pesquisa e em publicações a serem realizadas. Eventualmente, correções nas ferramentas desenvolvidas e/ou nos experimentos também serão agregadas nesta etapa.
+    \item \textbf{Analysis of results:} the results obtained must be evaluated and reported in the research project and in publications to be carried out. Eventually, fixes on tools or experiments developed will also be aggregated at this stage.
 
-    \item \textbf{Publicar resultados:} artigos científicos com os resultados obtidos devem ser publicados em revistas ou conferências sobre processamento de imagens, classificação ou outras áreas relacionadas com o contexto do projeto de pesquisa.
+    \item \textbf{Publish results:} scientific papers with the results obtained must be published in magazines or conferences on image processing, classification or other areas related to the context of the research.
 
-    \item \textbf{Escrever a dissertação:} a dissertação deverá ser escrita assim que as demais atividades tiverem sido concluídas, principalmente em relação aos experimentos e análise de resultados, o que fornecerá dados consolidados para a conclusão do projeto de pesquisa.
+    \item \textbf{Write the thesis:} the thesis must be written once previous task have been completed, mainly in relation to the experiments and analysis of results, which will provide consolidated data for the conclusion of the research project.
 \end{enumerate}
 
-%------------------------------------------------------
-\section{Cronograma proposto}\index{proposto!cronograma}
-\label{sec:cronograma}
-As atividades listadas na seção \ref{sec:atividades_previstas} serão realizadas de acordo com o cronograma disposto na tabela \ref{tab:cronograma_proposto}. As tarefas foram divididas dentro de um período de onze meses de execução e a previsão de defesa da dissertação é outubro de 2017.
 
 \begin{table}[!htpb]
 \centering
-% definindo o tamanho da fonte para small
-\begin{small} 
-  
-% redefinindo o espaçamento das colunas
+
 \setlength{\tabcolsep}{6pt} 
 
-% \cline semelhante ao \hline, indicando as colunas com a linha horizontal
-% \multicolumn{12}{c|}{Meses} indica que doze colunas serão mescladas
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
- & \multicolumn{11}{c|}{Meses 2016/2017}\\ \cline{2-12}
-\raisebox{1.5ex}{Atividade} & dez & jan & fev & mar & abr & mai & jun & jul & ago & set & out \\ \hline
+ & \multicolumn{11}{c|}{Months 2016/2017}\\ \cline{2-12}
+\raisebox{1.5ex}{Task} & Dec & Jan & Feb & Mar & Apr & Mai & Jun & Jul & Aug & Sep & Oct \\ \hline
 
 1 & X & X & X &   &   &   &   &   &   &   & \\ \hline
 2 & X & X &   &   &   &   &   &   &   &   & \\ \hline
@@ -75,7 +71,21 @@ As atividades listadas na seção \ref{sec:atividades_previstas} serão realizad
 8 &   &   &   &   &   &   &   & X & X & X & X \\ \hline
 
 \end{tabular} 
-\end{small}
-\caption{Cronograma das atividades previstas}
-\label{tab:cronograma_proposto}
+\caption{Schedule of planned tasks at the time of Examining Committee.}
+\label{tab:schedule}
 \end{table}
+
+We were trying to apply classification based on interval data for the problem of skin detection until the Examining Committee. That is why the definition of tasks \texttt{\#}1 and \texttt{\#}3. Even though we had to add new papers to be read, they were related to rule-based methods. In addition, task \texttt{\#}2 proved to make sense since three new datasets have been incorporated in the project: Pratheepan, HGR, and Compaq.
+
+One of the methods we explored for data interval classification was the \emph{FuzzyDT} (\emph{Fuzzy Decision Tree}) proposed by~\citet{cintra:13}. As aforementioned, we moved to a different approach, but we also have developed new algorithms, such as the methods described in~\ref{cap:proposed-solution}, as well as new tools to process the datasets, binarize images, and a visualization web application for the problem of skin detection\footnote{Available at \url{https://bitbucket.org/rodrigoadfaria/skin-detector-ws}.}, which is compliant with task \texttt{\#}4. Based on the new methods, we also performed new experiments (task \texttt{\#}5), analyzed the results (task \texttt{\#}6), and published them (task \texttt{\#}7) according to the plan. The latest task (\texttt{\#}8) was to exactly write this thesis.
+
+It is worth noticing that the plan has been shifted ahead for a couple of months. Basically, due the time we had taken to implement the grid search for the parameters tuning and the supplementary neighborhood operations. The conference paper also took some additional time to review, fix recommendations, prepare, and present.
+
+
+%------------------------------------------------------
+\section{Final considerations}
+\label{sec:final_considerations}
+
+%------------------------------------------------------
+\section{Future work}
+\label{sec:future_work}
