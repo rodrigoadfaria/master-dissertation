@@ -255,13 +255,13 @@ where TP, TN, FP, FN are, respectively, the number of true positive, true negati
 
 
 %------------------------------------------------------
-\section{Machine learning experiments}
+\section{UCI dataset evaluation}
 \label{sec:ml_experiments}
 Preliminary experiments were carried out using machine learning techniques in order to evaluate the UCI dataset, described in section~\ref{sec:datasets_uci}, once we do not have the original images used to create it. The idea is to establish a bottom line to understand if this dataset can be useful for further experiments.
 
-The first experiment was carried out with $k$-NN and SVM, available in the scikit-learn package~\citep{scikit-learn:11}. The color space originally used was RGB, as cited in the description of datasets in \ref{sec:datasets}. In both cases, the chosen cross-validation strategy was 10-fold, which is a common choice of this approach in practice \citep{mostafa:12}. In addition, the technique of grid search of scikit-learn was also used with the objective of finding the most suitable parameters for each classifier.
+The first experiment was carried out with k-Nearest Neighbors ($k$-NN) and Support Vector Machines (SVM), available in the scikit-learn package~\citep{scikit-learn:11}. The color space originally used was RGB, as cited in the description of datasets in section~\ref{sec:datasets_uci}. In both cases, the chosen cross-validation strategy was 10-fold, which is a common choice of this approach in practice~\citep{mostafa:12}. In addition, the grid search technique of scikit-learn was also used with the objective of finding the most suitable parameters for each classifier.
 
-The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and \emph{gamma} in the SVM or number of neighbors of $k$-NN \citep{scikit-learn:11}. The parameter tables used in the training of SVM and $k$-NN can be seen in \ref{tab:svm_grid_search} and \ref{tab:knn_grid_search}. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, \emph{gamma} = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
+The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and \emph{gamma} in the SVM or number of neighbors of $k$-NN~\citep{scikit-learn:11}. The parameter's combination used in the training of SVM and $k$-NN can be seen in~\ref{tab:svm_grid_search} and~\ref{tab:knn_grid_search}, respectively. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, \emph{gamma} = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
 
 \begin{table}[ht]
 \centering
@@ -276,7 +276,7 @@ linear & 1 & 10 & 100 &      &      &      &   &   \\ \hline
 
 \end{tabular}
 \end{small}
-\caption[Grid search table of the parameters of the optimal estimator in the SVM]{Grid search table of the parameters of the optimal estimator in the SVM. The kernel column refers to the kernels used in training that are Gaussian, polynomial and linear, respectively. C is a regularization parameter that tells SVM the amount of error allowed during the training. Gamma is a parameter used only in Gaussian and polynomial kernels. Degree is the degree of the polynomial; used only in the polynomial kernel~\citep{scikit-learn:11}.}
+\caption[Grid search parameters table of the optimal estimator in the SVM]{Grid search parameters table of the optimal estimator in the SVM. The kernel column refers to the kernels used in training that are Gaussian, polynomial and linear, respectively. C is a regularization parameter that tells SVM the amount of error allowed during the training. Gamma is a parameter used only in Gaussian and polynomial kernels. Degree is the degree of the polynomial; used only in the polynomial kernel~\citep{scikit-learn:11}.}
 \label{tab:svm_grid_search}
 \end{table}
 
@@ -291,7 +291,7 @@ linear & 1 & 10 & 100 &      &      &      &   &   \\ \hline
 
 \end{tabular} 
 \end{small}
-\caption[Grid search table of the parameters of the optimal estimator in k-NN]{Grid search table of the parameters of the optimal estimator in k-NN. The n\_neighbors column refers to the number of neighbors considered in the training. Weights is the weight function used in the prediction, where uniform indicates that the points have equal weights and distance indicates that the inverse of the distance is applied in the classification. The third column indicates which algorithm should be used; auto means that the algorithm will be decided based on the data~\citep{scikit-learn:11}.}
+\caption[Grid search parameters table of the optimal estimator in k-NN]{Grid search parameters table of the optimal estimator in k-NN. The n\_neighbors column refers to the number of neighbors considered in the training. Weights is the weight function used in the prediction, where uniform indicates that the points have equal weights and distance indicates that the inverse of the distance is applied in the classification. The third column indicates which algorithm should be used; auto means that the algorithm will be decided based on the data~\citep{scikit-learn:11}.}
 \label{tab:knn_grid_search}
 \end{table}
 
@@ -313,15 +313,15 @@ The results of this experiment can be seen in the table~\ref{tab:results_experim
 \end{table}
 
 
-As can be seen in the table~\ref{tab:results_experiment_one}, both classifiers had very high quality measures in the UCI dataset, close to 100\%, which is probably an over-fitting situation. One possible root cause is the splitting of training and test data subsets. We observed that there are many replicates among the samples, so it is possible that samples already seen by the classifier during the training are used in the test step.
+As can be seen in the table~\ref{tab:results_experiment_one}, both classifiers had very high quality measures in the UCI dataset, about to 100\%, which is probably an over-fitting situation. One possible root cause is the splitting of training and test data subsets. We observed that there are many replicates among the samples, so it is possible that samples already seen by the classifier during the training are used in the test step.
 
 In fact, once we used a seed to generate the subsets, we applied the same strategy to split the data and count how many samples of the test subset were seen in the training subset as shown in figure~\ref{fig:uci_split_representation}. Based on the distribution of the splitting and the results of the measures given in table~\ref{tab:results_experiment_one}, we can say that UCI dataset is not suitable for this application.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{figuras/uci_split_representation}
+    \includegraphics[width=0.85\textwidth]{figuras/uci_split_representation}
 
-    \caption[UCI samples distribution after splitting the dataset in training and testing subsets]{UCI samples distribution after splitting the dataset in training and testing subsets. We used the scikit-learn package function for splitting, where 30\% is the size of test set. The right-most bar, entitled as duplicates, shows how many samples of the test set was seen in training set. In the order of 83\% for skin samples and 86\% for non skin samples. Source: proposed by the author.}
+    \caption[UCI samples distribution after splitting the dataset in training and testing subsets]{UCI samples distribution after splitting the dataset in training and testing subsets. We used the scikit-learn package function for splitting, where 30\% is the size of test set. The right-most bar, entitled as duplicates, shows how many samples of the test set were seen in training set. In the order of 83\% for skin samples and 86\% for non skin samples. Source: proposed by the author.}
     \label{fig:uci_split_representation}
 \end{figure}
 
@@ -387,6 +387,17 @@ Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the ex
 
 \end{table*}
 
+The original method was compared with six well known rule-based methods in literature using four different datasets, three of them, HGR, Pratheepan and Compaq, we have also been used here. We applied the methods against a fourth dataset (SFA) to increase and strengthen the different number of samples tested.
+
+Because the method had the best \textit{F-measure} in the HGR and Pratheepan datasets in comparison with the other six methods and, in addition, because it performed the top first \textit{Precision} in HGR and  second in Pratheepan, we decided to compare the proposed extensions only to the original method.
+
+As one can see in Table~\ref{tab:merged_rules_results}, the reverse hypothesis performed better than the original method and achieved the best \textit{Recall} in HGR and SFA. It also achieved the best \textit{F-measure} in SFA with a 0.8125 rate, which gave almost 0.25 in gain compared to the original.
+
+In general, the reverse method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it has very high \textit{F-measure} rates.
+
+The combined method along with the neighborhood approach achieved the best \textit{F-measure} in HGR and Pratheepan. Moreover, the other metrics still are in a very high rate for all datasets, being in the top second in almost cases.
+
+Therefore, the combined and extended approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that are useful in different application domains, mainly near real time systems (processing time of about 10ms for a typical image of dimensions 300x400).
 
 Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, \ref{fig:results_hgr} and \ref{fig:results_cpq}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
 
@@ -641,20 +652,3 @@ The AND conjunction approach is most similar to that implemented in neighborhood
 \section{Grid search parameters experiments}
 \label{sec:grid_search_experiments}
 
-
-%------------------------------------------------------
-\section{Results and discussion}
-
-\noindent The original method was compared with six well known rule-based methods in literature using four different datasets, three of them, HGR, Pratheepan and Compaq, have also been used here.
-
-Because the method had the best \textit{F-measure} in the HGR and Pratheepan datasets in comparison with the other six methods and, in addition, because it performed the top first \textit{Precision} in HGR and  second in Pratheepan, we decided to compare the proposed extensions only to the original method.
-
-Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the experiments. Column 1 refers to the dataset used. Column 2 refers to the method being experimented: Original for the original hypothesis;  Reversed refers to the reverse hypothesis with respect to $P_{Cr_{s}}$ parameter; Combined refers to the combination of both of the former methods (see  Sec. \ref{sec:proposed_method}); Neighbors refers to the extension of the method using the neighborhood approach.
-
-As one can see, the reverse hypothesis performed better than the original method and achieved the best \textit{Recall} in HGR and SFA. It also achieved the best \textit{F-measure} in SFA with a 0.8125 rate, which gave almost 0.25 in gain compared to the original.
-
-In general, the reverse method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it has very high \textit{F-measure} rates.
-
-The combined method along with the neighborhood approach achieved the best \textit{F-measure} in HGR and Pratheepan. Moreover, the other metrics still are in a very high rate for all datasets, being in the top second in almost cases.
-
-Therefore, the combined and extended approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that are useful in different application domains, mainly near real time systems (processing time of about 10ms for a typical image of dimensions 300x400).
