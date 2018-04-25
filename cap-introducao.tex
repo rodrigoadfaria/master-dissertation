@@ -3,14 +3,13 @@
 \label{cap:introducao}
 The study and understanding of human skin color date from many years ago. \citet{edwards:39} were one of those who tried to precisely analyze the color formation of this particular material by means of spectrophotometry. Spectrophotometry consists of the measurement of the light reflected at each wave-length (color) of the visible spectrum. The curve obtained can be transformed by computation into a specification of the color in terms of its three definite attributes, namely, dominant wave-length, purity, and brightness.
 
-According to \citet{edwards:39}, skin is built from a series of different layers, each of which reflects a portion of impinging light after absorbing a certain amount of it by the pigments which lie in the layer. The light which is neither reflected nor absorbed, however, is transmitted through each successive layer to the underlying one, where absorption, reflection, and transmission again take place. The absorption bands of the pigment in each layer are thus ‘imprinted’ on both the reflected and transmitted light from each layer. The total reflected light, consequently, has the absorption characteristics of the pigments in all the layers. This phenomena gives rise to what our eyes see as skin color.
+According to \citet{edwards:39}, skin is built from a series of different layers (see Fig.~\ref{fig:human-skin-layers}), each of which reflects a portion of impinging light, after absorbing a certain amount of it by the pigments which lie in the layer. The light which is neither reflected nor absorbed, however, is transmitted through each successive layer to the underlying one, where absorption, reflection, and transmission again take place. The absorption bands of the pigment in each layer are thus "imprinted" on both the reflected and transmitted light from each layer. The total reflected light, consequently, has the absorption characteristics of the pigments in all the layers. This phenomena gives rise to what our eyes see as skin color.
 
 \begin{figure}[!hb]
   \centering
   \includegraphics[width=.55\textwidth]{human-skin-layers}
-  % fonte https://www.scienceabc.com/humans/how-does-a-skin-lotion-moisturizer-emollient-occlusive-work.html
-  \caption{The layers of human skin.}
-  \label{fig:human-skin-layers} 
+  \caption[The layers of human skin]{The layers of human skin. Source:~\citet{nanette:18}.}
+  \label{fig:human-skin-layers}
 \end{figure}
 
 \citet{edwards:39} observed yet that other pigments out of melanin and hemoglobin also play a role in the origin of skin color, along with an additional optical effect, designated as scattering. The pigments are melanoid -- derivative of melanin --, oxyhemoglobin, and carotene. Furthermore, they stated that variations in the amount of melanin in the epidermis is responsible for the difference in human skin coloration.
@@ -25,12 +24,14 @@ Therefore, a natural evolution of the skin coloration has been occurred to accom
   \centering
   \includegraphics[width=.9\textwidth]{skin-ref-map}
   \caption[Map of skin color reflectance]{Map of skin color reflectance. The map is generalized to reduce the number of polygons. Source:~\citet{chaplin:04}.}
-  \label{fig:skin-ref-map} 
+  \label{fig:skin-ref-map}
 \end{figure}
+
+We can clearly see darker shades of skin near the Equator and tropics due exposition to high UV radiation. This is a very singular feature of human skin, once it acts as a sun shield to protect the body from solar UV radiation~\citep{jablonski:04}. The large number of shades of skin shown in the map give us an idea on how complex can be a system to automatically detect human skin in images.
 
 Skin detection can be defined as the process of identifying skin-colored pixels in an image. It plays an important role in a wide range of image processing and computer vision applications such as face detection, pornographic image filtering, gesture analysis, face tracking, video surveillance systems, medical image analysis, and other human-related image processing applications.
 
-The problem is complex because of the numerous similar materials with human skin tone and texture, and also because of illumination conditions, ethnicity, sensor capturing singularities, geometric variations, etc. Because it is a primary task in image processing, additional requirements as real time processing, robustness and accuracy are also desirable.
+The problem is complex because of the numerous similar materials with human skin tone and texture, and also because of illumination conditions, ethnicity, large number of shades, sensor capturing singularities, geometric variations, etc. Because it is a primary task in image processing, additional requirements as real time processing, robustness and accuracy are also desirable.
 
 It is worth mentioning that image processing is one of the most important tasks in a computer vision system. Its goal is to create a suitable description -- typically based on shapes, textures, gray levels or color -- with enough information to differentiate the objects in the scene. With this description, useful interpretation can be extracted from the image by means of an automatic computer system that facilitates human perception.
 
@@ -39,7 +40,7 @@ computer vision systems benefit from image processing techniques as pre-processi
 
 Once this work is intended to explore new methods on human skin detection, we will use techniques from both fields. Color space transformation from image processing, for example, as well as human skin segmentation and understanding as part of computer vision. This is a tentative to imitate the human visual system and its capability to recognize others from the same specie –- of course, humans use other characteristics to identify other humans like shape, high, gender, and others, but skin is also part of this recognition system.
 
-One of the powerful features used of this task is skin color, that is a strong attribute and it is used in most algorithms for skin detection. It is normally used along with other features such as shape, texture, and geometry, or even as a preliminary step to classify regions of interest in an image.
+One of the powerful features used of this task is definitely skin color, which is a strong attribute and it is used in most algorithms for skin detection. It is normally used along with other features such as shape, texture, and geometry, or even as a preliminary step to classify regions of interest in an image.
 
 The human skin color pixels have a restricted range of hues and are not deeply saturated, since the appearance of skin is formed by a combination of blood (red) and melanin (brown, yellow), which leads the human skin color to be clustered within a small area in the color space~\citep{fleck:96}.
 
@@ -66,7 +67,7 @@ Perhaps this was the most iconic section I have written in this thesis. And here
 
 When I look at the word motivation, it is impossible not to establish self-questioning such as: (i) What made you do a Master's degree in Computer Science? (ii) Why did not you pursue some other type of postgraduate course? And, of course, (iii) why did you choose this topic for the research? Responding to these questions, I must possibly bring to the reader the feeling that has moved me to this point.
 
-I was born into a family of five siblings (seven in total) and grew up in a very poor rural zone of the countryside of Minas Gerais. I always believed that studying was the only way to change the future of my family and my own. I graduated from public school and became a bachelor in Information Systems with a scholarship. However, I always had the dream of studying at a renowned teaching institution such as the University of São Paulo. Partly because I would like to become a Teacher, something I did for a few opportunities. That answers the first question.
+I was born in a family of five siblings (seven in total) and grew up in a very poor rural zone of the countryside of Minas Gerais. I always believed that studying was the only way to change the future of my family and my own. I graduated from public high school and became a bachelor in Information Systems with a scholarship. However, I always had the dream of studying at a renowned teaching institution such as the University of São Paulo. Partly because I would like to become a Professor, something I did for a few opportunities. That answers the first question.
 
 I am really passionate about my profession. I have ten years of experience in software development, embedded systems and, more recently, in the semiconductor industry. I felt that something was missing in my background education. The Master's degree showed me, mainly, the magic of formal mathematics and the importance it has in fundamental areas in society such as computing, engineering, physics and others. And the Institute of Mathematics and Statistics of USP played a decisive role in this respect, which answers the second question.
 
@@ -81,7 +82,7 @@ In this work, we have done a comprehensive and detailed study of various methods
 
 Thus, we can enumerate some of the contributions that came as a result of this research project:
 \begin{enumerate}
-    \item Implementation of three variations of the skin detection method proposed by~\citet{brancati:17} on the basis of the inversely proportional behavior of the chrominance components ($Cb$ and $Cr$) of the $YCbCr$ color model. Furthermore, extensive quantitative and qualitative experiments performed in a wide range of image datasets well-known in this field;
+    \item Implementation of three variations of the skin detection method proposed by~\citet{brancati:17} on the basis of the inversely proportional behavior of the chrominance components ($Cb$ and $Cr$) of the YCbCr color model. Furthermore, extensive quantitative and qualitative experiments performed in a wide range of image datasets well-known in this field;
     \item Adapted version of the neighborhood method (8-$neighbors$ window) presented in section~\ref{sec:neighborhood_extended_method};
     \item A grid search implementation to try different combinations of trapezoids parameters in order to optimize them (if possible) and understand those who have been used so far.
 \end{enumerate}
@@ -100,7 +101,7 @@ Although many advances have been observed in literature, from what we have seen 
 Therefore, the main objective of this research is to create or improve new methods for skin detection, according to the rule-based approach. More specifically, our main objective is to achieve improvements in the method proposed by~\citet{brancati:17} in order to reduce the false positive rate. In addition, we have other secondary objectives, such as:
 \begin{itemize}
     \item Publish articles with the results in renowned conference or journals in the area;
-    \item Complete the master's degree in three years, which includes the credits in disciplines as well as the research project and this thesis.
+    \item Complete the Master's degree in three years, which includes the credits in disciplines as well as the research project and this thesis.
 \end{itemize}
 
 
@@ -108,5 +109,5 @@ Therefore, the main objective of this research is to create or improve new metho
 %% ------------------------------------------------------------------------- %%
 \section{Organization}
 \label{sec:text_organization}
-In this chapter we have presented the background of this work as well as the motivation, main contributions, and objectives behind it. Chapter~\ref{cap:related-work} presents other relevant research works that also address the problem of skin detection in several approaches. In Chapter~\ref{cap:conceitos} we provide an overview of the theoretical concepts that apply to this research. Next, in Chapter~\ref{cap:proposed-solution} we present a state of the art skin detection method recently developed by~\citet{brancati:17}. We review the method and extend it adding more rules to enforce the constraints and seeking for a better accuracy in terms of false positive rate without hurting the performance of the original method. Then, in Chapter~\ref{cap:experimentos} we present the evaluation of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a
+In this chapter we have presented the background of this work as well as the motivation, main contributions, and objectives behind it. Chapter~\ref{cap:related-work} presents other relevant research works that also addresses the problem of skin detection in several distinct  approaches. In Chapter~\ref{cap:conceitos} we provide an overview of the theoretical concepts that apply to this research. Next, in Chapter~\ref{cap:proposed-solution}, we present a state of the art skin detection method recently developed by~\citet{brancati:17}. We review the method and extend it adding more rules to enforce the constraints and seeking for a better accuracy in terms of false positive rate without hurting the performance of the original method. Then, in Chapter~\ref{cap:experimentos}, we present the evaluation of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a
 brief definition of the evaluation metrics used is shown for the sake of clarity. Finally, Chapter~\ref{cap:conclusoes} winds up this thesis by discussing our observations along the research, focused on the experimental results, and directs the readers towards future works.
