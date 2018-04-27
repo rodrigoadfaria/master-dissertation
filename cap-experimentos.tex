@@ -2,22 +2,23 @@
 \chapter{Evaluation}
 \label{cap:experimentos}
 
-In this section we present some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a brief definition of the evaluation metrics used is shown for the sake of clarity.
+In this chapter we present some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a brief definition of the evaluation metrics used is shown for the sake of clarity. We also provide some results of the supplementary neighborhood adaptation that we built to remove the \emph{diagonal effect} as well as to explore different neighbors techniques. Finally, we show the grid search parameters experiments results with aim of trapezoids parameters tuning. All the experiments are analyzed and discussed in each section separately.
 
 
 %------------------------------------------------------
 \section{Datasets}
 \label{sec:datasets}
 
+%------------------------------------------------------
 \subsection{UCI}
 \label{sec:datasets_uci}
-Named UCI in this work, this dataset was proposed by~\citet{uci-skin-dataset:12} and obtained from the machine learning repository of the University of California in Irvine \citep{lichman:13}. The dataset consists pixel samples of images of various skin and non-skin textures obtained from thousands of arbitrary faces images of different ages, sex and races \citep{pal-texas:04, feret:96}.
+Named UCI in this work, this dataset was proposed by~\citet{uci-skin-dataset:12} and obtained from the machine learning repository of the University of California in Irvine~\citep{lichman:13}. The dataset consists of pixel samples of images of various skin and non-skin textures obtained from thousands of arbitrary faces images of different ages, gender, and races~\citep{pal-texas:04, feret:96}.
 
 The UCI contains 245,057 samples, composed of 3 attributes that constitute the input vector $x = [x_1, x_2, x_3]$, $x \in \mathbb{R}^{d}$, where $d$ is the space dimension which represents, respectively, blue (B), green (G) and red (R) channels of the RGB color model. In addition, a fourth column determines the class to which the sample $x$ belongs, denoted by $y$, where $y \in Y$ and $Y = \{+1, -1\}$. In other words, each sample is an RGB pixel with a given label.
 
-The table~\ref{tbl:uci_dataset} exemplifies a short excerpt from the UCI database. It is worth mentioning that 194,198 out of the 245,057 are non-skin pixels and 50,859 pixels with different skin tones. In addition, the images that were used to extract the dataset were not made available by the authors.
+The Table~\ref{tbl:uci_dataset} exemplifies a short excerpt from the UCI database. It is worth mentioning that 194,198 out of the 245,057 are non-skin pixels and 50,859 pixels with different skin tones. In addition, the images that were used to extract the dataset were not made available by the authors.
 
-\begin{table}[hb]
+\begin{table}[H]
 \centering
 \begin{small}
 \begin{tabular}{|c|c|c|c|} \hline
@@ -39,9 +40,9 @@ The table~\ref{tbl:uci_dataset} exemplifies a short excerpt from the UCI databas
 \end{small}
 \end{table}
 
-Since the data are points in the RGB space, it is possible to plot it for a better interpretation of them, as shown in the figure~\ref{fig:dataset_uci}.
+Since the data are points in the RGB space, it is possible to plot it for a better interpretation of them, as shown in the Figure~\ref{fig:dataset_uci}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\textwidth]{uci_skinns_plot}
@@ -55,53 +56,56 @@ Since the data are points in the RGB space, it is possible to plot it for a bett
 \end{figure}
 
 
+%------------------------------------------------------
 \subsection{SFA}
 \label{sec:datasets_sfa}
-SFA, the name of the dataset proposed by \citet{sfa-skin-dataset:13}, stands for Skin of FERET and AR Database. The SFA is a set of images of frontal faces obtained from two other color image databases: the FERET, created by~\citet{feret:96}, and the AR proposed by~\citet{ar-face-database:98}, which provided 876 and 242 images each, respectively. It is important to notice that AR images have a white background and small variations of skin color. In other words, the environment is more controlled than the images in FERET \cite{sfa-skin-dataset:13}. Figure~\ref{fig:sfa_dataset_exemplo} shows some of the 1,118 samples available.
+SFA, the name of the dataset proposed by~\citet{sfa-skin-dataset:13}, stands for Skin of FERET and AR Database. The SFA is a set of images of frontal faces obtained from two other color image databases: the FERET, created by~\citet{feret:96}, and the AR proposed by~\citet{ar-face-database:98}, which provided 876 and 242 images each, respectively. It is important to notice that AR images have a white background and small variations of skin color. In other words, the environment is more controlled than the images in FERET~\citep{sfa-skin-dataset:13}. Figure~\ref{fig:sfa_dataset_exemplo} shows some of the 1,118 samples available.
 
-\citet{sfa-skin-dataset:13} also extracted different window patches of each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a window of size $n \times n$, where $n$ is odd, with a central pixel, from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in figure~\ref{fig:sfa_dataset_janelas}.
+\citet{sfa-skin-dataset:13} also extracted different window patches of each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a window of size $n \times n$, where $n$ is odd, with a central pixel, from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in Figure~\ref{fig:sfa_dataset_janelas}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=.3\textwidth]{sfa-janelas}
-  \caption[Structure of the windows that form the SFA samples]{Structure of the windows that form the SFA samples. In total, there are 3,354 skin samples and 5,590 non-skin samples for each window size. Source: \citet{sfa-skin-dataset:13}.}
+  \caption[Structure of the windows that form the SFA patch samples]{Structure of the windows that form the SFA patch samples. In total, there are 3,354 skin samples and 5,590 non-skin samples for each window size. Source: \citet{sfa-skin-dataset:13}.}
   \label{fig:sfa_dataset_janelas}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.21\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \includegraphics[width=\textwidth]{sfa/ori/img4}
         \includegraphics[width=\textwidth]{sfa/gtc/img4}
         \includegraphics[width=\textwidth]{sfa/gt/img4}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.21\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \includegraphics[width=\textwidth]{sfa/ori/img51}
         \includegraphics[width=\textwidth]{sfa/gtc/img51}
         \includegraphics[width=\textwidth]{sfa/gt/img51}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.21\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \includegraphics[width=\textwidth]{sfa/ori/img112}
         \includegraphics[width=\textwidth]{sfa/gtc/img112}
         \includegraphics[width=\textwidth]{sfa/gt/img112}
     \end{subfigure}
     ~ % space
-    \begin{subfigure}[t]{0.21\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \includegraphics[width=\textwidth]{sfa/ori/img14}
         \includegraphics[width=\textwidth]{sfa/gtc/img14}
         \includegraphics[width=\textwidth]{sfa/gt/img14}
     \end{subfigure}
-    \caption[Examples of SFA face image database]{Examples of SFA face image database. First row are the original images and the second contain the colored ground truth with the skin color pixels annotated manually. The black color RGB = (0, 0, 0) was assigned to all pixels in the background. In the third row we have the binary ground truth images. We generated these samples based on the colored ground truth, by creating a mask, assigning (255, 255, 255) for the pixels which were not background (0, 0, 0). One can see some noise in the results, but the samples were enough for further experiments. In addition, the original images were not perfectly annotated. Therefore, some salt noise can be seen in non-skin regions. Source: \citet{sfa-skin-dataset:13}.}
+    \caption[Examples of SFA face image database]{Examples of SFA face image database. First row are the original images and the second contain the colored ground truth with the skin color pixels annotated manually. The black color RGB = (0, 0, 0) was assigned to all pixels in the background. In the third row we have the binary ground truth images. We generated these samples based on the colored ground truth, by creating a mask, assigning (255, 255, 255) for the pixels which were not background (0, 0, 0). One can see some noise in the results, but the samples were enough for further experiments. In addition, the original images were not perfectly annotated. Therefore, some salt noise can be seen in non-skin regions. Source:~\citet{sfa-skin-dataset:13}.}
     \label{fig:sfa_dataset_exemplo}
 \end{figure}
 
+It is worth mentioning that we do not use these patches in our experiments. Once the methods tested in this work only depends on the input image itself. Therefore, we can simply ignore these sampling patches during experiments. However, one could use them to evaluate the ability of the methods in terms of false detection rate, once the patches are made available for skin and non-skin labeled images separately.
 
 
+%------------------------------------------------------
 \subsection{Pratheepan}
 \label{sec:datasets_pratheepan}
-The images in the Pratheepan dataset were downloaded randomly from Google for human skin detection search. There are 78 images of family and face captured with a range of distinct cameras using different color enhancement and under different illumination conditions \cite{tan:12}. Figure~\ref{fig:pra_dataset_exemplo} shows some of the 78 samples available.
+The images in the Pratheepan dataset were downloaded randomly from Google for human skin detection research. There are 78 images of family and face captured with a range of distinct cameras using different color enhancement and under different illumination conditions~\cite{tan:12}. Figure~\ref{fig:pra_dataset_exemplo} shows some of the 78 samples available.
 
 \begin{figure}[H]
     \centering
@@ -124,15 +128,17 @@ The images in the Pratheepan dataset were downloaded randomly from Google for hu
         \includegraphics[width=\textwidth]{pra/ori/chenhao0017me9}
         \includegraphics[width=\textwidth]{pra/gt/chenhao0017me9}
     \end{subfigure}
-    \caption[Examples of Pratheepan skin dataset]{Examples of Pratheepan skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source: \citet{tan:12}.}
+    \caption[Examples of Pratheepan skin dataset]{Examples of Pratheepan skin dataset. At the top row is the original image, and at the bottom row the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source:~\citet{tan:12}.}
     \label{fig:pra_dataset_exemplo}
 \end{figure}
 
 
+%------------------------------------------------------
 \subsection{HGR}
 \label{sec:datasets_hgr}
 The database for Hand Gesture Recognition (HGR) contains the gestures from Polish and American Sign Language. There are 1,558 images acquired in different conditions of background, dimensions and lightening. In addition to original and ground truth binary skin mask images, it includes hand feature points location in separate files. Figure~\ref{fig:hgr_dataset_exemplo} shows some of the 1,558 samples available \citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
+The images within it were acquired in three different series. A set of 899 was captured in uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and uncontrolled (41) background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions~\citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
 \begin{figure}[H]
     \centering
@@ -150,18 +156,17 @@ The database for Hand Gesture Recognition (HGR) contains the gestures from Polis
         \includegraphics[width=\textwidth]{hgr/ori/V_S_hgr2A2_id03_1}
         \includegraphics[width=\textwidth]{hgr/gt/V_S_hgr2A2_id03_1}
     \end{subfigure}
-    \caption[Examples of HGR skin dataset]{Examples of HGR skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Differently from Pratheepan and SFA, the ground truth is also binary images, but the black color RGB = (0, 0, 0) was assigned to all pixels when they represent skin patches. Source: \citet{kawulok:14, nalepa:14, grzejszczak:16}.}
+    \caption[Examples of HGR skin dataset]{Examples of HGR skin dataset. At the top row is the original image and at the bottom row the ground truth with the skin color pixels annotated. Differently from Pratheepan and SFA, the ground truth is also binary images, but the black color RGB = (0, 0, 0) was assigned to all pixels when they represent skin patches -- and we take this in consideration during experiments. Source:~\citet{kawulok:14, nalepa:14, grzejszczak:16}.}
     \label{fig:hgr_dataset_exemplo}
 \end{figure}
 
-The images within were acquired in three different series. A set of 899 was captured in uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and (41) uncontrolled background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions \citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
-
+%------------------------------------------------------
 \subsection{Compaq}
 \label{sec:datasets_compaq}
-Compaq can be considered as the first large skin dataset and, probably is the most used for skin detection classifiers. It consists of 13,635 images crawled from the Internet, which 4,670 contain skin regions and another subset of 8,965 images not containing any skin. The ground truth images are poorly annotated on the basis of an automatic software tool \citep{mahmoodi:16}.
+Compaq can be considered as the first large skin dataset and, probably is the most used for skin detection classifiers. It consists of 13,635 images crawled from the internet, which 4,670 contain skin regions and another subset of 8,965 images not containing any skin. The ground truth images are poorly annotated on the basis of an automatic software tool~\citep{mahmoodi:16}.
 
-It is worth mentioning that this database is no longer available and we had obtained a copy of it by contacting the authors. We also had to fix some few images due lack of ground truth or files corrupted. The final amount of images with skin used in the experiments is 4,669. Figure~\ref{fig:compaq_dataset_example} shows some of the 4,669 samples available used in the experiments \citep{jones:02}.
+It is worth mentioning that this database is no longer available and we had obtained a copy of it by contacting the authors. We also had to fix some few images due lack of ground truth or files corrupted. The final amount of images with skin used in the experiments is 4,669. Figure~\ref{fig:compaq_dataset_example} shows some of the 4,669 images with skin samples available used in the experiments~\citep{jones:02}.
 
 \begin{figure}[H]
     \centering
@@ -189,7 +194,7 @@ It is worth mentioning that this database is no longer available and we had obta
         \includegraphics[width=\textwidth]{cpq/ori/3003632}
         \includegraphics[width=\textwidth]{cpq/gt/3003632}
     \end{subfigure}
-    \caption[Examples of Compaq skin/non-skin dataset]{Examples of Compaq skin/non-skin dataset. At the top is the original image and at the bottom the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source: \citet{jones:02}.}
+    \caption[Examples of Compaq skin/non-skin dataset]{Examples of Compaq skin/non-skin dataset. At the top row is the original image, and at the bottom the ground truth with the skin color pixels annotated. Here, the ground truth are binary images, where the black color RGB = (0, 0, 0) was assigned to all pixels in the background. Source:~\citet{jones:02}.}
     \label{fig:compaq_dataset_example}
 \end{figure}
 
@@ -221,7 +226,7 @@ It is worth mentioning that this database is no longer available and we had obta
     \label{eq:fmeasure}
 \end{equation*}
 
-where TP, TN, FP, FN are, respectively, the number of true positive, true negative, false positive, and false negative pixels counted in the image, which are obtained from the confusion matrix (see table~\ref{tab:confusion_matrix}).
+where TP, TN, FP, FN are, respectively, the number of true positive, true negative, false positive, and false negative pixels counted in the image, which are obtained from the confusion matrix (see Table~\ref{tab:confusion_matrix}).
 
 \begin{table}[H]
     \centering
