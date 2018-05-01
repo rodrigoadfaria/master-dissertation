@@ -8,6 +8,10 @@ In this chapter we present some experimental evaluations of the proposed extensi
 %------------------------------------------------------
 \section{Datasets}
 \label{sec:datasets}
+Datasets are an integral part of the field of computer vision. In the particular case of computer vision, datasets consist, primarily, of images or videos for tasks such as object detection, motion tracking, segmentation, and classification. In general, they are constructed with tens, hundreds, or even thousands of images in different environments, distinct illumination conditions, various quality and resolution, and many other aspects.
+
+We gathered four widely known datasets, SFA, Pratheepan, HGR, and Compaq, which will be briefly introduced in next sections, to be used in our experiments. Together, they sum up 7,423 images in different size and resolution, and more than 1.5 billion pixels tested in all the experiments, counting only the original images.
+
 
 %------------------------------------------------------
 \subsection{UCI}
@@ -266,7 +270,7 @@ Preliminary experiments were carried out using machine learning techniques in or
 
 The first experiment was carried out with k-Nearest Neighbors ($k$-NN) and Support Vector Machines (SVM), available in the scikit-learn package~\citep{scikit-learn:11}. The color space originally used was RGB, as cited in the description of datasets in section~\ref{sec:datasets_uci}. In both cases, the chosen cross-validation strategy was 10-fold, which is a common choice of this approach in practice~\citep{mostafa:12}. In addition, the grid search technique of scikit-learn was also used with the objective of finding the most suitable parameters for each classifier.
 
-The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and \emph{gamma} in the SVM or number of neighbors of $k$-NN~\citep{scikit-learn:11}. The parameter's combination used in the training of SVM and $k$-NN can be seen in~\ref{tab:svm_grid_search} and~\ref{tab:knn_grid_search}, respectively. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, \emph{gamma} = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
+The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and \emph{gamma} in the SVM or number of neighbors of $k$-NN~\citep{scikit-learn:11}. The parameter's combination used in the training of SVM and $k$-NN can be seen in Tables~\ref{tab:svm_grid_search} and~\ref{tab:knn_grid_search}, respectively. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, \emph{gamma} = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
 
 \begin{table}[ht]
 \centering
@@ -300,7 +304,7 @@ linear & 1 & 10 & 100 &      &      &      &   &   \\ \hline
 \label{tab:knn_grid_search}
 \end{table}
 
-The results of this experiment can be seen in the table~\ref{tab:results_experiment_one}. The dataset used was UCI. It is noteworthy that the training was performed splitting the data with 30\% randomly separated for test in both classifiers.
+The results of this experiment can be seen in the Table~\ref{tab:results_experiment_one}. The dataset used was UCI. It is noteworthy that the training was performed splitting the data with 30\% randomly separated for test in both classifiers.
 \begin{table}[!htpb]
 \centering
 \begin{small}
@@ -318,9 +322,9 @@ The results of this experiment can be seen in the table~\ref{tab:results_experim
 \end{table}
 
 
-As can be seen in the table~\ref{tab:results_experiment_one}, both classifiers had very high quality measures in the UCI dataset, about to 100\%, which is probably an over-fitting situation. One possible root cause is the splitting of training and test data subsets. We observed that there are many replicates among the samples, so it is possible that samples already seen by the classifier during the training are used in the test step.
+As can be seen in Table~\ref{tab:results_experiment_one}, both classifiers had very high quality measures in the UCI dataset, about to 100\%, which is probably an over-fitting situation. One possible root cause is the splitting of training and test data subsets. We observed that there are many replicates among the samples, so it is possible that samples already seen by the classifier during the training are used in the test step.
 
-In fact, once we used a seed to generate the subsets, we applied the same strategy to split the data and count how many samples of the test subset were seen in the training subset as shown in figure~\ref{fig:uci_split_representation}. Based on the distribution of the splitting and the results of the measures given in table~\ref{tab:results_experiment_one}, we can say that UCI dataset is not suitable for this application.
+In fact, once we used a seed to generate the subsets, we applied the same strategy to split the data and count how many samples of the test subset were seen in the training subset as shown in Figure~\ref{fig:uci_split_representation}. Based on the distribution of the splitting and the results of the measures given in Table~\ref{tab:results_experiment_one}, we can say that UCI dataset is not suitable for this application.
 
 \begin{figure}[H]
     \centering
@@ -345,7 +349,7 @@ For the benefit of the doubt, we submitted the learned function given by those c
                              & SVM    & 0.6179 & 0.7259 & 0.8841 & 0.6675 \\ \hline
 \end{tabular}
 \end{small}
-\caption[Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets]{Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets. Despite some of the measures are quite good, we can see that they are far way from the ones given during the training in table~\ref{tab:results_experiment_one}, which says that the learned models do not have a good generalization.}
+\caption[Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets]{Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets. Despite some of the measures are quite good, we can see that they are far way from the ones given during the training in Table~\ref{tab:results_experiment_one}, which says that the learned models do not have a good generalization.}
 \label{tab:results_experiment_one_imgs}
 \end{table}
 
