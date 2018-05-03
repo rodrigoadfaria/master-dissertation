@@ -270,27 +270,27 @@ $Y_0$ and $Y_1$ are, respectively, the 5${th}$ and 95$th$ percentile of the lumi
 
 To the best of our knowledge, there is any justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to shot different combination of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
 
-Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, but once the trapezoids definition do not change among them, we think that employing it only in combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, $F-measure$, $Precision$, and $Recall$ metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
+Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, but once the trapezoids definition do not change among them, we think that employing it only in combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
 
-In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $Ymin$ and $Ymax$ percentils in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according the criteria aforementioned in the end of the procedure.
+In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $P_{min}$ and $P_{max}$\footnote{$P_{min}$ is the minimum percentile index of the $Y$ luminance values. $P_{max}$ is the maximum percentile index of the $Y$ luminance values.} percentiles in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according the criteria aforementioned in the end of the procedure.
 
 \begin{codebox}
 \kern-1.5em $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$\\
-\li $Ymin \gets 5$
+\li $P_{min} \gets 5$
 \li $Results \gets []$
 \li
-\li \While $Ymin \leq 95$
+\li \While $P_{min} \leq 95$
 \li \Do
-        $Ymax \gets Ymin$
-\li     \While $Ymax \leq 95$
+        $P_{max} \gets P_{min}$
+\li     \While $P_{max} \leq 95$
 \li     \Do
-            $\proc{Set-Combined-Method-Y-Parameters}(Ymin, Ymax)$ \label{alg:tpgs-set-cmb-y}
+            $\proc{Set-Combined-Method-Y-Parameters}(P_{min}, P_{max})$ \label{alg:tpgs-set-cmb-y}
 \li         $\proc{Segment-Dataset-Images}(dataset)$    \label{alg:tpgs-segment-dtset}
 \li         $Precision, Recall, Fmeasure \gets \proc{Compute-Metrics}(dataset)$ \label{alg:tpgs-compt-metrcs}
-\li         $\proc{Push}(Results, Ymin, Ymax, Precision, Recall, Fmeasure)$ \label{alg:tpgs-push-rslts}
-\li\li      $Ymax \gets Ymax + 5$
+\li         $\proc{Push}(Results, P_{min}, P_{max}, Precision, Recall, Fmeasure)$ \label{alg:tpgs-push-rslts}
+\li\li      $P_{max} \gets P_{max} + 5$
         \End
-\li      $Ymin \gets Ymin + 5$
+\li      $P_{min} \gets P_{min} + 5$
     \End
 \li
 \li $\proc{Sort-By}(Results, Fmeasure, Precision, Recall)$

@@ -660,7 +660,72 @@ The AND conjunction approach is most similar to that implemented in neighborhood
 %------------------------------------------------------
 \section{Grid search parameters experiments}
 \label{sec:grid_search_experiments}
+In one part of this work we are concerned with understanding and, perhaps, improving the choice of parameters that define the trapezoids. They are a fundamental part of the model that segments the skin pixels in an image, the main function of the methods developed here. In short, as described in section~\ref{sec:trapezoids_params_tunning}, 5${th}$ and 95$th$ percentiles of the histogram of $Y$ luminance component have been used by~\citet{brancati:17} to be the right parameters to define the trapezoids coordinates. For this reason, we decided to shot different combination of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentiles have been used?
 
+Thus, we created a simple grid search algorithm (see details in section~\ref{sec:trapezoids_params_tunning}) to find the best range combination of those parameters. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics. The results with these metrics, in that given order, for each dataset, can be seen in Appendix~\ref{ape:trapezoids_parameters_tuning}.
+
+It is worth mentioning that the grid search algorithm starts with $P_{min}$ percentile index in $5$ and $P_{max}$ percentile lower bound is set to $P_{min}$ in the inner loop. Thus, we will no longer have a combination of parameters such as $[15, 10]$, that means, we always have combinations such that $P_{max} \geq P_{min}$. This will produce a table with results according the template given in Figure~\ref{fig:gs_table_output}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \draw[step=0.75cm,black,thin] (0.75,0.75) grid (4.5,4.5);
+
+    %gray area
+    \foreach \k in {0.75,1.5,...,3.75}{
+        \fill[pattern=north east lines, pattern color=gray] (\k,3.75) rectangle (\k+0.75,4.5);
+    }
+    \foreach \k in {1.5,2.25,...,3.75}{
+        \fill[pattern=north east lines, pattern color=gray] (\k,3) rectangle (\k+0.75,3.75);
+    }
+    \foreach \k in {2.25,3,...,3.75}{
+        \fill[pattern=north east lines, pattern color=gray] (\k,2.25) rectangle (\k+0.75,3);
+    }
+    \fill[pattern=north east lines, pattern color=gray] (3,1.5) rectangle (3.75,2.25);
+    \fill[pattern=north east lines, pattern color=gray] (3.75,1.5) rectangle (4.5,2.25);
+    \fill[pattern=north east lines, pattern color=gray] (3.75,0.75) rectangle (4.5,1.5);
+
+    % labels outside
+    \node at (0.375,1.125) {95};
+    \node at (0.375,1.875) {90};
+    \node at (0.375,2.625) {\vdots};
+    \node at (0.375,3.375) {10};
+    \node at (0.375,4.125) {5};
+    \node at (1.125,4.875) {5};
+    \node at (1.875,4.875) {10};
+    \node at (2.625,4.875) {\ldots};
+    \node at (3.375,4.875) {90};
+    \node at (4.125,4.875) {95};
+    \end{tikzpicture}
+
+    \caption[The output template table with result metrics of the grid search algorithm]{The output template table with result metrics of the grid search algorithm. $P_{min}$ percentile index is in vertical axis and $P_{max}$ percentile index is in horizontal axis. The highlighted cells -- from the main diagonal and above -- are the ones which will have values of the metrics after running the method for the given combination of parameters. Source: proposed by the author.}
+    \label{fig:gs_table_output}
+\end{figure}
+
+We performed this experiment in all four datasets: Compaq, Pratheepan, HGR, and SFA. For each dataset, respectively, we have a scatter plot of \emph{F-measure}, \emph{Precision}, and \emph{Recall}, which can be seen in Figures~\ref{fig:compaq_g_search},~\ref{fig:pratheepan_g_search},~\ref{fig:hgr_g_search}, and~\ref{fig:sfa_g_search}\footnote{The scatter plots are ignoring the results when $P_{min} = P_{max}$ since they are always the same.}. We can clearly see...
+
+One important observation we have made during this experiment is that, when we have $P_{min} = P_{max}$, the resulting metric is absolute the same for any combination of equal percentile parameters. For instance, in Compaq dataset, when we tried $P_{min} = 5$ and $P_{max} = 5$, we got \emph{F-measure} = 0.5322, \emph{Precision} = 0.4180, and \emph{Recall} = 0.7323. The result is the same for $P_{min} = 10$ and $P_{max} = 10$ onward up to $P_{min} = 95$ and $P_{max} = 95$. This behavior will repeat for every single dataset tested.
+
+Based on this result, we started to investigate the source code given in the original method by~\citet{brancati:17}. We found out that, when the percentiles are the same, the computation of the parameters who define the trapezoids is impacted. In other words, $Y_0$, $Y_1$, $Y_2$, $Y_3$, $Y_{min}$, $Y_{max}$, $Cr_{min}$, $Cb_{max}$ are always the same, i.e. assume default values. Even $Cb_{min}$, $Cr_{max}$, that are still computed dynamically by the internal method functions, do not change when $P_{min}$, $P_{max}$ percentiles are changed, since they are dependent on the previous parameters and the histogram of the image itself that never change. The same behavior will be observed when $P_{min} > P_{max}$.
+
+\clearpage % to avoid warnings on 'Text page X contains only floats.'
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.95\textwidth}
+        \includegraphics[width=\textwidth]{g_search/compaq_precision}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.95\textwidth}
+        \includegraphics[width=\textwidth]{g_search/compaq_recall}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.95\textwidth}
+        \includegraphics[width=\textwidth]{g_search/compaq_fmeasure}
+    \end{subfigure}
+    \caption[Scatter plot with the quality measures for grid search parameters in Compaq dataset]{Scatter plot with the quality measures for grid search parameters in Compaq dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
+    \label{fig:compaq_g_search}
+\end{figure}
+
+
+\clearpage % to avoid warnings on 'Text page X contains only floats.'
 \begin{figure}[!htb]
     \centering
     \begin{subfigure}[t]{0.95\textwidth}
@@ -677,38 +742,7 @@ The AND conjunction approach is most similar to that implemented in neighborhood
 \end{figure}
 
 
-\begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/compaq_precision}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/compaq_recall}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/compaq_fmeasure}
-    \end{subfigure}
-    \caption[Scatter plot with the quality measures for grid search parameters in Compaq dataset]{Scatter plot with the quality measures for grid search parameters in Compaq dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
-    \label{fig:sfa_g_search}
-\end{figure}
-
-
-\begin{figure}[!htb]
-    \centering
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/sfa_precision}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/sfa_recall}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/sfa_fmeasure}
-    \end{subfigure}
-    \caption[Scatter plot with the quality measures for grid search parameters in SFA dataset]{Scatter plot with the quality measures for grid search parameters in SFA dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
-    \label{fig:sfa_g_search}
-\end{figure}
-
-
+\clearpage % to avoid warnings on 'Text page X contains only floats.'
 \begin{figure}[!htb]
     \centering
     \begin{subfigure}[t]{0.95\textwidth}
@@ -722,4 +756,21 @@ The AND conjunction approach is most similar to that implemented in neighborhood
     \end{subfigure}
     \caption[Scatter plot with the quality measures for grid search parameters in HGR dataset]{Scatter plot with the quality measures for grid search parameters in HGR dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
     \label{fig:hgr_g_search}
+\end{figure}
+
+
+\clearpage % to avoid warnings on 'Text page X contains only floats.'
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.95\textwidth}
+        \includegraphics[width=\textwidth]{g_search/sfa_precision}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.95\textwidth}
+        \includegraphics[width=\textwidth]{g_search/sfa_recall}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.95\textwidth}
+        \includegraphics[width=\textwidth]{g_search/sfa_fmeasure}
+    \end{subfigure}
+    \caption[Scatter plot with the quality measures for grid search parameters in SFA dataset]{Scatter plot with the quality measures for grid search parameters in SFA dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
+    \label{fig:sfa_g_search}
 \end{figure}
