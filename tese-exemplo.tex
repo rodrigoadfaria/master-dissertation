@@ -91,6 +91,10 @@
 \newcommand{\thb}[1]{\textbf{#1}}
 % Título negrito e itálico
 \newcommand{\thbi}[1]{\textbf{\emph{#1}}}
+% Dedication page
+\newenvironment{dedication}
+     {\vspace{6ex}\begin{quotation}\begin{center}\begin{em}}
+     {\par\end{em}\end{center}\end{quotation}}
 
 % ---------------------------------------------------------------------------- %
 % Opções de listing usados para o código fonte
@@ -246,6 +250,11 @@ framexrightmargin=10pt
 %     \end{quote}
 % \pagebreak
 
+% ---------------------------------------------------------------------------- %
+% Dedication page
+\begin{dedication}
+To my beloved wife and daughter.
+\end{dedication}
 
 \pagenumbering{roman}     % começamos a numerar 
 
@@ -407,6 +416,10 @@ Skin detection plays an important role in a wide range of image processing and c
     $J_P$       & Maximum distance between the points $(P_Y, P_{Cb})$ and $(P_Y, P_{Cb_s})$ \\
     $I'_P$      & Minimum difference between the values $P_{Cr}$ and $P_{Cb}$ with respect to $P_{Cr_s}$ \\
     $J'_P$      & Maximum distance between the points $(P_Y, P_{Cr})$ and $(P_Y, P_{Cr_s})$ \\
+    $P_{min}$   & Minimum percentile of the histogram of Y luminance component used to \\
+                & compute trapezoid coordinates \\
+    $P_{max}$   & Maximum percentile of the histogram of Y luminance component used to \\
+                & compute trapezoid coordinates \\
     $C$         & Regularization parameter \\
     $\gamma$    & Polynomial/RBF kernel parameter of a nonlinear SVM \\
     $d(x_i, x_j)$& Distance function between $x_i$ and $x_j$ vectors \\
