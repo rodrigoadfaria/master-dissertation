@@ -2,14 +2,14 @@
 \chapter{Conclusions}
 \label{cap:conclusoes}
 
-We started this thesis by describing the problem of skin detection, explaining our motivation and determining our main objectives. Further, we reviewed the literature with a large number of works of skin detection based on color information, comparing their differences in terms of techniques and classifiers, mainly from the point of view of performance, color models, skin color modeling and datasets. Next, we stated he theoretical concepts that apply to this research where we briefly showed some techniques from image processing and computer vision fields used during the project, such as color space transformation, human skin segmentation and understanding, etc. Then, we reviewed the method proposed by~\citet{brancati:17} and we added new variations of it. Also, we showed an implementation of a grid search strategy to figure out the best combination of parameters to the method. Finally, we presented some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq.
+We started this thesis by describing the problem of skin detection, explaining our motivation and determining our main objectives. Further, we reviewed the literature with a large number of works of skin detection based on color information, comparing their differences in terms of techniques and classifiers, mainly from the point of view of performance, color models, skin color modeling and datasets. Next, we stated the theoretical concepts that apply to this research where we briefly showed some techniques from image processing and computer vision fields used during the project, such as color space transformation, human skin segmentation and understanding, etc. Then, we reviewed the method proposed by~\citet{brancati:17} and we added new variations of it. Also, we showed an implementation of a grid search strategy to figure out the best combination of parameters to the method. Finally, we presented some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq.
 
-This chapter comes this thesis to an end by addressing our conclusions regarding our research, objectives, and contributions. In section~\ref{sec:work_plan} we review the schedule defined at the time of Examining Committee, that took place on December 2016. Furthermore, we do a brief summary of the whole time line of this research project. In section~\ref{sec:final_considerations} we sum up the final considerations. Lastly, in section~\ref{sec:future_work} we compile the set of future work that can potentially bring our research even closer to better solutions.
+This chapter comes this thesis to an end by addressing our conclusions regarding our research, objectives, and contributions. In section~\ref{sec:final_considerations} we do a brief summary of the whole time line of this research project and sum up the final considerations. Lastly, in section~\ref{sec:future_work} we compile the set of future work that can potentially bring our research even closer to better solutions.
+
 
 %------------------------------------------------------
-\section{Work plan}
-\label{sec:work_plan}
-
+\section{Final considerations}
+\label{sec:final_considerations}
 The credits in the required subjects for the master's program in Computer Science at IME-USP were fulfilled from March 2015 until June 2016, according to the table~\ref{tab:subjects}. In the middle of 2015, we started the bibliographic research for the development of this project. During this period up to the examining committee, preliminary experiments were carried out which served as a basis for subsequent steps. It is worth mentioning that the most important recommendation was done by a Committee's member, Prof. Dr. Roberto Marcondes, who has indicated for us the fundamental related paper of this work.
 
 
@@ -34,73 +34,20 @@ The credits in the required subjects for the master's program in Computer Scienc
 \label{tab:subjects}
 \end{table}
 
-The suggestions and recommendations of the Examining Committee were considered and reflected in the tasks bellow, represented in the schedule available in Table~\ref{tab:schedule}. We will briefly describe what has happened with each one since then.
 
-\begin{enumerate}
-    \item \textbf{Review additional work:} other related work must be added to our project, mainly related to \emph{kernel} methods, which will serve as a basis for understanding and studying the \emph{kernels} technique in \emph{fuzzy} sets proposed by \citet{guevara:14}.
-
-    \item \textbf{Incorporate new datasets:} this task consists of analyzing and integrating new datasets to the project for use in experiments, both of skin color-image datasets as well as others of color images where the classification of interval data can be applied.
-
-    \item \textbf{Investigate appropriate features for interval data classifiers:} the classifiers trained during the preliminary experiments stage consisted only of the color information of the image, regardless of the chosen color space. Therefore, this task aims to understand the role of other attributes, such as texture and local characteristics, during training and whether the inclusion of such attributes, in fact, can lead to performance improvement.
-
-    \item \textbf{Develop new tools:} new tools must be developed to support subsequent experiments, such as the grid search implemented for \emph{FuzzyDT} parameter optimization. All software created by this research project will be made available to the entire scientific community in open source code format.
-
-    \item \textbf{Design new experiments:} based on established tools and datasets, develop and run new experiments.
-
-    \item \textbf{Analysis of results:} the results obtained must be evaluated and reported in the research project and in publications to be carried out. Eventually, fixes on tools or experiments developed will also be aggregated at this stage.
-
-    \item \textbf{Publish results:} scientific papers with the results obtained must be published in magazines or conferences on image processing, classification or other areas related to the context of the research.
-
-    \item \textbf{Write the thesis:} the thesis must be written once previous task have been completed, mainly in relation to the experiments and analysis of results, which will provide consolidated data for the conclusion of the research project.
-\end{enumerate}
-
-
-\begin{table}[!htpb]
-\centering
-
-\setlength{\tabcolsep}{6pt} 
-
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
- & \multicolumn{11}{c|}{Months 2016/2017}\\ \cline{2-12}
-\raisebox{1.5ex}{Task} & Dec & Jan & Feb & Mar & Apr & Mai & Jun & Jul & Aug & Sep & Oct \\ \hline
-
-1 & X & X & X &   &   &   &   &   &   &   & \\ \hline
-2 & X & X &   &   &   &   &   &   &   &   & \\ \hline
-3 &   & X & X &   &   &   &   &   &   &   & \\ \hline
-4 &   &   & X & X & X & X &   &   &   &   & \\ \hline
-5 &   &   &   &   & X & X & X &   &   &   & \\ \hline
-6 &   &   &   &   &   & X & X & X &   &   & \\ \hline
-7 &   &   &   &   &   &   & X & X &   &   & \\ \hline
-8 &   &   &   &   &   &   &   & X & X & X & X \\ \hline
-
-\end{tabular} 
-\caption{Schedule of planned tasks at the time of Examining Committee.}
-\label{tab:schedule}
-\end{table}
-
-We were trying to apply classification based on interval data for the problem of skin detection until the Examining Committee. That is why the definition of tasks \texttt{\#}1 and \texttt{\#}3. Even though we had to add new papers to be read, they were related to rule-based methods. In addition, task \texttt{\#}2 proved to make sense since three new datasets have been incorporated in the project: Pratheepan, HGR, and Compaq.
-
-One of the methods we explored for data interval classification was the \emph{FuzzyDT} (\emph{Fuzzy Decision Tree}) proposed by~\citet{cintra:13}. As aforementioned, we moved to a different approach, but we also have developed new algorithms, such as the methods described in Chapter~\ref{cap:proposed-solution}, as well as new tools to process the datasets, binarize images, and a visualization web application for the problem of skin detection\footnote{Available at \url{https://bitbucket.org/rodrigoadfaria/skin-detector-ws}.}, which is compliant with task \texttt{\#}4. Based on the new methods, we also performed new experiments (task \texttt{\#}5), analyzed the results (task \texttt{\#}6), and published them (task \texttt{\#}7) according to the plan. The latest task (\texttt{\#}8) was to exactly write this thesis.
-
-It is worth noting that the plan has been shifted ahead for a couple of months. Basically, due the time we had taken to implement the grid search for the parameters tuning and the supplementary neighborhood operations. The conference paper also took some additional time to review, fix recommendations, prepare, and present.
-
-
-%------------------------------------------------------
-\section{Final considerations}
-\label{sec:final_considerations}
 Human skin segmentation is still a unsolved problem, mainly for the case of real time applications. In~\cite{brancati:17}, a surprisingly simple and clever method has been presented and it established a new tier.
 
-We reproduced the original experiments and also checked if the same patterns were presented in RGB, HSV, and Lab color spaces, or other applications as finding tree leaves but the results were not consistent as the original approach for human skin using YCbCr space.
+We reproduced the original experiments and also checked if the same patterns were presented in RGB, HSV, and Lab color spaces, or other applications as finding tree leaves, but the results were not consistent as the original approach for human skin using YCbCr space.
 
 In this research project, we introduced two extensions based on a hypothesis that the original rule could be reversed and also taking in consideration that a human skin pixel does not appear isolated. A third extension combines the original rule with the reversed one in a more strengthen method in terms of precision. All these extensions are simple and do not hurt the efficiency of the original method.
 
-We tested the extensions in four standard public datasets and the experiments show that our methods improve the accuracy of skin detection, even when there exists a huge variation in ethnicity and illumination. Moreover, our approach proved to be very competitive, outperforming alternative state-of-the-art work.
+We tested the extensions in four standard public datasets and the experiments showed that our methods improve the accuracy of skin detection, even when there exists a huge variation in ethnicity and illumination. Moreover, our approach proved to be very competitive, outperforming alternative state-of-the-art work. In addition, we implemented the grid search for the parameters tuning and the supplementary neighborhood operations as well as new tools to process the datasets, binarize images, and a visualization web application for the problem of skin detection\footnote{Available at \url{https://bitbucket.org/rodrigoadfaria/skin-detector-ws}.}
 
 Our results confirm that skin color is an extremely powerful cue for detecting human skin in unconstrained imagery. Other local properties can be experimented to be used in a future work, along with the methods presented here, such as texture, shape, geometry, and other neighborhood operations.
 
-Thus, we can say that the main objective of this research -- create or improve new methods for skin detection, according to the rule-based approach -- has been successfully completed. More specifically, the main objective to achieve improvements in the method proposed by~\citet{brancati:17} by reducing the false positive rate.
+Thus, we can say that the main objective of this research -- create or improve new methods for skin detection, according to the rule-based approach -- has been successfully completed. More specifically, the main objective to achieve improvements in the method proposed by~\citet{brancati:17} by reducing the false positive rate. Furthermore, we proposed a deep analysis on the parameters choice for the trapezoids definition which started a new discussion as well as the possibility to apply neighborhood operations.
 
-In addition, we have accomplished the secondary objectives by publishing a paper in VISAPP conference as well as completing completing the master's degree in three years and one month, extremely close to the time line set in the beginning of this journey.
+In addition, we have accomplished the secondary objectives by publishing a paper in VISAPP conference as well as completing the master's degree in about three years, that is extremely close to the time line set in the beginning of this journey.
 
 
 %------------------------------------------------------
@@ -111,6 +58,6 @@ In the future, extended works could explore further the connectivity of the skin
 
 Our intuition, based on the experimental results, says that trapezoids features such as size, area, symmetry and others, could be used to establish a relation with the classification accuracy. Moreover, if  this relationship exists, the shape of the trapezoids could be previously processed, for instance by filtering image illumination, to obtain better classification results.
 
-We have also implemented a tentative to explain part of the parameters selection in section~\ref{sec:grid_search_experiments}. However, additional experiments can be made on this topic. A good suggestion would involve a new method to learn the best parameters of the trapezoids.
+We have also implemented a grid search algorithm to explain part of the parameters selection in section~\ref{sec:grid_search_experiments}. However, additional experiments can be made on this topic. A good suggestion would involve a new method to learn the best parameters of the trapezoids by means of machine learning techniques.
 
-We have checked if the same patterns were presented in RGB, HSV, and Lab color spaces, the results were not consistent as the original approach for human skin using YCbCr space. However, a surprisingly comparison between different color spaces in~\citet{chaves:10} suggests that YCgCr is a very good candidate for this problem. In fact, YCbCr and YCgCr color spaces are very similar. Therefore, if one finds out the same patterns (trapezoids shapes) appear in this space, he/she could obtain a better result, because green color is quite better than blue color to detect skin color, so it is a very worthwhile change.
+We have checked if the same patterns were presented in RGB, HSV, and Lab color spaces, the results were not consistent as the original approach for human skin using YCbCr space. However, a surprisingly comparison between different color spaces in~\citet{chaves:10} suggests that YCgCr is a very good candidate for this problem. In fact, YCbCr and YCgCr color spaces are very similar. Therefore, if one finds out the same patterns (trapezoids shapes) appear in this space, he/she could obtain a better result, because green color is quite better than blue color to detect skin, so it is a very worthwhile change.
