@@ -58,6 +58,7 @@ where \footnote{$dP_{Cr}$ is the distance between $(P_Y, P_{Cr})$ and $(P_Y, Cr_
     dP_{Cr} &= P_{Cr} - Cr_{min}
 \end{align}
 
+\newpage
 The coordinates of the other sides of the trapezoids are given by $[P_Y, H_{Cr}(P_Y)]$ and $[P_Y, H_{Cb}(P_Y)]$, such that:
 \begin{align}
   H_{Cr}(Y) &=  \begin{cases}
@@ -153,7 +154,7 @@ Therefore, to determine if the pixel $P$ is skin, we have to modify the conditio
 Doing this simple extension, we are now able to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis.
 
 
-\begin{figure}[H]
+\begin{figure}[!htp]
     \centering
     \includegraphics[width=0.25\textwidth]{pixel_neighborhood}
     \caption[Neighbors evaluation with respect to a pixel $P$]{Neighbors evaluation with respect to $P$. If the image is scanned in raster order, $N_8^-(P)$ is the set of points that can be reached before $P$ in an 8-\textit{neighbors} window. Source: proposed by the author.}
@@ -272,8 +273,6 @@ To the best of our knowledge, there is any justification to choose the 5${th}$ a
 
 Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, but once the trapezoids definition do not change among them, we think that employing it only in combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
 
-In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $P_{min}$ and $P_{max}$\footnote{$P_{min}$ is the minimum percentile index of the $Y$ luminance values. $P_{max}$ is the maximum percentile index of the $Y$ luminance values.} percentiles in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according the criteria aforementioned in the end of the procedure.
-
 \begin{codebox}
 \kern-1.5em $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$\\
 \li $P_{min} \gets 5$
@@ -296,5 +295,10 @@ In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combi
 \li $\proc{Sort-By}(Results, Fmeasure, Precision, Recall)$
 \li \Return $Results$
 \end{codebox}
+
+
+\newpage
+
+In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $P_{min}$ and $P_{max}$\footnote{$P_{min}$ is the minimum percentile index of the $Y$ luminance values. $P_{max}$ is the maximum percentile index of the $Y$ luminance values.} percentiles in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according the criteria aforementioned in the end of the procedure.
 
 Detailed output of this experiments and analysis can be seen in chapter~\ref{cap:experimentos}, specifically in section~\ref{sec:grid_search_experiments}, where an examination of the behavior of the most performing parameters is given as well as others which did not succeed.

@@ -402,14 +402,17 @@ Because the method had the best \textit{F-measure} in the HGR and Pratheepan dat
 
 As one can see in Table~\ref{tab:merged_rules_results}, the reverse hypothesis performed better than the original method and achieved the best \textit{Recall} in HGR and SFA. It also achieved the best \textit{F-measure} in SFA with a 0.8125 rate, which gave almost 0.25 in gain compared to the original.
 
-In general, the reverse method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it has very high \textit{F-measure} rates.
+It is important to note that, the significant improvement of the \textit{Recall} in HGR and SFA datasets is, probably, due to the nature of the images that form each of them. HGR and SFA contain images where we have a great concentration of skin pixels -- hands and arms in the case of HGR, and faces in the case of SFA occupying a considerable region of the image. Furthermore, a large part of them were collected in controlled environments, on the background and lighting conditions point of view. Thus, this behavior must be taken into consideration when selecting the method to apply within an application, since this can be decisive for a potentially performance improvement.
 
-The combined method along with the neighborhood approach achieved the best \textit{F-measure} in HGR and Pratheepan. Moreover, the other metrics still are in a very high rate for all datasets, being in the top second in almost cases.
+In general, the reverse method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it still has very good \textit{F-measure} rates.
 
-Therefore, the combined and extended approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that are useful in different application domains, mainly near real time systems (processing time of about 10ms for a typical image of dimensions 300x400).
+The neighborhood approach achieved the best \textit{F-measure} in Compaq, HGR, and Pratheepan. Moreover, the other metrics still are in a very high rate for all datasets, being in the top second in almost all cases. If we compare the neighbors approach with the original, except for the \textit{Recall} -- where we only got the best result in SFA --, we can see that our implementation achieved the best measures practically for all other metrics, in the four datasets.
 
-Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, \ref{fig:results_hgr} and \ref{fig:results_cpq}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
+Therefore, the combined and neighbors approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that are useful in different application domains, mainly near real time systems (processing time of about 10ms for a typical image of dimensions 300x400).
 
+Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hgr} and~\ref{fig:results_cpq}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
+
+Qualitatively, we can see that, in general, the reverse method removes a large part of the reddish pixels from the background of the image (e.g. see the third image in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the reverse method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
 
 \begin{figure*}[!htb]
     \centering
@@ -459,6 +462,8 @@ Figures \ref{fig:results_sfa}, \ref{fig:results_pratheepan}, \ref{fig:results_hg
     \caption[Image samples with the results of each method in SFA dataset]{Image samples with the results of each method in SFA dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
     \label{fig:results_sfa}
 \end{figure*}
+
+However, when we blend the original method along with the reverse in the method we call combined, both background regions of reddish and yellowish pixels are almost completely removed. In addition, salt-like noises are also dropped, since the rules together are more rigid (e.g. see column (e) combined method for the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}). Obviously, this causes an undesired effect of removing some of the skin pixels of which we are interested. This helps us understand why the recall decreases with the application of the combined rule.
 
 \begin{figure*}[!htb]
     \centering
