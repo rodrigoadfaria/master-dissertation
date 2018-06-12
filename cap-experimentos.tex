@@ -262,97 +262,6 @@ where TP, TN, FP, FN are, respectively, the number of true positive, true negati
 
 
 
-
-%------------------------------------------------------
-\section{UCI dataset evaluation}
-\label{sec:ml_experiments}
-Preliminary experiments were carried out using machine learning techniques in order to evaluate the UCI dataset, described in section~\ref{sec:datasets_uci}, once we do not have the original images used to create it. The idea is to establish a bottom line to understand if this dataset can be useful for further experiments.
-
-The first experiment was carried out with k-Nearest Neighbors ($k$-NN) and Support Vector Machines (SVM), available in the scikit-learn package~\citep{scikit-learn:11}. The color space originally used was RGB, as cited in the description of datasets in section~\ref{sec:datasets_uci}. In both cases, the chosen cross-validation strategy was 10-fold, which is a common choice of this approach in practice~\citep{mostafa:12}. In addition, the grid search technique of scikit-learn was also used with the objective of finding the most suitable parameters for each classifier.
-
-The grid search is used in scikit-learn to find the optimal parameters of a classifier when they can not be learned by the estimator, such as the \emph{kernel} and \emph{gamma} in the SVM or number of neighbors of $k$-NN~\citep{scikit-learn:11}. The parameter's combination used in the training of SVM and $k$-NN can be seen in Tables~\ref{tab:svm_grid_search} and~\ref{tab:knn_grid_search}, respectively. The parameters of each line are combined in an attempt to find the optimal estimator. For example, a choice in SVM training would be \emph{kernel} = rbf, C = 100, \emph{gamma} = 1e-4. All possible combinations are exploited, with the best of them being returned~\citep{scikit-learn:11}.
-
-\begin{table}[ht]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{10pt}
-
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|}\hline
- \thbi{kernel} & \multicolumn{3}{c|}{\thbi{C}} & \multicolumn{3}{c|}{\thbi{gamma}} & \multicolumn{2}{c|}{\thbi{degree}}\\ \cline{1-9}
-rbf    & 1 & 10 & 100 & 1e-3 & 1e-4 & 1e-5 &   &   \\ \hline
-poly   & 1 & 10 & 100 &      & 1e-4 & 1e-5 & 3 & 4 \\ \hline
-linear & 1 & 10 & 100 &      &      &      &   &   \\ \hline
-
-\end{tabular}
-\end{small}
-\caption[Grid search parameters table of the optimal estimator in the SVM]{Grid search parameters table of the optimal estimator in the SVM. The kernel column refers to the kernels used in training that are Gaussian, polynomial and linear, respectively. C is a regularization parameter that tells SVM the amount of error allowed during the training. Gamma is a parameter used only in Gaussian and polynomial kernels. Degree is the degree of the polynomial; used only in the polynomial kernel~\citep{scikit-learn:11}.}
-\label{tab:svm_grid_search}
-\end{table}
-
-\begin{table}[hb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{8pt}
-
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
- \multicolumn{7}{|c|}{\thbi{n\_neighbors}} & \multicolumn{2}{c|}{\thbi{weights}} & \multicolumn{1}{c|}{\thbi{algorithm}}\\ \cline{1-10}
-3 & 5 & 9 & 15 & 25 & 31 & 35 & distance & uniform & auto \\ \hline
-
-\end{tabular} 
-\end{small}
-\caption[Grid search parameters table of the optimal estimator in k-NN]{Grid search parameters table of the optimal estimator in k-NN. The n\_neighbors column refers to the number of neighbors considered in the training. Weights is the weight function used in the prediction, where uniform indicates that the points have equal weights and distance indicates that the inverse of the distance is applied in the classification. The third column indicates which algorithm should be used; auto means that the algorithm will be decided based on the data~\citep{scikit-learn:11}.}
-\label{tab:knn_grid_search}
-\end{table}
-
-The results of this experiment can be seen in the Table~\ref{tab:results_experiment_one}. The dataset used was UCI. It is noteworthy that the training was performed splitting the data with 30\% randomly separated for test in both classifiers.
-\begin{table}[!htpb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{8pt}
-
-\begin{tabular}{|c|c|c|c|c|}\hline
- \thb{Classifier} & \thb{Color model} & \thbi{Precision} & \thbi{Recall} & \thbi{F-measure} \\ \hline
- $k$-NN & RGB & 0,9995 & 0,9995 & 0,9995 \\ \cline{1-5}
- SVM    & RGB & 0,9995 & 0,9995 & 0,9995 \\ \hline
-
-\end{tabular}
-\end{small}
-\caption[Results of the experiments with $k$-NN and SVM in the UCI dataset]{Results of the experiments with $k$-NN and SVM in the UCI dataset. The optimal $k$-NN parameters found during the training in UCI were $n\_neighbors = 3$, $weights = uniform$. In the case of SVM, the optimal parameters found in UCI training were $kernel = rbf$, $C = 100$ and $gamma = 1e-3$.}
-\label{tab:results_experiment_one}
-\end{table}
-
-
-As can be seen in Table~\ref{tab:results_experiment_one}, both classifiers had very high quality measures in the UCI dataset, about to 100\%, which is probably an over-fitting situation. One possible root cause is the splitting of training and test data subsets. We observed that there are many replicates among the samples, so it is possible that samples already seen by the classifier during the training are used in the test step.
-
-In fact, once we used a seed to generate the subsets, we applied the same strategy to split the data and count how many samples of the test subset were seen in the training subset as shown in Figure~\ref{fig:uci_split_representation}. Based on the distribution of the splitting and the results of the measures given in Table~\ref{tab:results_experiment_one}, we can say that UCI dataset is not suitable for this application.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{figuras/uci_split_representation}
-
-    \caption[UCI samples distribution after splitting the dataset in training and testing subsets]{UCI samples distribution after splitting the dataset in training and testing subsets. We used the scikit-learn package function for splitting, where 30\% is the size of test set. The right-most bar, entitled as duplicates, shows how many samples of the test set were seen in training set. In the order of 83\% for skin samples and 86\% for non skin samples. Source: proposed by the author.}
-    \label{fig:uci_split_representation}
-\end{figure}
-
-For the benefit of the doubt, we submitted the learned function given by those classifiers in real images of Pratheepan and SFA datasets. This experiment can help us to understand the ability of the learned model to generalize for upcoming non seen samples.
-
-\begin{table}[!htpb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{8pt}
-
-\begin{tabular}{|c|c|c|c|c|c|}\hline
- \thb{Dataset} & \thb{Classifier} & \thb{Precision} & \thbi{Recall} & \thbi{Specificity} & \thbi{F-measure} \\ \hline
- \multirow{2}{*}{SFA} & $k$-NN & 0.9322 & 0.5895 & 0.9835 & 0.7223 \\ \cline{2-6}
-                      & SVM    & 0.9079 & 0.4839 & 0.9838 & 0.6314 \\ \hline
- \multirow{2}{*}{Pratheepan} & $k$-NN & 0.5930 & 0.7719 & 0.8568 & 0.6707 \\ \cline{2-6}
-                             & SVM    & 0.6179 & 0.7259 & 0.8841 & 0.6675 \\ \hline
-\end{tabular}
-\end{small}
-\caption[Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets]{Results of the experiments with $k$-NN and SVM in the SFA and Pratheepan images datasets. Despite some of the measures are quite good, we can see that they are far way from the ones given during the training in Table~\ref{tab:results_experiment_one}, which says that the learned models do not have a good generalization.}
-\label{tab:results_experiment_one_imgs}
-\end{table}
-
 %------------------------------------------------------
 \section{Rule-based experiments}
 \label{sec:rule_based_experiments}
@@ -707,15 +616,16 @@ It is worth mentioning that the grid search algorithm starts with $P_{min}$ perc
     \label{fig:gs_table_output}
 \end{figure}
 
-We performed this experiment in all four datasets: Compaq, Pratheepan, HGR, and SFA. For each dataset, respectively, we have a scatter plot of \emph{F-measure}, \emph{Precision}, and \emph{Recall}, which can be seen in Figures~\ref{fig:compaq_g_search},~\ref{fig:pratheepan_g_search},~\ref{fig:hgr_g_search}, and~\ref{fig:sfa_g_search}\footnote{The scatter plots are ignoring the results when $P_{min} = P_{max}$ since they are always the same.}. Each series is represented by a shade of a gradient color. In other words, the darkest is the color the lower is the $P_{min}$ fixed value while $P_{max}$ is varying along $x$ (horizontal) axis.
+We performed this experiment in all four datasets: Compaq, Pratheepan, HGR, and SFA. For each dataset, respectively, we have a scatter plot of \emph{F-measure}, \emph{Precision}, and \emph{Recall}, with their respective variance, which can be seen in Figures~\ref{fig:compaq_g_search},~\ref{fig:pratheepan_g_search},~\ref{fig:hgr_g_search}, and~\ref{fig:sfa_g_search}. Each chart is showing the resulting metrics, in $y$ (vertical) axis\footnote{We set the range in the charts to start at 0.25 for better visualization of the series.
+}, by using a fixed $P_{min}$ and varying $P_{max}$ along $x$ (horizontal) axis. The shaded path of the measures are the variance and tell us how far we are from the mean when looking for each image within the dataset individually.
 
-In general, the points on the upper-right side of the charts are the ones with the best metric result for each parameters' combination. We can see predominantly that larger intervals -- e.g. $[5, 85]$, $[5, 90]$, $[5, 95]$ -- resulted in the best \emph{Precision}. On the other hand, smaller intervals, with both $P_{min}$ and $P_{max}$ near the upper bound (95) -- e.g. $[80, 90]$, $[85, 95]$, $[90 ,95]$ --, performed better in \emph{Recall}. Thus, if we set up a specific pair of parameters for the percentile to compute the trapezoid coordinates, it can produce a good \emph{Precision} but it may hurt the \emph{Recall} and vice versa.
+We can see predominantly that larger intervals -- e.g. $[5, 85]$, $[5, 90]$, $[5, 95]$ -- resulted in the best \emph{Precision} in all datasets. On the other hand, smaller intervals, with both $P_{min}$ and $P_{max}$ near the upper bound (95) -- e.g. $[80, 90]$, $[85, 95]$, $[90 ,95]$ --, performed better in \emph{Recall}. Thus, if we set up a specific pair of parameters for the percentile to compute the trapezoid coordinates, it can produce a good \emph{Precision} but it may hurt the \emph{Recall} and vice versa.
 
-Therefore, evaluate \emph{F-measure} in this situation seems to be the correct path, since it gives us a harmonic measure between \emph{Precision} and \emph{Recall}. That's why we sorted the results (see Tables~\ref{tab:compaq_grid_search},~\ref{tab:pratheepan_grid_search},~\ref{tab:hgr_grid_search}, and~\ref{tab:sfa_grid_search} for details) using the order \emph{F-measure}, \emph{Precision}, and \emph{Recall} as a criteria.
+Therefore, evaluate \emph{F-measure} in this situation seems to be the correct path, since it gives us a harmonic measure between \emph{Precision} and \emph{Recall}. That's why we sorted the results (see Tables~\ref{tab:compaq_grid_search},~\ref{tab:pratheepan_grid_search},~\ref{tab:hgr_grid_search}, and ~\ref{tab:sfa_grid_search} for details) using the order \emph{F-measure}, \emph{Precision}, and \emph{Recall} as a criteria. Another important observation is the behavior of variance in each result, that means, even good measures with huge variance could be a problem for real world applications.
 
-In Compaq, we can see that top \emph{F-measure} results were obtained with pair of parameters such as $[5, 25], \ldots, [5, 95]$, while keeping good measures in both \emph{Precision} and \emph{Recall}. A similar behavior can be seen in Pratheepan, but among the highest \emph{F-measure} scores are those where $P_{min} = 10$ -- i.e. $[10, 25], \ldots, [10, 95]$. Next in sequence are those starting with $P_{min} = 5$. So, we could state that the values $[5, 95]$ chosen by~\citet{brancati:17} are fair enough since the results were quite good. Even so, the results are insignificantly worse than the highest ranked ones (see Table~\ref{tab:gs_results_comparison}).
+In Compaq, we can see that top \emph{F-measure} results were obtained with pair of parameters such as $[5, 25], \ldots, [5, 95]$, while keeping good measures in both \emph{Precision} and \emph{Recall}. A similar behavior can be seen in Pratheepan, but among the highest \emph{F-measure} scores are those where $P_{min} = 10$. Next are those starting with $P_{min} = 5$. So, we could state that the values $[5, 95]$ chosen by~\citet{brancati:17} are fair enough since the results were quite good. Even so, the results are insignificantly worse than the highest ranked ones (see Table~\ref{tab:gs_results_comparison}).
 
-However, in HGR as well as in SFA top \emph{F-measure} results were obtained with pair of parameters such that $P_{min} = P_{max}$. For instance, we can see in HGR results that \emph{Recall} = 0.8623 and \emph{F-measure} = 0.8664 when $P_{min} = 5$ and $P_{max} = 5$, while $[5, 95]$ interval resulted in \emph{Recall} = 0.6952 and \emph{F-measure} = 0.7843 -- a gain in the order of 24\% and 10\% for each metric, respectively. A similar behavior can be seen in the results of SFA, where the gain in \emph{Recall} and \emph{F-measure} are in the order of 65\% and 38\% for each metric, respectively, which is a very huge difference.
+However, in HGR as well as in SFA top \emph{F-measure} results were obtained with pair of parameters such that $P_{min} = P_{max}$. For instance, we can see in HGR results that \emph{Recall} = 0.8641 and \emph{F-measure} = 0.8667 when $P_{min} = 5$ and $P_{max} = 5$, while $[5, 95]$ interval resulted in \emph{Recall} = 0.6952 and \emph{F-measure} = 0.7843 -- a gain in the order of 24\% and 10\% for each metric, respectively. A similar behavior can be seen in the results of SFA, where the gain in \emph{Recall} and \emph{F-measure} are in the order of 67\% and 39\% for each metric, respectively, which is a very huge difference. It is worth mentioning that, despite \emph{Precision} and \emph{Specificity} have a slightly decreasing, they are still around the~\citet{brancati:17} results.
 
 
 
@@ -724,110 +634,115 @@ However, in HGR as well as in SFA top \emph{F-measure} results were obtained wit
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|}\hline
 \thb{Dataset} & \textbf{$P_{min}$} & \textbf{$P_{max}$} & \thb{Precision} & \thb{Recall} & \thb{Specificity} & \thb{F-measure}\\ \cline{1-7}
-\multirow{3}{*}{Compaq}
+\multirow{6}{*}{Compaq}
 & 5  &   95  & 0.4906    &   0.6251  &   0.8856  & 0.5498 \\ \cline{2-7}
-& 5  &   25  & 0.4896    &   0.6334  &   0.8826  & 0.5523 \\ \cline{2-7}
-& 5  &   20  & 0.4862    &   0.6387  &   0.8794  & 0.5521 \\ \cline{2-7}
-& 5  &   35  & 0.4939    &   0.6249  &   0.8870  & 0.5517 \\ \hhline{=======}
+& 5  & 25 & 0.4819 & 0.6459 & 0.8762 & 0.5520 \\ \cline{2-7}
+& 5  & 35 & 0.4866 & 0.6374 & 0.8808 & 0.5519 \\ \cline{2-7}
+& 5  & 40 & 0.4877 & 0.6356 & 0.8818 & 0.5519 \\ \cline{2-7}
+& 5  & 30 & 0.4844 & 0.6408 & 0.8789 & 0.5517 \\ \cline{2-7}
+& 5  & 45 & 0.4884 & 0.6335 & 0.8827 & 0.5516 \\ \hhline{=======}
 
-\multirow{3}{*}{Pratheepan}
+\multirow{6}{*}{Pratheepan}
 & 5  &   95  & 0.6681    &   0.6683  &   0.9164  & 0.6682 \\ \cline{2-7}
-& 10 &   15  & 0.6531    &   0.7001  &   0.9066  & 0.6758 \\ \cline{2-7}
-& 5  &   15  & 0.6639    &   0.6857  &   0.9133  & 0.6746 \\ \cline{2-7}
-& 10 &   55  & 0.6660    &   0.6829  &   0.9137  & 0.6744 \\ \hhline{=======}
+& 10 & 55 & 0.6560 & 0.6955 & 0.9055 & 0.6752 \\ \cline{2-7}
+& 10 & 80 & 0.6558 & 0.6950 & 0.9056 & 0.6748 \\ \cline{2-7}
+& 10 & 85 & 0.6557 & 0.6949 & 0.9056 & 0.6748 \\ \cline{2-7}
+& 10 & 95 & 0.6557 & 0.6950 & 0.9057 & 0.6747 \\ \cline{2-7}
+& 10 & 90 & 0.6556 & 0.6950 & 0.9056 & 0.6747 \\ \hhline{=======}
 
-\multirow{3}{*}{HGR}
+\multirow{6}{*}{HGR}
 & 5  &   95  & 0.8994    &   0.6952  &   0.9390  & 0.7843 \\ \cline{2-7}
-& 5  &   5   & 0.8706    &   0.8623  &   0.9073  & 0.8664 \\ \cline{2-7}
-& 10 &   10  & 0.8706    &   0.8623  &   0.9073  & 0.8664 \\ \cline{2-7}
-& 15 &   15  & 0.8706    &   0.8623  &   0.9073  & 0.8664 \\ \hhline{=======}
+& 5  & 5  & 0.8693 & 0.8641 & 0.9064 & 0.8667 \\ \cline{2-7}
+& 10 & 10 & 0.8693 & 0.8641 & 0.9064 & 0.8667 \\ \cline{2-7}
+& 15 & 15 & 0.8693 & 0.8641 & 0.9064 & 0.8667 \\ \cline{2-7}
+& 20 & 20 & 0.8693 & 0.8641 & 0.9064 & 0.8667 \\ \cline{2-7}
+& 25 & 25 & 0.8693 & 0.8641 & 0.9064 & 0.8667 \\ \hhline{=======}
 
-\multirow{3}{*}{SFA}
+\multirow{6}{*}{SFA}
 & 5  &   95  & 0.9288    &   0.3958  &   0.9894  & 0.5551 \\ \cline{2-7}
-& 5  &   5   & 0.9319    &   0.6567  &   0.9789  & 0.7705 \\ \cline{2-7}
-& 10 &   10  & 0.9319    &   0.6567  &   0.9789  & 0.7705 \\ \cline{2-7}
-& 15 &   15  & 0.9319    &   0.6567  &   0.9789  & 0.7705 \\ \hline
+& 5  & 5  & 0.9313 & 0.6617 & 0.9785 & 0.7737 \\ \cline{2-7}
+& 10 & 10 & 0.9313 & 0.6617 & 0.9785 & 0.7737 \\ \cline{2-7}
+& 15 & 15 & 0.9313 & 0.6617 & 0.9785 & 0.7737 \\ \cline{2-7}
+& 20 & 20 & 0.9313 & 0.6617 & 0.9785 & 0.7737 \\ \cline{2-7}
+& 25 & 25 & 0.9313 & 0.6617 & 0.9785 & 0.7737 \\ \hline
 \end{tabular}
 
-\caption[Quantitative result metrics of the proposed grid search parameters tuning]{Quantitative result metrics of the proposed grid search parameters tuning. For each dataset, we have four different applications of the combined method with different pairs of $P_{min}$ and $P_{max}$ percentiles. The first line is the default one $[5, 95]$, as reported in the experiments given in Table~\ref{tab:results_experiment_one}. Next three lines are the top three results ordered by F-measure, Precision, and Recall, respectively.}
+\caption[Quantitative result metrics of the proposed grid search parameters tuning]{Quantitative result metrics of the proposed grid search parameters tuning. For each dataset, we have different applications of the combined method with different pairs of $P_{min}$ and $P_{max}$ percentiles. The first line is the default one $[5, 95]$, as reported in the experiments given in Table~\ref{tab:merged_rules_results}. Next five lines are the top five results ordered by F-measure, Precision, and Recall, respectively.}
 \label{tab:gs_results_comparison}
 
 \end{table*}
 
-
-On the basis of this scenario, we observed that when we have $P_{min} = P_{max}$, the resulting metric is absolute the same for any combination of equal percentile parameters. For instance, in Compaq dataset, when we tried $P_{min} = 5$ and $P_{max} = 5$, we got \emph{Precision} = 0.4180, \emph{Recall} = 0.7323, \emph{Specificity} = 0.8105, and \emph{F-measure} = 0.5322. The result is the same for $P_{min} = 10$ and $P_{max} = 10$ onward up to $P_{min} = 95$ and $P_{max} = 95$. This behavior will repeat for every single dataset tested.
+On the basis of this scenario, we observed that when we have $P_{min} = P_{max}$, the resulting metric is absolute the same for any combination of equal percentile parameters. For instance, in Compaq dataset, when we tried $P_{min} = 5$ and $P_{max} = 5$, we got \emph{Precision} = 0.4172, \emph{Recall} = 0.7333, \emph{Specificity} = 0.8096, and \emph{F-measure} = 0.5318. The result is the same for $P_{min} = 10$ and $P_{max} = 10$ onward up to $P_{min} = 95$ and $P_{max} = 95$. This behavior will repeat for every single dataset tested.
 
 Based on this result, we started to investigate the source code given in the original method by~\citet{brancati:17}. We found out that, when the percentiles are the same, the computation of the parameters who define the trapezoids is impacted. In other words, $Y_0$, $Y_1$, $Y_2$, $Y_3$, $Y_{min}$, $Y_{max}$, $Cr_{min}$, $Cb_{max}$ are always the same, i.e. assume default values. Even $Cb_{min}$, $Cr_{max}$, that are still computed dynamically by the internal method functions, do not change when $P_{min}$, $P_{max}$ percentiles are changed, since they are dependent on the previous parameters and the histogram of the image itself that never change. The same behavior will be observed when $P_{min} > P_{max}$.
 
-It is important to note that, in the case of Compaq and Pratheepan, where $P_{min} = P_{max}$, the results worsen significantly. On the other hand, they have a significant gain in the HGR and SFA datasets.
+It is important to note that, in the case of Compaq and Pratheepan, where $P_{min} = P_{max}$, the results worsen significantly in terms of \emph{Precision}. On the other hand, they have a significant gain in the HGR and SFA datasets.
 
 This particular phenomenon occurs by the nature of the images that form each of these images databases. Both Compaq and Pratheepan contain images with more complex scenes, uncontrolled environment, distinct lighting conditions and, in general, images randomly collected from the internet. On the other hand, HGR and SFA contain images where we have a great concentration of skin pixels -- hands and arms in the case of HGR, and faces in the case of SFA occupying a considerable region of the image. Furthermore, a large part of them were collected in controlled environments, on the background and lighting conditions point of view.
 
 Therefore, this behavior must be taken into consideration when selecting a pair of $P_{min}$ and $P_{max}$ to apply in the method in question, since this can be decisive for a potentially performance improvement.
 
 \clearpage % to avoid warnings on 'Text page X contains only floats.'
+
 \begin{figure}[!htb]
     \centering
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/compaq_precision}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/compaq_recall}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/compaq_fmeasure}
-    \end{subfigure}
-    \caption[Scatter plot with the quality measures for grid search parameters in Compaq dataset]{Scatter plot with the quality measures for grid search parameters in Compaq dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
+    \includegraphics[page=1,scale=1,width=\textwidth]{g_search/compaq.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in Compaq dataset.}
+\end{figure}
+\begin{figure}[!htb]
+    \ContinuedFloat
+    \centering
+    \includegraphics[page=2,scale=1,width=\textwidth]{g_search/compaq.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in Compaq dataset.}
     \label{fig:compaq_g_search}
 \end{figure}
 
 
-\clearpage % to avoid warnings on 'Text page X contains only floats.'
 \begin{figure}[!htb]
     \centering
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/pratheepan_precision}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/pratheepan_recall}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/pratheepan_fmeasure}
-    \end{subfigure}
-    \caption[Scatter plot with the quality measures for grid search parameters in Pratheepan dataset]{Scatter plot with the quality measures for grid search parameters in Pratheepan dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
+    \includegraphics[page=1,scale=1,width=\textwidth]{g_search/pratheepan.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in Pratheepan dataset.}
+\end{figure}
+\begin{figure}[!htb]
+    \ContinuedFloat
+    \centering
+    \includegraphics[page=2,scale=1,width=\textwidth]{g_search/pratheepan.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in Pratheepan dataset.}
     \label{fig:pratheepan_g_search}
 \end{figure}
 
 
-\clearpage % to avoid warnings on 'Text page X contains only floats.'
 \begin{figure}[!htb]
     \centering
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/hgr_precision}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/hgr_recall}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/hgr_fmeasure}
-    \end{subfigure}
-    \caption[Scatter plot with the quality measures for grid search parameters in HGR dataset]{Scatter plot with the quality measures for grid search parameters in HGR dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
+    \includegraphics[page=1,scale=1,width=\textwidth]{g_search/hgr.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in HGR dataset.}
+\end{figure}
+\begin{figure}[!htb]
+    \ContinuedFloat
+    \centering
+    \includegraphics[page=2,scale=1,width=\textwidth]{g_search/hgr.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in HGR dataset.}
     \label{fig:hgr_g_search}
 \end{figure}
 
 
-\clearpage % to avoid warnings on 'Text page X contains only floats.'
 \begin{figure}[!htb]
     \centering
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/sfa_precision}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/sfa_recall}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.95\textwidth}
-        \includegraphics[width=\textwidth]{g_search/sfa_fmeasure}
-    \end{subfigure}
-    \caption[Scatter plot with the quality measures for grid search parameters in SFA dataset]{Scatter plot with the quality measures for grid search parameters in SFA dataset.In $y$ axis we have the measure for each combination. In $x$ axis we are varying the $y$ maximum percentile. Each series represent a fixed $y$ minimum percentile.}
+    \includegraphics[page=1,scale=1,width=\textwidth]{g_search/sfa.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in SFA dataset.}
+\end{figure}
+\begin{figure}[!htb]
+    \ContinuedFloat
+    \centering
+    \includegraphics[page=2,scale=1,width=\textwidth]{g_search/sfa.pdf}
+
+    \caption{Scatter plot with the quality measures for grid search parameters in SFA dataset.}
     \label{fig:sfa_g_search}
 \end{figure}
