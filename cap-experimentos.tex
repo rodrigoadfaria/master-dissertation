@@ -319,9 +319,29 @@ The neighborhood approach achieved the best \textit{F-measure} in Compaq, HGR, a
 
 Therefore, the combined and neighbors approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that are useful in different application domains, mainly near real time systems (processing time of about 10ms for a typical image of dimensions 300x400).
 
+We have also tested the subset of non-skin images from Compaq dataset in terms of \emph{Specificity}. Basically, this measure tell us the ability of the method to correctly identify the non-skin pixels in the image, in other words, the true negative rate. It is important to remember that the original~\citep{brancati:17} method was compared with six well known rule-based methods in literature, and it outperformed all of them in this experiment. We can see in table~\ref{tab:rule_based_specificity} that both combined and neighbors are in a better position, with a gain of about 5.7\% and 2\%, respectively, which shows us, once again, how robust are the results produced by these proposed enhancements.
+
+
+\begin{table*}[ht]
+\centering
+
+\begin{tabular}{lc}\hline
+\thb{Hypothesis} & \thb{Specificity} \\ \cline{1-2}
+Original~\citep{brancati:17}    & 0.8681          \\
+Reverse                         & 0.7876          \\
+Combined                        & \textbf{0.9177} \\
+Neighbors                       & 0.8866          \\ \hline
+\end{tabular}
+
+\caption[Specificity of the proposed enhancements and original method for non-skin images of Compaq dataset]{Specificity of the proposed enhancements and original method for non-skin images of Compaq dataset. The combined method obtained the best result and neighbors is the second ranked method.}
+\label{tab:rule_based_specificity}
+
+\end{table*}
+
 Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hgr} and~\ref{fig:results_cpq}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
 
 Qualitatively, we can see that, in general, the reverse method removes a large part of the reddish pixels from the background of the image (e.g. see the third image in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the reverse method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
+
 
 \begin{figure*}[!htb]
     \centering
@@ -532,43 +552,49 @@ In this section we will show some experimental results of the supplementary neig
 
 \begin{tabular}{|c|c|c|c|c|c|c|}\hline
 \thb{Dataset} & \thb{\vtop{\hbox{\strut Hypothesis}\hbox{\strut (Neighbors)}}} & \thb{Precision} & \thb{Recall} & \thb{Specificity} & \thb{F-measure}\\ \cline{1-6}
-\multirow{3}{*}{Compaq}
+\multirow{5}{*}{Compaq}
+& Proposed~\ref{sec:neighborhood_extended_method}    & 0.4708            & 0.7421            & 0.8463            & \textbf{0.5761} \\ \cline{2-6}
 & AND               & \textbf{0.5121}   & 0.6252            & \textbf{0.8941}   & 0.5630 \\ \cline{2-6}
 & OR                & 0.3786            & \textbf{0.9037}   & 0.7203            & 0.5336 \\ \cline{2-6}
 & $P_{Cr_s}$ only   & 0.4132            & 0.7254            & 0.8032            & 0.5265 \\ \cline{2-6}
-& $P_{Cb_s}$ only   & 0.4478            & 0.8053            & 0.8120            & \textbf{0.5755} \\ \hhline{======}
+& $P_{Cb_s}$ only   & 0.4478            & 0.8053            & 0.8120            & 0.5755 \\ \hhline{======}
 
-\multirow{3}{*}{Pratheepan}
-& AND               & \textbf{0.6731}   & 0.6789            & \textbf{0.9127}   & \textbf{0.6760} \\ \cline{2-6}
+\multirow{5}{*}{Pratheepan}
+& Proposed~\ref{sec:neighborhood_extended_method}    & 0.6280            & 0.7515            & 0.8871            & \textbf{0.6843}  \\ \cline{2-6}
+& AND               & \textbf{0.6731}   & 0.6789            & \textbf{0.9127}   & 0.6760 \\ \cline{2-6}
 & OR                & 0.4624            & \textbf{0.8837}   & 0.7321            & 0.6072 \\ \cline{2-6}
 & $P_{Cr_s}$ only   & 0.5285            & 0.7414            & 0.8163            & 0.6171 \\ \cline{2-6}
 & $P_{Cb_s}$ only   & 0.5630            & 0.8218            & 0.8292            & 0.6682 \\ \hhline{======}
 
-\multirow{3}{*}{HGR}
+\multirow{5}{*}{HGR}
+& Proposed~\ref{sec:neighborhood_extended_method}    & 0.8818            & 0.7935            & 0.9211            & 0.8353 \\ \cline{2-6}
 & AND               & \textbf{0.9007}   & 0.7203            & \textbf{0.9378}   & 0.8005 \\ \cline{2-6}
 & OR                & 0.7978            & \textbf{0.9084}   & 0.8238            & \textbf{0.8495} \\ \cline{2-6}
 & $P_{Cr_s}$ only   & 0.7937            & 0.8600            & 0.8331            & 0.8256 \\ \cline{2-6}
-& $P_{Cb_s}$ only   & 0.8818            & 0.7935            & 0.9211            & 0.8353 \\ \hhline{======}
+& $P_{Cb_s}$ only   & 0.8941            & 0.7715            & 0.9288            & 0.8283 \\ \hhline{======}
 
-\multirow{3}{*}{SFA}
+\multirow{5}{*}{SFA}
+& Proposed~\ref{sec:neighborhood_extended_method}          & 0.9176             & 0.5111            & 0.9826            & 0.6565 \\ \cline{2-6}
 & AND               & \textbf{0.9345}   & 0.3947            & \textbf{0.9899}   & 0.5549 \\ \cline{2-6}
 & OR                & 0.8345            & \textbf{0.8181}   & 0.9176            & 0.8262 \\ \cline{2-6}
 & $P_{Cr_s}$ only   & 0.8612            & 0.7922            & 0.9375            & 0.8252 \\ \cline{2-6}
 & $P_{Cb_s}$ only   & 0.8953            & 0.7690            & 0.9286            & \textbf{0.8273} \\ \hline
 \end{tabular}
 
-\caption[Quantitative result metrics of the proposed supplementary neighborhood adaptation]{Quantitative result metrics of the proposed supplementary neighborhood adaptation. For each dataset, we have four different applications of the neighbors operations, respectively: applying an AND between the original and reverse rules, applying an OR between the original and reverse rules, considering the $P_{Cr_{s}}$ (reverse) only, and considering the $P_{Cb_{s}}$ (original) only.}
+\caption[Quantitative result metrics of the proposed supplementary neighborhood adaptation]{Quantitative result metrics of the proposed supplementary neighborhood adaptation. For each dataset, we have five different applications of the neighbors operations. The first line is the result of the proposed method detailed in section~\ref{sec:neighborhood_extended_method} for comparison. The following four lines are the supplementary neighborhood adaptation shown in section~\ref{sec:sup_neighborhood_operations} which are considering, respectively, an AND between the original and reverse rules, an OR between the original and reverse rules, the $P_{Cr_{s}}$ (reverse) only, and the $P_{Cb_{s}}$ (original) only.}
 \label{tab:sup_neighbors_results}
 
 \end{table*}
 
 It is worth mentioning that the goal here is to explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Therefore, we are not worried about the additional computational cost taken to scan the image one more time. Even though, this implementation can be enhanced by, for instance, keeping the latest three lines of the image scanned in memory to be verified by the 8-\textit{neighbors} window backward to have a final decision when evaluating a pixel.
 
-From the table~\ref{tab:sup_neighbors_results} we can see that the application of the neighborhood approach using AND gives us the best precision and specificity in all datasets. On the other hand, we lost performance in the recall in relation to the others approaches. Speaking of recall, the loss is in the order of 20\% up to 30\% in the Compaq, Pratheepan and HGR datasets, and approximately 50\% in the SFA.
+From the table~\ref{tab:sup_neighbors_results} we can see that the application of the neighborhood approach using AND gives us the best \emph{Precision} and \emph{Specificity} in all datasets. On the other hand, we lost performance in the \emph{Recall} in relation to the other approaches. Speaking of \emph{Recall}, the loss is in the order of 20\% up to 30\% in the Compaq, Pratheepan and HGR datasets, and approximately 50\% in the SFA.
 
-Clearly there is a trade-off between increasing precision and decreasing recall and vice versa, just as in the experiments done in section~\ref{sec:rule_based_experiments} with all methods. When we use a more relaxed rule, as in the case of the OR or the isolated rules, we get a better recall, but there is also an abrupt drop in precision and specificity. Another side effect of this phenomenon is to increase the false positive rate.
+Clearly, there is a trade-off between increasing \emph{Precision} and decreasing \emph{Recall} and vice versa, just as in the experiments done in section~\ref{sec:rule_based_experiments} with all methods. When we use a more relaxed rule, as in the case of the OR (or the isolated rules), we get a better \emph{Recall}, but there is also an abrupt drop in \emph{Precision} and \emph{Specificity}. Another side effect of this phenomenon is to increase the false positive rate.
 
-The AND conjunction approach is most similar to that implemented in neighborhood extended method (see Sec.~\ref{sec:neighborhood_extended_method}). The results obtained by that approach show low variability in relation to the adaptations shown in the experiments in this section. Therefore, for the sake of implementation, the approach given in the neighborhood implementation may be a good starting point. Nevertheless, we can apply some other complementary technique, such as weights in the pixels, to measure those more or less relevant to the decision making in the neighborhood. This can potentially diminish the effect of this trade-off and obtain more harmonic measures while removing the undesired \textit{diagonal effect}.
+The AND conjunction approach is most similar to that implemented in neighborhood extended method, as we can see in the results of first line (named Proposed~\ref{sec:neighborhood_extended_method}) of each dataset. The results obtained by that approach (Proposed~\ref{sec:neighborhood_extended_method}) show low variability in relation to the adaptations shown in the experiments in this section. In fact, we can see the best \emph{F-measure} obtained by this method both in Compaq and Pratheepan, and the second in HGR. In addition, it performed the second best \emph{Precision} and \emph{Specificity} in Compaq, Pratheepan, and SFA while keeping solid results with respect to \emph{Recall}.
+
+Therefore, for the sake of implementation, the approach given in the neighborhood implementation (Proposed~\ref{sec:neighborhood_extended_method}) may be a good starting point. Nevertheless, we can apply some other complementary technique, such as weighting the distance among the pixels, to measure those more or less relevant to the decision making in the neighborhood. This can potentially diminish the effect of this trade-off and obtain more harmonic measures. For the \textit{diagonal effect}, we can use a more symmetric window, similar to the one used in the adaptations experimented here, to produce better results and increase this undesired anomaly.
 
 
 %------------------------------------------------------
