@@ -225,13 +225,13 @@ A histogram can be seen as a probability distribution, once the number of pixels
 %% ------------------------------------------------------------------------- %%
 \section{Image segmentation}
 \label{sec:image_segmentation}
-Image segmentation refers to partitioning an image into different regions that are homogeneous with respect to some image feature~\citep{gonzalez:02}. These regions, or objects, are the fundamental parts of an image. With respect to the human visual perception, humans use their visual sense to effortlessly partition their surrounding environment into different objects to help themselves to recognize them, guide their movements, and for almost every other task in their lives~\citep{konstantinos:00}.
+Image segmentation can be defined, in a simple manner, as the task of splitting an image into several parts, or regions, who individually represent some particular aspect. These regions who, in general, are the representation of specific objects, are the fundamental parts of an image. This partitioning process is also used by humans, through their visual perception, into surrounding environment to help themselves to recognize them, guide their movements, and for almost every other day by day tasks in their lives~\citep{konstantinos:00}.
 
-Segmentation of complex images is one of the most difficult tasks in the field of image processing, where the accuracy determines whether a successful operation or not~\citep{gonzalez:02}. It is a heavy process that includes many interacting components that are involved with the analysis of color, shape, motion, and texture of objects in images. Despite the segmentation of images is a natural activity for the human visual system, it is definitely not easy to create algorithms whose performance is comparable to that of the human visual system~\citep{konstantinos:00}.
+Segmentation of complex images is one of the most difficult tasks in the field of image processing, where the accuracy determines whether a successful operation or not~\citep{gonzalez:02}. It is wisely a heavy process that consists of many steps such as the analysis of color, shape, motion, geometry, and texture of objects in images. It is worth mentioning that all of these steps are taken effortlessly by our visual system. However, it is definitely not easy to create algorithms whose performance is comparable to that of the human visual system~\citep{konstantinos:00}.
 
-Image segmentation is usually the first task of any image analysis process. All subsequent tasks, such as feature extraction and object recognition rely heavily on the quality of the segmentation~\citep{konstantinos:00}. The algorithms created for image segmentation generally are based on one of two basic properties of intensity values: \emph{discontinuity}, where abrupt changes in intensity, such as points, lines, and edges are detected, and \emph{similarity}, whose approaches are based on regions partitioning, according to a set of predefined criteria~\citep{gonzalez:02}.
+Usually, the first task of any image analysis process is image segmentation. All subsequent tasks, such as feature extraction and object recognition rely heavily on the quality of the segmentation~\citep{konstantinos:00}. The algorithms created for image segmentation generally are based on one of two basic properties of intensity values: \emph{discontinuity}, where abrupt changes in intensity, such as points, lines, and edges are detected, and \emph{similarity}, whose approaches are based on regions partitioning, according to a set of predefined criteria~\citep{gonzalez:02}.
 
-One of the \emph{similarity} methods it is the thresholding: a popular and clever method used to segment regions of an image, especially in applications where speed is an important factor -- that is the case for skin detection, once it is used, in general, for face detection, gesture analysis, face tracking, video surveillance systems, medical image analysis, and other human-related image processing applications. Due the simplicity of implementation, several authors apply this technique on skin detection task~\citep{kovac:03, chai:99, basilio:11, kaur:12, shaik:15, kumar:15}. Others extend this application by using adaptive thresholding~\citep{yogarajah:11, tan:12}.
+One of the \emph{similarity} methods it is the thresholding: a popular and clever method used to segment regions of an image, especially in applications where speed is an important factor -- that is the case for skin detection, once it is used, in general, for face detection, gesture analysis, face tracking, video surveillance systems, medical image analysis, and other human-related image processing applications. Due to the simplicity of implementation, several authors apply this technique for skin detection task~\citep{kovac:03, chai:99, basilio:11, kaur:12, shaik:15, kumar:15}. Others extend this application by using adaptive thresholding~\citep{yogarajah:11, tan:12}.
 
 The method proposed by~\citet{brancati:17}, where a set of dynamic correlation rules are computed to determine skin pixels, can be classified as the kind of \emph{similarity} method. Subsequently, our proposed enhancements described in chapter~\ref{cap:proposed-solution}, in a pixel-based manner, is also of this kind. Other methods detailed in chapter~\ref{cap:related-work}, aforementioned, and used in~\citet{brancati:17} as well here for comparison, are thresholding based. For that reason, a brief introduction on thresholding will be given in section~\ref{sec:thresholding}.
 
@@ -239,7 +239,7 @@ The method proposed by~\citet{brancati:17}, where a set of dynamic correlation r
 %% ------------------------------------------------------------------------- %%
 \subsection{Thresholding}
 \label{sec:thresholding}
-Histogram thresholding is one of the simplest pixel-based techniques for image segmentation due its intuitive properties and uncomplicated implementation~\citep{gonzalez:02}. Roughly speaking, if an image is composed of distinct regions -- that means, each region in the histogram are represented by a peak, similar to a Gaussian distribution --, adjacent regions could be split into separated groups, once adjacent peaks are likely separated by a valley~\citep{konstantinos:00}. Those valleys can be determined by means of one or more threshold values. However, to find out the threshold value that is the lower bound of a valley is definitely not a trivial task~\citep{konstantinos:00}.
+Histogram thresholding is one of the simplest pixel-based techniques for image segmentation due to its intuitive properties and uncomplicated implementation~\citep{gonzalez:02}. Roughly speaking, if an image is composed of distinct regions -- that means, each region in the histogram are represented by a peak, similar to a Gaussian distribution --, adjacent regions could be split into separated groups, once adjacent peaks are likely separated by a valley~\citep{konstantinos:00}. Those valleys can be determined by means of one or more threshold values. However, to find out the threshold value that is the lower bound of a valley is definitely not a trivial task~\citep{konstantinos:00}.
 
 
 \begin{figure}[h]
@@ -269,9 +269,9 @@ Histogram thresholding is one of the simplest pixel-based techniques for image s
 \end{figure}
 
 
-Let Figure~\ref{fig:histogram_thresholding}(a) the gray levels histogram of an image $f(x, y)$. We can clearly see two dominant groups of pixels. One obvious way to separate the objects in this image is to select a threshold $T$ that splits these groups. In other words, for every single point $(x, y)$, if $f(x, y) \leq T$, then $(x, y)$ belongs to the first object (or group), otherwise it belongs to the second object. In general, one of these objects are seen as the background of the image and the other, the portion of interest in the image~\citep{gonzalez:02}.
+Let Figure~\ref{fig:histogram_thresholding}(a) the gray levels histogram of an image $f(x, y)$. We can clearly see two dominant groups of pixels. One obvious way to separate the objects in this image is to select a threshold $T$ that splits these groups. In other words, for every single point $(x, y)$, if $f(x, y) \leq T$, then $(x, y)$ belongs to the first object (or group), otherwise it belongs to the second object. In general, one of these objects is seen as the background of the image and the other, the portion of interest in the image~\citep{gonzalez:02}.
 
-The resulting image $g(x, y)$ after applying the thresholding is given by:
+The resulting image $g(x, y)$ after applying the thresholding is given by~\citep{gonzalez:02}:
 \begin{equation}
 g(x, y) =   \begin{cases}
                 0, \quad &\text{if}\ f(x, y) \leq T\\[0.7em]
@@ -279,7 +279,7 @@ g(x, y) =   \begin{cases}
             \end{cases}
 \end{equation}
 
-Therefore, pixels labeled 0 corresponds to the object left of $T$ in histogram, and pixels labeled 1 corresponds to the object right of $T$ in histogram -- or background as commonly used in literature. The \emph{single-level thresholding} procedure that produces $g(x, y)$ image is known as \emph{binarization}~\citep{gonzalez:02}.
+Therefore, pixels labeled 0 corresponds to the object left of $T$ in the histogram, and pixels labeled 1 corresponds to the object right of $T$ in histogram -- or background as commonly used in literature. The \emph{single-level thresholding} procedure that produces $g(x, y)$ image is known as \emph{binarization}~\citep{gonzalez:02}.
 
 Figure~\ref{fig:histogram_thresholding}(b) shows a slightly more general case of thresholding, where three distinct groups of the histogram are split by $T_1$ and $T_2$ threshold values. Here, \emph{multi-level thresholding} classifies a point $(x, y)$ as belonging to a specific object class as follows~\citep{gonzalez:02}:
 
@@ -305,7 +305,7 @@ The visual perception of color by the human eye should not vary according to the
 
 As an example, the grass of a soccer stadium remains green throughout the day, even at dusk when, from a physical point of view, sunlight has a more reddish appearance.
 
-The human perception of colors occurs by the activation of nerve cells that send signals to the brain about brightness, hue and saturation, which are usually the features used to distinguish one color from another~\citep{gonzalez:02}.
+The human perception of colors occurs by the activation of nerve cells that send signals to the brain about brightness, hue, and saturation, which are usually the features used to distinguish one color from another~\citep{gonzalez:02}.
 
 The brightness gives the notion of chromatic intensity. Hue represents the dominant color perceived by an observer. Saturation refers to the relative purity or amount of white light applied to the hue. Combined, hue and saturation are known as chromaticity and, therefore, a color must be characterized by its brightness and chromaticity~\citep{gonzalez:02}.
 
@@ -323,13 +323,13 @@ Pioneer in an attempt to organize the perception of color in a color space, Albe
 
 The principle of equality of visual spacing between the components of the model is the essential idea of the Munsell color model. These components are hue, value, corresponding to luminance, and chroma, corresponding to saturation~\citep{konstantinos:00}.
 
-The model is represented by a cylindrical shape and it can be seen in the Figure~\ref{fig:munsell-system}. The hue is arranged in the circular axis consisting of five base as well as five secondary colors, the saturation in the radial axis and the luminance in the vertical axis in a range varying from 0 to 10.
+The model is represented by a cylindrical shape and it can be seen in the Figure~\ref{fig:munsell-system}. The hue is arranged in the circular axis consisting of five bases as well as five secondary colors, the saturation in the radial axis and the luminance in the vertical axis in a range varying from 0 to 10.
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=.6\textwidth]{munsell-system}
   % fonte https://commons.wikimedia.org/wiki/File:Munsell-system.svg
-  \caption[Munsell color model.]{Munsell color model represented by a cylindrical shape. The hue is arranged on the circular axis consisting of five base and five secondary colors, the saturation on the radial axis and the luminance on the vertical axis in a range varying from 0 to 10. Source: \citet{rus:07}.}
+  \caption[Munsell color model.]{Munsell color model represented by a cylindrical shape. The hue is arranged on the circular axis consisting of five bases and five secondary colors, the saturation on the radial axis and the luminance on the vertical axis in a range varying from 0 to 10. Source: \citet{rus:07}.}
   \label{fig:munsell-system} 
 \end{figure}
 
@@ -337,11 +337,11 @@ The model is represented by a cylindrical shape and it can be seen in the Figure
 \subsection{CIE color model}
 \label{sec:modelo_cores_cie}
 
-In 1931, the CIE established the first mathematical model of color numerical specification, whose objective was to analyze the relationship between the physical aspects of colors in the electromagnetic spectrum and their perception by the human visual system to determine how an ordinary person perceives the color. A review of this specification was published in 1964~\citep{gonzalez:02}.
+In 1931, the CIE established the first mathematical model of a color numerical specification, whose objective was to analyze the relationship between the physical aspects of colors in the electromagnetic spectrum and their perception by the human visual system to determine how an ordinary person perceives the color. A review of this specification was published in 1964~\citep{gonzalez:02}.
 
-The experiment that originated the standard consisted in detecting the colors perceived by an observer from a mixture of three primary colors X, Y and Z, called tristimulus values. These coordinates gave rise to the CIE XYZ color space which encompasses all the colors that can be perceived by an ordinary human being. For this reason, it is considered a device independent representation~\citep{konstantinos:00}.
+The experiment that originated the standard consisted of detecting the colors perceived by an observer from a mixture of three primary colors X, Y and Z, called tristimulus values. These coordinates gave rise to the CIE XYZ color space which encompasses all the colors that can be perceived by an ordinary human being. For this reason, it is considered a device independent representation~\citep{konstantinos:00}.
 
-The system proposed by the CIE XYZ to describe a color is based on a luminance component Y, and two additional components X and Z, that bring the chromaticity information. This system is formed by imaginary colors that can be expressed as combinations of the normalized measures shown in the equations~\ref{eq:cie_x}, \ref{eq:cie_y} and \ref{eq:cie_z}.
+The system proposed by the CIE XYZ to describe a color is based on a luminance component Y, and two additional components X and Z, that bring the chromaticity information. This system is formed by imaginary colors that can be expressed as combinations of the normalized measures shown in the equations~\ref{eq:cie_x}, \ref{eq:cie_y} and \ref{eq:cie_z}~\citep{konstantinos:00}.
 
 \newpage
 \begin{equation}
@@ -370,13 +370,13 @@ Combinations of negative values and other problems related to selecting a set of
   \label{fig:cie-cromaticity-diagram} 
 \end{figure}
 
-The coordinates $ (x = 1/3, y = 1/3) $ correspond to the location of white light, also known as white point, and serve as reference in the process of image capture, coding, or reproduction.
+The coordinates $(x = 1/3, y = 1/3)$ correspond to the location of the white light, also known as white point, and serve as a reference in the process of image capture, coding, or reproduction.
 
 CIE also derived and standardized two other color models based on CIE XYZ specification and, likewise, are device independent. Both are perceptually uniform, which means that equal perceptual distances separate all colors in the system~\citep{vezhnevets:03}. As an example, the gray scale of the space should allow for a smooth transition between black and white.
 
 The first one was designed to reduce the problem of perceptual non-uniformity. Some Uniform Chromaticity Scale (UCS) diagrams were proposed based on mathematical equations to transform the values XYZ or the coordinates $x, y$ into a new set of values $(u, v)$, which gave rise to the 1960 CIE $uv$ chromaticity diagram~\citep{gevers:12}.
 
-Still with unsatisfactory results, the CIE made a new change by multiplying the $v$ component by a factor of 1.5. In addition, the brightness scale given by the Y component has been replaced by $L^* = [0, 100]$ to better represent the differences in luminosity that are equivalent. This revision originated the CIE 1976 $L^*u^*v^*$ color model, commonly known by the acronym CIELuv~\citep{gevers:12}.
+With unsatisfactory results yet, the CIE made a new change by multiplying the $v$ component by a factor of 1.5. In addition, the brightness scale given by the Y component has been replaced by $L^* = [0, 100]$ to better represent the differences in luminosity that are equivalent. This revision originated the CIE 1976 $L^*u^*v^*$ color model, commonly known by the acronym CIELuv~\citep{gevers:12}.
 
 In 1976 the CIE adopted a new color model, based on the $L, a, b$ model, proposed by Richard Hunter in 1948, which best represented the uniform spacing of colors. Named CIE $L^*a^*b^*$ and known by the acronym CIELab, it is a space based on opponent colors \footnote{Theory started around 1500 when Leonardo da Vinci concluded that colors are produced by mixing yellow and blue, green and red, and white and black. In 1950, this theory was confirmed when optically-colored signals were detected at the optical connection between the retina and the brain~\citep{gevers:12}.} in which the color stimuli of retina is converted to distinctions between light and dark, red and green, and blue and yellow, represented by the axes $L^*$, $a^*$, and $b^*$, respectively~\citep{gevers:12}.
 
@@ -388,7 +388,7 @@ In 1976 the CIE adopted a new color model, based on the $L, a, b$ model, propose
 The RGB model, an acronym for Red, Green, and Blue, is an additive color model in which the three primary colors red, green and blue are added to produce the others~\citep{gonzalez:02}.
 
 This system was based on the trichromatic theory of Thomas Young and Hermann Helmholtz in the mid-19th century and can be represented graphically
-through the unit cube defined on the axes R, G and B, as illustrated in the Figure~\ref{fig:rgb-cube}~\citep{konstantinos:00}.
+through the unit cube defined on the axes R, G, and B, as illustrated in the Figure~\ref{fig:rgb-cube}~\citep{konstantinos:00}.
 
 \begin{figure}[!ht]
   \centering
@@ -397,16 +397,16 @@ through the unit cube defined on the axes R, G and B, as illustrated in the Figu
   \label{fig:rgb-cube} 
 \end{figure}
 
-It is noteworthy that there are two ways of representing the RGB space: linear and non-linear. The aforementioned system shows the non-linear model, whose abbreviation is $R'G'B'$, and is most used by devices and applications because of their similarity to the human visual system. In the literature, this system is frequently cited with the acronym RGB, which makes the nomenclature dubious, since the linear model is also called RGB and, therefore, the conversion between color spaces must be done with some caution. It is also important to note that linear RGB values are rarely used to represent an image since they are perceptually highly non-uniform~\citep{konstantinos:00}.
+It is noteworthy that there are two ways of representing the RGB space: linear and non-linear. The aforementioned system shows the non-linear model, whose abbreviation is $R'G'B'$ and is most used by devices and applications because of their similarity to the human visual system. In the literature, this system is frequently cited with the acronym RGB, which makes the nomenclature dubious, since the linear model is also called RGB and, therefore, the conversion between color spaces must be done with some caution. It is also important to note that linear RGB values are rarely used to represent an image since they are perceptually highly non-uniform~\citep{konstantinos:00}.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{CMY color model}
 \label{sec:modelo_cores_cmy}
 
-The CMY model is based on the complementary primary colors of the R, G, and B coordinates, which are given by Cyan, Magenta, and Yellow. Unlike RGB, is a subtractive color model, therefore, non additive, in which colors are generated by subtracting the length of the dominant wave from the white light and, therefore, the resulting color corresponds to the light that is reflected~\citep{gonzalez:02}.
+The CMY model is based on the complementary primary colors of the R, G, and B coordinates, which are given by Cyan, Magenta, and Yellow. Unlike RGB, is a subtractive color model, therefore, non-additive, in which colors are generated by subtracting the length of the dominant wave from the white light and, therefore, the resulting color corresponds to the light that is reflected~\citep{gonzalez:02}.
 
-One way to get the CMY coordinates from RGB system is:\\
+One way to get the CMY coordinates from the RGB system is:\\
 \begin{equation}
   \begin{bmatrix}
     C \\ M \\ Y
@@ -437,22 +437,22 @@ Similarly to RGB, CMY is device dependent. The model is widely used in equipment
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=.25\textwidth]{cmy-model}
-  \caption[CMY subtractive color model]{CMY subtractive color model. It is interesting to note that the intersection of yellow with magenta generates the red color, magenta with cyan generates the blue color and cyan with yellow generates the green color. Source: \citet{rus:08}.}
+  \caption[CMY subtractive color model]{CMY subtractive color model. It is noteworthy that the intersection of yellow with magenta generates the red color, magenta with cyan generates the blue color and cyan with yellow generates the green color. Source: \citet{rus:08}.}
   \label{fig:cmy-model}
 \end{figure}
 
-Overlapping the CMY primary colors in equal amounts to generate the black color typically creates a tint that is close to brown or dark green. To avoid this undesired effect, the black component is usually added to the system, represented by the letter K. This operation gives rise to a new model known as \textbf{CMYK}~\citep{gonzalez:02}.
+Overlapping the CMY primary colors in equal amounts to generate the black color typically creates a tint that is close to the brown or dark green. To avoid this undesired effect, the black component is usually added to the system, represented by the letter K. This operation gives rise to a new model known as \textbf{CMYK}~\citep{gonzalez:02}.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Color models of the YUV family}
 \label{sec:modelo_cores_yuv}
 
-Color models of this family is also known as orthogonal color spaces. They are able to reduce the redundancy present in RGB color channels and represent the color with statistically independent components -- as independent as possible~\citep{kakumanu:07}.
+Color models of this family are also known as orthogonal color spaces. They are able to represent the color with statistically independent components -- as independent as possible. In addition, to reduce the redundancy present in RGB color channels is also one of its key features~\citep{kakumanu:07}.
 
-The acronym YUV stands to a set of color spaces of which the luminance information, represented by the Y component, is coded separately from the chrominance, given by the components U and V. The components U and V are representations of signals of the difference of the blue subtracted from luminance ($B-Y$) and red subtracted from luminance ($R-Y$). It is used to represent colors in analogue television transmission systems in the Phase Alternating Line (PAL) and Sequential Color with Memory (SECAM)~\citep{pedrini:08}.
+The acronym YUV stands to a set of color spaces of which the luminance information, represented by the Y component, is coded separately from the chrominance, given by the components U and V. The components U and V are representations of signals of the difference of the blue subtracted from luminance ($B-Y$) and red subtracted from luminance ($R-Y$). It is used to represent colors in analog television transmission systems in the Phase Alternating Line (PAL) and Sequential Color with Memory (SECAM)~\citep{pedrini:08}.
 
-The transformation of the RGB space to YUV is given by:\\
+The transformation of the RGB space to YUV is given by~\citep{pedrini:08}:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ U \\ V
@@ -470,7 +470,7 @@ where $0 \leq R, G, B \leq 1$.
 
 Analogous to the YUV, the YIQ model was adopted in 1950 by the National Television System Committee (NTSC), an American standard for color television signal transmission. In this model, the Y component corresponds to luminance and the components I (hue) and Q (saturation) encode the chrominance information~\citep{pedrini:08}.
 
-The transformation of the RGB space to YIQ is given by:\\
+The transformation of the RGB space to YIQ is given by~\citep{pedrini:08}:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ I \\ Q
@@ -490,7 +490,7 @@ Another color model of the YUV family is the YCbCr, mathematically defined by a 
 
 The YCbCr model is widely used in digital videos. In this system, the Y component represents luminance, computed as a weighted sum of RGB values. Cb component gives the measurement of the difference between the blue color and a reference value, similar to the Cr component which is the measurement of the difference between the red color and a reference value~\citep{pedrini:08}.
 
-The transformation of the RGB space to YCbCr is given by:\\
+The transformation of the RGB space to YCbCr is given by~\citep{pedrini:08}:\\
 \begin{equation}
   \begin{bmatrix}
     Y \\ Cb \\ Cr
@@ -510,18 +510,18 @@ The transformation of the RGB space to YCbCr is given by:\\
 \subsection{Color models of the HSI family}
 \label{sec:modelo_cores_hsi}
 
-Hue, Saturation, and Intensity (HSI) models are best suited for image processing applications from the point of view pf the user, due the correlation with human perception of the color \citep{konstantinos:00}.
+Hue, Saturation, and Intensity (HSI) models are best suited for image processing applications from the user point of view, due to the correlation with human perception of the color \citep{konstantinos:00}.
 
 In this model, as in YIQ, the intensity given by I component is decomposed from the chrominance information, represented by the hue (H) and saturation (S)~\citep{konstantinos:00}. The combination of these components results in a pyramidal structure which can be seen in Figure~\ref{fig:hsi-model}.
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=.7\textwidth]{hsi-model}
-  \caption[Graphical representation of the HSI model]{Graphical representation of the HSI model. The hue describes the color itself, in the form of an angle $\theta$, where $\theta \in [0, 360]$. Red is at 0 degree, yellow at 60, green at 120, and so on. The saturation component, which varies between 0 and 1, indicates how much color is polluted with white color. The intensity scale is between $[0, 1]$, where 0 means black and 1, white. Source: \citet{blackice:16}.}
+  \caption[Graphical representation of the HSI model]{Graphical representation of the HSI model. The hue describes the color itself, in the form of an angle $\theta$, where $\theta \in [0, 360]$. Red is at 0 degrees, yellow at 60, green at 120, and so on. The saturation component, which varies between 0 and 1, indicates how much color is polluted with white color. The intensity scale is between $[0, 1]$, where 0 means black and 1, white. Source: \citet{blackice:16}.}
   \label{fig:hsi-model} 
 \end{figure}
 
-The transformation of the components of the RGB space to HSI is given by the equations:
+The transformation of the components of the RGB space to HSI is given by the equations \citep{pedrini:08}:
 \begin{align}
 \label{eq:rgb_para_hsi}
 \begin{split}
@@ -538,13 +538,13 @@ The transformation of the components of the RGB space to HSI is given by the equ
 \end{split}
 \end{align}
 
-It is important to note that the values R, G and B must be normalized in the interval between 0 and 1. The intensity $I$ and the saturation $S$ are also normalized between 0 and 1.
+It is important to note that the values R, G, and B must be normalized in the interval between 0 and 1. The intensity $I$ and the saturation $S$ are also normalized between 0 and 1.
 
 Another model of this family is formed by the components Hue, Saturation and Value (HSV) and its three-dimensional graphical representation is a hexagonal pyramid derived from the RGB cube~\citep{pedrini:08}. Value, in this context, is the luminance component.
 
-The various hue shades are represented at the top of the pyramid, the saturation is measured along the horizontal axis and value is measured along the vertical axis, which passes through the center of the pyramid. The hue, which corresponds to the edges around the vertical axis, varies from 0 (red) to 360 degrees and the angle between the vertices is 60 degrees. The saturation varies from 0 to 1 and is represented as the ratio of the purity of a given hue to its maximum purity, that is, when $S = 1$. Value varies from 0, at the peak of the pyramid representing the black color, to 1 at the base, where the intensities of the colors are maximum~\citep{pedrini:08}.
+The various hue shades are represented at the top of the pyramid, the saturation is measured along the horizontal axis and value is measured along the vertical axis, which passes through the center of the pyramid. The hue, which corresponds to the edges around the vertical axis, varies from 0 (red) to 360 degrees and the angle between the vertices is 60 degrees. The saturation varies from 0 to 1 and is represented as the ratio of the purity of a given hue to its maximum purity, that is when $S = 1$. Value varies from 0, at the peak of the pyramid representing the black color, to 1 at the base, where the intensities of the colors are maximum~\citep{pedrini:08}.
 
-The transformation of the components of the RGB space to HSV is given by the equations:
+The transformation of the components of the RGB space to HSV is given by the equations \citep{pedrini:08}:
 \begin{align}
 \label{eq:rgb_para_hsv}
 \begin{split}
@@ -565,11 +565,11 @@ The transformation of the components of the RGB space to HSV is given by the equ
 
 \noindent where $m = min(R, G ,B)$ and $M = max(R, G ,B)$. The luminance $V$ and saturation $S$ are normalized between 0 and 1. The $H$ hue ranges from 0 to 360 degrees.
 
-Similarly to HSV, the Hue, Saturation and Lightness (HSL) model is a three-dimensional representation and is formed by two cones of height 1, whose bases are coincident \citep{pedrini:08}.
+Similarly to HSV, the Hue, Saturation, and Lightness (HSL) model is a three-dimensional representation and is formed by two cones of height 1, whose bases are coincident \citep{pedrini:08}.
 
 The hue is determined by the points in the circle of the common bases to the cones. The saturation varies from 0 to 1, depending on the distance to the axis of the cone. The lightness is along the vertical axis common to the two cones and varies in the scale $[0, 1]$, where 0 means black and 1, white~\citep{pedrini:08}.
 
-The conversion of the RGB space to HSL is given by the equations:
+The conversion of the RGB space to HSL is given by the equations \citep{pedrini:08}:
 \begin{align}
 \label{eq:rgb_para_hsl}
 \begin{split}
@@ -589,6 +589,6 @@ The conversion of the RGB space to HSL is given by the equations:
 \end{split}
 \end{align}
 
-\noindent where $m = min(R, G ,B)$ and $M = max(R, G ,B)$. The lightness $L$ and saturation $S$ are normalized between 0 and 1. Note that the transformation of the $H$ component is the same as that used in the conversion of the RGB to HSV space in Eq.~\ref{eq:rgb_para_hsv} and varies between 0 and 360 degrees.
+\noindent where $m = min(R, G, B)$ and $M = max(R, G, B)$. The lightness $L$ and saturation $S$ are normalized between 0 and 1. Note that the transformation of the $H$ component is the same as that used in the conversion of the RGB to HSV space in Eq.~\ref{eq:rgb_para_hsv} and varies between 0 and 360 degrees.
 
 All the color models of this family have the property of thinking of lighter colors, obtained by increasing the brightness or lightness, and darker colors, by the diminution of the same values. The intermediate colors are produced by decreasing the saturation~\citep{pedrini:08}.
