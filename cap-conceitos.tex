@@ -120,7 +120,7 @@ Connectivity between pixels is a very important concept used to establish the bo
 %% ------------------------------------------------------------------------- %%
 \subsection{Arithmetic and logic operations}
 \label{sec:ari_logic_operations}
-Image arithmetic applies one of the standard arithmetic operations or a logical operator to two or more images. The operators are applied in a pixel-wise manner. In other words, the value of a pixel in the output image depends only on the values of the corresponding pixels in the input images. Hence, the images -- or the subsets, if is the case -- must be of the same size. Although image arithmetic is the most simple form of image processing, they are used extensively in a wide range of applications and its use can potentially produce very interesting practical results. A main advantage of arithmetic operators is that the process is very simple and, therefore, fast.
+Image arithmetic applies one of the standard arithmetic operations or a logical operator to two or more images. The operators are applied in a pixel-wise manner. In other words, the value of a pixel in the output image depends only on the values of the corresponding pixels in the input images. Hence, the images -- or the subsets, if it is the case -- must be of the same size. Although image arithmetic is the most simple form of image processing, they are used extensively in a wide range of applications and its use can potentially produce very interesting practical results. A main advantage of arithmetic operators is that the process is very simple and, therefore, fast~\citep{gonzalez:02}.
 
 The most common arithmetic operations between two pixels, say $f_1(x, y)$ and $f_2(x, y)$ of two different images $f_1$ and $f_2$, are the addition, subtraction, multiplication and division as shown in Table~\ref{tab:img_ari_operations}~\citep{pedrini:08}.
 
@@ -179,7 +179,7 @@ In addition to the pixel-wise processing, logic and arithmetic operations can be
 \subsection{Image boundaries}
 \label{sec:image_boundaries}
 
-When working with neighborhood operations, the mask being used, independently of its size, can fall beyond the image boundaries. In other words, this means that, for an image $f$, with size $W \times H$, some part of the mask operator will be located in a nonexistent pixel from an index out of the range given by $W \times H$ matrix. Figure~\ref{fig:img_boundaries} shows an example of this phenomena in a $10 \times 8$ image being used as input for an 4-\textit{neighbors} operator.
+When working with neighborhood operations, the mask being used, independently of its size, can fall beyond the image boundaries. In other words, this means that, for an image $f$, with size $W \times H$, some part of the mask operator will be located in a nonexistent pixel from an index out of the range given by $W \times H$ matrix~\citep{pedrini:08}. Figure~\ref{fig:img_boundaries} shows an example of this phenomenon in a $10 \times 8$ image being used as input for an 4-\textit{neighbors} operator.
 
 \begin{figure}[ht]
     \centering
@@ -202,9 +202,9 @@ There are several ways to work around this problem. One simple mechanism is to s
 %% ------------------------------------------------------------------------- %%
 \section{Image histogram}
 \label{sec:image_histogram}
-In an image processing context, the histogram of an image normally refers to a histogram of the pixel intensity values. The most common representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value~\citep{gonzalez:02}.
+An image is composed by a matrix of pixels whose individual values are a measure of its intensity levels. In particular for image processing, when we are referring to an image histogram, we are talking about a histogram of these pixel intensity levels~\citep{fisher:03}. The most common representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value~\citep{gonzalez:02}.
 
-For instance, in an 8-bit grayscale image there are 256 different possible intensities, and so the histogram will graphically display 256 numbers showing the counting of occurrences of those grayscale values. It is also possible to compute histograms of color images. In this particular case, the channels of the color space in use are split individually from where a separate histogram is calculated.
+For instance, in an 8-bit grayscale image there are 256 different possible intensities, and so, the histogram will graphically display 256 integer numbers showing the counting of occurrences of those grayscale values. It is also possible to compute histograms of color images. In this particular case, the channels of the color space in turn are split individually from where a separate histogram is calculated~\citep{fisher:03}.
 
 \begin{figure}[H]
     \centering
