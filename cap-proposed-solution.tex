@@ -2,7 +2,7 @@
 \chapter{Proposed solution}
 \label{cap:proposed-solution}
 
-\noindent A state of the art skin detection method has been recently developed by~\cite{brancati:17}. Here, we review the method and extend it adding more rules to enforce the constraints and seeking for a better accuracy in terms of false positive rate without hurting the performance of the original method. Basically, we reversed the original hypothesis to create a new method. We combined both to strengthen it. A third variation with neighborhood approach is also provided.
+\noindent A state of the art skin detection method has been recently developed by~\cite{brancati:17}. Here, we review the method and extend it adding more rules to enforce the constraints and seeking for a better accuracy in terms of false positive rate without hurting the performance of the original method. Basically, we reversed the original hypothesis to create a new method. We combined both to strengthen it. A third variation with neighborhood approach is also provided \footnote{All the implementations can be found at \url{https://bitbucket.org/rodrigoadfaria/skin-detector/}.}.
 
 In the case of the neighborhood approach, we also made additional implementations in order to clean up an undesired behavior on the output images that we called \emph{diagonal effect}. In addition, we provide an implementation of a grid search to figure out the best combination of parameters to compute the trapezoids coordinates.
 
@@ -19,9 +19,9 @@ In order to describe the proposed extensions, we will first transcribe the origi
     \label{fig:trapezoids}
 \end{figure}
 
-The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ (Fig.~\ref{fig:trapezoids}) are given by $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ subspaces, respectively. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color falls in the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races. 
+The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ (Fig.~\ref{fig:trapezoids}) are given by $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ subspaces, respectively~\citep{brancati:17}. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color falls in the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races. 
 
-The $Cr_{max}$ parameter is calculated dynamically, taking into account the histogram of the pixels with $Cr$ values in the range $[Cr_{min}, 183]$, looking for the maximum value of $Cr$ associated with at least 0.1\%\footnote{In \citet{brancati:17} this rate is reported to be equal to 10\%. However, in the distributed source code we found the value 0.1\%, that we are using in the experiments.} of pixels in the image. The same applies to $Cb_{min}$, taking the histogram with $Cb$ values in the range $[77, Cb_{max}]$. $Y_0$ and $Y_1$ (shorter base of the upper trapezoid) are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$. A similar procedure is used to find the values of the shorter base of the other trapezoid, $Y_2$ and $Y_3$ (see Fig.~\ref{fig:crmax_computation} for an example).
+The $Cr_{max}$ parameter is calculated dynamically, taking into account the histogram of the pixels with $Cr$ values in the range $[Cr_{min}, 183]$, looking for the maximum value of $Cr$ associated with at least 0.1\% \footnote{In \citet{brancati:17} this rate is reported to be equal to 10\%. However, in the distributed source code we found the value 0.1\%, that we are using in the experiments.} of pixels in the image. The same applies to $Cb_{min}$, taking the histogram with $Cb$ values in the range $[77, Cb_{max}]$. $Y_0$ and $Y_1$ (shorter base of the upper trapezoid) are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$~\citep{brancati:17}. A similar procedure is used to find the values of the shorter base of the other trapezoid, $Y_2$ and $Y_3$ (see Fig.~\ref{fig:crmax_computation} for an example).
 
 \begin{figure}[ht]
     \centering
@@ -30,14 +30,14 @@ The $Cr_{max}$ parameter is calculated dynamically, taking into account the hist
     \label{fig:crmax_computation}
 \end{figure}
 
-The correlation rules between the chrominance components $P_{Cr}$ and $P_{Cb}$ of a pixel $P$ are defined as:
+The correlation rules between the chrominance components $P_{Cr}$ and $P_{Cb}$ of a pixel $P$ are defined as~\citep{brancati:17}:
 \begin{itemize}
     \item the minimum difference between the values $P_{Cr}$ and $P_{Cb}$, denoted $I_P$;
     \item an estimated value of $P_{Cb}$, namely $P_{Cb_s}$;
     \item the maximum distance between the points $(P_Y, P_{Cb})$ and $(P_Y, P_{Cb_s})$, denoted $J_P$.
 \end{itemize}
 
-Therefore, to determine if $P$ is skin, the following equations must hold:
+Therefore, to determine if $P$ is skin, the following equations must hold~\citep{brancati:17}:
 \begin{equation}
     P_{Cr} - P_{Cb} \geq I_P
 \label{condition_c0}
@@ -47,11 +47,11 @@ Therefore, to determine if $P$ is skin, the following equations must hold:
 \label{condition_c1}
 \end{equation}
 
-The estimated value $P_{Cb_{s}}$ is given by \footnote{$dP_{Cb_{s}}$ is the distance between the points $(P_Y, P_{Cb_{s}})$ and $(P_Y, Cb_{max})$ in the $YCb$ subspace, calculated on the basis of $dP_{Cr}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
+The estimated value $P_{Cb_{s}}$ is given by \footnote{$dP_{Cb_{s}}$ is the distance between the points $(P_Y, P_{Cb_{s}})$ and $(P_Y, Cb_{max})$ in the $YCb$ subspace, calculated on the basis of $dP_{Cr}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value~\citep{brancati:17}.}:
 \begin{equation}
     P_{Cb_s} = Cb_{max} - dP_{Cb_s}
 \end{equation}
-where \footnote{$dP_{Cr}$ is the distance between $(P_Y, P_{Cr})$ and $(P_Y, Cr_{min})$ points in the $YCr$ subspace.}:
+where \footnote{$dP_{Cr}$ is the distance between $(P_Y, P_{Cr})$ and $(P_Y, Cr_{min})$ points in the $YCr$ subspace~\citep{brancati:17}.}:
 \begin{align}
     dP_{Cb_s} &= \alpha \cdot dP_{Cr}
     \\
@@ -59,7 +59,7 @@ where \footnote{$dP_{Cr}$ is the distance between $(P_Y, P_{Cr})$ and $(P_Y, Cr_
 \end{align}
 
 \newpage
-The coordinates of the other sides of the trapezoids are given by $[P_Y, H_{Cr}(P_Y)]$ and $[P_Y, H_{Cb}(P_Y)]$, such that:
+The coordinates of the other sides of the trapezoids are given by $[P_Y, H_{Cr}(P_Y)]$ and $[P_Y, H_{Cb}(P_Y)]$, such that~\citep{brancati:17}:
 \begin{align}
   H_{Cr}(Y) &=  \begin{cases}
                 Cr_{min} + h_{Cr}\big(\frac{Y - Y_{min}}{Y_0 - Y_{min}}\big) & Y \in [Y_{min},\ Y_0] \\
@@ -76,13 +76,13 @@ The coordinates of the other sides of the trapezoids are given by $[P_Y, H_{Cr}(
 
 \noindent where $h_{Cr} = Cr_{max} - Cr_{min}$ and $h_{Cb} = Cb_{max} - Cb_{min}$, which are the heights of $T_{YCr}$ and $T_{YCb}$, respectively.
 
-The computation of those points are useful for the calculation of $\alpha$. We first compute the distances $\Delta_{Cr}(P_Y)$ and $\Delta_{Cb}(P_Y)$ between the points $(P_Y, H_{Cr}(P_Y))$, $(P_Y, H_{Cb}(P_Y))$ and the base of the trapezoids:
+The computation of those points are useful for the calculation of $\alpha$. We first compute the distances $\Delta_{Cr}(P_Y)$ and $\Delta_{Cb}(P_Y)$ between the points $(P_Y, H_{Cr}(P_Y))$, $(P_Y, H_{Cb}(P_Y))$ and the base of the trapezoids~\citep{brancati:17}:
 \begin{align}
     \Delta_{Cr}(P_Y) &= H_{Cr}(P_Y) - Cr_{min} \\
     \Delta_{Cb}(P_Y) &= Cb_{max} - H_{Cb}(P_Y)
 \end{align}
 
-Next, the distances are normalized with respect to the difference in size of the trapezoids:
+Next, the distances are normalized with respect to the difference in size of the trapezoids \citep{brancati:17}:
 \begin{align}
   \Delta^{'}_{Cr}(P_Y) &=  \begin{cases}
                 \Delta_{Cr}(P_Y) \cdot \frac{A_{T_{YCb}}} {A_{T_{YCr}}} &\quad \text{if}\ A_{T_{YCr}} \geq A_{T_{YCb}} \\
@@ -96,12 +96,12 @@ Next, the distances are normalized with respect to the difference in size of the
 \end{align}
 where $A_{T_{YCr}}$ and $A_{T_{YCb}}$ are the areas of trapezoid ${T_{YCr}}$ and ${T_{YCb}}$, respectively.
 
-Then, the value of $\alpha$ is given by:
+Then, the value of $\alpha$ is given by~\citep{brancati:17}:
 \begin{equation}
     \alpha = \frac{\Delta^{'}_{Cb}(P_Y)} {\Delta^{'}_{Cr}(P_Y)}
 \end{equation}
 
-Finally, $I_P$ and $J_P$ are given by:
+Finally, $I_P$ and $J_P$ are given by~\citep{brancati:17}:
 \begin{equation}
     I_P = sf \cdot [(\Delta^{'}_{Cr}(P_Y) - dP_{Cr}) + (\Delta^{'}_{Cb}(P_Y) - dP_{Cb_s})]
     \label{eq:ip}
@@ -119,13 +119,13 @@ where:
 %% ------------------------------------------------------------------------- %%
 \section{Extended method}
 \label{sec:proposed_method}
-The hypothesis defined in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
+The hypothesis defined in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point~\citep{faria:18}.
 
-Thus, we have to refactor the correlation rules to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
+Thus, we have to refactor the correlation rules to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value~\citep{faria:18}.}~\citep{faria:18}:
 \begin{equation}
     P_{Cr_s} = dP_{Cr_s} + Cr_{min}
 \end{equation}
-where \footnote{$dP_{Cb}$ is the distance between $(P_Y, P_{Cb})$ and $(P_Y, Cb_{max})$ points in the $YCb$ subspace.}:
+where \footnote{$dP_{Cb}$ is the distance between $(P_Y, P_{Cb})$ and $(P_Y, Cb_{max})$ points in the $YCb$ subspace~\citep{faria:18}.}:
 \begin{equation}
     dP_{Cr_s} = \alpha \cdot dP_{Cb}
 \end{equation}
@@ -133,7 +133,7 @@ where \footnote{$dP_{Cb}$ is the distance between $(P_Y, P_{Cb})$ and $(P_Y, Cb_
     dP_{Cb}   = Cb_{max} - P_{Cb}
 \end{equation}
 
-Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{eq:jp} respectively, can be redefined as:
+Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{eq:jp} respectively, can be redefined as~\citep{faria:18}:
 \begin{equation}
     I^{'}_P = sf \cdot [(\Delta^{'}_{Cr}(P_Y) - dP_{Cr_s}) + (\Delta^{'}_{Cb}(P_Y) - dP_{Cb})]
 \end{equation}
@@ -141,7 +141,7 @@ Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{e
     J^{'}_P = dP_{Cr_s} \cdot \frac{dP_{Cb} + dP_{Cr_s}} {\Delta^{'}_{Cb}(P_Y) + \Delta^{'}_{Cr}(P_Y)}
 \end{equation}
 
-Therefore, to determine if the pixel $P$ is skin, we have to modify the conditions given by Eq. \ref{condition_c0} and \ref{condition_c1}:
+Therefore, to determine if the pixel $P$ is skin, we have to modify the conditions given by Eq. \ref{condition_c0} and \ref{condition_c1}~\citep{faria:18}:
 \begin{equation}
     P_{Cr} - P_{Cb} \geq I^{'}_P
 \label{condition_c00}
@@ -151,7 +151,7 @@ Therefore, to determine if the pixel $P$ is skin, we have to modify the conditio
 \label{condition_c11}
 \end{equation}
 
-Doing this simple extension, we are now able to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis.
+Doing this simple extension, we are now able to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis~\citep{faria:18}.
 
 
 \begin{figure}[!htp]
@@ -165,9 +165,9 @@ Doing this simple extension, we are now able to apply the method to the same set
 %% ------------------------------------------------------------------------- %%
 \section{Neighborhood extended method}
 \label{sec:neighborhood_extended_method}
-\noindent Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we can improve the method using neighbor pixels information, when evaluating a pixel $P$, in order to decide if $P$ represents human skin, or not. Let $N_8^-(P)$ the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order (blue points in Fig.~\ref{fig:pixel_neighborhood}).
+\noindent Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we can improve the method using neighbor pixels information, when evaluating a pixel $P$, in order to decide if $P$ represents human skin, or not. Let $N_8^-(P)$ the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order, that means the blue points in Figure~\ref{fig:pixel_neighborhood}~\citep{faria:18}.
 
-Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of the conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel. Figure~\ref{fig:n8-flowchart} shows a flowchart of the aforementioned procedure described.
+Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of the conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel~\citep{faria:18}. Figure~\ref{fig:n8-flowchart} shows a flowchart of the aforementioned procedure described.
 
 \begin{figure}[ht]
     \centering
