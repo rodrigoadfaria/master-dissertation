@@ -342,7 +342,9 @@ Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hg
 
 Qualitatively, we can see that, in general, the reverse method removes a large part of the reddish pixels from the background of the image (e.g. see the third image in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the reverse method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
 
+However, when we blend the original method along with the reverse in the method we call combined, both background regions of reddish and yellowish pixels are almost completely removed. In addition, salt-like noises are also dropped, since the rules together are more rigid (e.g. see column (e) combined method for the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}). Obviously, this causes an undesired effect of removing some of the skin pixels of which we are interested. This helps us understand why the recall decreases with the application of the combined rule.
 
+\clearpage
 \begin{figure*}[!htb]
     \centering
     \begin{subfigure}[t]{0.15\textwidth}
@@ -350,6 +352,8 @@ Qualitatively, we can see that, in general, the reverse method removes a large p
         \includegraphics[width=\textwidth]{sfa/ori/img51}
         \includegraphics[width=\textwidth]{sfa/ori/img112}
         \includegraphics[width=\textwidth]{sfa/ori/img14}
+        \includegraphics[width=\textwidth]{sfa/ori/img21}
+        \includegraphics[width=\textwidth]{sfa/ori/img140}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -357,6 +361,8 @@ Qualitatively, we can see that, in general, the reverse method removes a large p
         \includegraphics[width=\textwidth]{sfa/gt/img51}
         \includegraphics[width=\textwidth]{sfa/gt/img112}
         \includegraphics[width=\textwidth]{sfa/gt/img14}
+        \includegraphics[width=\textwidth]{sfa/gt/img21}
+        \includegraphics[width=\textwidth]{sfa/gt/img140}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -364,6 +370,8 @@ Qualitatively, we can see that, in general, the reverse method removes a large p
         \includegraphics[width=\textwidth]{sfa/cbs/img51}
         \includegraphics[width=\textwidth]{sfa/cbs/img112}
         \includegraphics[width=\textwidth]{sfa/cbs/img14}
+        \includegraphics[width=\textwidth]{sfa/cbs/img21}
+        \includegraphics[width=\textwidth]{sfa/cbs/img140}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -371,6 +379,8 @@ Qualitatively, we can see that, in general, the reverse method removes a large p
         \includegraphics[width=\textwidth]{sfa/crs/img51}
         \includegraphics[width=\textwidth]{sfa/crs/img112}
         \includegraphics[width=\textwidth]{sfa/crs/img14}
+        \includegraphics[width=\textwidth]{sfa/crs/img21}
+        \includegraphics[width=\textwidth]{sfa/crs/img140}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -378,6 +388,8 @@ Qualitatively, we can see that, in general, the reverse method removes a large p
         \includegraphics[width=\textwidth]{sfa/cmb/img51}
         \includegraphics[width=\textwidth]{sfa/cmb/img112}
         \includegraphics[width=\textwidth]{sfa/cmb/img14}
+        \includegraphics[width=\textwidth]{sfa/cmb/img21}
+        \includegraphics[width=\textwidth]{sfa/cmb/img140}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -385,14 +397,14 @@ Qualitatively, we can see that, in general, the reverse method removes a large p
         \includegraphics[width=\textwidth]{sfa/ngh/img51}
         \includegraphics[width=\textwidth]{sfa/ngh/img112}
         \includegraphics[width=\textwidth]{sfa/ngh/img14}
+        \includegraphics[width=\textwidth]{sfa/ngh/img21}
+        \includegraphics[width=\textwidth]{sfa/ngh/img140}
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in SFA dataset]{Image samples with the results of each method in SFA dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \caption[Image samples with the results of each method in SFA dataset]{Image samples with the results of each method in SFA dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
     \label{fig:results_sfa}
 \end{figure*}
-
-However, when we blend the original method along with the reverse in the method we call combined, both background regions of reddish and yellowish pixels are almost completely removed. In addition, salt-like noises are also dropped, since the rules together are more rigid (e.g. see column (e) combined method for the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}). Obviously, this causes an undesired effect of removing some of the skin pixels of which we are interested. This helps us understand why the recall decreases with the application of the combined rule.
 
 \begin{figure*}[!htb]
     \centering
@@ -401,6 +413,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=2.28cm]{pra/ori/buck_family}
         \includegraphics[width=2.28cm]{pra/ori/3115267-My-very-large-Indian-family-2}
         \includegraphics[width=2.28cm]{pra/ori/chenhao0017me9}
+        \includegraphics[width=2.28cm]{pra/ori/920480_f520}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -408,6 +421,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=2.28cm]{pra/gt/buck_family}
         \includegraphics[width=2.28cm]{pra/gt/3115267-My-very-large-Indian-family-2}
         \includegraphics[width=2.28cm]{pra/gt/chenhao0017me9}
+        \includegraphics[width=2.28cm]{pra/gt/920480_f520}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -415,6 +429,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=2.28cm]{pra/cbs/buck_family}
         \includegraphics[width=2.28cm]{pra/cbs/3115267-My-very-large-Indian-family-2}
         \includegraphics[width=2.28cm]{pra/cbs/chenhao0017me9}
+        \includegraphics[width=2.28cm]{pra/cbs/920480_f520}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -422,6 +437,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=2.28cm]{pra/crs/buck_family}
         \includegraphics[width=2.28cm]{pra/crs/3115267-My-very-large-Indian-family-2}
         \includegraphics[width=2.28cm]{pra/crs/chenhao0017me9}
+        \includegraphics[width=2.28cm]{pra/crs/920480_f520}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -429,6 +445,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=2.28cm]{pra/cmb/buck_family}
         \includegraphics[width=2.28cm]{pra/cmb/3115267-My-very-large-Indian-family-2}
         \includegraphics[width=2.28cm]{pra/cmb/chenhao0017me9}
+        \includegraphics[width=2.28cm]{pra/cmb/920480_f520}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -436,10 +453,11 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=2.28cm]{pra/ngh/buck_family}
         \includegraphics[width=2.28cm]{pra/ngh/3115267-My-very-large-Indian-family-2}
         \includegraphics[width=2.28cm]{pra/ngh/chenhao0017me9}
+        \includegraphics[width=2.28cm]{pra/ngh/920480_f520}
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in Pratheepan dataset]{Image samples with the results of each method in Pratheepan dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \caption[Image samples with the results of each method in Pratheepan dataset]{Image samples with the results of each method in Pratheepan dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
     \label{fig:results_pratheepan}
 \end{figure*}
 
@@ -449,40 +467,46 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=2.28cm]{hgr/ori/D_P_hgr1_id05_2}
         \includegraphics[width=2.28cm]{hgr/ori/N_P_hgr1_id04_5}
         \includegraphics[width=2.28cm]{hgr/ori/V_S_hgr2A2_id03_1}
+        \includegraphics[width=2.28cm]{hgr/ori/2_A_hgr2B_id15_1}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
         \includegraphics[width=2.28cm]{hgr/gt/D_P_hgr1_id05_2}
         \includegraphics[width=2.28cm]{hgr/gt/N_P_hgr1_id04_5}
         \includegraphics[width=2.28cm]{hgr/gt/V_S_hgr2A2_id03_1}
+        \includegraphics[width=2.28cm]{hgr/gt/2_A_hgr2B_id15_1}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
         \includegraphics[width=2.28cm]{hgr/cbs/D_P_hgr1_id05_2}
         \includegraphics[width=2.28cm]{hgr/cbs/N_P_hgr1_id04_5}
         \includegraphics[width=2.28cm]{hgr/cbs/V_S_hgr2A2_id03_1}
+        \includegraphics[width=2.28cm]{hgr/cbs/2_A_hgr2B_id15_1}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
         \includegraphics[width=2.28cm]{hgr/crs/D_P_hgr1_id05_2}
         \includegraphics[width=2.28cm]{hgr/crs/N_P_hgr1_id04_5}
         \includegraphics[width=2.28cm]{hgr/crs/V_S_hgr2A2_id03_1}
+        \includegraphics[width=2.28cm]{hgr/crs/2_A_hgr2B_id15_1}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
         \includegraphics[width=2.28cm]{hgr/cmb/D_P_hgr1_id05_2}
         \includegraphics[width=2.28cm]{hgr/cmb/N_P_hgr1_id04_5}
         \includegraphics[width=2.28cm]{hgr/cmb/V_S_hgr2A2_id03_1}
+        \includegraphics[width=2.28cm]{hgr/cmb/2_A_hgr2B_id15_1}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
         \includegraphics[width=2.28cm]{hgr/ngh/D_P_hgr1_id05_2}
         \includegraphics[width=2.28cm]{hgr/ngh/N_P_hgr1_id04_5}
         \includegraphics[width=2.28cm]{hgr/ngh/V_S_hgr2A2_id03_1}
+        \includegraphics[width=2.28cm]{hgr/ngh/2_A_hgr2B_id15_1}
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in HGR dataset]{Image samples with the results of each method in HGR dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \caption[Image samples with the results of each method in HGR dataset]{Image samples with the results of each method in HGR dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
     \label{fig:results_hgr}
 \end{figure*}
 
@@ -494,6 +518,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=\textwidth]{cpq/ori/1923132}
         \includegraphics[width=\textwidth]{cpq/ori/2747136}
         \includegraphics[width=\textwidth]{cpq/ori/3003632}
+        \includegraphics[width=\textwidth]{cpq/ori/2226882}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -502,6 +527,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=\textwidth]{cpq/gt/1923132}
         \includegraphics[width=\textwidth]{cpq/gt/2747136}
         \includegraphics[width=\textwidth]{cpq/gt/3003632}
+        \includegraphics[width=\textwidth]{cpq/gt/2226882}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -510,6 +536,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=\textwidth]{cpq/cbs/1923132}
         \includegraphics[width=\textwidth]{cpq/cbs/2747136}
         \includegraphics[width=\textwidth]{cpq/cbs/3003632}
+        \includegraphics[width=\textwidth]{cpq/cbs/2226882}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -518,6 +545,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=\textwidth]{cpq/crs/1923132}
         \includegraphics[width=\textwidth]{cpq/crs/2747136}
         \includegraphics[width=\textwidth]{cpq/crs/3003632}
+        \includegraphics[width=\textwidth]{cpq/crs/2226882}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -526,6 +554,7 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=\textwidth]{cpq/cmb/1923132}
         \includegraphics[width=\textwidth]{cpq/cmb/2747136}
         \includegraphics[width=\textwidth]{cpq/cmb/3003632}
+        \includegraphics[width=\textwidth]{cpq/cmb/2226882}
         \caption{}
     \end{subfigure}
     \begin{subfigure}[t]{0.15\textwidth}
@@ -534,10 +563,11 @@ However, when we blend the original method along with the reverse in the method 
         \includegraphics[width=\textwidth]{cpq/ngh/1923132}
         \includegraphics[width=\textwidth]{cpq/ngh/2747136}
         \includegraphics[width=\textwidth]{cpq/ngh/3003632}
+        \includegraphics[width=\textwidth]{cpq/ngh/2226882}
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in Compaq dataset]{Image samples with the results of each method in Compaq dataset: (a) original image (b) ground truth (c) original method \cite{brancati:17} (d) reverse method (e) combined method (f) neighbors method.}
+    \caption[Image samples with the results of each method in Compaq dataset]{Image samples with the results of each method in Compaq dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
     \label{fig:results_cpq}
 \end{figure*}
 \clearpage
