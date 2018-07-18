@@ -1,18 +1,32 @@
 %% ------------------------------------------------------------------------- %%
 \chapter{Theoretical Background}
 \label{cap:conceitos}
-The image analysis is one of the most important tasks in a computer vision system. Its goal is to create a suitable description with enough information to differentiate the objects in the scene. In general, this description is typically based on shapes, textures, gray levels or color of those objects in the image. With this description, useful interpretation can be extracted from the image by means of an automatic computer system that facilitates human perception.
+The 
+% Não tem esse The, Image ...
+image analysis is one of the most important tasks in a computer vision system. Its goal is to create a suitable description with enough information to differentiate the objects in the scene. In general, this description is typically based on shapes, textures, gray levels or color of those objects in the image. With 
+% Melhor Based on, 
+this description, useful interpretation can be extracted from the image by means of an automatic computer system that facilitates human perception.
 
-There is no general agreement among authors regarding where image processing stops and computer vision starts. The first, as the title says, processes the image by applying some transformations on it such as smoothing, sharpening, noise reduction, lightening enhancement, contrasting, stretching, and compression. These will result on a more enhanced and readable image. In addition, the input and output of the process are always images~\citep{gonzalez:02}. On the other hand, computer vision has the ultimate goal to use computers to emulate human vision, including learning and being able to make inferences and take actions based on visual inputs~\citep{gonzalez:02}. In general, computer vision systems benefit from image processing techniques as preprocessing steps to build better applications. Thus, we can see that they definitely are not different fields, but there is an overlapping between them.
+There is no general agreement among authors regarding where image processing stops and computer vision starts. 
+% Aqui há uma certa repetição do que foi dito antes e, de novo, aquela questão do que é DIP e o que é CV. As transformações que levam imagem em outras representações podem ser consideradas CV.
+The first, as the title says, processes the image by applying some transformations on it such as smoothing, sharpening, noise reduction, lightening enhancement, contrasting, stretching, and compression. These will result on a more enhanced and readable image. In addition, the input and output of the process are always images~\citep{gonzalez:02}. On the other hand, computer vision has the ultimate goal to use computers to emulate human vision, including learning and being able to make inferences and take actions based on visual inputs~\citep{gonzalez:02}. In general, computer vision systems benefit from image processing techniques as preprocessing steps to build better applications. Thus, we can see that they definitely are not different fields, but there is an overlapping between them.
+% Embora bacana, parece meio fora de contexto.
 
-Once this work is intended to explore new methods on human skin detection, we will use techniques from both fields. Color space transformation from image processing, for example, as well as human skin segmentation and understanding as part of computer vision. This is a tentative to imitate the human visual system and its capability to recognize others from the same specie -- of course, humans use other characteristics to identify other humans like shape, high, gender, and others, but skin is also part of this recognition system.
+Once 
+% Acho que esse Once está sobrando.
+this work is intended to explore new methods on human skin detection, we will use techniques from both fields. Color space transformation from image processing, for example, as well as human skin segmentation and understanding as part of computer vision. This is a tentative to imitate the human visual system and its capability to recognize others from the same specie -- of course, humans use other characteristics to identify other humans like shape, high, gender, and others, but skin is also part of this recognition system.
+% Parece repetição do que você falou na intro.
 
-Therefore, in this chapter, the theoretical concepts that apply to this research are stated. First, we define and explain the concept of a digital image in section~\ref{sec:digital_image} as well as basic relationship between pixels in section~\ref{sec:image_components_relation}. In section~\ref{sec:image_histogram} we will see how image histograms are fundamental for the methods described in chapter~\ref{cap:proposed-solution} of the proposed solution. Also, the background of image segmentation, mainly for the thresholding technique is shown in section~\ref{sec:image_segmentation}. Thereafter, a brief introduction to color models is provided in section~\ref{sec:color_models} in order to give an overview of the main characteristics of some of the most used in the computer vision and image processing area, on which this research is based.
+% O capítulo deveria começar aqui.
+Therefore, in this chapter, the theoretical concepts that apply to this research are stated. First, we define and explain the concept of a digital image in
+% Section pois é nome próprio
+section~\ref{sec:digital_image} as well as basic relationship between pixels in section~\ref{sec:image_components_relation}. In section~\ref{sec:image_histogram} we will see how image histograms are fundamental for the methods described in chapter~\ref{cap:proposed-solution} of the proposed solution. Also, the background of image segmentation, mainly for the thresholding technique is shown in section~\ref{sec:image_segmentation}. Thereafter, a brief introduction to color models is provided in section~\ref{sec:color_models} in order to give an overview of the main characteristics of some of the most used in the computer vision and image processing area, on which this research is based.
 
 %% ------------------------------------------------------------------------- %%
 \section{Digital image}
 \label{sec:digital_image}
 By definition, an image is a two-dimensional function $f(x, y)$, where $x$ and $y$ are spatial coordinates, and the amplitude of $f$ at any pair of coordinates $(x, y)$ is called the \textit{intensity} or \textit{gray level} of the image at that point. The image is said digital when the function $f(x, y)$ is converted to a discrete form. This is made by a process called \textit{digitalization}, which consists of two steps: \textit{sampling} and \textit{quantization}~\citep{gonzalez:02}.
+% Acho que isso pode ficar complicado pois o (x,y) que está sendo imageado tem uma relação complicada com o (x,y) da imagem digital. Eu inverteria a ordem da frase e diria que você está partindo da imagem digital.
 
 Each element of the discrete function $f(x, y)$ is called \textit{pixel} (picture element), where $0 \leq x \leq W - 1$ and $0 \leq y \leq H - 1$. This means that the image can be represented in a matrix form (see Eq.~\ref{eq:image_function}), where $W$ is the number of lines and $H$ the number of columns of the matrix. Therefore, $W$ and $H$ defines the size or resolution of the image~\citep{pedrini:08}.
 
@@ -42,8 +56,10 @@ Usually, pixels are stored, and therefore read, in this matrix in an order known
 
 
 In a monochromatic digital image, the value of a pixel is a scalar in the range $[L_{min}, L_{max}]$, where $L$ is the (integer) number of gray levels~\citep{pedrini:08}.
+% Problema, quem é L? Where $L_min$  and $L_max$ are in general positive integers\footnote{In some rare occasions, $L_min$ can be a negative integer}, respectively, the minimum and maximum graylevel values.
 
 In a multispectral image, each pixel has a vector value such that $f(x, y) = (L_1, L_2, \ldots L_n)$ where $L_{min} \leq L_i \leq L_{max}$ and $i = 1, 2, 3, \ldots, n$. In general, $L_i$ can represent different measures for each of $(x, y)$ coordinate as well as different intervals~\citep{pedrini:08}.
+% Isso não está bom pois cada L_i pode variar no seu intervalo próprio, que é o caso dos espaços de cores. Assim, melhor: where $L^i_{min} \leq L_i \leq L^i_{max}$ and $i = 1, 2, 3, \ldots, n$.
 
 A colored image is a multispectral image, where the color in each $(x, y)$ point is given by three variables: brightness, hue and saturation~\citep{pedrini:08}. The brightness gives the notion of chromatic intensity. Hue represents the dominant color perceived by an observer. Saturation refers to the relative purity or amount of white light applied to the hue. Combined, hue and saturation are known as chromaticity and, therefore, a color must be characterized by its brightness and chromaticity \citep{gonzalez:02}.
 
@@ -59,6 +75,7 @@ There is a number of applications in image processing and computer vision that u
 \subsection{Neighborhood}
 \label{sec:neighborhood}
 A pixel $p$ with coordinates $(x, y)$ has four horizontal and vertical neighbors whose coordinates are given by:
+% can have up to four\footnote{Respecting the image domain limits.}...
 
 \begin{equation*}
     (x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)
@@ -83,7 +100,9 @@ This set of pixels, called the 4-\textit{neighbors} of $p$, is denoted by $N_4(p
 
 Each pixel of the image is a unite distance from $(x, y)$. Some neighbors of $p$ might lie outside of the image boundaries if $(x, y)$ is on the border of the image~\citep{gonzalez:02}. Those who will use neighborhood operations in the image might take this in consideration to avoid index out of range in those regions.
 
-The four coordinates of the diagonals of $p$ are given by:
+The four coordinates of the diagonals of $p$
+%, if they exist in the domain of the image, 
+are given by:
 \begin{equation*}
     (x + 1, y + 1), (x + 1, y - 1), (x - 1, y + 1), (x - 1, y - 1)
     \label{eq:nd_neighbors}
@@ -108,13 +127,17 @@ See Figure~\ref{fig:n8-neighbors} for a reference on how the $N_8(p)$ neighborho
     \label{fig:n8-neighbors}
 \end{figure}
 
-Despite these are the most common neighbors used in applications, other different distances from $p$ as well as connectivity can be applied. The idea of neighborhood can also be extended to 3-dimensional images where, instead of pixels, the voxels are the coordinates considered.
+Despite 
+% being the most ...
+these are the most common neighbors used in applications, other different distances from $p$ as well as connectivity can be applied. The idea of neighborhood can also be extended to 3-dimensional images where, instead of pixels, the voxels are the coordinates considered.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Connectivity}
 \label{sec:connectivity}
+% The connectivity ..
 Connectivity between pixels is a very important concept used to establish the boundaries of objects and regions in an image. To figure out if two pixels are connected, it must be determined if they are neighbors and if their gray levels satisfy some similarity criteria, such as gray levels, color or texture equality. For instance, in a binary image, where the pixels values vary in the range $[0, 1]$, two pixels may be 4-\textit{neighbors}, but they are connected if and only if they have the same value~\citep{gonzalez:02}.
+% Você usa conectividade além do que você já falou de vizinhança?
 
 
 %% ------------------------------------------------------------------------- %%
@@ -173,13 +196,17 @@ The AND operation outputs 1 in the resulting image when both pixels, at same coo
 All the logic operators can be combined to create other more complex and robust operators. They can be used to combine information between images or to extract information of regions of interest from them~\citep{pedrini:08}.
 
 In addition to the pixel-wise processing, logic and arithmetic operations can be used for neighborhood processing. Typically, this kind of processing uses masks, where terms such as windows and filters are often used as synonym of masks. The idea of the masks is to turn the value of the pixel a function of its own value and its neighbors. It is note mentioning that masks application are made under high computational cost. Therefore, they must be used carefully~\citep{pedrini:08}.
-
+% Seria bom verificar quais dessas operações você usa e deixar apenas elas.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Image boundaries}
 \label{sec:image_boundaries}
 
-When working with neighborhood operations, the mask being used, independently of its size, can fall beyond the image boundaries. In other words, this means that, for an image $f$, with size $W \times H$, some part of the mask operator will be located in a nonexistent pixel from an index out of the range given by $W \times H$ matrix~\citep{pedrini:08}. Figure~\ref{fig:img_boundaries} shows an example of this phenomenon in a $10 \times 8$ image being used as input for an 4-\textit{neighbors} operator.
+When working with neighborhood operations, the mask being used, independently of its size, can fall beyond the image boundaries. In other words, this means that, for an image $f$, with size $W \times H$, some part 
+% parts 
+of the mask operator will be
+% outside the domain of the image.
+located in a nonexistent pixel from an index out of the range given by $W \times H$ matrix~\citep{pedrini:08}. Figure~\ref{fig:img_boundaries} shows an example of this phenomenon in a $10 \times 8$ image being used as input for an 4-\textit{neighbors} operator.
 
 \begin{figure}[ht]
     \centering
@@ -192,7 +219,9 @@ When working with neighborhood operations, the mask being used, independently of
     \fill[pattern=north east lines, pattern color=blue, draw=black] (6.0,5.25) rectangle (6.75,6.0);
     \end{tikzpicture}
 
-    \caption[Representation of a 4-\textit{neighbors} window mask going beyond image borders]{Representation of a 4-\textit{neighbors} window mask going beyond image borders. Here we can solve this problem, for instance, ignoring the first and last lines and columns of the whole image during the operation. Source: adapted from~\citet{pedrini:08}.}
+    \caption[Representation of a 4-\textit{neighbors} window mask going beyond image borders]{Representation of a 4-\textit{neighbors} window mask going beyond image borders. 
+    % Acho que até aqui está bom.
+    Here we can solve this problem, for instance, ignoring the first and last lines and columns of the whole image during the operation. Source: adapted from~\citet{pedrini:08}.}
     \label{fig:img_boundaries}
 \end{figure}
 
@@ -202,7 +231,13 @@ There are several ways to work around this problem. One simple mechanism is to s
 %% ------------------------------------------------------------------------- %%
 \section{Image histogram}
 \label{sec:image_histogram}
-An image is composed by a matrix of pixels whose individual values are a measure of its intensity levels. In particular for image processing, when we are referring to an image histogram, we are talking about a histogram of these pixel intensity levels~\citep{fisher:03}. The most common representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value~\citep{gonzalez:02}.
+An image is composed by a matrix of pixels whose individual values are a measure of its intensity levels. 
+% Isso está repetitivo.
+In particular for image processing, when we are referring to an image histogram, we are talking about a histogram of these pixel intensity levels~\citep{fisher:03}. 
+% Dá para melhorar esta frase de cima.
+The most common 
+% visual 
+representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value~\citep{gonzalez:02}.
 
 For instance, in an 8-bit grayscale image there are 256 different possible intensities, and so, the histogram will graphically display 256 integer numbers showing the counting of occurrences of those grayscale values. It is also possible to compute histograms of color images. In this particular case, the channels of the color space in turn are split individually from where a separate histogram is calculated~\citep{fisher:03}.
 
@@ -219,27 +254,48 @@ For instance, in an 8-bit grayscale image there are 256 different possible inten
     \label{fig:obama_hist}
 \end{figure}
 
-A histogram can be seen as a probability distribution, once the number of pixels for a given intensity level gives an estimate of the probability of occurrence of this intensity level~\citep{gonzalez:02}. Several statistical measures can be obtained from a histogram such that minimum and maximum values, mean, median, standard deviation, and percentiles~\citep{pedrini:08}. Those measures as well as the histogram itself are fundamental for the methods described in chapter~\ref{cap:proposed-solution} of the proposed solution.
+A histogram can be seen as a 
+% discrete 
+probability distribution,
+% só que para isso, teria que ser o histograma relativo, não o absoluto.
+once the number of pixels for a given intensity level gives an estimate of the probability of occurrence of this intensity level~\citep{gonzalez:02}. Several statistical measures can be obtained from a histogram such that minimum and maximum values, mean, median, standard deviation, and percentiles~\citep{pedrini:08}. Those measures as well as the histogram itself are fundamental for the methods described in chapter~\ref{cap:proposed-solution} of the proposed solution.
 
 
 %% ------------------------------------------------------------------------- %%
 \section{Image segmentation}
 \label{sec:image_segmentation}
-Image segmentation can be defined, in a simple manner, as the task of splitting an image into several parts, or regions, who individually represent some particular aspect. These regions who, in general, are the representation of specific objects, are the fundamental parts of an image. This partitioning process is also used by humans, through their visual perception, into surrounding environment to help themselves to recognize them, guide their movements, and for almost every other day by day tasks in their lives~\citep{konstantinos:00}.
+Image segmentation can be defined, in a simple manner, as the task of splitting an image into several parts, or regions, who individually represent some particular aspect. 
+% Image segmentation is the task of partition the image domain so each part is semantically different from each of its neighbors. 
+These regions who, in general, are the representation of specific objects, are the fundamental parts of an image. This partitioning process is also used by humans, through their visual perception, into surrounding environment to help themselves to recognize them, guide their movements, and for almost every other day by day tasks in their lives~\citep{konstantinos:00}.
 
-Segmentation of complex images is one of the most difficult tasks in the field of image processing, where the accuracy determines whether a successful operation or not~\citep{gonzalez:02}. It is wisely a heavy process that consists of many steps such as the analysis of color, shape, motion, geometry, and texture of objects in images. It is worth mentioning that all of these steps are taken effortlessly by our visual system. However, it is definitely not easy to create algorithms whose performance is comparable to that of the human visual system~\citep{konstantinos:00}.
+Segmentation of complex images is one of the most difficult tasks in the field of image processing, where the accuracy determines whether a successful operation or not~\citep{gonzalez:02}. It is wisely a heavy process
+% Não entendi
+that consists of many steps such as the analysis of color, shape, motion, geometry, and texture of objects in images. It is worth mentioning that all of these steps are taken effortlessly by our visual system.
+% Perigo!
+However, it is definitely not easy to create algorithms whose performance is comparable to that of the human visual system~\citep{konstantinos:00}.
 
 Usually, the first task of any image analysis process is image segmentation. All subsequent tasks, such as feature extraction and object recognition rely heavily on the quality of the segmentation~\citep{konstantinos:00}. The algorithms created for image segmentation generally are based on one of two basic properties of intensity values: \emph{discontinuity}, where abrupt changes in intensity, such as points, lines, and edges are detected, and \emph{similarity}, whose approaches are based on regions partitioning, according to a set of predefined criteria~\citep{gonzalez:02}.
 
-One of the \emph{similarity} methods it is the thresholding: a popular and clever method used to segment regions of an image, especially in applications where speed is an important factor -- that is the case for skin detection, once it is used, in general, for face detection, gesture analysis, face tracking, video surveillance systems, medical image analysis, and other human-related image processing applications. Due to the simplicity of implementation, several authors apply this technique for skin detection task~\citep{kovac:03, chai:99, basilio:11, kaur:12, shaik:15, kumar:15}. Others extend this application by using adaptive thresholding~\citep{yogarajah:11, tan:12}.
+One of the \emph{similarity} methods
+%it 
+is the thresholding: a popular and 
+clever 
+% Clever? É um dos métodos mais bobos, por assim dizer, por usar apenas um parâmetro.
+method used to segment regions of an image, especially in applications where speed is an important factor
+% como eu disse, essa frase abaixo deveria vir na introdução
+-- that is the case for skin detection, once it is used, in general, for face detection, gesture analysis, face tracking, video surveillance systems, medical image analysis, and other human-related image processing applications. 
+Due to the simplicity of implementation, several authors apply this technique for skin detection task~\citep{kovac:03, chai:99, basilio:11, kaur:12, shaik:15, kumar:15}. Others extend this application by using adaptive thresholding~\citep{yogarajah:11, tan:12}.
 
+% Ainda não vi tudo, mas acho precoce falar do método da Brancati agora. Ele não vai ser tratado depois? Junta então com o que for colocado depois. Acho que todo o parágrafo abaixo pode sair.
 The method proposed by~\citet{brancati:17}, where a set of dynamic correlation rules are computed to determine skin pixels, can be classified as the kind of \emph{similarity} method. Subsequently, our proposed enhancements described in chapter~\ref{cap:proposed-solution}, in a pixel-based manner, is also of this kind. Other methods detailed in chapter~\ref{cap:related-work}, aforementioned, and used in~\citet{brancati:17} as well here for comparison, are thresholding based. For that reason, a brief introduction on thresholding will be given in section~\ref{sec:thresholding}.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Thresholding}
 \label{sec:thresholding}
-Histogram thresholding is one of the simplest pixel-based techniques for image segmentation due to its intuitive properties and uncomplicated implementation~\citep{gonzalez:02}. Roughly speaking, if an image is composed of distinct regions -- that means, each region in the histogram are represented by a peak, similar to a Gaussian distribution --, adjacent regions could be split into separated groups, once adjacent peaks are likely separated by a valley~\citep{konstantinos:00}. Those valleys can be determined by means of one or more threshold values. However, to find out the threshold value that is the lower bound of a valley is definitely not a trivial task~\citep{konstantinos:00}.
+Histogram thresholding is one of the simplest pixel-based techniques for image segmentation due to its intuitive properties and uncomplicated implementation~\citep{gonzalez:02}. 
+% Na frase de cima, há repetição da ideia que você falou na parte anterior. Melhor tirar de lá e não daqui.
+Roughly speaking, if an image is composed of distinct regions -- that means, each region in the histogram are represented by a peak, similar to a Gaussian distribution --, adjacent regions could be split into separated groups, once adjacent peaks are likely separated by a valley~\citep{konstantinos:00}. Those valleys can be determined by means of one or more threshold values. However, to find out the threshold value that is the lower bound of a valley is definitely not a trivial task~\citep{konstantinos:00}.
 
 
 \begin{figure}[h]
@@ -263,13 +319,14 @@ Histogram thresholding is one of the simplest pixel-based techniques for image s
     \addplot[mark=none] coordinates {(30.5,0.5)} node[pin=90:{$T_2$}]{} ;
     \end{axis}
 \end{tikzpicture}
-
+% Esta figura tem dois problemas. Eu acho que você deveria colocar um histograma real, com os eixos bem rotulados. Basta uma imagem e o seu respectivo histograma. Melhor, uma imagem, seu histograma e a imagem segmentada. 
 \caption[Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds]{Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds. Source: adapted from~\citep{gonzalez:02}.}
 \label{fig:histogram_thresholding}
 \end{figure}
 
-
+% Isso simplifica muito essa explicação de baixo. Ah, em inglês você usa Let tralala be.
 Let Figure~\ref{fig:histogram_thresholding}(a) the gray levels histogram of an image $f(x, y)$. We can clearly see two dominant groups of pixels. One obvious way to separate the objects in this image is to select a threshold $T$ that splits these groups. In other words, for every single point $(x, y)$, if $f(x, y) \leq T$, then $(x, y)$ belongs to the first object (or group), otherwise it belongs to the second object. In general, one of these objects is seen as the background of the image and the other, the portion of interest in the image~\citep{gonzalez:02}.
+
 
 The resulting image $g(x, y)$ after applying the thresholding is given by~\citep{gonzalez:02}:
 \begin{equation}
@@ -279,8 +336,10 @@ g(x, y) =   \begin{cases}
             \end{cases}
 \end{equation}
 
+% O operador threshold é super simples e não merece tanta explicação. 
 Therefore, pixels labeled 0 corresponds to the object left of $T$ in the histogram, and pixels labeled 1 corresponds to the object right of $T$ in histogram -- or background as commonly used in literature. The \emph{single-level thresholding} procedure that produces $g(x, y)$ image is known as \emph{binarization}~\citep{gonzalez:02}.
 
+% Você usa o threshold multinível? Se não usa, tira esta parte, ok? Se usa, apresenta apenas a variante, sem referir-se a uma figura. 
 Figure~\ref{fig:histogram_thresholding}(b) shows a slightly more general case of thresholding, where three distinct groups of the histogram are split by $T_1$ and $T_2$ threshold values. Here, \emph{multi-level thresholding} classifies a point $(x, y)$ as belonging to a specific object class as follows~\citep{gonzalez:02}:
 
 \begin{equation}
@@ -292,22 +351,29 @@ g(x, y) =   \begin{cases}
 \end{equation}
 where $l_1, l_2, l_3$ are different gray levels used to represent each interval given by the thresholding values.
 
-When $T$ depends only on $f(x, y)$, that is, only on gray level values, the threshold is called \emph{global}. When another property -- e.g. the average gray level of a neighborhood centered on $(x, y)$ -- is used to define $T$, the threshold is called \emph{local}. If, in addition, $T$ depends on spatial coordinates $x$ and $y$, the threshold is called \emph{dynamic} or \emph{adaptive}~\citep{gonzalez:02}. This latest is fundamental to either the method developed by~\citet{brancati:17} and those enhancements made by us in chapter~\ref{cap:proposed-solution}. We can look for them as a particular case of adaptive thresholding to fit the skin model pixels in trapezoidal shape distributions.
+When $T$ depends only on $f(x, y)$, that is, only on gray level values, the threshold is called \emph{global}. When another property -- e.g. the average gray level of a neighborhood centered on $(x, y)$ -- is used to define $T$, the threshold is called \emph{local}. If, in addition, $T$ depends on spatial coordinates $x$ and $y$, the threshold is called \emph{dynamic} or \emph{adaptive}~\citep{gonzalez:02}. 
+% De novo, deixa esse comentário para quando você falar do métod da Brancati, senão você corre o risco de ser repetitivo.
+This latest is fundamental to either the method developed by~\citet{brancati:17} and those enhancements made by us in chapter~\ref{cap:proposed-solution}. We can look for them as a particular case of adaptive thresholding to fit the skin model pixels in trapezoidal shape distributions.
 
 
 %% ------------------------------------------------------------------------- %%
 \section{Color models}
 \label{sec:color_models}
 
-The use of color images in computer vision or image processing can be motivated by two main factors. The first refers to the powerful characteristic of color to function as a descriptor that often simplifies the identification and extraction of an object in a scene. The second is related to the ability of humans to discern thousands of tonalities and intensities compared to only a few dozen levels of gray~\citep{gonzalez:02}.
+The use of color images in computer vision or image processing can be motivated by two main factors. The first refers to the powerful characteristic of color to function as a descriptor that often simplifies the identification and extraction of an object in a scene. 
+% Isto não parece muito convincente, afinal, a visão é computacional, não humana. Idem para a seguinte afirmação.
+The second is related to the ability of humans to discern thousands of tonalities and intensities compared to only a few dozen levels of gray~\citep{gonzalez:02}.
 
 The visual perception of color by the human eye should not vary according to the spectral distribution of the natural light incident upon an object. In other words, the color appearance of objects remains stable under different lighting conditions. This phenomenon is known as color constancy~\citep{gevers:12}.
 
 As an example, the grass of a soccer stadium remains green throughout the day, even at dusk when, from a physical point of view, sunlight has a more reddish appearance.
 
 The human perception of colors occurs by the activation of nerve cells that send signals to the brain about brightness, hue, and saturation, which are usually the features used to distinguish one color from another~\citep{gonzalez:02}.
+% Puxa, isso é bem complicado, melhor não colocar isso não. A visão humana é bem complicada e é melhor não entrar nessa seara.
 
+% Eu ainda não vi para frente, mas isso provavelmente será falado mais tarde, não?
 The brightness gives the notion of chromatic intensity. Hue represents the dominant color perceived by an observer. Saturation refers to the relative purity or amount of white light applied to the hue. Combined, hue and saturation are known as chromaticity and, therefore, a color must be characterized by its brightness and chromaticity~\citep{gonzalez:02}.
+
 
 Colors can be specified by mathematical models in tuples of numbers in a coordinate system and a subspace within that system where each color is represented by a single point. Such models are known as the color models~\citep{gonzalez:02}.
 
@@ -341,7 +407,9 @@ In 1931, the CIE established the first mathematical model of a color numerical s
 
 The experiment that originated the standard consisted of detecting the colors perceived by an observer from a mixture of three primary colors X, Y and Z, called tristimulus values. These coordinates gave rise to the CIE XYZ color space which encompasses all the colors that can be perceived by an ordinary human being. For this reason, it is considered a device independent representation~\citep{konstantinos:00}.
 
-The system proposed by the CIE XYZ to describe a color is based on a luminance component Y, and two additional components X and Z, that bring the chromaticity information. This system is formed by imaginary colors that can be expressed as combinations of the normalized measures shown in the equations~\ref{eq:cie_x}, \ref{eq:cie_y} and \ref{eq:cie_z}~\citep{konstantinos:00}.
+The system proposed by the CIE XYZ to describe a color is based on a luminance component Y, and two additional components X and Z, that bring the chromaticity information. This system is formed by imaginary colors that can be expressed as combinations of the normalized measures shown in
+% tirei o the e coloquei em maiúscula.
+Equations~\ref{eq:cie_x}, \ref{eq:cie_y} and \ref{eq:cie_z}~\citep{konstantinos:00}.
 
 \newpage
 \begin{equation}
@@ -441,6 +509,7 @@ Similarly to RGB, CMY is device dependent. The model is widely used in equipment
   \label{fig:cmy-model}
 \end{figure}
 
+% Precisa de falar sobre o modelo para impressão?
 Overlapping the CMY primary colors in equal amounts to generate the black color typically creates a tint that is close to the brown or dark green. To avoid this undesired effect, the black component is usually added to the system, represented by the letter K. This operation gives rise to a new model known as \textbf{CMYK}~\citep{gonzalez:02}.
 
 
