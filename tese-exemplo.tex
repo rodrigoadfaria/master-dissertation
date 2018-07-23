@@ -57,7 +57,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\setlength{\headheight}{13.6pt}
+\setlength{\headheight}{14.5pt}
 \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
 \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}
 \renewcommand{\headrulewidth}{0pt}
@@ -347,11 +347,13 @@ Human skin is made of a stack of different layers, each of which reflects a port
     $f(x, y)$   & Intensity function of an image \\
     $W$         & Number of horizontal samples (lines) of an image \\
     $H$         & Number of vertical samples (columns) of an image \\
-    $L$         & Number of gray-levels \\
-    $L_{min}$   & The minimum gray-level of a range \\
-    $L_{max}$   & The maximum gray-level of a range \\
-    $L_n$       & The $n$-th vector channel of a pixel \\
-    $L_i$       & The $i$-th vector value of a channel of a pixel \\
+    $L$         & Number of gray levels \\
+    $L_{min}$   & The minimum gray level of a range \\
+    $L_{max}$   & The maximum gray level of a range \\
+    $L_n$       & The $n$-th channel of a pixel \\
+    $L_i$       & The $i$-th channel of a pixel \\
+    $L^i_{min}$ & The minimum gray level of the $i$-th channel of a pixel \\
+    $L^i_{max}$ & The maximum gray level of the $i$-th channel of a pixel \\
     $N_4(p)$    & Four neighbors of a pixel $p$ \\
     $N_D(p)$    & Diagonal neighbors of a pixel $p$ \\
     $N_8(p)$    & Eight neighbors of a pixel $p$ \\
@@ -373,11 +375,11 @@ Human skin is made of a stack of different layers, each of which reflects a port
     $\mathbb{R}$& Set of real numbers \\
     $P$         & A point (pixel) in an image \\
     $P_Y$       & $Y$ component of a pixel $P$ in $YCbCr$ model \\
-    $Y_{Cb}$    & Subspace of $Cb$ points in function of $Y$ \\
-    $Y_{Cr}$    & Subspace of $Cr$ points in function of $Y$ \\
 \end{tabular}
 \clearpage
 \begin{tabular}{ll}
+    $Y_{Cb}$    & Subspace of $Cb$ points in function of $Y$ \\
+    $Y_{Cr}$    & Subspace of $Cr$ points in function of $Y$ \\
     $T_{YCb}$   & Trapezoid of the $Y_{Cb}$ subspace \\
     $T_{YCr}$   & Trapezoid of the $Y_{Cr}$ subspace \\
     $A_{T_{YCb}}$& Area of $Y_{Cb}$ trapezoid \\
@@ -415,12 +417,12 @@ Human skin is made of a stack of different layers, each of which reflects a port
     $dP_{Cr}$   & Distance between $P_{Cr}$ point and $Cr_{min}$ \\
     $dP_{Cb}$   & Distance between $P_{Cb}$ point and $Cb_{max}$ \\
     $I_P$       & Minimum difference between $P_{Cr}$ and $P_{Cb}$ with respect to $P_{Cb_s}$ \\
-    $J_P$       & Maximum distance between the points $(P_Y, P_{Cb})$ and $(P_Y, P_{Cb_s})$ \\
-    $I'_P$      & Minimum difference between $P_{Cr}$ and $P_{Cb}$ with respect to $P_{Cr_s}$ \\
-    $J'_P$      & Maximum distance between the points $(P_Y, P_{Cr})$ and $(P_Y, P_{Cr_s})$ \\
 \end{tabular}
 \clearpage
 \begin{tabular}{ll}
+    $J_P$       & Maximum distance between the points $(P_Y, P_{Cb})$ and $(P_Y, P_{Cb_s})$ \\
+    $I'_P$      & Minimum difference between $P_{Cr}$ and $P_{Cb}$ with respect to $P_{Cr_s}$ \\
+    $J'_P$      & Maximum distance between the points $(P_Y, P_{Cr})$ and $(P_Y, P_{Cr_s})$ \\
     $P_{min}$   & Minimum percentile of the histogram of Y luminance component used to \\
                 & compute trapezoid coordinates \\
     $P_{max}$   & Maximum percentile of the histogram of Y luminance component used to \\
