@@ -1,16 +1,72 @@
 %% ------------------------------------------------------------------------- %%
-\chapter{Proposed solution}
+\chapter{Correlation rules and proposed extension}
 \label{cap:proposed-solution}
 
-\noindent A state of the art skin detection method has been recently developed by~\cite{brancati:17}. Here, we review the method and extend it adding more rules to enforce the constraints and seeking for a better accuracy in terms of false positive rate without hurting the performance of the original method. Basically, we reversed the original hypothesis to create a new method. We combined both to strengthen it. A third variation with neighborhood approach is also provided \footnote{All the implementations can be found at \url{https://bitbucket.org/rodrigoadfaria/skin-detector/}.}.
+\noindent A state of the art skin detection method has been recently developed by~\cite{brancati:17}. In this chapter, we review the method and extend it\footnote{All the implementations can be found at \url{https://bitbucket.org/rodrigoadfaria/skin-detector/}.} adding more rules to enforce the constraints and seeking for a better accuracy in terms of false positive rate without hurting the performance of the original method.
 
-In the case of the neighborhood approach, we also made additional implementations in order to clean up an undesired behavior on the output images that we called \emph{diagonal effect}. In addition, we provide an implementation of a grid search to figure out the best combination of parameters to compute the trapezoids coordinates.
 
 %% ------------------------------------------------------------------------- %%
+\section{Correlation rules on YCrYCb colormap}
+\label{sec:correlation_rules_ycrycb}
+The pixels of human skin have a very particular color. They fall into a restricted range of hues and they are not deeply saturated. This phenomenon is due the appearance of skin: formed by a combination of blood (red) and melanin (brown, yellow), which leads the human skin color to be clustered within a small area in the color space~\citep{fleck:96}.
 
+Although this cluster can be seen in different color spaces, authors often use those where it is possible to split the chrominance from the luminance information. YCbCr is one of these color spaces. \citet{chai:99}~firstly observed this cluster within this particular color space (see Fig.~\ref{fig:dataset_sfa_ycbcr}). Based on a given set of training images, they~\citep{chai:99} built a skin color map using a histogram approach. In this map, the Cr and Cb distributions of skin color fall into the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races (see Fig.~\ref{fig:dataset_sfa_ycbcr_hist}).
+
+\begin{figure}[!ht]
+    \centering
+    \begin{minipage}{0.485\textwidth}
+        \includegraphics[width=\textwidth]{sfa/sfa_ycbcr}
+    \end{minipage}
+    ~ % space
+    \begin{minipage}{0.485\textwidth}
+        \includegraphics[width=\textwidth]{sfa/sfa_ycbcr_skin_only}
+    \end{minipage}
+    \caption[3-dimensional view of the YCbCr channels of some image patches of the SFA dataset]{3-dimensional view of the YCbCr channels of some image patches of the SFA dataset. We used the patches with skin samples of size $15 \times 15$. The blue points are skin samples and the green ones are non-skin. On the right (skin samples only), we can clearly see a narrow and thin cluster. Source: adapted from~\citet{chai:99}.}
+    \label{fig:dataset_sfa_ycbcr}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \begin{minipage}{0.485\textwidth}
+        \includegraphics[width=\textwidth]{sfa/sfa_cb_histogram}
+    \end{minipage}
+    ~ % space
+    \begin{minipage}{0.485\textwidth}
+        \includegraphics[width=\textwidth]{sfa/sfa_cr_histogram}
+    \end{minipage}
+    \caption[Histogram of Cb and Cr channels of some image patches of the SFA dataset]{Histogram of Cb and Cr channels of some image patches of the SFA dataset. We used the patches skin samples of size $15 \times 15$. Clearly, the samples (pixels) fall into the intervals observed by~\citet{chai:99}. Source: adapted from~\citet{chai:99}.}
+    \label{fig:dataset_sfa_ycbcr_hist}
+\end{figure}
+
+Therefore, a very simple and practical approach to detect human skin pixels would be to create a set of rules, based in those ranges, that identify the presence of chrominance (Cr, Cb) values who fit into the rules. In fact, this was the approach used by~\citet{chai:99}.
+
+Another important finding regarding the skin color clusters in the YCbCr color space is their behavior when looking for Cb and Cr channels distribution with respect to the Y luminance component separately. In other words, where rely this distribution into the YCb and YCr subspaces. In Figure~\ref{fig:obama_trapezoids}, we can see the distribution (clusters) for an image of the Pratheepan dataset. We can clearly see their geometry as a trapezoidal shape~\citep{hsu:02}.
+
+In fact, the skin color pixels distribution in the YCb and YCr subspaces is a pattern. However, this trapezoidal shape and size will change according to many factors. \citet{brancati:17} observed that change and identified that they are caused mainly due illumination conditions (i.e. the lighting of the scene when the image was acquired influences the size, height, and position of these trapezoidal shape). Moreover, they~\citep{brancati:17} observed an inversely proportional behavior of the chrominance components (Cr, Cb) that could be fitted into a model for skin pixels detection. We will explain in details how this model has been created in Section~\ref{sec:original_method}.
+
+\begin{figure*}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{pra/ori/obama}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{pra/gtc/obama}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.9\textwidth}
+        \includegraphics[width=\textwidth]{image_trap_plot}
+        \caption{}
+    \end{subfigure}
+
+    \caption[Skin pixels distribution in the YCr and YCb subspaces of a sample image]{Skin pixels distribution in the YCr and YCb subspaces of a sample image. Each image is, respectively, (a) sample image from Pratheepan (b) ground truth (c) skin pixels distribution in YCr (orange) and YCb (blue) subspaces. We can clearly see a trapezoidal shape of the pixels distribution. These trapezoids are inversely positioned reflecting the inversely proportional behavior of the chrominance components (Cr, Cb). Source: adapted from~\citet{brancati:17}.}
+    \label{fig:obama_trapezoids}
+\end{figure*}
+
+%% ------------------------------------------------------------------------- %%
 \section{Original method}
 \label{sec:original_method}
-In order to describe the proposed extensions, we will first transcribe the original method that is based on the definition of image-specific trapezoids, named $T_{YCb}$ and $T_{YCr}$, in the \textit{YCb} and \textit{YCr} subspaces, respectively. The trapezoids are essential to verify a relationship between the chrominance components $Cb$ and $Cr$ in these subspaces~\citep{brancati:17}.
+In order to describe the proposed extensions, we will first present the original method that is based on the definition of image-specific trapezoids, named $T_{YCb}$ and $T_{YCr}$, in the \textit{YCb} and \textit{YCr} subspaces, respectively. The trapezoids are essential to verify a relationship between the chrominance components $Cb$ and $Cr$ in these subspaces~\citep{brancati:17}.
 
 \begin{figure}[ht]
     \centering
@@ -19,7 +75,7 @@ In order to describe the proposed extensions, we will first transcribe the origi
     \label{fig:trapezoids}
 \end{figure}
 
-The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ (Fig.~\ref{fig:trapezoids}) are given by $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ subspaces, respectively~\citep{brancati:17}. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color falls in the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races. 
+To show the correlations, Brancati et. al. present the YCbCr space as a 2D graph where the $Y$ is presented in the abscissa and the $Cr$ and $Cb$ components is in the ordinate (see Fig.~\ref{fig:trapezoids}). The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ are given by the coordinates $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ , respectively~\citep{brancati:17}. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color falls in the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races (see details in Section~\ref{sec:correlation_rules_ycrycb}). 
 
 The $Cr_{max}$ parameter is calculated dynamically, taking into account the histogram of the pixels with $Cr$ values in the range $[Cr_{min}, 183]$, looking for the maximum value of $Cr$ associated with at least 0.1\% \footnote{In \citet{brancati:17} this rate is reported to be equal to 10\%. However, in the distributed source code we found the value 0.1\%, that we are using in the experiments.} of pixels in the image. The same applies to $Cb_{min}$, taking the histogram with $Cb$ values in the range $[77, Cb_{max}]$. $Y_0$ and $Y_1$ (shorter base of the upper trapezoid) are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$~\citep{brancati:17}. A similar procedure is used to find the values of the shorter base of the other trapezoid, $Y_2$ and $Y_3$ (see Fig.~\ref{fig:crmax_computation} for an example).
 
@@ -58,7 +114,6 @@ where \footnote{$dP_{Cr}$ is the distance between $(P_Y, P_{Cr})$ and $(P_Y, Cr_
     dP_{Cr} &= P_{Cr} - Cr_{min}
 \end{align}
 
-\newpage
 The coordinates of the other sides of the trapezoids are given by $[P_Y, H_{Cr}(P_Y)]$ and $[P_Y, H_{Cb}(P_Y)]$, such that~\citep{brancati:17}:
 \begin{align}
   H_{Cr}(Y) &=  \begin{cases}
@@ -114,18 +169,20 @@ where:
 \begin{equation}
     sf = \frac{min( (Y_1 - Y_0), (Y_3 - Y_2) )} {max( (Y_1 - Y_0), (Y_3 - Y_2) )}
 \end{equation}
-
+% Acho que um gráfico mostrando um ponto, ou alguns pontos, no trapézio superior e o respectivo ponto no trapézio inferior seria muito didático. 
 
 %% ------------------------------------------------------------------------- %%
 \section{Extended method}
 \label{sec:proposed_method}
-The hypothesis defined in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point~\citep{faria:18}.
+% Aqui seria legal dizer qual a heurística na qual se baseia cada uma das extensões.
 
-Thus, we have to refactor the correlation rules to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value~\citep{faria:18}.}~\citep{faria:18}:
+The hypothesis defined in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
+
+Thus, we have to refactor the correlation rules to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
 \begin{equation}
     P_{Cr_s} = dP_{Cr_s} + Cr_{min}
 \end{equation}
-where \footnote{$dP_{Cb}$ is the distance between $(P_Y, P_{Cb})$ and $(P_Y, Cb_{max})$ points in the $YCb$ subspace~\citep{faria:18}.}:
+where \footnote{$dP_{Cb}$ is the distance between $(P_Y, P_{Cb})$ and $(P_Y, Cb_{max})$ points in the $YCb$ subspace.}:
 \begin{equation}
     dP_{Cr_s} = \alpha \cdot dP_{Cb}
 \end{equation}
@@ -133,7 +190,7 @@ where \footnote{$dP_{Cb}$ is the distance between $(P_Y, P_{Cb})$ and $(P_Y, Cb_
     dP_{Cb}   = Cb_{max} - P_{Cb}
 \end{equation}
 
-Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{eq:jp} respectively, can be redefined as~\citep{faria:18}:
+Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{eq:jp} respectively, can be redefined as:
 \begin{equation}
     I^{'}_P = sf \cdot [(\Delta^{'}_{Cr}(P_Y) - dP_{Cr_s}) + (\Delta^{'}_{Cb}(P_Y) - dP_{Cb})]
 \end{equation}
@@ -141,7 +198,7 @@ Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{e
     J^{'}_P = dP_{Cr_s} \cdot \frac{dP_{Cb} + dP_{Cr_s}} {\Delta^{'}_{Cb}(P_Y) + \Delta^{'}_{Cr}(P_Y)}
 \end{equation}
 
-Therefore, to determine if the pixel $P$ is skin, we have to modify the conditions given by Eq. \ref{condition_c0} and \ref{condition_c1}~\citep{faria:18}:
+Therefore, to determine if the pixel $P$ is skin, we have to modify the conditions given by Eq. \ref{condition_c0} and \ref{condition_c1}:
 \begin{equation}
     P_{Cr} - P_{Cb} \geq I^{'}_P
 \label{condition_c00}
@@ -151,7 +208,7 @@ Therefore, to determine if the pixel $P$ is skin, we have to modify the conditio
 \label{condition_c11}
 \end{equation}
 
-Doing this simple extension, we are now able to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis~\citep{faria:18}.
+Doing this simple extension, we are now able to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis.
 
 
 \begin{figure}[!htp]
@@ -165,9 +222,12 @@ Doing this simple extension, we are now able to apply the method to the same set
 %% ------------------------------------------------------------------------- %%
 \section{Neighborhood extended method}
 \label{sec:neighborhood_extended_method}
-Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we can improve the method using neighbor pixels information, when evaluating a pixel $P$, in order to decide if $P$ represents human skin, or not. Let $N_8^-(P)$ the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order, that means the blue points in Figure~\ref{fig:pixel_neighborhood}~\citep{faria:18}.
+Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we could improve the method using 
+some of the already processed neighbors of a pixel $P$, in order to decide if $P$ represents human skin, or not. 
 
-Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of the conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel~\citep{faria:18}. Figure~\ref{fig:n8-flowchart} shows a flowchart of the aforementioned procedure described.
+To do that, let $N_8^-(P)$ be the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order, that means the blue points in Figure~\ref{fig:pixel_neighborhood}. %aqui você deve citar quem propôs essa ideia de pixels anteriores, que foi o Rosenfeld no artigo sobre rotulação. Tem na minha dissertação de mestrado.
+
+Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of the conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel. Figure~\ref{fig:n8-flowchart} shows a flowchart of the aforementioned procedure described.
 
 \begin{figure}[ht]
     \centering
@@ -203,7 +263,7 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
         \path [line] (pcbs) |- (bothtrue);
     \end{tikzpicture}
 
-    \caption[Flowchart of our proposed neighbors' method]{Flowchart of our proposed neighbors' method. In \textbf{both false} decision, the \textbf{no} path means that one of the rules is true and we are in doubt if $P$ is skin or not -- here is where the neighbors are used to find out the label of $P$. Source: proposed by the author.}
+    \caption[Flowchart of our proposed neighbors' method]{Flowchart of our proposed neighbors method. In \textbf{both false} decision, the \textbf{no} path means that one of the rules is true and we are in doubt if $P$ is skin or not -- here is where the neighbors are used to find out the label of $P$. Source: proposed by the author.}
     \label{fig:n8-flowchart}
 \end{figure}
 
@@ -211,11 +271,9 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
 %% ------------------------------------------------------------------------- %%
 \section{Supplementary neighborhood operations}
 \label{sec:sup_neighborhood_operations}
-The given neighborhood method presented in section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). This is caused due to the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we should look for all the eight neighbors of the pixel $P$ being evaluated.
+The given neighborhood method presented in Section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). In addition, besides being visually undesirable, the \textit{diagonal effect} phenomenon causes us to have an increase in the false positive rate. This is caused due to the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we could use another neighborhood strategy and look for all the eight neighbors of the pixel $P$ being evaluated. However, this particular implementation can add extra computational time and hurt the performance of the method. 
 
-However, this particular implementation can add extra computational time and hurt the performance of the method. In addition, besides being a visually undesirable effect, the \textit{diagonal effect} phenomenon causes us to have an increase in the false positive rate.
-
-Therefore, we created an adaptation of the neighborhood method shown in~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and apply the 8-\textit{neighbors} operations in four different ways:
+Therefore, we created an adaptation of the neighborhood method shown in Section~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and the extended reverse rules for every single pixel. We keep the both results in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and we apply a 8-\textit{neighbors} operations in four different ways:
 
 \begin{enumerate}[label={(\arabic*)}]
     \item we look in the rules answer performing an AND. In other words, if both original and reverse rules are saying this pixel is skin, then we classify it as skin;
@@ -224,7 +282,7 @@ Therefore, we created an adaptation of the neighborhood method shown in~\ref{sec
     \item we look in the neighbors only querying the reversed ($P_{Cr_s}$) rules.
 \end{enumerate}
 
-Of course, this variation will add some additional computational cost once we will scan the image one more time. This implementation can be enhanced, but the idea here is to only explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Some experiments can be seen further in section~\ref{sec:sno_experiments}.
+Of course, this variation will add some additional computational cost once we will scan the image one more time. This implementation can be enhanced, but the idea here is to only explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Some experiments can be seen further in Section~\ref{sec:sno_experiments}.
 
 \begin{figure*}[!htb]
     \centering
@@ -267,13 +325,14 @@ Of course, this variation will add some additional computational cost once we wi
 
 \clearpage
 %% ------------------------------------------------------------------------- %%
-\section{Trapezoids parameters tuning with a grid search strategy}
+% Esta seção deveria vir na parte experimental.
+\section{Parameters tuning via a grid search strategy}
 \label{sec:trapezoids_params_tunning}
-As we could see in previous sections, this model is based on the definition of trapezoids to fit the skin color pixels distribution from a given image. According to~\citet{brancati:17}, the coordinates of each trapezoid within the $YCr$ and $YCb$ sub-spaces are calculated based on the $Y$ luminance component values. $Y_0$ and $Y_1$ are those used to define the shorter side of the upper trapezoid, and $Y_2$ and $Y_3$ the points used to define the shorter side of the lower trapezoid.
+As we could see in previous sections, this model is based on the definition of trapezoids to fit the skin color pixels distribution from a given image. According to~\citet{brancati:17}, the coordinates of each trapezoid within the $YCr$ and $YCb$ sub-spaces are calculated based on the $Y$ luminance component values. Just to remember what was seen before, $Y_0$ and $Y_1$ are those values used to define the shorter side of the upper trapezoid, and $Y_2$ and $Y_3$ are the points used to define the shorter side of the lower trapezoid.
 
 $Y_0$ and $Y_1$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$ (see Fig.~\ref{fig:crmax_computation} for an example). Similarly, $Y_2$ and $Y_3$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cb = Cb_{min}$.
 
-To the best of our knowledge, there is any justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to trigger different combinations of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
+To the best of our knowledge, there is no justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to trigger different combinations of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
 
 Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, but once the trapezoids definition do not change among them, we think that employing it only in combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
 
