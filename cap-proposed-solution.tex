@@ -75,7 +75,7 @@ In order to describe the proposed extensions, we will first present the original
     \label{fig:trapezoids}
 \end{figure}
 
-To show the correlations, Brancati et. al. present the YCbCr space as a 2D graph where the $Y$ is presented in the abscissa and the $Cr$ and $Cb$ components is in the ordinate (see Fig.~\ref{fig:trapezoids}). The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ are given by the coordinates $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ , respectively~\citep{brancati:17}. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color falls in the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races (see details in Section~\ref{sec:correlation_rules_ycrycb}). 
+To show the correlations, Brancati et. al. present the YCbCr space as a 2D graph where the $Y$ is presented in the abscissa and the $Cr$ and $Cb$ components is in the ordinate (see Fig.~\ref{fig:trapezoids}). The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ are given by the coordinates $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ , respectively~\citep{brancati:17}. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color falls in the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races (see details in Section~\ref{sec:correlation_rules_ycrycb}).
 
 The $Cr_{max}$ parameter is calculated dynamically, taking into account the histogram of the pixels with $Cr$ values in the range $[Cr_{min}, 183]$, looking for the maximum value of $Cr$ associated with at least 0.1\% \footnote{In \citet{brancati:17} this rate is reported to be equal to 10\%. However, in the distributed source code we found the value 0.1\%, that we are using in the experiments.} of pixels in the image. The same applies to $Cb_{min}$, taking the histogram with $Cb$ values in the range $[77, Cb_{max}]$. $Y_0$ and $Y_1$ (shorter base of the upper trapezoid) are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$~\citep{brancati:17}. A similar procedure is used to find the values of the shorter base of the other trapezoid, $Y_2$ and $Y_3$ (see Fig.~\ref{fig:crmax_computation} for an example).
 
@@ -222,8 +222,7 @@ Doing this simple extension, we are now able to apply the method to the same set
 %% ------------------------------------------------------------------------- %%
 \section{Neighborhood extended method}
 \label{sec:neighborhood_extended_method}
-Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we could improve the method using 
-some of the already processed neighbors of a pixel $P$, in order to decide if $P$ represents human skin, or not. 
+Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we could improve the method using some of the already processed neighbors of a pixel $P$, in order to decide if $P$ represents human skin, or not.
 
 To do that, let $N_8^-(P)$ be the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order, that means the blue points in Figure~\ref{fig:pixel_neighborhood}. %aqui você deve citar quem propôs essa ideia de pixels anteriores, que foi o Rosenfeld no artigo sobre rotulação. Tem na minha dissertação de mestrado.
 
@@ -322,46 +321,3 @@ Of course, this variation will add some additional computational cost once we wi
     \caption[Image samples with the diagonal effect after the neighbors method segmentation]{Image samples with the diagonal effect after the neighbors method segmentation. Each image is from (top-down) SFA, Pratheepan, HGR, and Compaq datasets, respectively, where: (a) original image (b) ground truth (c) combined method (f) neighbors method. Independently of the classification accuracy, we can clearly see the diagonal effect present in the output of the neighbors method segmentation in comparison with combined. Besides being a visually undesirable effect, this phenomenon causes us to have an increase in the false positive rate.}
     \label{fig:diagonal_effect}
 \end{figure*}
-
-\clearpage
-%% ------------------------------------------------------------------------- %%
-% Esta seção deveria vir na parte experimental.
-\section{Parameters tuning via a grid search strategy}
-\label{sec:trapezoids_params_tunning}
-As we could see in previous sections, this model is based on the definition of trapezoids to fit the skin color pixels distribution from a given image. According to~\citet{brancati:17}, the coordinates of each trapezoid within the $YCr$ and $YCb$ sub-spaces are calculated based on the $Y$ luminance component values. Just to remember what was seen before, $Y_0$ and $Y_1$ are those values used to define the shorter side of the upper trapezoid, and $Y_2$ and $Y_3$ are the points used to define the shorter side of the lower trapezoid.
-
-$Y_0$ and $Y_1$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$ (see Fig.~\ref{fig:crmax_computation} for an example). Similarly, $Y_2$ and $Y_3$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cb = Cb_{min}$.
-
-To the best of our knowledge, there is no justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to trigger different combinations of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
-
-Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, but once the trapezoids definition do not change among them, we think that employing it only in combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
-
-\begin{codebox}
-\kern-1.5em $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$\\
-\li $P_{min} \gets 5$
-\li $Results \gets []$
-\li
-\li \While $P_{min} \leq 95$
-\li \Do
-        $P_{max} \gets P_{min}$
-\li     \While $P_{max} \leq 95$
-\li     \Do
-            $\proc{Set-Combined-Method-Y-Parameters}(P_{min}, P_{max})$ \label{alg:tpgs-set-cmb-y}
-\li         $\proc{Segment-Dataset-Images}(dataset)$    \label{alg:tpgs-segment-dtset}
-\li         $Precision, Recall, Fmeasure \gets \proc{Compute-Metrics}(dataset)$ \label{alg:tpgs-compt-metrcs}
-\li         $\proc{Push}(Results, P_{min}, P_{max}, Precision, Recall, Fmeasure)$ \label{alg:tpgs-push-rslts}
-\li\li      $P_{max} \gets P_{max} + 5$
-        \End
-\li      $P_{min} \gets P_{min} + 5$
-    \End
-\li
-\li $\proc{Sort-By}(Results, Fmeasure, Precision, Recall)$
-\li \Return $Results$
-\end{codebox}
-
-
-\newpage
-
-In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $P_{min}$ and $P_{max}$\footnote{$P_{min}$ is the minimum percentile index of the $Y$ luminance values. $P_{max}$ is the maximum percentile index of the $Y$ luminance values.} percentiles in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according to the criteria aforementioned at the end of the procedure.
-
-Detailed output of this experiments and analysis can be seen in chapter~\ref{cap:experimentos}, specifically in section~\ref{sec:grid_search_experiments}, where an examination of the behavior of the most performing parameters is given as well as others which did not succeed.

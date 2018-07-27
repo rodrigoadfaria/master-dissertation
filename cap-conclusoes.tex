@@ -2,51 +2,27 @@
 \chapter{Conclusions}
 \label{cap:conclusoes}
 
-We started this thesis by describing the problem of skin detection, explaining our motivation and determining our main objectives. Further, we reviewed the literature with a large number of works of skin detection based on color information, comparing their differences in terms of techniques and classifiers, mainly from the point of view of performance, color models, skin color modeling, and datasets. Next, we stated the theoretical concepts that apply to this research where we briefly showed some techniques from image processing and computer vision fields used during the project, such as color space transformation, human skin segmentation, and understanding, etc. Then, we reviewed the method proposed by~\citet{brancati:17} and we added new variations of it. Also, we showed an implementation of a grid search strategy to figure out the best combination of parameters to the method. Finally, we presented some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq.
+We started this thesis by describing the problem of skin detection, explaining our motivation and determining our main objectives. Further, we reviewed the literature with a large number of works of skin detection, based on color information, comparing their differences in terms of techniques and classifiers, mainly from the point of view of performance, color models, skin color modeling, and datasets. Next, we stated the theoretical concepts that apply to this research where we briefly showed some techniques from image processing and computer vision fields used during the project, such as color space transformation, human skin segmentation, and understanding, etc. Then, we reviewed the method proposed by~\citet{brancati:17} and we added new variations of it.
 
-This chapter comes this thesis to an end by addressing our conclusions regarding our research, objectives, and contributions. In section~\ref{sec:final_considerations} we do a brief summary of the whole timeline of this research project and sum up the final considerations. Lastly, in section~\ref{sec:future_work} we compile the set of future work that can potentially bring our research even closer to better solutions.
+Also, we showed an implementation of a grid search strategy to figure out the best combination of parameters to the method. Finally, we presented some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq.
+
+This chapter address some conclusions regarding our research, objectives, and contributions. In Section~\ref{sec:final_considerations} we sum up the final considerations. Finally, in Section~\ref{sec:future_work}, we present some possible future work.
 
 
 %------------------------------------------------------
 \section{Final considerations}
 \label{sec:final_considerations}
-The credits in the required subjects for the master's program in Computer Science at IME-USP were fulfilled from March 2015 until June 2016, according to the table~\ref{tab:subjects}. Thereafter, we started the bibliographic research for the development of this project. During this period up to the examining committee, preliminary experiments were carried out which served as a basis for subsequent steps. It is worth mentioning that the most important recommendation was done by a Committee's member, Prof. Dr. Roberto Marcondes, who has indicated for us the fundamental related paper of this work.
+The method proposed by~\citet{brancati:17} is a novel rule-based skin detection method that works in the YCbCr color space based on correlation rules that evaluate the combinations of chrominance Cb, Cr values to identify human skin pixels depending on the shape and size of dynamically generated skin color clusters (trapezoids). The method is surprisingly simple and clever and it established a new tier.
 
+Because the authors left the code available, we reproduced the original experiments and also checked if the same color patterns were presented in RGB, HSV, and Lab color spaces, or other applications as finding tree leaves, but the results were not consistent as the original approach for human skin using YCbCr space.
 
-\begin{table}[!htpb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{6pt}
+In this research project, we introduced two extensions based on a hypothesis that the original rule could be reversed and also taking into consideration that a human skin pixel does not appear isolated. We also made a third extension that combines the original rule with the reversed one in a more strengthen method in terms of precision. All these extensions are simple and do not hurt the efficiency of the original method.
 
-\begin{tabular}{|c|l|c|}\hline
- \thb{Code} & \thb{Name} & \thb{Conclusion} \\ \hline
- MAC5832 & Machine Learning: Models, Algorithms and Applications    & Jun/2015 \\ \hline
- MAC5744 & Introduction to Computer Graphics                        & Jun/2015 \\ \hline
- MAC5768 & Computer Vision and Image Processing - Part I            & Jun/2015 \\ \hline
- MAC5711 & Analysis of Algorithms                                   & Nov/2015 \\ \hline
- MAC6914 & Learning Methods in Computer Vision                      & Nov/2015 \\ \hline
- MAC4722 & Languages, Automata and Computability                    & Jun/2016 \\ \hline
- MAC5714 & Object-Oriented Programming                              & Jun/2016 \\\hline
-
-\end{tabular}
-\end{small}
-\caption{Subjects taken in the course of the master's program in Computer Science at IME-USP.}
-\label{tab:subjects}
-\end{table}
-
-This paper, proposed by~\citet{brancati:17}, is a novel rule-based skin detection method that works in the YCbCr color space based on correlation rules that evaluate the combinations of chrominance Cb, Cr values to identify human skin pixels depending on the shape and size of dynamically generated skin color clusters (trapezoids).
-
-Despite dozens of works in this field, using different techniques other than rule-based, human skin segmentation is still an unsolved problem, mainly for the case of real-time applications. In~\cite{brancati:17}, a surprisingly simple and clever method has been presented and it established a new tier.
-
-We reproduced the original experiments and also checked if the same patterns were presented in RGB, HSV, and Lab color spaces, or other applications as finding tree leaves, but the results were not consistent as the original approach for human skin using YCbCr space.
-
-In this research project, we introduced two extensions based on a hypothesis that the original rule could be reversed and also taking into consideration that a human skin pixel does not appear isolated. A third extension combines the original rule with the reversed one in a more strengthen method in terms of precision. All these extensions are simple and do not hurt the efficiency of the original method.
-
-We tested the extensions in four standard public datasets and the experiments showed that our methods improve the accuracy of skin detection, even when there exists a huge variation in ethnicity and illumination. Moreover, our approach proved to be very competitive, outperforming alternative state-of-the-art work. In addition, we implemented the grid search for the parameters tuning and the supplementary neighborhood operations as well as new tools to process the datasets, binarize images, and a visualization web application for the problem of skin detection\footnote{Available at \url{https://bitbucket.org/rodrigoadfaria/skin-detector-ws}.}.
+We tested the extensions in four standard public datasets and the experiments showed that our methods improve the accuracy of skin detection, even when there exists a huge variation in ethnicity and illumination. Moreover, our approach proved to be very competitive, outperforming alternative state-of-the-art work. In addition, we implemented a grid search for the parameters tuning and the supplementary neighborhood operations as well as new tools to process the datasets, binarize images, and a visualization web application for the problem of skin detection\footnote{Available at \url{https://bitbucket.org/rodrigoadfaria/skin-detector-ws}.}.
 
 Our results confirm that skin color is an extremely powerful cue for detecting human skin in unconstrained imagery. Other local properties can be experimented to be used in a future work, along with the methods presented here, such as texture, shape, geometry, and other neighborhood operations.
 
-Thus, we can say that the main objective of this research -- create or improve new methods for skin detection, according to the rule-based approach -- has been successfully completed. More specifically, the main objective to achieve improvements in the method proposed by~\citet{brancati:17} in order to reduce the false positive rate. Furthermore, we proposed a deep analysis of the parameters chosen for the trapezoids definition which started a new discussion as well as the possibility to apply neighborhood operations. Additionally, we have accomplished our secondary objective by publishing a paper in VISAPP conference in earlier 2018.
+Finally, part of the work has been published in an international conference  (VISAPP) in earlier 2018.
 
 
 %------------------------------------------------------
@@ -55,14 +31,13 @@ Thus, we can say that the main objective of this research -- create or improve n
 
 In the future, extended works could explore further the connectivity of the skin pixels and, because there is so far no explanation why the original method works so well, it would be valuable to statistically analyze the shape of the trapezoids on the YCbCr space and try to correlate with the classification accuracy.
 
-Our intuition, based on the experimental results, says that trapezoids features such as size, area, symmetry, and others, could be used to establish a relationship with the classification accuracy. Moreover, if this relationship exists, the shape of the trapezoids could be previously processed, for instance by filtering image illumination, to obtain better classification results.
+Our intuition, based on the experimental results, says that trapezoids features such as size, area, symmetry, and others, could be used to establish a relationship with the classification accuracy. Moreover, the shape of the trapezoids could be previously processed, for instance by filtering image illumination, to obtain better classification results.
 
-We have seen in the proposed reversed method that the inversely proportional behavior of the chrominance components is a reality. The experiments confirmed these results intuitively. However, it would be tremendously valuable to have a mathematical proof to show carefully this relationship, which would take the readers beyond any reasonable doubt.
+The neighborhood operations add some additional computational cost but the implementation can be enhanced as well as other techniques applied, such as applying weights when counting neighboring pixels.
 
-The supplementary neighborhood operations are given in section~\ref{sec:sup_neighborhood_operations} will add some additional computational cost once we will scan the image one more time. Primarily, the idea of those variations is to only explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures could be improved. This implementation can be enhanced as well as other techniques applied, such as applying weights when counting neighboring pixels.
+We have also implemented a grid search algorithm to understand the parameters selection in Section~\ref{sec:grid_search_experiments}. This approach can be improved and we could try to learn the best parameters of the trapezoids by means of Machine Learning techniques.
 
-We have also implemented a grid search algorithm to understand the parameters selection in section~\ref{sec:grid_search_experiments}. However, additional experiments can be made on this topic. A good suggestion would involve a new method to learn the best parameters of the trapezoids by means of machine learning techniques.
+A recent test paper comparing different color spaces suggests that YCgCr is also a good candidate for this problem~\citep{chaves:10}. In fact, YCbCr and YCgCr color spaces are very similar. Therefore, the same color relations can be presented in this space.
 
-We have checked if the same patterns would appear in RGB, HSV, and Lab color spaces, the results were not consistent as the original approach for human skin using YCbCr space. However, a surprising comparison between different color spaces in~\citet{chaves:10} suggests that YCgCr is a very good candidate for this problem. In fact, YCbCr and YCgCr color spaces are very similar. Therefore, if one finds out the same patterns (trapezoids shapes) appear in this space, he/she could obtain a better result, because green color is quite better than blue color to detect skin, so it is a very worthwhile change.
-
-Another important investigation that could be addressed is related to the ranges of the chromaticity (Cb, Cr) channels used in the definition of the correlation rules. In~\citet{brancati:17}, as well as in our proposed methods, the thresholds used were given by~\citep{chai:99}. However,~\citet{basilio:11} found out that the thresholds were robust only against images with Caucasian people. In the end,~\citet{basilio:11} proposed different values that seems to be more robust to find human skin from different people races. This simple change may also result in improved human skin segmentation quality.
+%Another important investigation that could be addressed is related to the ranges of the chromaticity (Cb, Cr) channels used in the definition of the correlation rules. In~\citet{brancati:17}, as well as in our proposed methods, the thresholds used were given by~\citep{chai:99}. However,~\citet{basilio:11} found out that the thresholds were robust only against images with Caucasian people. In the end,~\citet{basilio:11} proposed different values that seems to be more robust to find human skin from different people races. This simple change may also result in improved human skin segmentation quality.
+% Rodrigo, eu achei que as estensões tinham dado conta de aumentar a robustez. Pelo que eu entendi aqui, você acha que esses novos thresholds vão dar conta de aumentar a robustez sem precisar as extensões?

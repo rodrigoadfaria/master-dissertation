@@ -1,5 +1,5 @@
 %% ------------------------------------------------------------------------- %%
-\chapter{Evaluation}
+\chapter{Experimental Evaluation}
 \label{cap:experimentos}
 
 In this chapter, we present some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a brief definition of the evaluation metrics used is shown for the sake of clarity. We also provide some results of the supplementary neighborhood adaptation that we built to remove the \emph{diagonal effect} as well as to explore different neighbors techniques. Finally, we show the grid search parameters experiments results with aim of trapezoids parameters tuning. All the experiments are analyzed and discussed in each section separately.
@@ -14,60 +14,13 @@ We gathered four widely known datasets, SFA, Pratheepan, HGR, and Compaq, which 
 
 
 %------------------------------------------------------
-\subsection{UCI}
-\label{sec:datasets_uci}
-Named UCI in this work, this dataset was proposed by~\citet{uci-skin-dataset:12} and obtained from the machine learning repository of the University of California in Irvine~\citep{lichman:13}. The dataset consists of pixel samples of images of various skin and non-skin textures obtained from thousands of arbitrary faces images of different ages, gender, and races~\citep{pal-texas:04, feret:96}.
-
-The UCI contains 245,057 samples, composed of 3 attributes that constitute the input vector $x = [x_1, x_2, x_3]$, $x \in \mathbb{R}^{d}$, where $d$ is the space dimension which represents, respectively, blue (B), green (G) and red (R) channels of the RGB color model. In addition, a fourth column determines the class to which the sample $x$ belongs, denoted by $y$, where $y \in Y$ and $Y = \{+1, -1\}$. In other words, each sample is an RGB pixel with a given label.
-
-The Table~\ref{tbl:uci_dataset} exemplifies a short excerpt from the UCI database. It is worth mentioning that 194,198 out of the 245,057 are non-skin pixels and 50,859 pixels with different skin tones. In addition, the images that were used to extract the dataset were not made available by the authors.
-
-\begin{table}[H]
-\centering
-\begin{small}
-\begin{tabular}{|c|c|c|c|} \hline
-\thb{B} & \thb{G} & \thb{R}  & \thb{Label}  \\ \hline
-74	    & 85      & 123	     & 1     \\
-207	    & 215     & 255      & 1     \\
-74      & 82      & 122	     & 1     \\
-202     & 211     & 255      & 1     \\
-54      & 72      & 125      & 1     \\
-\ldots  &\ldots   & \dots    &\ldots \\
-166     & 164     & 116      & -1    \\
-148     & 150     & 91       & -1    \\
-29      & 26      & 5        & -1    \\
-167     & 166	  & 115	     & -1    \\
-180	    & 177	  & 133	     & -1    \\ \hline
-\end{tabular}
-\caption[Excerpt with samples from the UCI dataset]{Excerpt with samples from the UCI dataset. Each of the first three columns represents a pixel channel of the RGB color space ranging from 0 to 255. The fourth column is the label assigned to the sample, which can assume +1 if it is skin and -1, otherwise. Originally, the class representing a non-skin pixel had value 2, replaced by -1 for compliance with the experiments.}
-\label{tbl:uci_dataset}
-\end{small}
-\end{table}
-
-Since the data are points in the RGB space, it is possible to plot it for a better interpretation of them, as shown in the Figure~\ref{fig:dataset_uci}.
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \includegraphics[width=\textwidth]{uci_skinns_plot}
-    \end{minipage}
-    ~ % space
-    \begin{minipage}{0.45\textwidth}
-        \includegraphics[width=\textwidth]{uci_skin_plot}
-    \end{minipage}
-    \caption[3-dimensional view of the RGB channels of the UCI dataset]{3-dimensional view of the RGB channels of the UCI dataset. The blue points are skin samples and the green ones are non-skin. On the left are all samples of the dataset; to the right only the skin samples. Source: proposed by the author.}
-    \label{fig:dataset_uci}
-\end{figure}
-
-
-%------------------------------------------------------
 \subsection{SFA}
 \label{sec:datasets_sfa}
 SFA, the name of the dataset proposed by~\citet{sfa-skin-dataset:13}, stands for Skin of FERET and AR Database. The SFA is a set of images of frontal faces obtained from two other color image databases: the FERET, created by~\citet{feret:96}, and the AR proposed by~\citet{ar-face-database:98}, which provided 876 and 242 images each, respectively. It is important to notice that AR images have a white background and small variations of skin color. In other words, the environment is more controlled than the images in FERET~\citep{sfa-skin-dataset:13}. Figure~\ref{fig:sfa_dataset_exemplo} shows some of the 1,118 samples available.
 
 \citet{sfa-skin-dataset:13} also extracted different window patches of each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a window of size $n \times n$, where $n$ is odd, with a central pixel, from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in Figure~\ref{fig:sfa_dataset_janelas}.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=.3\textwidth]{sfa-janelas}
   \caption[Structure of the windows that form the SFA patch samples]{Structure of the windows that form the SFA patch samples. In total, there are 3,354 skin samples and 5,590 non-skin samples for each window size. Source: \citet{sfa-skin-dataset:13}.}
@@ -144,7 +97,7 @@ The database for Hand Gesture Recognition (HGR) contains the gestures from Polis
 
 The images within it were acquired in three different series. A set of 899 was captured in uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and uncontrolled (41) background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions~\citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
-\begin{figure}[H]
+\begin{figure}[!hbt]
     \centering
     \begin{subfigure}[t]{0.3\textwidth}
         \includegraphics[width=\textwidth]{hgr/ori/D_P_hgr1_id05_2}
@@ -315,7 +268,7 @@ It is important to note that, the significant improvement of the \textit{Recall}
 
 In general, the reverse method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it still has very good \textit{F-measure} rates.
 
-The neighborhood approach achieved the best \textit{F-measure} in Compaq, HGR, and Pratheepan. Moreover, the other metrics still are at a very high rate for all datasets, being in the top second in almost all cases. If we compare the neighbors approach with the original, except for the \textit{Recall} -- where we only got the best result in SFA --, we can see that our implementation achieved the best measures practically for all other metrics, in the four datasets.
+The neighborhood approach achieved the best \textit{F-measure} results in Compaq, HGR, and Pratheepan. Moreover, the other metrics still are at a very high rate for all datasets, being in the top second in almost all cases. If we compare the neighbors approach with the original, except for the \textit{Recall} -- where we only got the best result in SFA --, we can see that our implementation achieved the best measures practically for all other metrics, in the four datasets.
 
 Therefore, the combined and neighbors approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that is useful in different application domains, mainly near real-time systems (processing time of about 10ms for a typical image of dimensions 300x400).
 
@@ -338,7 +291,7 @@ Neighbors                       & 0.8866          \\ \hline
 
 \end{table*}
 
-Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hgr} and~\ref{fig:results_cpq}, present some qualitative results with image samples in column (a) along with the results for each method tested. Column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
+Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hgr} and~\ref{fig:results_cpq}, present some qualitative results for each method tested. Column (a) are image samples, column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
 
 Qualitatively, we can see that, in general, the reverse method removes a large part of the reddish pixels from the background of the image (e.g. see the third image in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the reverse method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
 
@@ -573,7 +526,7 @@ However, when we blend the original method along with the reverse in the method 
 \clearpage
 
 %% ------------------------------------------------------------------------- %%
-\section{Supplementary neighborhood operations experiments}
+\section{Supplementary neighborhood experiments}
 \label{sec:sno_experiments}
 In this section, we will show some experimental results of the supplementary neighborhood adaptation described in section~\ref{sec:sup_neighborhood_operations}. In short, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Finally, we count those answers into four different strategies. The results can be seen in table~\ref{tab:sup_neighbors_results}.
 
@@ -627,12 +580,42 @@ The AND conjunction approach is most similar to that implemented in neighborhood
 Therefore, for the sake of implementation, the approach given by the neighborhood implementation (Proposed~\ref{sec:neighborhood_extended_method}) may be a good starting point. Nevertheless, we can apply some other complementary technique, such as weighting the distance among the pixels, to measure those more or less relevant to the decision making in the neighborhood. This can potentially diminish the effect of this trade-off and obtain more harmonic measures. For the \textit{diagonal effect}, we can use a more symmetric window, similar to the one used in the adaptations experimented here, to produce better results and increase this undesired anomaly.
 
 
-%------------------------------------------------------
-\section{Grid search parameters experiments}
+%% ------------------------------------------------------------------------- %%
+\section{Parameters tuning via a grid search strategy}
 \label{sec:grid_search_experiments}
-In one part of this work, we are concerned with understanding and, perhaps, improving the choice of parameters that define the trapezoids. They are a fundamental part of the model that segments the skin pixels in an image, the main role of the methods developed here. In short, as described in section~\ref{sec:trapezoids_params_tunning}, 5${th}$ and 95$th$ percentiles of the histogram of the $Y$ luminance component have been used by~\citet{brancati:17} to be the right parameters to define the trapezoids coordinates. For this reason, we decided to trigger different combinations of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentiles have been used?
+As we could see in Chapter~\ref{cap:proposed-solution}, this model is based on the definition of trapezoids to fit the skin color pixels distribution from a given image. According to~\citet{brancati:17}, the coordinates of each trapezoid within the $YCr$ and $YCb$ sub-spaces are calculated based on the $Y$ luminance component value. Just to remember what was seen before, $Y_0$ and $Y_1$ are those values used to define the shorter side of the upper trapezoid, and $Y_2$ and $Y_3$ are the points used to define the shorter side of the lower trapezoid.
 
-Thus, we created a simple grid search algorithm (see details in section~\ref{sec:trapezoids_params_tunning}) to find the best range combination of those parameters. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics. The results with these metrics, in that given order, for each dataset, can be seen in Appendix~\ref{ape:trapezoids_parameters_tuning}.
+$Y_0$ and $Y_1$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$ (see Fig.~\ref{fig:crmax_computation} for an example). Similarly, $Y_2$ and $Y_3$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cb = Cb_{min}$.
+
+To the best of our knowledge, there is no justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to trigger different combinations of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
+
+Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, once trapezoids definition do not change among them. So, we think that using combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics, as detailed in section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
+
+\begin{codebox}
+\kern-1.5em $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$\\
+\li $P_{min} \gets 5$
+\li $Results \gets []$
+\li
+\li \While $P_{min} \leq 95$
+\li \Do
+        $P_{max} \gets P_{min}$
+\li     \While $P_{max} \leq 95$
+\li     \Do
+            $\proc{Set-Combined-Method-Y-Parameters}(P_{min}, P_{max})$ \label{alg:tpgs-set-cmb-y}
+\li         $\proc{Segment-Dataset-Images}(dataset)$    \label{alg:tpgs-segment-dtset}
+\li         $Precision, Recall, Fmeasure \gets \proc{Compute-Metrics}(dataset)$ \label{alg:tpgs-compt-metrcs}
+\li         $\proc{Push}(Results, P_{min}, P_{max}, Precision, Recall, Fmeasure)$ \label{alg:tpgs-push-rslts}
+\li\li      $P_{max} \gets P_{max} + 5$
+        \End
+\li      $P_{min} \gets P_{min} + 5$
+    \End
+\li
+\li $\proc{Sort-By}(Results, Fmeasure, Precision, Recall)$
+\li \Return $Results$
+\end{codebox}
+
+
+In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $P_{min}$ and $P_{max}$\footnote{$P_{min}$ is the minimum percentile index of the $Y$ luminance values. $P_{max}$ is the maximum percentile index of the $Y$ luminance values.} percentiles in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according to the criteria aforementioned at the end of the procedure.
 
 It is worth mentioning that the grid search algorithm starts with $P_{min}$ percentile index in $5$ and $P_{max}$ percentile lower bound is set to $P_{min}$ in the inner loop. Thus, we will no longer have a combination of parameters such as $[15, 10]$, that means, we always have combinations such that $P_{max} \geq P_{min}$. This will produce a table with results according to the template given in Figure~\ref{fig:gs_table_output}.
 
@@ -673,7 +656,7 @@ It is worth mentioning that the grid search algorithm starts with $P_{min}$ perc
 \end{figure}
 
 We performed this experiment in all four datasets: Compaq, Pratheepan, HGR, and SFA. For each dataset, respectively, we have a scatter plot of \emph{F-measure}, \emph{Precision}, and \emph{Recall}, with their respective variance, which can be seen in Figures~\ref{fig:compaq_g_search},~\ref{fig:pratheepan_g_search},~\ref{fig:hgr_g_search}, and~\ref{fig:sfa_g_search}. Each chart is showing the resulting metrics, in $y$ (vertical) axis\footnote{We set the range in the charts to start at 0.25 for better visualization of the series.
-}, by using a fixed $P_{min}$ and varying $P_{max}$ along $x$ (horizontal) axis. The shaded path of the measures are the variance and tell us how far we are from the mean when looking for each image within the dataset individually.
+}, by using a fixed $P_{min}$ and varying $P_{max}$ along $x$ (horizontal) axis. The shaded path of the measures are the variance and tell us how far we are from the mean when looking for each image within the dataset individually. The results with these measures, for each dataset, can also be seen in Appendix~\ref{ape:trapezoids_parameters_tuning}.
 
 We can see predominantly that larger intervals -- e.g. $[5, 85]$, $[5, 90]$, $[5, 95]$ -- resulted in the best \emph{Precision} in all datasets. On the other hand, smaller intervals, with both $P_{min}$ and $P_{max}$ near the upper bound (95) -- e.g. $[80, 90]$, $[85, 95]$, $[90 ,95]$ --, performed better in \emph{Recall}. Thus, if we set up a specific pair of parameters for the percentile to compute the trapezoid coordinates, it can produce a good \emph{Precision} but it may hurt the \emph{Recall} and vice versa.
 
