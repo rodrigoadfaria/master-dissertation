@@ -174,8 +174,6 @@ where:
 %% ------------------------------------------------------------------------- %%
 \section{Extended method}
 \label{sec:proposed_method}
-% Aqui seria legal dizer qual a heurística na qual se baseia cada uma das extensões.
-
 The hypothesis defined in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
 
 Thus, we have to refactor the correlation rules to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
@@ -222,9 +220,9 @@ Doing this simple extension, we are now able to apply the method to the same set
 %% ------------------------------------------------------------------------- %%
 \section{Neighborhood extended method}
 \label{sec:neighborhood_extended_method}
-Both methods presented in sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we could improve the method using some of the already processed neighbors of a pixel $P$, in order to decide if $P$ represents human skin, or not.
+Both methods presented in Sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we could improve the method using some of the already processed neighbors of a pixel $P$, in order to decide if $P$ represents human skin, or not.
 
-To do that, let $N_8^-(P)$ be the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order, that means the blue points in Figure~\ref{fig:pixel_neighborhood}. %aqui você deve citar quem propôs essa ideia de pixels anteriores, que foi o Rosenfeld no artigo sobre rotulação. Tem na minha dissertação de mestrado.
+To do that, let $N_8^-(P)$ be the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order~\citep{rosenfeld:66}. We can see this idea graphically represented by the blue points in Figure~\ref{fig:pixel_neighborhood}.
 
 Thus, we classify $P$ as skin in the following manner: if the constraints given by the pair of equations \ref{condition_c0} and \ref{condition_c1}, as well as \ref{condition_c00} and \ref{condition_c11} hold, then $P$ is classified as skin. When only one of the conditions is satisfied, then we check the decision in $N_8^-(P)$. If three or more pixels are skin, then $P$ will also be classified as a skin pixel. Figure~\ref{fig:n8-flowchart} shows a flowchart of the aforementioned procedure described.
 
@@ -268,9 +266,9 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
 
 
 %% ------------------------------------------------------------------------- %%
-\section{Supplementary neighborhood operations}
+\section{Heuristics to fix neighborhood extended method}
 \label{sec:sup_neighborhood_operations}
-The given neighborhood method presented in Section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). In addition, besides being visually undesirable, the \textit{diagonal effect} phenomenon causes us to have an increase in the false positive rate. This is caused due to the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we could use another neighborhood strategy and look for all the eight neighbors of the pixel $P$ being evaluated. However, this particular implementation can add extra computational time and hurt the performance of the method. 
+The neighborhood extended method presented in Section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). In addition, besides being visually undesirable, the \textit{diagonal effect} phenomenon causes us to have an increase in the false positive rate. This is caused due to the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we could use another neighborhood strategy and look for all the eight neighbors of the pixel $P$ being evaluated. However, this particular implementation can add extra computational time and hurt the performance of the method. 
 
 Therefore, we created an adaptation of the neighborhood method shown in Section~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and the extended reverse rules for every single pixel. We keep the both results in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and we apply a 8-\textit{neighbors} operations in four different ways:
 
