@@ -8,18 +8,18 @@ In this chapter, the theoretical concepts that apply to this research are stated
 \label{sec:digital_image}
 By definition, an image is a two-dimensional function where its amplitude, at any pair of coordinates, is called the \textit{intensity} or \textit{gray level} of the image at that point. The image is said digital when this function is converted to a discrete form, $f(x, y)$ let's say. This is made by a process called \textit{digitalization}, which consists of two steps: \textit{sampling} and \textit{quantization}~\citep{gonzalez:02}.
 
-Each element of the discrete function $f(x, y)$ is called \textit{pixel} (picture element), where $0 \leq x \leq W - 1$ and $0 \leq y \leq H - 1$. This means that the image can be represented in a matrix form (see Eq.~\ref{eq:image_function}), where $W$ is the number of lines and $H$ the number of columns of the matrix. Therefore, $W$ and $H$ defines the size or resolution of the image~\citep{pedrini:08}.
+Each element of the discrete function $f(x, y)$ is called \textit{pixel} (picture element), where $0 \leq x \leq H - 1$ and $0 \leq y \leq W - 1$. This means that the image can be represented in a matrix form (see Eq.~\ref{eq:image_function}), where $H$ is the number of rows and $W$ the number of columns of the matrix. Therefore, $H$ and $W$ define the size or resolution of the image~\citep{pedrini:08}.
 
-\begin{equation*}
+\begin{equation}
 f(x, y) =
  \begin{bmatrix}
-  f(0, 0)     & f(0, 1)     & \cdots & f(0, H - 1) \\
-  f(1, 0)     & f(1, 1)     & \cdots & f(1, H - 1) \\
+  f(0, 0)     & f(0, 1)     & \cdots & f(0, W - 1) \\
+  f(1, 0)     & f(1, 1)     & \cdots & f(1, W - 1) \\
   \vdots      & \vdots      & \ddots & \vdots  \\
-  f(W - 1, 0) & f(W - 1, 1) & \cdots & f(W - 1, H - 1)
+  f(H - 1, 0) & f(H - 1, 1) & \cdots & f(H - 1, W - 1)
  \end{bmatrix}
 \label{eq:image_function}
-\end{equation*}
+\end{equation}
 
 Usually, pixels are stored, and therefore read, in this matrix in an order known as \textit{raster} (see Fig.~\ref{fig:raster}). This information is important so that capture and display devices may be able to establish a common interface, and make necessary transformations in the coordinates, when needed.
 
@@ -45,7 +45,7 @@ A colored image is a multispectral image, where the color in each $(x, y)$ point
 %% ------------------------------------------------------------------------- %%
 \section{Basic relationship between pixels}
 \label{sec:image_components_relation}
-There is a number of applications in image processing and computer vision that uses information of relationship among pixels to create knowledge. Some of these important relationships will be described in the following sections once we will apply it in Chapter~\ref{cap:proposed-solution} further. It is worth mentioning that we defined an image as a function $f(x, y)$. In this section, when referring to a particular pixel, we will denote it in lowercase letters such as $p$.
+There is a number of applications in image processing and computer vision that uses information of relationship among pixels to create knowledge. Some of these important relationships will be described in the following sections once we will apply it further in Chapter~\ref{cap:proposed-solution} further. It is worth mentioning that we defined an image as a function $f(x, y)$. In this section, when referring to a particular pixel, we will denote it in lowercase letters such as $p$.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -101,7 +101,7 @@ See Figure~\ref{fig:n8-neighbors} for a reference on how the $N_8(p)$ neighborho
     \label{fig:n8-neighbors}
 \end{figure}
 
-Despite these are the most common neighbors used in applications, other different distances from $p$ as well as connectivity can be applied. The idea of neighborhood can also be extended to 3-dimensional images where, instead of pixels, the voxels are the coordinates considered.
+Despite these are the most common neighbors used in applications, other different distances from $p$ as well as connectivity can be applied. The idea of neighborhood can also be extended to 3-dimensional images where, instead of pixels, the voxels are the coordinates considered~\citep{pedrini:08}.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -113,7 +113,7 @@ The connectivity between pixels is a very important concept used to establish th
 %% ------------------------------------------------------------------------- %%
 \subsection{Arithmetic and logic operations}
 \label{sec:ari_logic_operations}
-Image arithmetic applies one of the standard arithmetic operations or a logical operator to two or more images. The operators are applied in a pixel-wise manner. In other words, the value of a pixel in the output image depends only on the values of the corresponding pixels in the input images. Hence, the images -- or the subsets, if it is the case -- must be of the same size. Although image arithmetic is the most simple form of image processing, they are used extensively in a wide range of applications and its use can potentially produce very interesting practical results. A main advantage of arithmetic operators is that the process is very simple and, therefore, fast~\citep{gonzalez:02}.
+Image arithmetic applies one of the standard arithmetic operations, or a logical operator, in two or more images. The operators are applied in a pixel-wise manner. In other words, the value of a pixel in the output image depends only on the values of the corresponding pixels in the input images. Hence, the images -- or the subsets, if it is the case -- must be of the same size. Although image arithmetic is the most simple form of image processing, they are used extensively in a wide range of applications and its use can potentially produce very interesting practical results. A main advantage of arithmetic operators is that the process is very simple and, therefore, fast~\citep{gonzalez:02}.
 
 The most common arithmetic operations between two pixels, say $f_1(x, y)$ and $f_2(x, y)$ of two different images $f_1$ and $f_2$, are the addition, subtraction, multiplication and division as shown in Table~\ref{tab:img_ari_operations}~\citep{pedrini:08}.
 
@@ -136,9 +136,9 @@ The most common arithmetic operations between two pixels, say $f_1(x, y)$ and $f
 \label{tab:img_ari_operations}
 \end{table}
 
-Addition is used often for image averaging to reduce noise. Subtraction is used frequently for static background removal. Multiplication as well as division is applied to correct gray level shading~\citep{gonzalez:02}.
+Addition is used often for image averaging to reduce noise. Subtraction is used frequently for static background removal. Multiplication as well as division are applied to correct gray level shading~\citep{gonzalez:02}.
 
-Once the arithmetic operations can potentially produce images with values out of the gray levels given in the original images, additional effort is frequently needed to work around this situation. For instance, when adding two images, some pixels of the resulting image may be greater than 255. Similarly, when subtracting two images, some pixels may be with negative values. One way to solve this issue is, after the arithmetic operation, perform a transformation in the gray levels of the resulting image to keep them within a suitable range~\citep{pedrini:08}.
+Once the arithmetic operations can potentially produce images with values out of the gray levels given in the original images, additional effort is frequently needed to work around this situation. For instance, when adding two grayscale images, some pixels of the resulting image may be greater than 255. Similarly, when subtracting two images, some pixels may be with negative values. One way to solve this issue is, after the arithmetic operation, perform a transformation in the gray levels of the resulting image to keep them within a suitable range~\citep{pedrini:08}.
 
 Logic operations are also useful in computer vision and image processing applications. They are applied only in binary images, while arithmetic operations can be used with higher gray levels. The terminology adopted among authors and application developers is that pixels with zero value (black color) belongs to the objects while one value (white color) corresponds to the background. Table~\ref{tab:img_log_operations} shows how the logic operations can be computed~\citep{pedrini:08}.
 
@@ -195,7 +195,7 @@ There are several ways to work around this problem. One simple mechanism is to s
 %% ------------------------------------------------------------------------- %%
 \section{Image histogram}
 \label{sec:image_histogram}
-In particular for image processing, when we are referring to an image histogram, we are talking about to count the frequency of the pixels for each intensity levels in separate bins, in a multi-valued (intensity levels) sequence~\citep{fisher:03}. The most common visual representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value~\citep{gonzalez:02}.
+In particular for image processing, when we are referring to an image histogram, we are talking about to count the frequency of the pixels for each intensity level in separate bins, in a multi-valued (intensity levels) sequence~\citep{fisher:03}. The most common visual representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value~\citep{gonzalez:02}.
 
 For instance, in an 8-bit grayscale image there are 256 different possible intensities, and so, the histogram will graphically display 256 integer numbers showing the counting of occurrences of those grayscale values. It is also possible to compute histograms of color images. In this particular case, the channels of the color space in turn are split individually from where a separate histogram is calculated~\citep{fisher:03}.
 
@@ -254,7 +254,7 @@ Histogram thresholding is one of the simplest pixel-based techniques for image s
     \addplot[mark=none] coordinates {(30.5,0.5)} node[pin=90:{$T_2$}]{} ;
     \end{axis}
 \end{tikzpicture}
-\caption[Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds]{Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds. Source: adapted from~\citep{gonzalez:02}.}
+\caption[Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds]{Gray level histograms that can be partitioned by (a) a single threshold, and (b) multiple thresholds. Source: adapted from~\citet{gonzalez:02}.}
 \label{fig:histogram_thresholding}
 \end{figure}
 
@@ -310,7 +310,7 @@ The model is represented by a cylindrical shape and it can be seen in the Figure
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=.6\textwidth]{munsell-system}
-  \caption[Munsell color model.]{Munsell color model represented by a cylindrical shape. The hue is arranged on the circular axis consisting of five bases and five secondary colors, the saturation on the radial axis and the luminance on the vertical axis in a range varying from 0 to 10. Source: \citet{rus:07}.}
+  \caption[Munsell color model.]{Munsell color model represented by a cylindrical shape. The hue is arranged on the circular axis consisting of five bases and five secondary colors, the chroma (saturation) on the radial axis and the luminance (value) on the vertical axis in a range varying from 0 to 10. Source: \citet{rus:07}.}
   \label{fig:munsell-system} 
 \end{figure}
 
@@ -377,14 +377,14 @@ This system was based on the trichromatic theory of Thomas Young and Hermann Hel
   \label{fig:rgb-cube} 
 \end{figure}
 
-It is noteworthy that there are two ways of representing the RGB space: linear and non-linear. The aforementioned system shows the non-linear model, whose abbreviation is $R'G'B'$ and is most used by devices and applications because of their similarity to the human visual system. In the literature, this system is frequently cited with the acronym RGB, which makes the nomenclature dubious, since the linear model is also called RGB and, therefore, the conversion between color spaces must be done with some caution. It is also important to note that linear RGB values are rarely used to represent an image since they are perceptually highly non-uniform~\citep{konstantinos:00}.
+It is noteworthy that there are two ways to represent the RGB space: linear and non-linear. The aforementioned system shows the non-linear model, whose abbreviation is $R'G'B'$ and is most used by devices and applications because of their similarity to the human visual system. In the literature, this system is frequently cited with the acronym RGB, which makes the nomenclature dubious, since the linear model is also called RGB and, therefore, the conversion between color spaces must be done with some caution. It is also important to note that linear RGB values are rarely used to represent an image since they are perceptually highly non-uniform~\citep{konstantinos:00}.
 
 
 %% ------------------------------------------------------------------------- %%
 \subsection{CMY color model}
 \label{sec:modelo_cores_cmy}
 
-The CMY model is based on the complementary primary colors of the R, G, and B coordinates, which are given by Cyan, Magenta, and Yellow. Unlike RGB, is a subtractive color model, therefore, non-additive, in which colors are generated by subtracting the length of the dominant wave from the white light and, therefore, the resulting color corresponds to the light that is reflected~\citep{gonzalez:02}.
+The CMY model is based on the complementary primary colors of the R, G, and B coordinates, which are given by Cyan, Magenta, and Yellow. Unlike RGB, it is a subtractive color model, and so, non-additive, in which colors are generated by subtracting the length of the dominant wave from the white light and, therefore, the resulting color corresponds to the light that is reflected~\citep{gonzalez:02}.
 
 One way to get the CMY coordinates from the RGB system is:\\
 \begin{equation}
@@ -522,7 +522,7 @@ It is important to note that the values R, G, and B must be normalized in the in
 
 Another model of this family is formed by the components Hue, Saturation and Value (HSV) and its three-dimensional graphical representation is a hexagonal pyramid derived from the RGB cube~\citep{pedrini:08}. Value, in this context, is the luminance component.
 
-The various hue shades are represented at the top of the pyramid, the saturation is measured along the horizontal axis and value is measured along the vertical axis, which passes through the center of the pyramid. The hue, which corresponds to the edges around the vertical axis, varies from 0 (red) to 360 degrees and the angle between the vertices is 60 degrees. The saturation varies from 0 to 1 and is represented as the ratio of the purity of a given hue to its maximum purity, that is when $S = 1$. Value varies from 0, at the peak of the pyramid representing the black color, to 1 at the base, where the intensities of the colors are maximum~\citep{pedrini:08}.
+The various hue shades are represented at the top of the pyramid, the saturation is measured along the horizontal axis and value is measured along the vertical axis, which passes through the center of the pyramid. The hue, which corresponds to the edges around the vertical axis, varies from 0 (red) to 360 degrees and the angle between the vertices is 60 degrees. The saturation varies from 0 to 1 and it is represented as the ratio of the purity of a given hue to its maximum purity, that is when $S = 1$. Value varies from 0, at the peak of the pyramid representing the black color, to 1 at the base, where the intensities of the colors are maximum~\citep{pedrini:08}.
 
 The transformation of the components of the RGB space to HSV is given by the equations \citep{pedrini:08}:
 \begin{align}

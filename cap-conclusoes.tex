@@ -29,14 +29,16 @@ Finally, part of the work has been published in an international conference  (VI
 \section{Future work}
 \label{sec:future_work}
 
-In the future, extended works could explore further the connectivity of the skin pixels and, because there is so far no explanation why the original method works so well, it would be valuable to statistically analyze the shape of the trapezoids on the YCbCr space and try to correlate with the classification accuracy.
+In the future, extended works could explore further the connectivity of the skin pixels and, because there is so far no explanation why the original method works so well, it would be valuable to statistically analyze the shape of the trapezoids in the YCbCr space and try to correlate with the classification accuracy.
 
 Our intuition, based on the experimental results, says that trapezoids features such as size, area, symmetry, and others, could be used to establish a relationship with the classification accuracy. Moreover, the shape of the trapezoids could be previously processed, for instance by filtering image illumination, to obtain better classification results.
 
 The neighborhood operations add some additional computational cost but the implementation can be enhanced as well as other techniques applied, such as applying weights when counting neighboring pixels.
 
-We have also implemented a grid search algorithm to understand the parameters selection in Section~\ref{sec:grid_search_experiments}. This approach can be improved and we could try to learn the best parameters of the trapezoids by means of Machine Learning techniques.
+We have also implemented a grid search algorithm to understand the parameters selection in Section~\ref{sec:grid_search_experiments}. This approach can be improved and we could try to learn the best parameters of the trapezoids by means of machine learning techniques.
 
-A recent test paper comparing different color spaces suggests that YCgCr is also a good candidate for this problem~\citep{chaves:10}. In fact, YCbCr and YCgCr color spaces are very similar. Therefore, the same color relations can be presented in this space.
+With respect to machine learning techniques, a valuable extension of this work would provide a comparison of the rule-based methods presented here along with machine-learning-based ones, either to review the accuracy as well as the performance in terms of classification time. 
+
+A recent work comparing different color spaces suggests that YCgCr is also a good candidate for this problem~\citep{chaves:10}. In fact, YCbCr and YCgCr color spaces are very similar. Therefore, the same color relations can be presented in this space.
 
 Another important investigation that could be addressed is related to the ranges of the chromaticity (Cr, Cb) channels used in the definition of the correlation rules. In~\citet{brancati:17}, as well as in our proposed methods, the thresholds used were given by~\citet{chai:99}. However,~\citet{basilio:11} found out that the thresholds were robust only against images with Caucasian people. In the end,~\citet{basilio:11} proposed different values that seems to be more robust to find human skin from different people races. This simple change may also result in improved human skin segmentation quality.

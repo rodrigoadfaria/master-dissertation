@@ -71,11 +71,11 @@ In order to describe the proposed extensions, we will first present the original
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{trapezoids}
-    \caption[Graphical representation of the trapezoids as well as its parameters]{Graphical representation of the trapezoids as well as the parameters $Y_{min} = 0$, $Y_{max} = 255$, $Y_{0}$, $Y_{1}$, $Y_{2}$, $Y_{3}$, $Cr_{min}$, $Cr_{max}$, $Cb_{min}$, $Cb_{max}$, $h_{Cr}$, $h_{Cb}$, $H_{Cr}(P_Y)$, $H_{Cb}(P_Y)$. Source: adapted from~\citep{brancati:17}.}
+    \caption[Graphical representation of the trapezoids as well as their parameters]{Graphical representation of the trapezoids as well as the parameters $Y_{min} = 0$, $Y_{max} = 255$, $Y_{0}$, $Y_{1}$, $Y_{2}$, $Y_{3}$, $Cr_{min}$, $Cr_{max}$, $Cb_{min}$, $Cb_{max}$, $h_{Cr}$, $h_{Cb}$, $H_{Cr}(P_Y)$, $H_{Cb}(P_Y)$. Source: adapted from~\citep{brancati:17}.}
     \label{fig:trapezoids}
 \end{figure}
 
-To show the correlations, Brancati et. al. present the YCbCr space as a 2D graph where the $Y$ is presented in the abscissa and the $Cr$ and $Cb$ components is in the ordinate (see Fig.~\ref{fig:trapezoids}). The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ are given by the coordinates $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ , respectively~\citep{brancati:17}. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color falls in the ranges [133, 173] and [77, 127], respectively, regardless the skin color variation in different races (see details in Section~\ref{sec:correlation_rules_ycrycb}).
+To show the correlations, Brancati et. al. present the YCbCr space as a 2D graph where the $Y$ is presented in the abscissa and the $Cr$ and $Cb$ components is in the ordinate (see Fig.~\ref{fig:trapezoids}). The base of the trapezoids $T_{YCr}$ and $T_{YCb}$ are given by the coordinates $(Y_{min}, Cr_{min})$ and $(Y_{min}, Cb_{max})$ in the $YCr$ and $YCb$ , respectively~\citep{brancati:17}. The values $Cr_{min}$ = 133, $Cb_{max}$ = 128 were selected according to~\citet{chai:99} where a skin color map was designed using a histogram approach based on a given set of training images. Chai and Ngan observed that the Cr and Cb distributions of skin color fall in the ranges [133, 173] and [77, 127], respectively, regardless of the skin color variation in different races (see details in Section~\ref{sec:correlation_rules_ycrycb}).
 
 The $Cr_{max}$ parameter is calculated dynamically, taking into account the histogram of the pixels with $Cr$ values in the range $[Cr_{min}, 183]$, looking for the maximum value of $Cr$ associated with at least 0.1\% \footnote{In \citet{brancati:17} this rate is reported to be equal to 10\%. However, in the distributed source code we found the value 0.1\%, that we are using in the experiments.} of pixels in the image. The same applies to $Cb_{min}$, taking the histogram with $Cb$ values in the range $[77, Cb_{max}]$. $Y_0$ and $Y_1$ (shorter base of the upper trapezoid) are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$~\citep{brancati:17}. A similar procedure is used to find the values of the shorter base of the other trapezoid, $Y_2$ and $Y_3$ (see Fig.~\ref{fig:crmax_computation} for an example).
 
@@ -156,9 +156,9 @@ Then, the value of $\alpha$ is given by~\citep{brancati:17}:
     \alpha = \frac{\Delta^{'}_{Cb}(P_Y)} {\Delta^{'}_{Cr}(P_Y)}
 \end{equation}
 
-Finally, $I_P$ and $J_P$ are given by~\citep{brancati:17}:
+Finally, $I_P$ \footnote{There is a difference between the source code and the equation that defines $I_P$ in~\citet{brancati:17}. Basically, part of the equation must be taken its absolute value, which we have fixed here.} and $J_P$ are given by~\citep{brancati:17}:
 \begin{equation}
-    I_P = sf \cdot [(\Delta^{'}_{Cr}(P_Y) - dP_{Cr}) + (\Delta^{'}_{Cb}(P_Y) - dP_{Cb_s})]
+    I_P = sf \cdot |(\Delta^{'}_{Cr}(P_Y) - dP_{Cr}) + (\Delta^{'}_{Cb}(P_Y) - dP_{Cb_s})|
     \label{eq:ip}
 \end{equation}
 \begin{equation}
@@ -190,7 +190,7 @@ where \footnote{$dP_{Cb}$ is the distance between $(P_Y, P_{Cb})$ and $(P_Y, Cb_
 
 Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{eq:jp} respectively, can be redefined as:
 \begin{equation}
-    I^{'}_P = sf \cdot [(\Delta^{'}_{Cr}(P_Y) - dP_{Cr_s}) + (\Delta^{'}_{Cb}(P_Y) - dP_{Cb})]
+    I^{'}_P = sf \cdot |(\Delta^{'}_{Cr}(P_Y) - dP_{Cr_s}) + (\Delta^{'}_{Cb}(P_Y) - dP_{Cb})|
 \end{equation}
 \begin{equation}
     J^{'}_P = dP_{Cr_s} \cdot \frac{dP_{Cb} + dP_{Cr_s}} {\Delta^{'}_{Cb}(P_Y) + \Delta^{'}_{Cr}(P_Y)}
@@ -260,7 +260,7 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
         \path [line] (pcbs) |- (bothtrue);
     \end{tikzpicture}
 
-    \caption[Flowchart of our proposed neighbors' method]{Flowchart of our proposed neighbors method. In \textbf{both false} decision, the \textbf{no} path means that one of the rules is true and we are in doubt if $P$ is skin or not -- here is where the neighbors are used to find out the label of $P$. Source: proposed by the author.}
+    \caption[Flowchart of our proposed neighbors method]{Flowchart of our proposed neighbors method. In \textbf{both false} decision, the \textbf{no} path means that one of the rules is true and we are in doubt if $P$ is skin or not -- here is where the neighbors are used to find out the label of $P$. Source: proposed by the author.}
     \label{fig:n8-flowchart}
 \end{figure}
 
@@ -270,7 +270,7 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
 \label{sec:sup_neighborhood_operations}
 The neighborhood extended method presented in Section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). In addition, besides being visually undesirable, the \textit{diagonal effect} phenomenon causes us to have an increase in the false positive rate. This is caused due to the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we could use another neighborhood strategy and look for all the eight neighbors of the pixel $P$ being evaluated. However, this particular implementation can add extra computational time and hurt the performance of the method. 
 
-Therefore, we created an adaptation of the neighborhood method shown in Section~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and the extended reverse rules for every single pixel. We keep the both results in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and we apply a 8-\textit{neighbors} operations in four different ways:
+Therefore, we created an adaptation of the neighborhood method shown in Section~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and the extended reverse rules for every single pixel. We keep both results in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two-position vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and we apply an 8-\textit{neighbors} operations in four different implementations, looking for the majority (five at least) neighbors:
 
 \begin{enumerate}[label={(\arabic*)}]
     \item we look in the rules answer performing an AND. In other words, if both original and reverse rules are saying this pixel is skin, then we classify it as skin;
@@ -316,6 +316,6 @@ Of course, this variation will add some additional computational cost once we wi
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the diagonal effect after the neighbors method segmentation]{Image samples with the diagonal effect after the neighbors method segmentation. Each image is from (top-down) SFA, Pratheepan, HGR, and Compaq datasets, respectively, where: (a) original image (b) ground truth (c) combined method (f) neighbors method. Independently of the classification accuracy, we can clearly see the diagonal effect present in the output of the neighbors method segmentation in comparison with combined. Besides being a visually undesirable effect, this phenomenon causes us to have an increase in the false positive rate.}
+    \caption[Image samples with the diagonal effect after the neighbors method segmentation]{Image samples with the diagonal effect after the neighbors method segmentation. Each image is from (top-down) SFA, Pratheepan, HGR, and Compaq (latest two) datasets, respectively, where: (a) original image (b) ground truth (c) combined method (f) neighbors method. Independently of the classification accuracy, we can clearly see the diagonal effect present in the output of the neighbors method segmentation in comparison with combined. Besides being a visually undesirable effect, this phenomenon causes us to have an increase in the false positive rate.}
     \label{fig:diagonal_effect}
 \end{figure*}

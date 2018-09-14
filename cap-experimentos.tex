@@ -2,7 +2,7 @@
 \chapter{Experimental Evaluation}
 \label{cap:experimentos}
 
-In this chapter, we present some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a brief definition of the evaluation metrics used is shown for the sake of clarity. We also provide some results of the supplementary neighborhood adaptation that we built to remove the \emph{diagonal effect} as well as to explore different neighbors techniques. Finally, we show the results of the grid search parameters experiments aiming the trapezoids parameters' tuning. All the experiments are analyzed and discussed in each section separately.
+In this chapter, we present some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a brief definition of the evaluation metrics used is shown for the sake of clarity. We also provide some results of the heuristics to fix the neighborhood method that we built to remove the \emph{diagonal effect} as well as to explore different neighbors techniques. Finally, we show the results of the grid search parameters experiments aiming the trapezoids parameters' tuning. All the experiments are analyzed and discussed in each section separately.
 
 
 %------------------------------------------------------
@@ -18,7 +18,7 @@ We gathered four widely known datasets, SFA, Pratheepan, HGR, and Compaq, which 
 \label{sec:datasets_sfa}
 SFA is an acronym for Skin of FERET and AR Database, a dataset proposed by~\citet{sfa-skin-dataset:13}. This is a dataset of frontal faces' skins obtained from two color image databases: FERET, created by~\citet{feret:96}, and AR proposed by~\citet{ar-face-database:98}. The datasets are composed of 876 and 242 images each, respectively and AR's images have a white background and small variations of skin color, i.e., a more controlled dataset than FERET's~\citep{sfa-skin-dataset:13}. Figure~\ref{fig:sfa_dataset_exemplo} shows some of the 1,118 samples available.
 
-\citet{sfa-skin-dataset:13} also extracted different window patches from each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a window of size $n \times n$, where $n$ is odd (to contain a central pixel), from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in Figure~\ref{fig:sfa_dataset_janelas}.
+\citet{sfa-skin-dataset:13} also extracted different window patches from each skin and non-skin samples to facilitate future research. The samples were randomly generated considering the ground truth mask \footnote{Ground truth is the term used to denote an image whose point of interest is properly segmented and highlighted, discarding the remaining pixels giving them uniform colors.} of each image, being three samples of skin and five of non-skin. Each sample is a image patch of size $n \times n$, where $n$ is odd (to contain a central pixel), from which other sample sizes have been created, ranging from $1 \times 1$ to $35 \times 35$, as can be seen in Figure~\ref{fig:sfa_dataset_janelas}.
 
 \begin{figure}[!htb]
   \centering
@@ -27,7 +27,7 @@ SFA is an acronym for Skin of FERET and AR Database, a dataset proposed by~\cite
   \label{fig:sfa_dataset_janelas}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!htb]
     \centering
     \begin{subfigure}[t]{0.2\textwidth}
         \includegraphics[width=\textwidth]{sfa/ori/img4}
@@ -52,11 +52,11 @@ SFA is an acronym for Skin of FERET and AR Database, a dataset proposed by~\cite
         \includegraphics[width=\textwidth]{sfa/gtc/img14}
         \includegraphics[width=\textwidth]{sfa/gt/img14}
     \end{subfigure}
-    \caption[Examples of SFA face image database]{Examples of SFA face image database. Original images (first row) and colored ground truth (second row) with the skin color pixels annotated manually. The black color RGB = (0, 0, 0) was assigned to all pixels in the background. Finally, binary ground truth images in the third row. One can see some noise in the results, but the samples were enough for further experiments. In addition, the original images were not perfectly annotated. Therefore, some salt noise can be seen in non-skin regions. Source:~\citet{sfa-skin-dataset:13}.}
+    \caption[Examples of SFA face image database]{Examples of SFA face image database. Original images (first row) and colored ground truth (second row) with the skin color pixels annotated manually. The black color RGB = (0, 0, 0) was assigned to all pixels in the background. Finally, binary ground truth images, that we generated, in the third row. One can see some noise in the results, but the samples were enough for further experiments. In addition, the original images were not perfectly annotated. Therefore, some salt noise can be seen in non-skin regions. Source:~\citet{sfa-skin-dataset:13}.}
     \label{fig:sfa_dataset_exemplo}
 \end{figure}
 
-It is worth mentioning that we do not use these patches in our experiments. Once the methods tested in this work only depends on the input image itself. Therefore, we can simply ignore these sampling patches during experiments. However, one could use them to evaluate the ability of the methods in terms of false detection rate, once the patches are made available for skin and non-skin labeled images separately.
+It is worth mentioning that we do not use these patches in our experiments, since the methods tested in this work only depends on the input image itself. Therefore, we can simply ignore these sampling patches during experiments. However, one could use them to evaluate the ability of the methods in terms of false detection rate, once the patches are made available for skin and non-skin labeled images separately.
 
 
 %------------------------------------------------------
@@ -64,7 +64,7 @@ It is worth mentioning that we do not use these patches in our experiments. Once
 \label{sec:datasets_pratheepan}
 The images in the Pratheepan dataset were downloaded randomly from Google Images for human skin detection research. There are 78 images of family and face captured with a range of distinct cameras using different color enhancement and under different illumination conditions~\cite{tan:12}. Figure~\ref{fig:pra_dataset_exemplo} shows some of the 78 samples available.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
     \centering
     \begin{subfigure}[t]{0.238\textwidth}
         \includegraphics[width=\textwidth]{pra/ori/07-c140-12family-red-rr-398h}
@@ -113,7 +113,7 @@ The images within it were acquired in three different series. A set of 899 was c
         \includegraphics[width=\textwidth]{hgr/ori/V_S_hgr2A2_id03_1}
         \includegraphics[width=\textwidth]{hgr/gt/V_S_hgr2A2_id03_1}
     \end{subfigure}
-    \caption[Examples of HGR skin dataset]{Examples of HGR skin dataset. Original images (top row) and the respective ground truth with the skin color pixels annotated (bottom row). Different from Pratheepan and SFA, the images of the ground truth are binary images (black color, RGB = (0, 0, 0), was assigned to all skin patches' pixels. Source:~\citet{kawulok:14, nalepa:14, grzejszczak:16}.}
+    \caption[Examples of HGR skin dataset]{Examples of HGR skin dataset. Original images (top row) and the respective ground truth with the skin color pixels annotated (bottom row). Different from Pratheepan and SFA, the images of the ground truth are binary images with black color (RGB = (0, 0, 0)) assigned to all skin patches' pixels. Source:~\citet{kawulok:14, nalepa:14, grzejszczak:16}.}
     \label{fig:hgr_dataset_exemplo}
 \end{figure}
 
@@ -125,7 +125,7 @@ Compaq can be considered as the first large skin dataset and, probably is the mo
 
  We had to fix some few images due to lack of ground truth or files corrupted. The final amount of images with skin used in the experiments is 4,669. Figure~\ref{fig:compaq_dataset_example} shows some of the 4,669 images with skin samples available used in the experiments~\citep{jones:02}.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
     \centering
     \begin{subfigure}[t]{0.269\textwidth}
         \includegraphics[width=\textwidth]{cpq/ori/318196}
@@ -151,7 +151,7 @@ Compaq can be considered as the first large skin dataset and, probably is the mo
         \includegraphics[width=\textwidth]{cpq/ori/3003632}
         \includegraphics[width=\textwidth]{cpq/gt/3003632}
     \end{subfigure}
-    \caption[Examples of Compaq skin/non-skin dataset]{Examples of Compaq skin/non-skin dataset. Original images (top row) and the ground truth images with skin color pixels annotated (bottom row).Source:~\citet{jones:02}.}
+    \caption[Examples of Compaq skin/non-skin dataset]{Examples of Compaq skin/non-skin dataset. Original images (top row) and the ground truth images with skin color pixels annotated (bottom row). Source:~\citet{jones:02}.}
     \label{fig:compaq_dataset_example}
 \end{figure}
 
@@ -224,7 +224,7 @@ Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the ex
 
 The original method was compared with six well known rule-based methods in the literature using four different datasets, three of them, HGR, Pratheepan and Compaq, we have also been used here. We applied the methods against a fourth dataset (SFA) to increase and strengthen the different number of samples tested.
 
-Because the method had the best \textit{F-measure} in the HGR and Pratheepan datasets in comparison with the other six methods and, in addition, because it performed the top first \textit{Precision} in HGR and second in Pratheepan, we decided to compare the proposed extensions only to the original method.
+Because the original method had the best \textit{F-measure} in the HGR and Pratheepan datasets in comparison with the other six methods and, in addition, because it performed the top first \textit{Precision} in HGR and second in Pratheepan, we decided to compare the proposed extensions only to the original method.
 
 As one can see in Table~\ref{tab:merged_rules_results}, the reverse hypothesis performed better than the original method and achieved the best \textit{Recall} in HGR and SFA. It also achieved the best \textit{F-measure} in SFA with a 0.8125 rate, which gave almost 0.25 in gain compared to the original.
 
@@ -269,7 +269,7 @@ In general, the reverse method increased the \textit{Recall} but did not perform
 
 The neighborhood approach achieved the best \textit{F-measure} results in Compaq, HGR, and Pratheepan. Moreover, the other metrics still are at a very high rate for all datasets, being in the top second in almost all cases. If we compare the neighbors approach with the original, except for the \textit{Recall} -- where we only got the best result in SFA --, we can see that our implementation achieved the best measures practically for all other metrics, in the four datasets.
 
-Therefore, the combined and neighbors approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in quadratic time, maintaining the desired computational efficiency that is useful in different application domains, mainly near real-time systems (processing time of about 10ms for a typical image of dimensions 300x400).
+Therefore, the combined and neighbors approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in linear time in the number of pixels, maintaining the desired computational efficiency that is useful in different application domains, mainly near real-time systems (processing time of about 10ms for a typical image of dimensions 320x400).
 
 We have also tested the subset of non-skin images from Compaq dataset in terms of \emph{Specificity}. Basically, this measure tells us the ability of the method to correctly identify the non-skin pixels in the image, in other words, the true negative rate. It is important to remember that the original~\citep{brancati:17} method was compared with six well known rule-based methods in the literature, and it outperformed all of them in this experiment. We can see in Table~\ref{tab:rule_based_specificity} that both combined and neighbors are in a better position, with a gain of about 5.7\% and 2\%, respectively, which shows us, once again, how robust are the results produced by these proposed enhancements.
 
@@ -292,9 +292,9 @@ Neighbors                       & 0.8866          \\ \hline
 
 Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hgr} and~\ref{fig:results_cpq}, present some qualitative results for each method tested. Column (a) are image samples, column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
 
-Qualitatively, we can see that, in general, the reverse method removes a large part of the reddish pixels from the background of the image (e.g. see the third image in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the reverse method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
+Qualitatively, we can see that, in general, the reverse method removes a large part of the reddish pixels from the background of the image (e.g. see the third and sixth images in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the reverse method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
 
-However, when we blend the original method along with the reverse in the method we call combined, both background regions of reddish and yellowish pixels are almost completely removed. In addition, salt-like noises are also dropped, since the rules together are more rigid (e.g. see column (e) combined method for the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}). Obviously, this causes an undesired effect of removing some of the skin pixels of which we are interested. This helps us understand why the recall decreases with the application of the combined rule.
+However, when we blend the original method along with the reverse in the method that we call combined, both background regions of reddish and yellowish pixels are almost completely removed. In addition, salt-like noises are also dropped, since the rules together are more rigid (e.g. see column (e) combined method for the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}). Obviously, this causes an undesired effect of removing some of the skin pixels of which we are interested. This helps us understand why the recall decreases with the application of the combined rule.
 
 \clearpage
 \begin{figure*}[!htb]
@@ -527,7 +527,7 @@ However, when we blend the original method along with the reverse in the method 
 %% ------------------------------------------------------------------------- %%
 \section{Experiments with heuristics to fix extended neighborhood method}
 \label{sec:sno_experiments}
-In this section, we will show some experimental results of the neighborhood adaptation described in Section~\ref{sec:sup_neighborhood_operations}. In short, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two positions vector with the result of the original and reverse rules answer for this pixel. Finally, we count those answers into four different strategies. The results can be seen in Table~\ref{tab:sup_neighbors_results}.
+In this section, we will show some experimental results of the neighborhood adaptation described in Section~\ref{sec:sup_neighborhood_operations}. In short, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two-position vector with the result of the original and reverse rules answer for this pixel. Finally, we count those answers into four different strategies. The results can be seen in Table~\ref{tab:sup_neighbors_results}.
 
 \begin{table*}[ht]
 \centering
@@ -563,7 +563,7 @@ In this section, we will show some experimental results of the neighborhood adap
 & $P_{Cb_s}$ only   & 0.8953            & 0.7690            & 0.9286            & \textbf{0.8273} \\ \hline
 \end{tabular}
 
-\caption[Quantitative result metrics of the proposed supplementary neighborhood adaptation]{Quantitative result metrics of the proposed supplementary neighborhood adaptation. For each dataset, we have five different applications of the neighbors operations. The first line is the result of the proposed method detailed in Section~\ref{sec:neighborhood_extended_method} for comparison. The following four lines are the supplementary neighborhood adaptation shown in Section~\ref{sec:sup_neighborhood_operations} which are considering, respectively, an AND between the original and reverse rules, an OR between the original and reverse rules, the $P_{Cr_{s}}$ (reverse) only, and the $P_{Cb_{s}}$ (original) only. The highlighted cells (bold) are those with the best result for the respective hypothesis and metric in each dataset.}
+\caption[Quantitative result metrics of the adaptation to fix neighborhood extended method]{Quantitative result metrics of the adaptation to fix neighborhood extended method. For each dataset, we have five different applications of the neighbors operations. The first line is the result of the proposed method detailed in Section~\ref{sec:neighborhood_extended_method} for comparison. The following four lines are the adaptation to fix neighborhood extended method shown in Section~\ref{sec:sup_neighborhood_operations} which are considering, respectively, an AND between the original and reverse rules, an OR between the original and reverse rules, the $P_{Cr_{s}}$ (reverse) only, and the $P_{Cb_{s}}$ (original) only. The highlighted cells (bold) are those with the best result for the respective hypothesis and metric in each dataset.}
 \label{tab:sup_neighbors_results}
 
 \end{table*}
