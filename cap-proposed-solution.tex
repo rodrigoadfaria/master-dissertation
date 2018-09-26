@@ -40,7 +40,7 @@ Although this cluster can be seen in different color spaces, authors often use t
 
 Therefore, a very simple and practical approach to detect human skin pixels would be to create a set of rules, based in those ranges, that identify the presence of chrominance (Cr, Cb) values who fit into the rules. In fact, this was the approach used by~\citet{chai:99}.
 
-Another important finding regarding the skin color clusters in the YCbCr color space is their behavior when looking for Cb and Cr channels distribution with respect to the Y luminance component separately. In other words, where rely this distribution into the YCb and YCr subspaces. In Figure~\ref{fig:obama_trapezoids}, we can see the distribution (clusters) for an image of the Pratheepan dataset. We can clearly see their geometry as a trapezoidal shape~\citep{hsu:02}.
+Another important finding regarding the skin color clusters in the YCbCr color space is their behavior when looking for the compositions of YCb and YCr separately. In other words, where rely this distribution into the YCb and YCr subspaces. In Figure~\ref{fig:obama_trapezoids}, we can see the distribution (clusters) for an image of the Pratheepan dataset. We can clearly see their shapes as taking a trapezoidal form~\citep{hsu:02}.
 
 In fact, the skin color pixels distribution in the YCb and YCr subspaces is a pattern. However, this trapezoidal shape and size will change according to many factors. \citet{brancati:17} observed that change and identified that they are caused mainly due illumination conditions (i.e. the lighting of the scene when the image was acquired influences the size, height, and position of these trapezoidal shape). Moreover, they~\citep{brancati:17} observed an inversely proportional behavior of the chrominance components (Cr, Cb) that could be fitted into a model for skin pixels detection. We will explain in details how this model has been created in Section~\ref{sec:original_method}.
 
@@ -54,7 +54,7 @@ In fact, the skin color pixels distribution in the YCb and YCr subspaces is a pa
         \includegraphics[width=\textwidth]{pra/gtc/obama}
         \caption{}
     \end{subfigure}
-    \begin{subfigure}[t]{0.9\textwidth}
+    \begin{subfigure}[t]{0.88\textwidth}
         \includegraphics[width=\textwidth]{image_trap_plot}
         \caption{}
     \end{subfigure}
@@ -86,14 +86,14 @@ The $Cr_{max}$ parameter is calculated dynamically, taking into account the hist
     \label{fig:crmax_computation}
 \end{figure}
 
-The correlation rules between the chrominance components $P_{Cr}$ and $P_{Cb}$ of a pixel $P$ are defined as~\citep{brancati:17}:
+The correlation rules' parameters between the chrominance components $P_{Cr}$ and $P_{Cb}$ of a pixel $P$ are specified as~\citep{brancati:17}:
 \begin{itemize}
     \item the minimum difference between the values $P_{Cr}$ and $P_{Cb}$, denoted $I_P$;
     \item an estimated value of $P_{Cb}$, namely $P_{Cb_s}$;
     \item the maximum distance between the points $(P_Y, P_{Cb})$ and $(P_Y, P_{Cb_s})$, denoted $J_P$.
 \end{itemize}
 
-Therefore, to determine if $P$ is skin, the following equations must hold~\citep{brancati:17}:
+Therefore, to determine if $P$ is skin, the following correlation rules, expressed in terms of equations, must hold~\citep{brancati:17}:
 \begin{equation}
     P_{Cr} - P_{Cb} \geq I_P
 \label{condition_c0}
@@ -172,11 +172,11 @@ where:
 % Acho que um gráfico mostrando um ponto, ou alguns pontos, no trapézio superior e o respectivo ponto no trapézio inferior seria muito didático. 
 
 %% ------------------------------------------------------------------------- %%
-\section{Extended method}
+\section{Complementary method}
 \label{sec:proposed_method}
-The hypothesis defined in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
+The hypothesis assumed in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
 
-Thus, we have to refactor the correlation rules to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
+Thus, we have to refactor the correlation rules' parameters to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
 \begin{equation}
     P_{Cr_s} = dP_{Cr_s} + Cr_{min}
 \end{equation}
@@ -196,7 +196,7 @@ Next, the constraints given by $I_P$ and $J_P$ in the Eq. \ref{eq:ip} and \ref{e
     J^{'}_P = dP_{Cr_s} \cdot \frac{dP_{Cb} + dP_{Cr_s}} {\Delta^{'}_{Cb}(P_Y) + \Delta^{'}_{Cr}(P_Y)}
 \end{equation}
 
-Therefore, to determine if the pixel $P$ is skin, we have to modify the conditions given by Eq. \ref{condition_c0} and \ref{condition_c1}:
+Therefore, to determine if the pixel $P$ is skin, we have to modify the correlations rules given by Eq. \ref{condition_c0} and \ref{condition_c1}:
 \begin{equation}
     P_{Cr} - P_{Cb} \geq I^{'}_P
 \label{condition_c00}
@@ -206,13 +206,13 @@ Therefore, to determine if the pixel $P$ is skin, we have to modify the conditio
 \label{condition_c11}
 \end{equation}
 
-Doing this simple extension, we are now able to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis.
+Doing this simple extension, we need now to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis.
 
 
 \begin{figure}[!htp]
     \centering
     \includegraphics[width=0.25\textwidth]{pixel_neighborhood}
-    \caption[Neighbors evaluation with respect to a pixel $P$]{Neighbors evaluation with respect to $P$. If the image is scanned in raster order, $N_8^-(P)$ is the set of points that can be reached before $P$ in an 8-\textit{neighbors} window. Source: proposed by the author.}
+    \caption[Neighbors evaluation with respect to a pixel $P$]{Neighbors evaluation with respect to $P$. If the image is scanned in raster order, $N_8^-(P)$ is the set of points that can be reached before $P$ in an 8-\textit{neighbors} window. In other words, $N_8^-(P)$ are the blue points which we already have evaluated. Source: proposed by the author.}
     \label{fig:pixel_neighborhood}
 \end{figure}
 
@@ -220,7 +220,7 @@ Doing this simple extension, we are now able to apply the method to the same set
 %% ------------------------------------------------------------------------- %%
 \section{Neighborhood extended method}
 \label{sec:neighborhood_extended_method}
-Both methods presented in Sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or in a conjunction rule. However, skin pixels do not usually appear isolated and we could improve the method using some of the already processed neighbors of a pixel $P$, in order to decide if $P$ represents human skin, or not.
+Both methods presented in Sections~\ref{sec:original_method} and \ref{sec:proposed_method} can be applied to detect skin pixels, either separated or combined (i.e. the four equations of the correlation rules of each method -- original and complementary -- must hold). However, skin pixels do not usually appear isolated and we could improve the method using some of the already processed neighbors of a pixel $P$, in order to decide if $P$ represents human skin, or not.
 
 To do that, let $N_8^-(P)$ be the 8-\textit{neighbors} of $P$ that can be reached before $P$ when scanning the image in raster order~\citep{rosenfeld:66}. We can see this idea graphically represented by the blue points in Figure~\ref{fig:pixel_neighborhood}.
 
@@ -268,15 +268,15 @@ Thus, we classify $P$ as skin in the following manner: if the constraints given 
 %% ------------------------------------------------------------------------- %%
 \section{Heuristics to fix neighborhood extended method}
 \label{sec:sup_neighborhood_operations}
-The neighborhood extended method presented in Section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). In addition, besides being visually undesirable, the \textit{diagonal effect} phenomenon causes us to have an increase in the false positive rate. This is caused due to the shape of the window being used. Once we look only for the four already seen pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetry mask. Ideally, we could use another neighborhood strategy and look for all the eight neighbors of the pixel $P$ being evaluated. However, this particular implementation can add extra computational time and hurt the performance of the method. 
+The neighborhood extended method presented in Section~\ref{sec:neighborhood_extended_method} will end up with an undesired behavior on the output images that we called \textit{diagonal effect} (see Fig.~\ref{fig:diagonal_effect}). In addition, besides being visually undesirable, the \textit{diagonal effect} phenomenon causes us to have an increase in the false positive rate. This is caused due to the shape of the window being used. Once we look only for the four already visited pixels of the 8-\textit{neighbors} window, the operation is so based in a non-symmetrical mask. Ideally, we could use another neighborhood strategy and look for all the eight neighbors of the pixel $P$ being evaluated. However, this particular implementation can add extra computational time and affect the performance of the method. 
 
-Therefore, we created an adaptation of the neighborhood method shown in Section~\ref{sec:neighborhood_extended_method}. In this version, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and the extended reverse rules for every single pixel. We keep both results in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two-position vector with the result of the original and reverse rules answer for this pixel. Next, we read each position of this output matrix and we apply an 8-\textit{neighbors} operations in four different implementations, looking for the majority (five at least) neighbors:
+Therefore, we created an adaptation of the neighborhood method shown in Section~\ref{sec:neighborhood_extended_method}. In this version, we scan the image, with a size of $W \times H$, in the raster order, and apply the original and the extended complementary correlation rules for every single pixel. We keep both results in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two-position vector with the result of the original and complementary rules answer for this pixel. Next, we read each position of this output matrix and we apply an 8-\textit{neighbors} operations in four different implementations, looking for the majority (five at least) neighbors:
 
 \begin{enumerate}[label={(\arabic*)}]
-    \item we look in the rules answer performing an AND. In other words, if both original and reverse rules are saying this pixel is skin, then we classify it as skin;
-    \item we look in the rules answer performing an OR. In other words, if one of the rules (original or reverse) is saying this pixel is skin, then we classify it as skin;
-    \item we look in the neighbors only querying the original ($P_{Cb_s}$) rules;
-    \item we look in the neighbors only querying the reversed ($P_{Cr_s}$) rules.
+    \item we look in the correlation rules answer performing an AND. In other words, if both original and complementary correlation rules are saying this pixel is skin, then we classify it as skin;
+    \item we look in the correlation rules answer performing an OR. In other words, if one of the correlation rules (original or complementary) is saying this pixel is skin, then we classify it as skin;
+    \item we look in the neighbors only querying the original ($P_{Cb_s}$) correlation rules;
+    \item we look in the neighbors only querying the complementary ($P_{Cr_s}$) correlation rules.
 \end{enumerate}
 
 Of course, this variation will add some additional computational cost once we will scan the image one more time. This implementation can be enhanced, but the idea here is to only explore better the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved. Some experiments can be seen further in Section~\ref{sec:sno_experiments}.

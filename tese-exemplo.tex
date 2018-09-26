@@ -185,23 +185,23 @@ framexrightmargin=10pt
 %   final, corrigida, do trabalho
 %
 %
-\newpage
-\thispagestyle{empty}
-    \begin{center}
-        \vspace*{2.3 cm}
-        \textbf{\Large{Human skin segmentation using correlation rules\\ on dynamic color clustering}}\\
-        \vspace*{2 cm}
-    \end{center}
-
-    \vskip 2cm
-
-    \begin{flushright}
-	This is the original version of the thesis prepared by the \\
-	candidate Rodrigo Augusto Dias Faria, such as \\
-	submitted to the Examining Committee.
-    \end{flushright}
-
-\pagebreak
+%\newpage
+%\thispagestyle{empty}
+%    \begin{center}
+%        \vspace*{2.3 cm}
+%        \textbf{\Large{Human skin segmentation using correlation rules\\ on dynamic color clustering}}\\
+%        \vspace*{2 cm}
+%    \end{center}
+%
+%    \vskip 2cm
+%
+%    \begin{flushright}
+%	This is the original version of the thesis prepared by the \\
+%	candidate Rodrigo Augusto Dias Faria, such as \\
+%	submitted to the Examining Committee.
+%    \end{flushright}
+%
+%\pagebreak
 
 
 % ---------------------------------------------------------------------------- %
@@ -217,39 +217,38 @@ framexrightmargin=10pt
 %   à Comissão Julgadora antes da defesa
 %
 %
-% \newpage
-% \thispagestyle{empty}
-%     \begin{center}
-%         \vspace*{2.3 cm}
-%         \textbf{\Large{Título do trabalho a ser apresentado à \\
-%         CPG para a dissertação/tese}}\\
-%         \vspace*{2 cm}
-%     \end{center}
+\newpage
+\thispagestyle{empty}
+    \begin{center}
+        \vspace*{2.3 cm}
+        \textbf{\Large{Human skin segmentation using correlation rules\\ on dynamic color clustering}}\\
+        \vspace*{2 cm}
+    \end{center}
 
-%     \vskip 2cm
+    \vskip 2cm
 
-%     \begin{flushright}
-% 	Esta versão da dissertação/tese contém as correções e alterações sugeridas\\
-% 	pela Comissão Julgadora durante a defesa da versão original do trabalho,\\
-% 	realizada em 14/12/2010. Uma cópia da versão original está disponível no\\
-% 	Instituto de Matemática e Estatística da Universidade de São Paulo.
+    \begin{flushright}
+    This version of the thesis contains the corrections and changes suggested by the\\
+    Examining Committee during the defense of the original work, performed\\
+    on August 31st, 2018. A copy of the original version is available at the\\
+    Institute of Mathematics and Statistics of the University of São Paulo.
 
-%     \vskip 2cm
+    \vskip 2cm
 
-%     \end{flushright}
-%     \vskip 4.2cm
+    \end{flushright}
+    \vskip 4.2cm
 
-%     \begin{quote}
-%     \noindent Comissão Julgadora:
+    \begin{quote}
+    \noindent Examining Committee:
     
-%     \begin{itemize}
-% 		\item Profª. Drª. Nome Completo (orientadora) - IME-USP [sem ponto final]
-% 		\item Prof. Dr. Nome Completo - IME-USP [sem ponto final]
-% 		\item Prof. Dr. Nome Completo - IMPA [sem ponto final]
-%     \end{itemize}
+    \begin{itemize}
+ 		\item Prof. Dr. Roberto Hirata Jr (advisor) - IME-USP
+ 		\item Prof. Dr. Manuel Menezes de Oliveira Neto - INF-UFRGS
+ 		\item Prof. Dr. João Eduardo Kogler Junior - EP-USP
+    \end{itemize}
       
-%     \end{quote}
-% \pagebreak
+    \end{quote}
+\pagebreak
 
 % ---------------------------------------------------------------------------- %
 % Dedication page
@@ -289,7 +288,7 @@ Dissertação (Mestrado) - Instituto de Matemática e Estatística,
 Universidade de São Paulo, São Paulo, 2018.
 \\
 
-A pele humana é constituída de uma série de camadas distintas, cada uma das quais reflete uma porção de luz incidente, depois de absorver uma certa quantidade dela pelos pigmentos que se encontram na camada. Os principais pigmentos responsáveis pela origem da cor da pele são a melanina e a hemoglobina. Há evidências de que a pigmentação da pele humana é uma adaptação para regular a penetração da radiação ultravioleta (UV) na epiderme. Como as populações se mudaram para partes do mundo com diferentes níveis de radiação UV, elas sofreram mudanças genéticas que alteraram a pigmentação da pele. Assim, tons mais escuros de pele estão, em geral, próximos à linha do Equador e dos trópicos. Todos esses fatos nos dão uma ideia de quão complexo pode ser um sistema para segmentar pele humana em imagens. A segmentação de pele desempenha um papel importante em uma ampla gama de aplicações em processamento de imagens e visão computacional. Em suma, existem três abordagens principais para segmentação de pele: baseadas em regras, aprendizado de máquina e híbridos. Elas diferem em termos de precisão e eficiência computacional. Geralmente, as abordagens com aprendizado de máquina e as híbridas superam os métodos baseados em regras, mas exigem um conjunto de dados de treinamento grande e representativo e, por vezes, também um tempo de classificação custoso, que pode ser um fator decisivo para aplicações em tempo real. Neste trabalho, propomos uma melhoria, em três versões distintas, de um novo método de segmentação de pele baseado em regras que funciona no espaço de cores YCbCr. Nossa motivação baseia-se nas hipóteses de que: (1) a regra original pode ser revertida e, (2) pixels de pele humana não aparecem isolados, ou seja, as operações de vizinhança são levadas em consideração. O método é uma combinação de algumas regras de correlação baseadas nessas hipóteses. Essas regras avaliam as combinações de valores de crominância Cb, Cr para identificar os pixels de pele, dependendo da forma e tamanho dos agrupamentos de cores de pele gerados dinamicamente. O método é muito eficiente em termos de esforço computacional, bem como robusto em imagens muito complexas.
+A pele humana é constituída de uma série de camadas distintas, cada uma das quais reflete uma porção de luz incidente, depois de absorver uma certa quantidade dela pelos pigmentos que se encontram na camada. Os principais pigmentos responsáveis pela origem da cor da pele são a melanina e a hemoglobina. A segmentação de pele desempenha um papel importante em uma ampla gama de aplicações em processamento de imagens e visão computacional. Em suma, existem três abordagens principais para segmentação de pele: baseadas em regras, aprendizado de máquina e híbridos. Elas diferem em termos de precisão e eficiência computacional. Geralmente, as abordagens com aprendizado de máquina e as híbridas superam os métodos baseados em regras, mas exigem um conjunto de dados de treinamento grande e representativo e, por vezes, também um tempo de classificação custoso, que pode ser um fator decisivo para aplicações em tempo real. Neste trabalho, propomos uma melhoria, em três versões distintas, de um novo método de segmentação de pele baseado em regras que funciona no espaço de cores YCbCr. Nossa motivação baseia-se nas hipóteses de que: (1) a regra original pode ser complementada e, (2) pixels de pele humana não aparecem isolados, ou seja, as operações de vizinhança são levadas em consideração. O método é uma combinação de algumas regras de correlação baseadas nessas hipóteses. Essas regras avaliam as combinações de valores de crominância Cb, Cr para identificar os pixels de pele, dependendo da forma e tamanho dos agrupamentos de cores de pele gerados dinamicamente. O método é muito eficiente em termos de esforço computacional, bem como robusto em imagens muito complexas.
 \\
 
 \noindent \textbf{Palavras-chave:} detecção de pele, segmentação de pele humana, modelo de cores YCbCr, regras de correlação, agrupamento dinâmico de cores.
@@ -302,7 +301,7 @@ Thesis (Master's Degree) - Institute of Mathematics and Statistics,
 University of São Paulo, São Paulo, 2018.
 \\
 
-Human skin is made of a stack of different layers, each of which reflects a portion of impinging light, after absorbing a certain amount of it by the pigments which lie in the layer. The main pigments responsible for skin color origins are melanin and hemoglobin. There is evidence that human skin pigmentation is an adaption to regulate the penetration of Ultra Violet (UV) radiation into the epidermis. As populations moved to parts of the world with different UV radiation levels, they underwent genetic changes that modified their skin pigmentation. So, darker shades of skin are, in general, near the Equator and tropics. All of these facts give us an idea of how complex can be a system to automatically detect human skin in images. Skin segmentation plays an important role in a wide range of image processing and computer vision applications. In short, there are three major approaches for skin segmentation: rule-based, machine learning and hybrid. They differ in terms of accuracy and computational efficiency. Generally, machine learning and hybrid approaches outperform the rule-based methods but require a large and representative training dataset and, sometimes, costly classification time as well, which can be a deal breaker for real-time applications. In this work, we propose an improvement, in three distinct versions, of a novel method for rule-based skin segmentation that works in the YCbCr color space. Our motivation is based on the hypotheses that: (1) the original rule can be reversed and, (2) human skin pixels do not appear isolated, i.e. neighborhood operations are taken into consideration. The method is a combination of some correlation rules based on these hypotheses. Such rules evaluate the combinations of chrominance Cb, Cr values to identify the skin pixels depending on the shape and size of dynamically generated skin color clusters. The method is very efficient in terms of computational effort as well as robust in very complex images.
+Human skin is made of a stack of different layers, each of which reflects a portion of impinging light, after absorbing a certain amount of it by the pigments which lie in the layer. The main pigments responsible for skin color origins are melanin and hemoglobin. Skin segmentation plays an important role in a wide range of image processing and computer vision applications. In short, there are three major approaches for skin segmentation: rule-based, machine learning and hybrid. They differ in terms of accuracy and computational efficiency. Generally, machine learning and hybrid approaches outperform the rule-based methods but require a large and representative training dataset and, sometimes, costly classification time as well, which can be a deal breaker for real-time applications. In this work, we propose an improvement, in three distinct versions, of a novel method for rule-based skin segmentation that works in the YCbCr color space. Our motivation is based on the hypotheses that: (1) the original rule can be complemented and, (2) human skin pixels do not appear isolated, i.e. neighborhood operations are taken into consideration. The method is a combination of some correlation rules based on these hypotheses. Such rules evaluate the combinations of chrominance Cb, Cr values to identify the skin pixels depending on the shape and size of dynamically generated skin color clusters. The method is very efficient in terms of computational effort as well as robust in very complex images.
 \\
 
 \noindent \textbf{Keywords:} skin detection, human skin segmentation, YCbCr color model, correlation rules, dynamic color clustering.
@@ -328,6 +327,7 @@ Human skin is made of a stack of different layers, each of which reflects a port
     NTSC        & National Television System Committee\\
     PAL         & Phase Alternating Line\\
     RGB         & Red, Green and Blue\\
+    SCT         & Scitex Continuous Tone Format\\
     SECAM       & Sequential Color with Memory\\
     SFA         & Skin of FERET and AR Database\\
     UCS         & Uniform Chromaticity Scale\\

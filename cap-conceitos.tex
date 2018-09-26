@@ -74,7 +74,7 @@ This set of pixels, called the 4-\textit{neighbors} of $p$, is denoted by $N_4(p
     \label{fig:n4-neighbors}
 \end{figure}
 
-Each pixel of the image is a unite distance from $(x, y)$. Some neighbors of $p$ might lie outside of the image boundaries if $(x, y)$ is on the border of the image~\citep{gonzalez:02}. Those who will use neighborhood operations in the image might take this in consideration to avoid index out of range in those regions.
+Some neighbors of $p$ might lie outside of the image boundaries if $(x, y)$ is on the border of the image~\citep{gonzalez:02}. Those who will use neighborhood operations in the image might take this in consideration to avoid index out of range in those regions.
 
 The four coordinates of the diagonals of $p$, if they exist in the domain of the image, are given by:
 \begin{equation*}
@@ -111,64 +111,6 @@ The connectivity between pixels is a very important concept used to establish th
 
 
 %% ------------------------------------------------------------------------- %%
-\subsection{Arithmetic and logic operations}
-\label{sec:ari_logic_operations}
-Image arithmetic applies one of the standard arithmetic operations, or a logical operator, in two or more images. The operators are applied in a pixel-wise manner. In other words, the value of a pixel in the output image depends only on the values of the corresponding pixels in the input images. Hence, the images -- or the subsets, if it is the case -- must be of the same size. Although image arithmetic is the most simple form of image processing, they are used extensively in a wide range of applications and its use can potentially produce very interesting practical results. A main advantage of arithmetic operators is that the process is very simple and, therefore, fast~\citep{gonzalez:02}.
-
-The most common arithmetic operations between two pixels, say $f_1(x, y)$ and $f_2(x, y)$ of two different images $f_1$ and $f_2$, are the addition, subtraction, multiplication and division as shown in Table~\ref{tab:img_ari_operations}~\citep{pedrini:08}.
-
-\begin{table}[hb]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{12pt}
-\renewcommand{\arraystretch}{1.75}
-
-\begin{tabular}{|c|c|}\hline
- \thb{Name}     & \thb{Operation} \\ \hline
- Addition       & $f_1(x, y) + f_2(x, y)$ \\ \cline{1-2}
- Subtraction    & $f_1(x, y) - f_2(x, y)$ \\ \cline{1-2}
- Multiplication & $f_1(x, y) * f_2(x, y)$ \\ \cline{1-2}
- Division       & $f_1(x, y) / f_2(x, y)$ \\ \hline
-
-\end{tabular}
-\end{small}
-\caption[Definition of addition, subtraction, multiplication and division arithmetic operations in two $f_1$ and $f_2$ images]{Definition of addition, subtraction, multiplication and division arithmetic operations in two $f_1$ and $f_2$ images. Source: adapted from~\citet{pedrini:08}.}
-\label{tab:img_ari_operations}
-\end{table}
-
-Addition is used often for image averaging to reduce noise. Subtraction is used frequently for static background removal. Multiplication as well as division are applied to correct gray level shading~\citep{gonzalez:02}.
-
-Once the arithmetic operations can potentially produce images with values out of the gray levels given in the original images, additional effort is frequently needed to work around this situation. For instance, when adding two grayscale images, some pixels of the resulting image may be greater than 255. Similarly, when subtracting two images, some pixels may be with negative values. One way to solve this issue is, after the arithmetic operation, perform a transformation in the gray levels of the resulting image to keep them within a suitable range~\citep{pedrini:08}.
-
-Logic operations are also useful in computer vision and image processing applications. They are applied only in binary images, while arithmetic operations can be used with higher gray levels. The terminology adopted among authors and application developers is that pixels with zero value (black color) belongs to the objects while one value (white color) corresponds to the background. Table~\ref{tab:img_log_operations} shows how the logic operations can be computed~\citep{pedrini:08}.
-
-\begin{table}[ht]
-\centering
-\begin{small}
-\setlength{\tabcolsep}{12pt}
-\renewcommand{\arraystretch}{1.75}
-
-\begin{tabular}{|c|c|}\hline
- \thb{Name}     & \thb{Operation} \\ \hline
- AND    & $f_1(x, y)$ AND $f_2(x, y)$ \\ \cline{1-2}
- OR     & $f_1(x, y)$ OR $f_2(x, y)$ \\ \cline{1-2}
- XOR    & $f_1(x, y)$ XOR $f_2(x, y)$ \\ \cline{1-2}
- NOT    & NOT($f_1(x, y)$) \\ \hline
-
-\end{tabular}
-\end{small}
-\caption[Definition of AND, OR, XOR and NOT logic operations in two $f_1$ and $f_2$ images]{Definition of AND, OR, XOR and NOT logic operations in two $f_1$ and $f_2$ images. Source: adapted from~\citet{pedrini:08}.}
-\label{tab:img_log_operations}
-\end{table}
-
-The AND operation outputs 1 in the resulting image when both pixels, at same coordinates in the input images, are equal 1. XOR operation outputs 1 when only one of the pixels -- but not both -- has value 1; 0 otherwise. The result of OR operation is 1 when at least one of the pixels has 1 value. The NOT operation reverse the value of the pixel in the image~\citep{pedrini:08}.
-
-All the logic operators can be combined to create other more complex and robust operators. They can be used to combine information between images or to extract information of regions of interest from them~\citep{pedrini:08}.
-
-In addition to the pixel-wise processing, logic and arithmetic operations can be used for neighborhood processing. Typically, this kind of processing uses masks, where terms such as windows and filters are often used as synonym of masks. The idea of the masks is to turn the value of the pixel a function of its own value and its neighbors. It is note mentioning that masks application are made under high computational cost. Therefore, they must be used carefully~\citep{pedrini:08}.
-
-
-%% ------------------------------------------------------------------------- %%
 \subsection{Image boundaries}
 \label{sec:image_boundaries}
 
@@ -189,7 +131,7 @@ When working with neighborhood operations, the mask being used, independently of
     \label{fig:img_boundaries}
 \end{figure}
 
-There are several ways to work around this problem. One simple mechanism is to simply ignore the pixels on the border where the mask go beyond. Despite this will avoid index out of bound errors, border pixels of the image will not be looked at. Another approach is to copy the corresponding pixels from the input image. Once again, the resulting image will have some not processed pixels in the border. Another strategy is to apply a different mask for the borders, which may consider the difference in the corners as well, to perform the operation, which can turn the operation more complex and computational costly~\citep{pedrini:08}.
+There are several ways to work around this problem. One simple mechanism is to simply ignore the pixels on the border where the mask go beyond -- this is the approach we used in this work. Despite this will avoid index out of bound errors, border pixels of the image will not be looked at. Another approach is to copy the corresponding pixels from the input image. Once again, the resulting image will have some not processed pixels in the border. Another strategy is to apply a different mask for the borders, which may consider the difference in the corners as well, to perform the operation, which can turn the operation more complex and computational costly~\citep{pedrini:08}.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -197,7 +139,7 @@ There are several ways to work around this problem. One simple mechanism is to s
 \label{sec:image_histogram}
 In particular for image processing, when we are referring to an image histogram, we are talking about to count the frequency of the pixels for each intensity level in separate bins, in a multi-valued (intensity levels) sequence~\citep{fisher:03}. The most common visual representation is a graph or plot, which gives an overall idea about the intensity distribution of an image. The foundation of a histogram can be seen as a set of bins, where each bin is representing a certain intensity value from a given range. A simple algorithm to compute a histogram of an image may examines all pixels in the image and assigns each to a bin depending on the pixel intensity. In the end, each bin will have the number of pixels of its own intensity value~\citep{gonzalez:02}.
 
-For instance, in an 8-bit grayscale image there are 256 different possible intensities, and so, the histogram will graphically display 256 integer numbers showing the counting of occurrences of those grayscale values. It is also possible to compute histograms of color images. In this particular case, the channels of the color space in turn are split individually from where a separate histogram is calculated~\citep{fisher:03}.
+For instance, in an 8-bit grayscale image there are 256 different possible intensities, and so, the histogram will graphically display 256 integer numbers showing the counting of occurrences of those grayscale values. It is also possible to compute histograms of color images. In this particular case, the channels of the color space in turn are split individually from where a separate histogram is calculated~\citep{fisher:03}. We are using color histograms of the YCbCr channels image in this work.
 
 \begin{figure}[H]
     \centering
@@ -212,13 +154,13 @@ For instance, in an 8-bit grayscale image there are 256 different possible inten
     \label{fig:obama_hist}
 \end{figure}
 
-A histogram can also be a source of useful information with respect an image. Several statistical measures can be obtained from a histogram such that minimum and maximum values, mean, median, standard deviation, and percentiles~\citep{pedrini:08}. Those measures as well as the histogram itself are fundamental for the methods described in Chapter~\ref{cap:proposed-solution} of the proposed solution.
+Several statistical measures can also be obtained from a histogram such that minimum and maximum values, mean, median, standard deviation, and percentiles~\citep{pedrini:08}. Those measures, specifically percentiles, as well as the histogram itself are fundamental for the methods described in Chapter~\ref{cap:proposed-solution} of the proposed solution.
 
 
 %% ------------------------------------------------------------------------- %%
 \section{Image segmentation}
 \label{sec:image_segmentation}
-Image segmentation is the task of partition the image domain so each part is semantically different from each of its neighbors. These regions who, in general, are the representation of specific objects, are the fundamental parts of an image. This partitioning process is also used by humans, through their visual perception, into surrounding environment to help themselves to recognize them, guide their movements, and for almost every other day by day tasks in their lives~\citep{konstantinos:00}.
+Image segmentation is the task of partition the image domain so each part is semantically different from each of its neighbors. These regions which, in general, are the representations of specific objects, are the fundamental parts of an image. This partitioning process is also used by humans, through their visual perception, into surrounding environment to help themselves to recognize them, guide their movements, and for almost every other day by day tasks in their lives~\citep{konstantinos:00}.
 
 Segmentation of complex images is one of the most difficult tasks in the field of image processing, where the accuracy determines whether a successful operation or not. It is a heavy process that consists of many steps such as the analysis of color, shape, motion, geometry, and texture of objects in images~\citep{gonzalez:02}.
 
@@ -230,7 +172,7 @@ One of the \emph{similarity} methods it is the thresholding: a popular and simpl
 %% ------------------------------------------------------------------------- %%
 \subsection{Thresholding}
 \label{sec:thresholding}
-Histogram thresholding is one of the simplest pixel-based techniques for image segmentation due to its intuitive properties and uncomplicated implementation~\citep{gonzalez:02}. Roughly speaking, if an image is composed of distinct regions -- that means, each region in the histogram are represented by a peak, similar to a Gaussian distribution --, adjacent regions could be split into separated groups, once adjacent peaks are likely separated by a valley~\citep{konstantinos:00}. Those valleys can be determined by means of one or more threshold values. However, to find out the threshold value that is the lower bound of a valley is definitely not a trivial task~\citep{konstantinos:00}.
+Histogram thresholding is one of the simplest pixel-based techniques for image segmentation due to its intuitive properties and easy implementation~\citep{gonzalez:02}. Roughly speaking, if an image is composed of distinct regions -- that means, each region in the histogram is represented by a peak --, adjacent regions could be split into separated groups, once adjacent peaks are likely separated by a valley~\citep{konstantinos:00}. Those valleys can be determined by means of one or more threshold values. However, to find out the threshold value that is the lower bound of a valley is definitely not a trivial task~\citep{konstantinos:00}.
 
 
 \begin{figure}[h]
@@ -295,7 +237,7 @@ Colors can be specified by mathematical models in tuples of numbers in a coordin
 
 These models can be classified as of two types: the additive models in which the primary color intensities are added to produce other colors and subtractive, where colors are generated by subtracting the length of the dominant wave from the white light.
 
-The following sections briefly describe some of the major color models, as well as their variants and main areas of application.
+The following sections briefly describe some color models, as well as their variants and main areas of application.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Munsell color model}
@@ -303,14 +245,14 @@ The following sections briefly describe some of the major color models, as well 
 
 Pioneer in an attempt to organize the perception of the colors in a color space, Albert Henry Munsell was able to combine the art and science of colors in a single theory~\citep{konstantinos:00}.
 
-The principle of equality of visual spacing between the components of the model is the essential idea of the Munsell color model. These components are hue, value, corresponding to luminance, and chroma, corresponding to saturation~\citep{konstantinos:00}.
+The principle of equality of perceptual separation between the components of the model is the essential idea of the Munsell color model. These components are hue, value, corresponding to luminance, and chroma, corresponding to saturation~\citep{konstantinos:00}.
 
-The model is represented by a cylindrical shape and it can be seen in the Figure~\ref{fig:munsell-system}. The hue is arranged in the circular axis consisting of five bases as well as five secondary colors, the saturation in the radial axis and the luminance in the vertical axis in a range varying from 0 to 10.
+The model is represented by a cylindrical coordinate system and it can be seen in the Figure~\ref{fig:munsell-system}. The hue is arranged in the circular axis consisting of five bases as well as five secondary colors, the saturation in the radial axis and the luminance in the vertical axis in a range varying from 0 to 10.
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=.6\textwidth]{munsell-system}
-  \caption[Munsell color model.]{Munsell color model represented by a cylindrical shape. The hue is arranged on the circular axis consisting of five bases and five secondary colors, the chroma (saturation) on the radial axis and the luminance (value) on the vertical axis in a range varying from 0 to 10. Source: \citet{rus:07}.}
+  \caption[Munsell color model.]{Munsell color model represented by a cylindrical coordinate system. The hue is arranged on the circular axis consisting of five bases and five secondary colors, the chroma (saturation) on the radial axis and the luminance (value) on the vertical axis in a range varying from 0 to 10. Source: \citet{rus:07}.}
   \label{fig:munsell-system} 
 \end{figure}
 
@@ -428,7 +370,7 @@ Overlapping the CMY primary colors in equal amounts to generate the black color 
 \subsection{Color models of the YUV family}
 \label{sec:modelo_cores_yuv}
 
-Color models of this family are also known as orthogonal color spaces. They are able to represent the color with statistically independent components -- as independent as possible. In addition, to reduce the redundancy present in RGB color channels is also one of its key features~\citep{kakumanu:07}.
+Color models of the YUV family are also known as orthogonal color spaces. In addition, one of their key features is to reduce the redundancy present in RGB color channels~\citep{kakumanu:07}.
 
 The acronym YUV stands to a set of color spaces of which the luminance information, represented by the Y component, is coded separately from the chrominance, given by the components U and V. The components U and V are representations of signals of the difference of the blue subtracted from luminance ($B-Y$) and red subtracted from luminance ($R-Y$). It is used to represent colors in analog television transmission systems in the Phase Alternating Line (PAL) and Sequential Color with Memory (SECAM)~\citep{pedrini:08}.
 
@@ -448,7 +390,7 @@ The transformation of the RGB space to YUV is given by~\citep{pedrini:08}:\\
 \end{equation}
 where $0 \leq R, G, B \leq 1$.
 
-Analogous to the YUV, the YIQ model was adopted in 1950 by the National Television System Committee (NTSC), an American standard for color television signal transmission. In this model, the Y component corresponds to luminance and the components I (hue) and Q (saturation) encode the chrominance information~\citep{pedrini:08}.
+Analogous to the YUV, the YIQ model was adopted in 1950 by the National Television System Committee (NTSC), an American standard for color television signal transmission. In this model, the Y component corresponds to luminance and the components I and Q encode the chrominance information~\citep{pedrini:08}.
 
 The transformation of the RGB space to YIQ is given by~\citep{pedrini:08}:\\
 \begin{equation}
@@ -466,7 +408,14 @@ The transformation of the RGB space to YIQ is given by~\citep{pedrini:08}:\\
 \end{equation}
 where $0 \leq R, G, B \leq 1$.
 
-Another color model of the YUV family is the YCbCr, mathematically defined by a coordinate transformation with respect to some RGB space~\citep{pedrini:08}.
+Another color model of the YUV family is the YCbCr, mathematically defined by a coordinate transformation with respect to some RGB space~\citep{pedrini:08}. The Figure~\ref{fig:ycbcr-model} shows the CbCr plane of the YCbCr color model for a specific Y value.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.7\textwidth]{ycbcr_plane}
+  \caption[CbCr plane of the YCbCr color model]{CbCr plane of the YCbCr color model. Y value is set to 0.5, Cb on the horizontal axis in the range [-1, 1], Cr on the vertical axis in the range [-1, 1]. Source: \citet{eugster:10}.}
+  \label{fig:ycbcr-model}
+\end{figure}
 
 The YCbCr model is widely used in digital videos. In this system, the Y component represents luminance, computed as a weighted sum of RGB values. Cb component gives the measurement of the difference between the blue color and a reference value, similar to the Cr component which is the measurement of the difference between the red color and a reference value~\citep{pedrini:08}.
 
@@ -494,9 +443,9 @@ Hue, Saturation, and Intensity (HSI) models are best suited for image processing
 
 In this model, as well in YIQ color space, the intensity given by I component is decomposed from the chrominance information, represented by the hue (H) and saturation (S). The combination of these components results in a pyramidal structure which can be seen in Figure~\ref{fig:hsi-model}~\citep{konstantinos:00}.
 
-\begin{figure}[!ht]
+\begin{figure}[!hbt]
   \centering
-  \includegraphics[width=.7\textwidth]{hsi-model}
+  \includegraphics[width=.75\textwidth]{hsi-model}
   \caption[Graphical representation of the HSI model]{Graphical representation of the HSI model. The hue describes the color itself, in the form of an angle $\theta$, where $\theta \in [0, 360]$. Red is at 0 degrees, yellow at 60, green at 120, and so on. The saturation component, which varies between 0 and 1, indicates how much color is polluted with white color. The intensity scale is between $[0, 1]$, where 0 means black and 1, white. Source: \citet{blackice:16}.}
   \label{fig:hsi-model} 
 \end{figure}

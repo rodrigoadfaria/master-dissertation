@@ -2,13 +2,13 @@
 \chapter{Experimental Evaluation}
 \label{cap:experimentos}
 
-In this chapter, we present some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a brief definition of the evaluation metrics used is shown for the sake of clarity. We also provide some results of the heuristics to fix the neighborhood method that we built to remove the \emph{diagonal effect} as well as to explore different neighbors techniques. Finally, we show the results of the grid search parameters experiments aiming the trapezoids parameters' tuning. All the experiments are analyzed and discussed in each section separately.
+In this chapter, we present some experimental evaluations of the proposed extensions along with the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. In addition, a brief definition of the evaluation measures used is shown for the sake of clarity. We also provide some results of the heuristics to fix the neighborhood method that we built to remove the \emph{diagonal effect} as well as to explore different neighbors techniques. Finally, we show the results of the grid search parameters experiments aiming the trapezoids parameters' tuning. All the experiments are analyzed and discussed in each section separately.
 
 
 %------------------------------------------------------
 \section{Datasets}
 \label{sec:datasets}
-Datasets are an integral part of the field of computer vision. In the particular case of computer vision, datasets consist, primarily, of images or videos for tasks such as object detection, motion tracking, segmentation, and classification. In general, they are constructed with tens, hundreds, or even thousands of images in different environments, distinct illumination conditions, various quality and resolution, and many other aspects.
+Datasets are very important in the field of computer vision for training, testing and bench-marking. In the particular case of computer vision, datasets consist, primarily, of images or videos for tasks such as object detection, motion tracking, segmentation, and classification. In general, they are constructed with tens, hundreds, or even thousands of images in different environments, distinct illumination conditions, various quality and resolution, and many other aspects.
 
 We gathered four widely known datasets, SFA, Pratheepan, HGR, and Compaq, which will be briefly introduced in next sections, to be used in our experiments. Together, they sum up 7,423 images of different size and resolution, and more than 1.5 billion pixels tested in all the experiments, counting only the original images.
 
@@ -95,7 +95,7 @@ The images in the Pratheepan dataset were downloaded randomly from Google Images
 \label{sec:datasets_hgr}
 The database for Hand Gesture Recognition (HGR) contains the gestures from Polish and American Sign Language. There are 1,558 images acquired in different conditions of background, dimensions, and lightning. In addition to original and ground truth binary skin mask images, it includes hand feature points locations in separate files. Figure~\ref{fig:hgr_dataset_exemplo} shows some of the 1,558 samples available \citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
-The images within it were acquired in three different series. A set of 899 was captured in uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and uncontrolled (41) background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions~\citep{kawulok:14, nalepa:14, grzejszczak:16}.
+The images within it were acquired in three different series. A set of 899 was captured with uncontrolled background and lighting. A small set of 85 was obtained in gray (44) and uncontrolled (41) background; the lighting was uniform. The third group contains 574 images in controlled background (green tone), using uniform lighting conditions~\citep{kawulok:14, nalepa:14, grzejszczak:16}.
 
 \begin{figure}[!hbt]
     \centering
@@ -121,7 +121,7 @@ The images within it were acquired in three different series. A set of 899 was c
 %------------------------------------------------------
 \subsection{Compaq}
 \label{sec:datasets_compaq}
-Compaq can be considered as the first large skin dataset and, probably is the most used for skin detection classifiers. It consists of 13,635 images crawled from the Internet, which 4,670 contain skin regions and another subset of 8,965 images not containing any skin. The ground truth images are poorly annotated on the basis of an automatic software tool~\citep{mahmoodi:16}\footnote{We acknowledge the authors for sending us their database with the ground truth images.}.
+Compaq can be considered the first large skin dataset and, probably is the most used for skin detection classifiers. It consists of 13,635 images crawled from the Internet, which 4,670 contain skin regions and another subset of 8,965 images not containing any skin. The ground truth images are poorly annotated on the basis of an automatic software tool~\citep{mahmoodi:16}\footnote{We acknowledge the authors for sending us their database with the ground truth images.}.
 
  We had to fix some few images due to lack of ground truth or files corrupted. The final amount of images with skin used in the experiments is 4,669. Figure~\ref{fig:compaq_dataset_example} shows some of the 4,669 images with skin samples available used in the experiments~\citep{jones:02}.
 
@@ -161,7 +161,7 @@ Compaq can be considered as the first large skin dataset and, probably is the mo
 \section{Evaluation measures}
 \label{sec:evaluation_measures}
 
-\textit{Precision, Recall, Specificity} and \textit{F-measure} have been used as evaluation metrics. They are the same used in~\citet{brancati:17} to compare the performance with state-of-the-art methods. They are also widely used by the scientific community. These metrics are given by the following formulas:
+\textit{Precision, Recall, Specificity} and \textit{F-measure} have been used as evaluation measures. They are the same used in~\citet{brancati:17} to compare the performance with state-of-the-art methods. They are also widely used by the scientific community. These measures are given by the following formulas:
 
 \begin{equation*}
     Precision = \frac{TP}{TP + FP}
@@ -179,7 +179,7 @@ Compaq can be considered as the first large skin dataset and, probably is the mo
 \end{equation*}
 
 \begin{equation*}
-    F-measure = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+    F\text{-}measure = 2 \times \frac{Precision \times Recall}{Precision + Recall}
     \label{eq:fmeasure}
 \end{equation*}
 
@@ -220,13 +220,13 @@ Compaq can be considered as the first large skin dataset and, probably is the mo
 \label{sec:rule_based_experiments}
 In this section, we present some experimental evaluations of the proposed extensions described in Sections~\ref{sec:proposed_method} and \ref{sec:neighborhood_extended_method}, as well as the original method in four widely known datasets: SFA, Pratheepan, HGR, and Compaq. The latest three of them have also been used in~\citet{brancati:17}.
 
-Table~\ref{tab:merged_rules_results} shows quantitative result metrics of the experiments. Column 1 refers to the dataset used. Column 2 refers to the method being experimented: Original for the original hypothesis; Reverse refers to the reverse hypothesis with respect to $P_{Cr_{s}}$ parameter; Combined refers to the combination of both of the former methods (see  Sec. \ref{sec:proposed_method}); Neighbors refers to the extension of the method using the neighborhood approach (see  Sec. \ref{sec:neighborhood_extended_method}).
+Table~\ref{tab:merged_rules_results} shows quantitative result measures of the experiments. Column 1 refers to the dataset used. Column 2 refers to the method being experimented: Original for the original hypothesis; Complementary refers to the complementary hypothesis with respect to $P_{Cr_{s}}$ parameter; Combined refers to the combination of both of the former methods (see  Sec. \ref{sec:proposed_method}); Neighbors refers to the extension of the method using the neighborhood approach (see  Sec. \ref{sec:neighborhood_extended_method}).
 
 The original method was compared with six well known rule-based methods in the literature using four different datasets, three of them, HGR, Pratheepan and Compaq, we have also been used here. We applied the methods against a fourth dataset (SFA) to increase and strengthen the different number of samples tested.
 
 Because the original method had the best \textit{F-measure} in the HGR and Pratheepan datasets in comparison with the other six methods and, in addition, because it performed the top first \textit{Precision} in HGR and second in Pratheepan, we decided to compare the proposed extensions only to the original method.
 
-As one can see in Table~\ref{tab:merged_rules_results}, the reverse hypothesis performed better than the original method and achieved the best \textit{Recall} in HGR and SFA. It also achieved the best \textit{F-measure} in SFA with a 0.8125 rate, which gave almost 0.25 in gain compared to the original.
+As one can see in Table~\ref{tab:merged_rules_results}, the complementary hypothesis performed better than the original method and achieved the best \textit{Recall} in HGR and SFA. It also achieved the best \textit{F-measure} in SFA with a 0.8125 rate, which gave almost 0.25 in gain compared to the original.
 
 \begin{table*}[ht]
 \centering
@@ -235,39 +235,39 @@ As one can see in Table~\ref{tab:merged_rules_results}, the reverse hypothesis p
 \thb{Dataset} & \thb{Hypothesis} & \thb{Precision} & \thb{Recall} & \thb{Specificity} & \thb{F-measure}\\ \cline{1-6}
 \multirow{3}{*}{Compaq}
 & Original     & 0.4354            & \textbf{0.8046}   & 0.8046            & 0.5650 \\ \cline{2-6}
-& Reverse      & 0.3971            & 0.7232            & 0.7921            & 0.5127 \\ \cline{2-6}
+& Complementary      & 0.3971            & 0.7232            & 0.7921            & 0.5127 \\ \cline{2-6}
 & Combined     & \textbf{0.4906}   & 0.6251            & \textbf{0.8856}   & 0.5498 \\ \cline{2-6}
 & Neighbors    & 0.4708            & 0.7421            & 0.8463            & \textbf{0.5761} \\ \hhline{======}
 
 \multirow{3}{*}{Pratheepan}
 & Original     & 0.5513            & \textbf{0.8199}   & 0.8230            & 0.6592 \\ \cline{2-6}
-& Reverse      & 0.5249            & 0.7326            & 0.8188            & 0.6116 \\ \cline{2-6}
+& Complementary      & 0.5249            & 0.7326            & 0.8188            & 0.6116 \\ \cline{2-6}
 & Combined     & \textbf{0.6681}   & 0.6683            & \textbf{0.9164}   & 0.6682 \\ \cline{2-6}
 & Neighbors    & 0.6280            & 0.7515            & 0.8871            & \textbf{0.6843} \\ \hhline{======}
 
 \multirow{3}{*}{HGR}
 & Original     & 0.8938            & 0.7664            & 0.9274            & 0.8252 \\ \cline{2-6}
-& Reverse      & 0.7929            & \textbf{0.8429}   & 0.8337            & 0.8171 \\ \cline{2-6}
+& Complementary      & 0.7929            & \textbf{0.8429}   & 0.8337            & 0.8171 \\ \cline{2-6}
 & Combined     & \textbf{0.8994}   & 0.6952            & \textbf{0.9390}   & 0.7843 \\ \cline{2-6}
 & Neighbors    & 0.8818            & 0.7935            & 0.9211            & \textbf{0.8353} \\ \hhline{======}
 
 \multirow{3}{*}{SFA}
 & Original     & 0.8636             & 0.4214            & 0.9692            & 0.5664 \\ \cline{2-6}
-& Reverse      & 0.8563             & \textbf{0.7730}   & 0.9381            & \textbf{0.8125} \\ \cline{2-6}
+& Complementary      & 0.8563             & \textbf{0.7730}   & 0.9381            & \textbf{0.8125} \\ \cline{2-6}
 & Combined     & \textbf{0.9288}    & 0.3958            & \textbf{0.9894}   & 0.5551 \\ \cline{2-6}
 & Neighbors    & 0.9176             & 0.5111            & 0.9826            & 0.6565 \\ \hline
 \end{tabular}
 
-\caption[Quantitative result metrics of the proposed enhancements and original method]{Quantitative result metrics of the proposed enhancements and \citet{brancati:17}. For each dataset, we have four different applications: the original hypothesis with respect to $P_{Cb_{s}}$, the reverse hypothesis with respect to $P_{Cr_{s}}$, the one which combines both, and the extension using the neighborhood approach. The highlighted cells (bold) are those with the best result for the respective method and metric in each dataset.}
+\caption[Quantitative result measures of the proposed enhancements and original method]{Quantitative result measures of the proposed enhancements and \citet{brancati:17}. For each dataset, we have four different applications: the original hypothesis with respect to $P_{Cb_{s}}$, the complementary hypothesis with respect to $P_{Cr_{s}}$, the one which combines both, and the extension using the neighborhood approach. The highlighted cells (bold) are those with the best result for the respective method and measure in each dataset.}
 \label{tab:merged_rules_results}
 
 \end{table*}
 
-It is important to note that, the significant improvement of the \textit{Recall} in HGR and SFA datasets is, probably, due to the nature of the images that form each of them. HGR and SFA contain images where we have a great concentration of skin pixels -- hands and arms in the case of HGR, and faces in the case of SFA occupying a considerable region of the image. Furthermore, a large part of them was collected in controlled environments, on the background and lighting conditions point of view. Thus, this behavior must be taken into consideration when selecting the method to apply within an application, since this can be decisive for a potential performance improvement.
+It is important to note that, the significant improvement of the \textit{Recall} in HGR and SFA datasets is, probably, due to the nature of the images that form each of them. HGR and SFA contain images where we have a great concentration of skin pixels -- hands and arms in the case of HGR, and faces in the case of SFA occupying a considerable region of the image. Furthermore, a large part of them was collected in controlled environments in terms of background and lighting conditions. Thus, this behavior must be taken into consideration when selecting the method to apply within an application, since this can be decisive for a potentially performance improvement.
 
-In general, the reverse method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it still has very good \textit{F-measure} rates.
+In general, the complementary method increased the \textit{Recall} but did not perform well in \textit{Precision} and \textit{Specificity} measures. When we combined both methods, the best \textit{Precision} and \textit{Specificity} were achieved for all datasets but it loses some performance in \textit{Recall}. However, it still has very good \textit{F-measure} rates.
 
-The neighborhood approach achieved the best \textit{F-measure} results in Compaq, HGR, and Pratheepan. Moreover, the other metrics still are at a very high rate for all datasets, being in the top second in almost all cases. If we compare the neighbors approach with the original, except for the \textit{Recall} -- where we only got the best result in SFA --, we can see that our implementation achieved the best measures practically for all other metrics, in the four datasets.
+The neighborhood approach achieved the best \textit{F-measure} results in Compaq, HGR, and Pratheepan. Moreover, the other measures still are at a very high rate for all datasets, being in the top second in almost all cases. If we compare the neighbors approach with the original, except for the \textit{Recall} -- where we only got the best result in SFA --, we can see that our implementation achieved the best measures practically for all other measures, in the four datasets.
 
 Therefore, the combined and neighbors approaches are very competitive compared to the original method. Furthermore, all the variations of the original method are still computed in linear time in the number of pixels, maintaining the desired computational efficiency that is useful in different application domains, mainly near real-time systems (processing time of about 10ms for a typical image of dimensions 320x400).
 
@@ -280,7 +280,7 @@ We have also tested the subset of non-skin images from Compaq dataset in terms o
 \begin{tabular}{lc}\hline
 \thb{Hypothesis} & \thb{Specificity} \\ \cline{1-2}
 Original~\citep{brancati:17}    & 0.8681          \\
-Reverse                         & 0.7876          \\
+Complementary                   & 0.7876          \\
 Combined                        & \textbf{0.9177} \\
 Neighbors                       & 0.8866          \\ \hline
 \end{tabular}
@@ -290,11 +290,11 @@ Neighbors                       & 0.8866          \\ \hline
 
 \end{table*}
 
-Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hgr} and~\ref{fig:results_cpq}, present some qualitative results for each method tested. Column (a) are image samples, column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective reverse method results, column (e), the combined method results and column (f) the extended neighborhood method.
+Figures~\ref{fig:results_sfa},~\ref{fig:results_pratheepan},~\ref{fig:results_hgr} and~\ref{fig:results_cpq}, present some qualitative results for each method tested. Column (a) are image samples, column (b) presents the respective ground truth for each image in column (a), column (c) presents the original method~\cite{brancati:17} results, column (d) presents the respective complementary method results, column (e), the combined method results and column (f) the extended neighborhood method.
 
-Qualitatively, we can see that, in general, the reverse method removes a large part of the reddish pixels from the background of the image (e.g. see the third and sixth images in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the reverse method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
+Qualitatively, we can see that, in general, the complementary method removes a large part of the reddish pixels from the background of the image (e.g. see the third and sixth images in the Figure~\ref{fig:results_sfa}, first and fourth images in the Figure~\ref{fig:results_pratheepan}, second image in Figure~\ref{fig:results_hgr}, and third image in Figure~\ref{fig:results_cpq}), which the original method was not able to. On the other hand, the complementary method has not been successful in taking off yellowish-toned background regions (e.g. see the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}).
 
-However, when we blend the original method along with the reverse in the method that we call combined, both background regions of reddish and yellowish pixels are almost completely removed. In addition, salt-like noises are also dropped, since the rules together are more rigid (e.g. see column (e) combined method for the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}). Obviously, this causes an undesired effect of removing some of the skin pixels of which we are interested. This helps us understand why the recall decreases with the application of the combined rule.
+However, when we blend the original method along with the complementary in the method that we call combined, both background regions of reddish and yellowish pixels are almost completely removed. In addition, salt-like noise is also dropped, since the correlation rules together are more rigid (e.g. see column (e) combined method for the third image in Figure~\ref{fig:results_hgr}, and fifth image in Figure~\ref{fig:results_cpq}). Obviously, this causes an undesired effect of removing some of the skin pixels of which we are interested. This helps us understand why the recall decreases with the application of the combined method.
 
 \clearpage
 \begin{figure*}[!htb]
@@ -354,7 +354,7 @@ However, when we blend the original method along with the reverse in the method 
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in SFA dataset]{Image samples with the results of each method in SFA dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
+    \caption[Image samples with the results of each method in SFA dataset]{Image samples with the results of each method in SFA dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) complementary (e) combined (f) neighbors.}
     \label{fig:results_sfa}
 \end{figure*}
 
@@ -409,7 +409,7 @@ However, when we blend the original method along with the reverse in the method 
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in Pratheepan dataset]{Image samples with the results of each method in Pratheepan dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
+    \caption[Image samples with the results of each method in Pratheepan dataset]{Image samples with the results of each method in Pratheepan dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) complementary (e) combined (f) neighbors.}
     \label{fig:results_pratheepan}
 \end{figure*}
 
@@ -458,7 +458,7 @@ However, when we blend the original method along with the reverse in the method 
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in HGR dataset]{Image samples with the results of each method in HGR dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
+    \caption[Image samples with the results of each method in HGR dataset]{Image samples with the results of each method in HGR dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) complementary (e) combined (f) neighbors.}
     \label{fig:results_hgr}
 \end{figure*}
 
@@ -519,7 +519,7 @@ However, when we blend the original method along with the reverse in the method 
         \caption{}
     \end{subfigure}
 
-    \caption[Image samples with the results of each method in Compaq dataset]{Image samples with the results of each method in Compaq dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) reverse (e) combined (f) neighbors.}
+    \caption[Image samples with the results of each method in Compaq dataset]{Image samples with the results of each method in Compaq dataset: (a) original image (b) ground truth (c) original \cite{brancati:17} (d) complementary (e) combined (f) neighbors.}
     \label{fig:results_cpq}
 \end{figure*}
 \clearpage
@@ -527,7 +527,7 @@ However, when we blend the original method along with the reverse in the method 
 %% ------------------------------------------------------------------------- %%
 \section{Experiments with heuristics to fix extended neighborhood method}
 \label{sec:sno_experiments}
-In this section, we will show some experimental results of the neighborhood adaptation described in Section~\ref{sec:sup_neighborhood_operations}. In short, we basically scan the image, with a size of $W \times H$, in the raster order, and apply the original and reverse rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two-position vector with the result of the original and reverse rules answer for this pixel. Finally, we count those answers into four different strategies. The results can be seen in Table~\ref{tab:sup_neighbors_results}.
+In this section, we will show some experimental results of the neighborhood adaptation described in Section~\ref{sec:sup_neighborhood_operations}. In short, we scan the image, with a size of $W \times H$, in raster order, and apply the original and complementary rules for every single pixel. We keep the result in a matrix of the same size ($W \times H$) of the input image. For each coordinate of this output matrix, we will have a two-position vector with the result of the original and complementary rules answer for this pixel. Finally, we count those answers into four different strategies. The results can be seen in Table~\ref{tab:sup_neighbors_results}.
 
 \begin{table*}[ht]
 \centering
@@ -563,21 +563,21 @@ In this section, we will show some experimental results of the neighborhood adap
 & $P_{Cb_s}$ only   & 0.8953            & 0.7690            & 0.9286            & \textbf{0.8273} \\ \hline
 \end{tabular}
 
-\caption[Quantitative result metrics of the adaptation to fix neighborhood extended method]{Quantitative result metrics of the adaptation to fix neighborhood extended method. For each dataset, we have five different applications of the neighbors operations. The first line is the result of the proposed method detailed in Section~\ref{sec:neighborhood_extended_method} for comparison. The following four lines are the adaptation to fix neighborhood extended method shown in Section~\ref{sec:sup_neighborhood_operations} which are considering, respectively, an AND between the original and reverse rules, an OR between the original and reverse rules, the $P_{Cr_{s}}$ (reverse) only, and the $P_{Cb_{s}}$ (original) only. The highlighted cells (bold) are those with the best result for the respective hypothesis and metric in each dataset.}
+\caption[Quantitative result measures of the adaptation to fix neighborhood extended method]{Quantitative result measures of the adaptation to fix neighborhood extended method. For each dataset, we have five different applications of the neighbors operations. The first line is the result of the proposed method detailed in Section~\ref{sec:neighborhood_extended_method} for comparison. The following four lines are the adaptation to fix neighborhood extended method shown in Section~\ref{sec:sup_neighborhood_operations} which are considering, respectively, an AND between the original and complementary rules, an OR between the original and complementary rules, the $P_{Cr_{s}}$ (complementary) only, and the $P_{Cb_{s}}$ (original) only. The highlighted cells (bold) are those with the best result for the respective hypothesis and measure in each dataset.}
 \label{tab:sup_neighbors_results}
 
 \end{table*}
 
-It is worth mentioning that the goal here is to better explore the connectivity of the 8-\textit{neighbors} window and check, on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone as well as the measures are improved.
-For these experiments we will pay the cost of scanning the image one more time. The implementation can be improved by, for instance, keeping the latest three lines of the image scanned in memory to be verified by the 8-\textit{neighbors} window backward to have a final decision when evaluating a pixel.
+It is worth mentioning that the goal here is to better explore the connectivity of the 8-\textit{neighbors} window and check on the basis of a symmetric mask window, if the \textit{diagonal effect} is gone, as well as if the measures were improved.
+For these experiments we will pay the cost of scanning the image one more time. The implementation can be improved, for instance, by keeping the latest three lines of the image scanned in memory to be verified with the 8-\textit{neighbors} window backward to have a final decision when evaluating a pixel.
 
 From the Table~\ref{tab:sup_neighbors_results} we can see that the application of the neighborhood approach using AND gives us the best \emph{Precision} and \emph{Specificity} in all datasets. On the other hand, we lost performance in the \emph{Recall} in relation to the other approaches. Concerning \emph{Recall}, the loss is in the order of 20\% up to 30\% in the Compaq, Pratheepan and HGR datasets, and approximately 50\% in the SFA.
 
-Clearly, there is a trade-off between increasing \emph{Precision} and decreasing \emph{Recall} and vice-versa, just as in the experiments done in Section~\ref{sec:rule_based_experiments} with all methods. When we use a more relaxed rule, as in the case of the OR (or the isolated rules), we get a better \emph{Recall}, but there is also an abrupt drop in \emph{Precision} and \emph{Specificity}. Another side effect of this phenomenon is to increase the false positive rate.
+Clearly, there is a trade-off between increasing \emph{Precision} and decreasing \emph{Recall} and vice-versa, just as in the experiments done in Section~\ref{sec:rule_based_experiments} with all methods. When we use a more relaxed rule, as in the case of the OR (or the isolated rules), we get a better \emph{Recall}, but there is also an abrupt drop in \emph{Precision} and \emph{Specificity}. Another side effect is to increase in the false positive rate.
 
-The AND conjunction approach is most similar to that implemented in neighborhood extended method, as we can see in the results of the first line (named Proposed~\ref{sec:neighborhood_extended_method}) of each dataset. The results obtained by that approach (Proposed~\ref{sec:neighborhood_extended_method}) show low variability in relation to the adaptations shown in the experiments in this section. In fact, we can see the best \emph{F-measure} obtained by this method both in Compaq and Pratheepan, and the second in HGR. In addition, it performed the second best \emph{Precision} and \emph{Specificity} in Compaq, Pratheepan, and SFA while keeping solid results with respect to \emph{Recall}.
+The AND conjunction approach is most similar to that implemented in the neighborhood extended method, as we can see in the results of the first row (named Proposed~\ref{sec:neighborhood_extended_method}) of each dataset. The results obtained by that approach (Proposed~\ref{sec:neighborhood_extended_method}) show low variability in relation to the adaptations shown in the experiments in this section. In fact, we can see the best \emph{F-measure} obtained with this method both in Compaq and Pratheepan, and the second in HGR. In addition, it performed the second best \emph{Precision} and \emph{Specificity} in Compaq, Pratheepan, and SFA while keeping solid results with respect to \emph{Recall}.
 
-Therefore, for the sake of implementation, the approach given by the neighborhood implementation (Proposed~\ref{sec:neighborhood_extended_method}) may be a good starting point. Nevertheless, we can apply some other complementary technique, such as weighting the distance among the pixels, to measure those more or less relevant to the decision making in the neighborhood. This can potentially diminish the effect of this trade-off and obtain more harmonic measures. For the \textit{diagonal effect}, we can use a more symmetric window, similar to the one used in the adaptations experimented here, to produce better results and increase this undesired anomaly.
+Therefore, the approach given by the neighborhood implementation (Section~\ref{sec:neighborhood_extended_method}) may be a good starting point. Nevertheless, we can apply some other complementary technique, such as weighting the distance among the pixels, to find those more or less relevant to the decision making in the neighborhood. This can potentially diminish the effect of this trade-off and obtain more harmonic measures. For the \textit{diagonal effect}, we can use a more symmetric window, similar to the one used in the adaptations experimented here, to produce better results and increase this undesired anomaly.
 
 
 %% ------------------------------------------------------------------------- %%
@@ -587,9 +587,9 @@ As we could see in Chapter~\ref{cap:proposed-solution}, this model is based on t
 
 $Y_0$ and $Y_1$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cr = Cr_{max}$ (see Fig.~\ref{fig:crmax_computation} for an example). Similarly, $Y_2$ and $Y_3$ are, respectively, the 5${th}$ and 95$th$ percentile of the luminance values associated with the pixels of the image with $Cb = Cb_{min}$.
 
-To the best of our knowledge, there is no justification to choose the 5${th}$ and 95$th$ percentile to be the right parameters to define the trapezoids coordinates. For this reason, we decided to trigger different combinations of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: why 5${th}$ and 95$th$ percentile have been used?
+To the best of our knowledge, there is no justification to choose the 5${th}$ and 95$th$ percentile as the right parameters to define the trapezoids coordinates. For this reason, we decided to apply different combinations of these parameters to figure out which pair better works for the model fitting. In addition, we would like to answer the question: 'why 5${th}$ and 95$th$ percentile have been used'.
 
-Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, once trapezoids definition do not change among them. So, we think that using combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in Section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} metrics, as detailed in Section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
+Thus, we used a well-known technique called grid search to find the best range combination from a hyper-parameter space. By constructing the model in this manner, we can leverage the classification results by finding the optimized parameters' combination, if other different from the ones defined earlier by \citet{brancati:17}. Despite we do not exhaustively consider all parameter combinations, we used an efficient search strategy by sampling a given number of candidates. For each chosen parameters candidate, we dynamically used them in the combined method\footnote{In fact, we could apply this approach in any of the described methods, once trapezoids definitions do not change among them. So, we think that using combined method is sufficient for the parameters optimization.} to test every single image of each dataset described in Section~\ref{sec:datasets}. Lastly, we sort the results table using respectively, \emph{F-measure}, \emph{Precision}, and \emph{Recall} measures, as detailed in Section~\ref{sec:evaluation_measures}, and established a comparison to get optimized parameters. The algorithm $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ shows how the grid search have been performed.
 
 \begin{codebox}
 \kern-1.5em $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$\\
@@ -603,7 +603,7 @@ Thus, we used a well-known technique called grid search to find the best range c
 \li     \Do
             $\proc{Set-Combined-Method-Y-Parameters}(P_{min}, P_{max})$ \label{alg:tpgs-set-cmb-y}
 \li         $\proc{Segment-Dataset-Images}(dataset)$    \label{alg:tpgs-segment-dtset}
-\li         $Precision, Recall, Fmeasure \gets \proc{Compute-Metrics}(dataset)$ \label{alg:tpgs-compt-metrcs}
+\li         $Precision, Recall, Fmeasure \gets \proc{Compute-Measures}(dataset)$ \label{alg:tpgs-compt-metrcs}
 \li         $\proc{Push}(Results, P_{min}, P_{max}, Precision, Recall, Fmeasure)$ \label{alg:tpgs-push-rslts}
 \li\li      $P_{max} \gets P_{max} + 5$
         \End
@@ -615,7 +615,7 @@ Thus, we used a well-known technique called grid search to find the best range c
 \end{codebox}
 
 
-In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will trigger combinations of $P_{min}$ and $P_{max}$\footnote{$P_{min}$ is the minimum percentile index of the $Y$ luminance values. $P_{max}$ is the maximum percentile index of the $Y$ luminance values.} percentiles in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the metrics are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting metrics are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according to the criteria aforementioned at the end of the procedure.
+In short, $\proc{Trapezoids-Parameters-Grid-Search}(dataset)$ will apply combinations of $P_{min}$ and $P_{max}$\footnote{$P_{min}$ is the minimum percentile index of the $Y$ luminance values. $P_{max}$ is the maximum percentile index of the $Y$ luminance values.} percentiles in the range $[5, 95]$ with a step of 5. In line~\ref{alg:tpgs-set-cmb-y}, the parameters are changed in the combined method and applied further in~\ref{alg:tpgs-segment-dtset} to classify each image within the dataset. Next, the measures are computed on every single image in line \ref{alg:tpgs-compt-metrcs} by comparing the output with the ground truth. The resulting measures are pushed into $Results$ matrix in line \ref{alg:tpgs-push-rslts}. We keep an average of overall images classified in each dataset. Finally, we sort the results matrix according to the criteria aforementioned at the end of the procedure.
 
 It is worth mentioning that the grid search algorithm starts with $P_{min}$ percentile index in $5$ and $P_{max}$ percentile lower bound is set to $P_{min}$ in the inner loop. Thus, we will no longer have a combination of parameters such as $[15, 10]$, that means, we always have combinations such that $P_{max} \geq P_{min}$. This will produce a table with results according to the template given in Figure~\ref{fig:gs_table_output}.
 
@@ -651,20 +651,20 @@ It is worth mentioning that the grid search algorithm starts with $P_{min}$ perc
     \node at (4.125,4.875) {95};
     \end{tikzpicture}
 
-    \caption[The output template table with result metrics of the grid search algorithm]{The output template table with result metrics of the grid search algorithm. $P_{min}$ percentile index is in vertical axis and $P_{max}$ percentile index is in horizontal axis. The highlighted cells -- from the main diagonal and above -- are the ones which will have values of the metrics after running the method for the given combination of parameters. Source: proposed by the author.}
+    \caption[The output template table with result measures of the grid search algorithm]{The output template table with result measures of the grid search algorithm. $P_{min}$ percentile index is in vertical axis and $P_{max}$ percentile index is in horizontal axis. The highlighted cells -- from the main diagonal and above -- are the ones which will have values of the measures after running the method for the given combination of parameters. Source: proposed by the author.}
     \label{fig:gs_table_output}
 \end{figure}
 
-We performed this experiment in all four datasets: Compaq, Pratheepan, HGR, and SFA. For each dataset, respectively, we produce a scatter plot of \emph{F-measure}, \emph{Precision}, and \emph{Recall}, with their respective variance, which can be seen in Figures~\ref{fig:compaq_g_search},~\ref{fig:pratheepan_g_search},~\ref{fig:hgr_g_search}, and~\ref{fig:sfa_g_search}. Each chart shows the resulting metrics, in $y$ (vertical) axis\footnote{We set the range in the charts to start at 0.25 for better visualization of the series.
+We performed this experiment with all four datasets: Compaq, Pratheepan, HGR, and SFA. For each dataset, respectively, we produced a scatter plot of \emph{F-measure}, \emph{Precision}, and \emph{Recall}, with their respective variance, which can be seen in Figures~\ref{fig:compaq_g_search},~\ref{fig:pratheepan_g_search},~\ref{fig:hgr_g_search}, and~\ref{fig:sfa_g_search}. Each chart shows the resulting measures, in $y$ (vertical) axis\footnote{We set the range in the charts to start at 0.25 for better visualization of the series.
 }, by using a fixed $P_{min}$ and varying $P_{max}$ along $x$ (horizontal) axis. The shaded path of the measures are the variance and tell us how far we are from the mean when looking for each image within the dataset individually. The results with these measures, for each dataset, can also be seen in Appendix~\ref{ape:trapezoids_parameters_tuning}.
 
-We can see predominantly that larger intervals -- e.g. $[5, 85]$, $[5, 90]$, $[5, 95]$ -- resulted in the best \emph{Precision} in all datasets. On the other hand, smaller intervals, with both $P_{min}$ and $P_{max}$ near the upper bound (95) -- e.g. $[80, 90]$, $[85, 95]$, $[90 ,95]$ --, performed better in \emph{Recall}. Thus, if we set up a specific pair of parameters for the percentile to compute the trapezoid coordinates, it can produce a good \emph{Precision} but it may hurt the \emph{Recall} and vice-versa.
+We can see predominantly that larger intervals -- e.g. $[5, 85]$, $[5, 90]$, $[5, 95]$ -- resulted in the best \emph{Precision} in all datasets. On the other hand, smaller intervals, with both $P_{min}$ and $P_{max}$ near the upper bound (95) -- e.g. $[80, 90]$, $[85, 95]$, $[90 ,95]$ --, performed better in \emph{Recall}. Thus, if we set up a specific pair of parameters for the percentile to compute the trapezoid coordinates, it can produce a good \emph{Precision} but it may affect the \emph{Recall} and vice-versa.
 
 Therefore, evaluate \emph{F-measure} in this situation seems to be the correct path, since it gives us a harmonic measure between \emph{Precision} and \emph{Recall}. That is why we sorted the results (see Tables~\ref{tab:compaq_grid_search},~\ref{tab:pratheepan_grid_search},~\ref{tab:hgr_grid_search}, and~\ref{tab:sfa_grid_search} for details) using the order \emph{F-measure}, \emph{Precision}, and \emph{Recall} as a criteria. Another important observation is the behavior of variance in each result, that means, even good measures with huge variance could be a problem for real world applications.
 
-In Compaq, we can see that top \emph{F-measure} results were obtained with pair of parameters such as $[5, 25], \ldots, [5, 95]$, while keeping good measures in both \emph{Precision} and \emph{Recall}. A similar behavior can be seen in Pratheepan, but among the highest \emph{F-measure} scores are those where $P_{min} = 10$. Next are those starting with $P_{min} = 5$. So, we could state that the values $[5, 95]$ chosen by~\citet{brancati:17} are fair enough since the results were quite good. Even so, the results are slightly worse than the highest ranked ones (see Table~\ref{tab:gs_results_comparison}).
+In Compaq, we can see that top \emph{F-measure} results were obtained with pair of parameters such as $[5, 25], \ldots, [5, 95]$, while keeping good measures in both \emph{Precision} and \emph{Recall}. A similar behavior can be seen in Pratheepan, but among the highest \emph{F-measure} scores are those where $P_{min} = 10$. Next are those starting with $P_{min} = 5$. So, we could state that the values $[5, 95]$ chosen by~\citet{brancati:17} are fair enough since the results are close to the highest ranked ones (see Table~\ref{tab:gs_results_comparison}).
 
-However, in HGR as well as in SFA top \emph{F-measure} results were obtained with pair of parameters such that $P_{min} = P_{max}$. For instance, we can see in HGR results that \emph{Recall} = 0.8641 and \emph{F-measure} = 0.8667 when $P_{min} = 5$ and $P_{max} = 5$, while $[5, 95]$ interval resulted in \emph{Recall} = 0.6952 and \emph{F-measure} = 0.7843 -- a gain in the order of 24\% and 10\% for each metric, respectively. A similar behavior can be seen in the results of SFA, where the gain in \emph{Recall} and \emph{F-measure} are in the order of 67\% and 39\% for each metric, respectively, which is a very huge difference. It is worth mentioning that, despite \emph{Precision} and \emph{Specificity} have a slightly decreasing, they are still around the~\citet{brancati:17} results.
+However, in HGR as well as in SFA top \emph{F-measure} results were obtained with pair of parameters such that $P_{min} = P_{max}$. For instance, we can see in HGR results that \emph{Recall} = 0.8641 and \emph{F-measure} = 0.8667 when $P_{min} = 5$ and $P_{max} = 5$, while $[5, 95]$ interval resulted in \emph{Recall} = 0.6952 and \emph{F-measure} = 0.7843 -- a gain in the order of 24\% and 10\% for each measure, respectively. A similar behavior can be seen in the results of SFA, where the gain in \emph{Recall} and \emph{F-measure} are in the order of 67\% and 39\% for each measure, respectively, which is a very huge difference. It is worth mentioning that, despite \emph{Precision} and \emph{Specificity} have a slightly decreasing, they are still around the~\citet{brancati:17} results.
 
 
 
@@ -706,12 +706,12 @@ However, in HGR as well as in SFA top \emph{F-measure} results were obtained wit
 & 25 & 25 & 0.9313 & 0.6617 & 0.9785 & 0.7737 \\ \hline
 \end{tabular}
 
-\caption[Quantitative result metrics of the proposed grid search parameters tuning]{Quantitative result metrics of the proposed grid search parameters tuning. For each dataset, we have different applications of the combined method with different pairs of $P_{min}$ and $P_{max}$ percentiles. The first line is the default one $[5, 95]$, as reported in the experiments given in Table~\ref{tab:merged_rules_results}. Next five lines are the top five results ordered by F-measure, Precision, and Recall, respectively.}
+\caption[Quantitative result measures of the proposed grid search parameters tuning]{Quantitative result measures of the proposed grid search parameters tuning. For each dataset, we have different applications of the combined method with different pairs of $P_{min}$ and $P_{max}$ percentiles. The first line is the default one $[5, 95]$, as reported in the experiments given in Table~\ref{tab:merged_rules_results}. Next five lines are the top five results ordered by F-measure, Precision, and Recall, respectively.}
 \label{tab:gs_results_comparison}
 
 \end{table*}
 
-On the basis of this scenario, we observed that when we have $P_{min} = P_{max}$, the resulting metric is absolute the same for any combination of equal percentile parameters. For instance, in Compaq dataset, when we tried $P_{min} = 5$ and $P_{max} = 5$, we got \emph{Precision} = 0.4172, \emph{Recall} = 0.7333, \emph{Specificity} = 0.8096, and \emph{F-measure} = 0.5318. The result is the same for $P_{min} = 10$ and $P_{max} = 10$ onward up to $P_{min} = 95$ and $P_{max} = 95$. This behavior will repeat for every single dataset tested.
+Based on this scenario, we observed that when we have $P_{min} = P_{max}$, the resulting measure is absolutely the same for any combination of equal percentile parameters. For instance, in Compaq dataset, when we tried $P_{min} = 5$ and $P_{max} = 5$, we got \emph{Precision} = 0.4172, \emph{Recall} = 0.7333, \emph{Specificity} = 0.8096, and \emph{F-measure} = 0.5318. The result is the same for $P_{min} = 10$ and $P_{max} = 10$ onward up to $P_{min} = 95$ and $P_{max} = 95$. This behavior will repeat for every single dataset tested.
 
 Based on this result, we started to investigate the source code given in the original method by~\citet{brancati:17}. We found out that, when the percentiles are the same, the computation of the parameters who define the trapezoids is impacted. In other words, $Y_0$, $Y_1$, $Y_2$, $Y_3$, $Y_{min}$, $Y_{max}$, $Cr_{min}$, $Cb_{max}$ are always the same, i.e. assume default values. Even $Cb_{min}$, $Cr_{max}$, that are still computed dynamically by the internal method functions, do not change when $P_{min}$, $P_{max}$ percentiles are changed since they are dependent on the previous parameters and the histogram of the image itself that never change. The same behavior will be observed when $P_{min} > P_{max}$.
 
@@ -721,7 +721,7 @@ This particular phenomenon occurs due to the nature of the images that form each
 
 Therefore, this behavior must be taken into consideration when selecting a pair of $P_{min}$ and $P_{max}$ to apply in the method in turn, since this can be decisive for a potential performance improvement.
 
-With respect to the variance for all the metrics, we can observe that, regardless of the combination of $P_{min}$ and $P_{max}$ parameters, there is no great deviation in the results in relation to the mean. For all datasets, the combinations where $P_{min}$ and $P_{max}$ are closer to the upper bound (95) -- e.g. $[80, 90]$, $[85, 90]$, $[85, 95]$, $[90 ,95]$ -- are the ones with the highest variance. On the other hand, the variance had little fluctuation where $P_{min} = P_{max}$.
+With respect to the variance for all the measures, we can observe that, regardless of the combination of $P_{min}$ and $P_{max}$ parameters, there is no great deviation in the results in relation to the mean. For all datasets, the combinations where $P_{min}$ and $P_{max}$ are closer to the upper bound (95) -- e.g. $[80, 90]$, $[85, 90]$, $[85, 95]$, $[90 ,95]$ -- are the ones with the highest variance. On the other hand, the variance had little fluctuation where $P_{min} = P_{max}$.
 
 \clearpage % to avoid warnings on 'Text page X contains only floats.'
 
