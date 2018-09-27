@@ -42,7 +42,7 @@ Therefore, a very simple and practical approach to detect human skin pixels woul
 
 Another important finding regarding the skin color clusters in the YCbCr color space is their behavior when looking for the compositions of YCb and YCr separately. In other words, where rely this distribution into the YCb and YCr subspaces. In Figure~\ref{fig:obama_trapezoids}, we can see the distribution (clusters) for an image of the Pratheepan dataset. We can clearly see their shapes as taking a trapezoidal form~\citep{hsu:02}.
 
-In fact, the skin color pixels distribution in the YCb and YCr subspaces is a pattern. However, this trapezoidal shape and size will change according to many factors. \citet{brancati:17} observed that change and identified that they are caused mainly due illumination conditions (i.e. the lighting of the scene when the image was acquired influences the size, height, and position of these trapezoidal shape). Moreover, they~\citep{brancati:17} observed an inversely proportional behavior of the chrominance components (Cr, Cb) that could be fitted into a model for skin pixels detection. We will explain in details how this model has been created in Section~\ref{sec:original_method}.
+In fact, the skin color pixels distribution in the YCb and YCr subspaces is a pattern. However, this trapezoidal shape and size will change according to many factors. \citet{brancati:17} observed that change and identified that they are caused mainly due illumination conditions (i.e. the lighting of the scene when the image was acquired influences the size, height, and position of these trapezoidal shape). Moreover, they~\citep{brancati:17} observed an proportional behavior of the chrominance components (Cr, Cb) that could be fitted into a model for skin pixels detection. We will explain in details how this model has been created in Section~\ref{sec:original_method}.
 
 \begin{figure*}[!htb]
     \centering
@@ -59,7 +59,7 @@ In fact, the skin color pixels distribution in the YCb and YCr subspaces is a pa
         \caption{}
     \end{subfigure}
 
-    \caption[Skin pixels distribution in the YCr and YCb subspaces of a sample image]{Skin pixels distribution in the YCr and YCb subspaces of a sample image. Each image is, respectively, (a) sample image from Pratheepan (b) ground truth (c) skin pixels distribution in YCr (orange) and YCb (blue) subspaces. We can clearly see a trapezoidal shape of the pixels distribution. These trapezoids are inversely positioned reflecting the inversely proportional behavior of the chrominance components (Cr, Cb). Source: adapted from~\citet{brancati:17}.}
+    \caption[Skin pixels distribution in the YCr and YCb subspaces of a sample image]{Skin pixels distribution in the YCr and YCb subspaces of a sample image. Each image is, respectively, (a) sample image from Pratheepan (b) ground truth (c) skin pixels distribution in YCr (orange) and YCb (blue) subspaces. We can clearly see a trapezoidal shape of the pixels distribution. These trapezoids are inversely positioned reflecting the proportional behavior of the chrominance components (Cr, Cb). Source: adapted from~\citet{brancati:17}.}
     \label{fig:obama_trapezoids}
 \end{figure*}
 
@@ -103,7 +103,7 @@ Therefore, to determine if $P$ is skin, the following correlation rules, express
 \label{condition_c1}
 \end{equation}
 
-The estimated value $P_{Cb_{s}}$ is given by \footnote{$dP_{Cb_{s}}$ is the distance between the points $(P_Y, P_{Cb_{s}})$ and $(P_Y, Cb_{max})$ in the $YCb$ subspace, calculated on the basis of $dP_{Cr}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value~\citep{brancati:17}.}:
+The estimated value $P_{Cb_{s}}$ is given by \footnote{$dP_{Cb_{s}}$ is the distance between the points $(P_Y, P_{Cb_{s}})$ and $(P_Y, Cb_{max})$ in the $YCb$ subspace, calculated on the basis of $dP_{Cr}$, observing the proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value~\citep{brancati:17}.}:
 \begin{equation}
     P_{Cb_s} = Cb_{max} - dP_{Cb_s}
 \end{equation}
@@ -174,9 +174,9 @@ where:
 %% ------------------------------------------------------------------------- %%
 \section{Complementary method}
 \label{sec:proposed_method}
-The hypothesis assumed in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the inversely proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
+The hypothesis assumed in the original method is based on rules that an estimated value of the point $P_{Cb}$, namely $P_{Cb_s}$, must hold in order for the correlation to be valid. On the basis of the proportional behavior of the chrominance components, we will rewrite the correlation rules with respect to the $P_{Cr}$ point.
 
-Thus, we have to refactor the correlation rules' parameters to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the inversely proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
+Thus, we have to refactor the correlation rules' parameters to put them in terms of the estimated value of $P_{Cr}$, that we denote as $P_{Cr_s}$ \footnote{$dP_{Cr_s}$ is the distance between the points $(P_Y, P_{Cr_s})$ and $(P_Y, Cr_{min})$ in the $YCr$ subspace, calculated on the basis of $dP_{Cb}$, observing the proportional behavior of the components. $\alpha$ is the rate between the normalized heights of the trapezoids in relation to the $P_Y$ value.}:
 \begin{equation}
     P_{Cr_s} = dP_{Cr_s} + Cr_{min}
 \end{equation}
@@ -206,7 +206,7 @@ Therefore, to determine if the pixel $P$ is skin, we have to modify the correlat
 \label{condition_c11}
 \end{equation}
 
-Doing this simple extension, we need now to apply the method to the same sets of images to evaluate, in fact, the inversely proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis.
+Doing this simple extension, we need now to apply the method to the same sets of images to evaluate, in fact, the proportional behavior of the chrominance components. More than that, we can combine all these constraints, given by the pair equations \ref{condition_c0} and \ref{condition_c1}, \ref{condition_c00} and \ref{condition_c11}, to reinforce the firstly defined hypothesis.
 
 
 \begin{figure}[!htp]

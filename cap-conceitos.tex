@@ -408,7 +408,7 @@ The transformation of the RGB space to YIQ is given by~\citep{pedrini:08}:\\
 \end{equation}
 where $0 \leq R, G, B \leq 1$.
 
-Another color model of the YUV family is the YCbCr, mathematically defined by a coordinate transformation with respect to some RGB space~\citep{pedrini:08}. The Figure~\ref{fig:ycbcr-model} shows the CbCr plane of the YCbCr color model for a specific Y value.
+Another color model of the YUV family is the YCbCr, mathematically defined by a coordinate transformation with respect to some RGB space~\citep{pedrini:08}. YCbCr color model is often used in image and video compression standards, because its particular representation that it is easy to get rid of some redundant color information. The Figure~\ref{fig:ycbcr-model} shows the CbCr plane of the YCbCr color model for a specific Y value.
 
 \begin{figure}[!htb]
   \centering
@@ -417,7 +417,7 @@ Another color model of the YUV family is the YCbCr, mathematically defined by a 
   \label{fig:ycbcr-model}
 \end{figure}
 
-The YCbCr model is widely used in digital videos. In this system, the Y component represents luminance, computed as a weighted sum of RGB values. Cb component gives the measurement of the difference between the blue color and a reference value, similar to the Cr component which is the measurement of the difference between the red color and a reference value~\citep{pedrini:08}.
+In this system, the Y component represents luminance, computed as a weighted sum of RGB values. Cb component gives the measurement of the difference between the blue color and a reference value, similar to the Cr component which is the measurement of the difference between the red color and a reference value~\citep{pedrini:08}.
 
 The transformation of the RGB space to YCbCr is given by~\citep{pedrini:08}:\\
 \begin{equation}
@@ -434,6 +434,7 @@ The transformation of the RGB space to YCbCr is given by~\citep{pedrini:08}:\\
   \end{bmatrix}
 \end{equation}
 
+The choice of YCbCr color model for skin segmentation is, in general, twofold: first, YCbCr is one of the color models where it is possible to split the chrominance (Cb, Cr) components from the luminance (Y), and second, it is commonly used in the digital video domain. Furthermore, chrominance of different skin colors (e.g. white, black, yellow and brown) shares a marked similarity, which can be used to distinguish between skin and non-skin colors~\citep{phung:02}.
 
 %% ------------------------------------------------------------------------- %%
 \subsection{Color models of the HSI family}
